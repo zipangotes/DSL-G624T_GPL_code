@@ -1,0 +1,43 @@
+
+<!-- Web Filters -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Web Filters</font></td>
+</tr>
+<tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>	
+  <div style="height: 15px"></div>
+
+	<table border=0 cellspacing=0 cellpadding=1 width=275>
+	    <tr>
+		  <td width="33%">Proxy</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="off" id="uiViewProxy0" onclick="jslDoToggleRadio('uiViewProxy',0,2)" alt="" >&nbsp;Enabled</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="on" id="uiViewProxy1" onclick="jslDoToggleRadio('uiViewProxy',1,2)" alt="" >&nbsp;Disabled</td>
+	   </tr>
+	    <tr>
+		  <td width="33%">Cookies</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="off" id="uiViewCookies0" onclick="jslDoToggleRadio('uiViewCookies',0,2)" alt="" >&nbsp;Enabled</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="on" id="uiViewCookies1" onclick="jslDoToggleRadio('uiViewCookies',1,2)" alt="" >&nbsp;Disabled</td>
+	   </tr>
+	    <tr>
+		  <td width="33%">Java Applets</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="off" id="uiViewJavaApp0" onclick="jslDoToggleRadio('uiViewJavaApp',0,2)" alt="" >&nbsp;Enabled</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="on" id="uiViewJavaApp1" onclick="jslDoToggleRadio('uiViewJavaApp',1,2)" alt="" >&nbsp;Disabled</td>
+	   </tr>
+	    <tr>
+		  <td width="33%">ActiveX</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="off" id="uiViewActiveX0" onclick="jslDoToggleRadio('uiViewActiveX',0,2)" alt="" >&nbsp;Enabled</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="on" id="uiViewActiveX1" onclick="jslDoToggleRadio('uiViewActiveX',1,2)" alt="" >&nbsp;Disabled</td>
+	   </tr>
+	    <tr>
+		  <td width="33%">Pop-Ups</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="off" id="uiViewPopups0" onclick="jslDoToggleRadio('uiViewPopups',0,2)" alt="" >&nbsp;Enabled</td>
+		  <td width="33%"><input <? echo $var:widDefRadioBtnOff ?> value="on" id="uiViewPopups1" onclick="jslDoToggleRadio('uiViewPopups',1,2)" alt="" >&nbsp;Disabled</td>
+	   </tr>
+	</table>
+
+	</td>
+</tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</table>
+<!-- END Web Filters -->

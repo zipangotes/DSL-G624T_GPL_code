@@ -1,0 +1,33 @@
+include ../../TI_Build.make
+-include ./.config
+
+all: build install
+
+build: 
+
+install:
+	cd  $(TI_base)$(TI_htmlsafedir);
+	rm -rf $(TI_base)$(TI_htmlsafedir);rm -rf $(TI_base)$(TI_htmldir)
+	install -d $(TI_base)$(TI_htmlsafedir)
+	cp -dRp html $(TI_base)$(TI_wwwsafedir)
+	install -d $(TI_base)$(TI_imagedir)
+	cp -dRp html/defs/style5/images $(TI_base)$(TI_imagedir)
+	cd $(TI_base)$(TI_wwwsafedir); rm -rf html/defs/style5/images
+	cd $(TI_base)$(TI_htmlsafedir); find . -type d -name CVS | xargs rm -rf
+	cd $(TI_base)$(TI_wwwdir); rm -f index.html; ln -s /usr/www_safe/html/index.html index.html	
+	cd $(TI_base)$(TI_wwwsafedir); rm -rf html/defs/style1
+	cd $(TI_base)$(TI_wwwsafedir); rm -rf html/defs/style2
+	cd $(TI_base)$(TI_wwwsafedir); rm -rf html/defs/style3
+	cd $(TI_base)$(TI_wwwsafedir); rm -rf html/defs/style4
+	cd $(TI_base)$(TI_wwwsafedir); rm -rf html/menus
+	cd $(TI_base)$(TI_wwwsafedir); rm -rf html/images
+	cd $(TI_base)$(TI_wwwsafedir); rm -rf html/def
+	cd $(TI_base)$(TI_wwwsafedir); rm -rf html/css
+	chmod u+w $(TI_base)$(TI_htmlsafedir)/setup/*	
+ifeq ($(BOARD),AR7RD)
+	@echo '*********** HTML Configuration specific to $(BOARD) board *******'
+	cd $(TI_base)$(TI_htmlsafedir);rm -rf wireless/
+	@echo '***************************************************************'
+endif
+
+clean:

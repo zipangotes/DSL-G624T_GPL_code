@@ -1,0 +1,119 @@
+
+<!-- Advanced Dynamic Routing -->
+<table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="#757575" width=495>
+<tr>
+	<td align=center class="header" bgcolor="#FFFFFF">Dynamic Routing - Advanced RIP Settings</td>
+</tr>
+<tr>
+  <td height=5 nowrap bgcolor="#D3D9DF"></td>
+</tr>
+<tr>
+	<td bgcolor="#FFFFFF" valign=top align=center>
+
+	<table border=0 align=center cellspacing=0 cellpadding=1 width=275>		
+	<tr>
+		<td width="50%" align=center><input type="radio" name="InterfaceField" value="BasicPage" id="" onClick="gotoBasicPage()"> Basic</td>
+		<td width="50%" align=center><input type="radio" name="InterfaceField" CHECKED value="AdvancedPage" id="" onClick="gotoAdvancedPage()"> Advanced</td>
+	</tr>
+	</table>
+
+	<table border=0 cellspacing=0 cellpadding=1 width=355>
+	<tr> 
+		<td colspan=2 height=16 nowrap valign=middle><img src="/usr/www_safe/html/images/ti_px757575.gif" alt="" width=355 height=1></td>
+	</tr>
+	</table>
+	
+	<table border=0 align=center cellpadding=0 cellspacing=0>   
+	<form id="uiViewRipTableForm" onSubmit="return false">
+	  <tr>
+		<td align=center></td>
+		<td align=center>Net</td>
+		<td align=center>Netmask</td>
+		<td align=center>Gateway</td>
+		<td align=center>Metric</td>
+		<td align=center>State</td>
+		<td align=center>Activate</td>
+	  </tr>
+
+<? multiquery rip:settings/rid
+  '
+  <tr>
+      <td align=center>
+           <input type="image" src="/usr/www_safe/html/images/ti_radio_off.gif" value="off" name="$0" id="uiViewSelectStatus$0" onclick="uiSelectStatus(id)" border=0>   
+     </td>
+     <td align=center>
+        <input type="text" size="12" maxlength="12" style="BORDER-bottom: 0px;BORDER-top: 0px;BORDER-right: 0px;BORDER-left: 0px;"  value="$3" id="uiViewNetAddr$0">
+     </td>
+     <td align=center >
+        <input type="text" size="12" maxlength="12" style="BORDER-bottom: 0px;BORDER-top: 0px;BORDER-right: 0px;BORDER-left: 0px;"  value="$2" id="uiViewNetMask$0">
+     </td>
+     <td align=center>
+        <input type="text" maxlength="15" style="BORDER-bottom: 0px;BORDER-top: 0px;BORDER-right: 0px;BORDER-left: 0px;" value="$4" id="uiViewGateway$0">
+     </td>
+     <td align=center>
+        <input type="text" maxlength="3" style="BORDER-bottom: 0px;BORDER-top: 0px;BORDER-right: 0px;BORDER-left: 0px;" value="$1" id="uiViewMetric$0">
+     </td>   
+     <td align=center>
+        <input type="text" maxlength="16" style="BORDER-bottom: 0px;BORDER-top: 0px;BORDER-right: 0px;BORDER-left: 0px;" value="$1" id="uiViewState$0">
+     </td>   
+     <td align=center>
+        <input type="text" maxlength="16" style="BORDER-bottom: 0px;BORDER-top: 0px;BORDER-right: 0px;BORDER-left: 0px;" value="$1" id="uiViewActivate$0">
+     </td>   
+ </tr>
+ ' ?>
+
+  <tr>
+        <td align=center>&nbsp;</td>
+        <td align=center>
+        	<input type="text" size="12"  value="" id="uiEditNetAddr">
+ 	 </td>
+        <td align=center>
+	        <input type="text" size="12" value="" id="uiEditNetMask">
+        </td>
+	 <td align=center>        
+	        <input type="text" size="12" value="" id="uiEditGateway">
+	 </td>     
+        <td align=center>
+	        <input type="text" size="2" value="" id="uiEditMetric">
+        </td>
+        <td align=center>
+        	<select id="uiEditState">
+	            	<option value="active">Active</option>
+       	      	<option value="passive">Passive</option>
+             		<option value="external">External</option>
+		</select>
+	 </td>
+        <td align=center>
+        	<select id="uiEditActivate">
+			     	<option value="Yes">Yes</option>		     
+				<option value="No">No</option>
+		</select>
+	 </td>
+  </tr>
+
+   <tr id="">
+    <td align=center>
+      	<input type="image" src="/usr/www_safe/html/images/ti_check_off.gif" id="uiViewDeleteAllStatus" onclick="jslDoToggleCheckBox(id);uiViewDeleteAll(this)" alt="" width=20 height=20 align="center" border=0>     
+    </td>
+    <td align=center>Select All</td>
+    <td colspan="6" align=center>&nbsp;</td>
+  </tr>
+</form>
+</table>
+
+	</td>
+</tr>
+<tr>
+ <td align=right bgcolor="#FFFFFF">
+	<table border=0 cellspacing=0 width=124>
+	  <tr valign=middle>
+	    <td width=62 height=19><input type="image" src="/usr/www_safe/html/images/ti_button_add.gif" id="uiViewAdd" onClick="uiSubmit('Add')" alt="Add" width="62" height="19" border="0"></td>
+        <td width=62 height=19><input type="image" src="/usr/www_safe/html/images/ti_button_modify.gif" id="uiViewModify" onClick="uiSubmit('Edit')" alt="Edit" width="62" height="19" border="0"></td>
+        <td width=62 height=19><input type="image" src="/usr/www_safe/html/images/ti_button_delete.gif" id="uiViewDelete" onClick="uiSubmit('Delete')" alt="Delete" width="62" height="19" border="0"></td>
+	  </tr>
+	</table>	 
+</td>
+</tr>
+</table>
+<!-- END Advanced Dynamic Routing -->
+

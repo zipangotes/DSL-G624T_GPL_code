@@ -1,0 +1,75 @@
+<!-- Wireless Management -->
+<form onSubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Management</font></td>
+</tr>
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+	
+		<table border=0 cellpadding=0 cellspacing=0>
+		<tr>
+                 <td align=center height=30 colspan=6><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+              </tr>
+		<tr>
+			<td height=6 nowrap></td>
+		</tr>
+		<tr>
+		   <td align=right><input <? echo $var:widDefBtnWirelessAccess ?> alt="Access" id="uiViewManagement0" onclick="uiDoAccessPage(id)"></td>
+		   <td>&nbsp&nbsp&nbsp</td>     
+		   <td align=left><input <? echo $var:widDefBtnWirelessAssocHilite ?> alt="Association" id="uiViewManagement1" onclick="uiDoStaPage(id)"></td>
+                        
+		</tr>
+		<tr>
+			<td height=6 nowrap></td>
+		</tr>
+		</table>
+
+	     <table cellspacing=2 border=0 cellpadding=0 align=center>
+	       <tr>		   
+	         <td colspan=9 align=center class="header" height=23>Associated Stations</td>
+	       </tr>
+	<? if eq 0 <? multiquerycount ap:status/sta_table?> `<tr><td colspan=9 align=center height=50>There are no Associated Stations at this time.</td></tr>`  
+     `	<tr>		   
+		  <td align=center nowrap><u>Ban Station</u></td>
+		  <td nowrap width=5></td>
+		  <td align=center nowrap><u>Mac Address</u></td>
+		  <td nowrap width=5></td>
+		  <td align=center><u>State</u></td>
+		  <td nowrap width=5></td>
+		  <td align=center><u>SSID</u></td>
+		  <td nowrap width=5></td>
+		  <td align=center nowrap><u>Active Rate</u></td>
+	    </tr>
+		<? multiquery ap:status/sta_table
+		`<tr>
+			<td align=center><input  $var:widDefRadioBtnOff   id="uiViewBanStation$10" onclick="uiDoBanStation('$11')" alt=""></td>
+		    <td nowrap width=5></td>
+			<td align=center>$11</td>
+		    <td nowrap width=5></td>
+			<td align=center>$12</td>
+		    <td nowrap width=5></td>
+			<td align=center><input type="text" size="32" class="uiSSID"  style="text-align:center;background-color: <? echo $var:bgColorBody ?>;font-size:8pt;font-color:black" value="" id="uiViewSSID$10"></td><td nowrap width=5></td>
+			<td align=center>$14</td>
+		  </tr>
+		 ` ?>
+		 
+         `  ?>
+	      </table>
+        </td>
+        </tr>
+<tr>
+   <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+	
+	<table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+	<tr>
+		<td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+		<td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+	</tr>
+   </table>
+   
+   </td>
+</tr>
+ </table>
+</form>
+<!-- END Wireless Management -->

@@ -1,0 +1,61 @@
+
+<!-- UI Preferences -->
+<form onsubmit="return false">
+ <table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 align=center bgcolor="<? echo $var:bgColorTable ?>">
+  <tr><td align=center class="header"  bgcolor="<? echo $var:bgColorBody ?>">UI Preferences</td></tr>
+  <tr><td height=5 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+  <tr><td bgcolor="<? echo $var:bgColorBody ?>" align=center>
+   <br>
+   <table cellspacing=10 <? echo $var:cntrBorder ?> cellpadding=3 align=center>
+    <tr valign=middle>
+     <td><b>Screen Size:</b></td>
+     <td><input <? echo $var:widDefCheckBoxOff ?> id="uiView640x480" onclick="jslDoToggleCheckBox('uiView640x480','uiView800x600','uiView1024x780')" align="center">&nbsp;640x480</td>
+     <td><input <? echo $var:widDefCheckBoxOff ?> id="uiView800x600" onclick="jslDoToggleCheckBox('uiView800x600','uiView640x480','uiView1024x780')" align="center">&nbsp;800x600</td>
+     <td><input <? echo $var:widDefCheckBoxOff ?> id="uiView1024x780" onclick="jslDoToggleCheckBox('uiView1024x780','uiView640x480','uiView800x600')" align="center">&nbsp;1024x780</td>
+	</tr>
+   </table>
+   <br>
+   </td>
+  </tr>
+  <tr><td bgcolor="<? echo $var:bgColorBody ?>" align=center>
+   <br>
+   <table cellspacing=10 <? echo $var:cntrBorder ?> cellpadding=3 align=center>
+    <tr valign=middle>
+     <td><b>Debug:</b></td>
+     <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewDebugForms" onclick="jslDoToggleCheckBox(id)" align="center">&nbsp;Forms</td>
+     <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewDebugTables" onclick="jslDoToggleCheckBox(id)" align="center">&nbsp;Tables</td>
+     <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewDebugOther" onclick="jslDoToggleCheckBox(id)" align="center">&nbsp;Other</td>
+	</tr>
+   </table>
+   <br>
+   </td>
+  </tr>
+
+  <tr><td bgcolor="<? echo $var:bgColorBody ?>" align=center>
+   <br>
+   <table cellspacing=10 <? echo $var:cntrBorder ?> cellpadding=3 align=center>
+    <tr valign=middle>
+     <td><b>UI Style:</b></td>
+     <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewTIMain" onclick="jslDoToggleCheckBox('uiViewTIMain','uiViewTIAlt1','uiViewTIBasic')" align="center">&nbsp;Main</td>
+     <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewTIAlt1" onclick="jslDoToggleCheckBox('uiViewTIAlt1','uiViewTIMain','uiViewTIBasic')" align="center">&nbsp;Royale</td>
+	 <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewTIBasic" onclick="jslDoToggleCheckBox('uiViewTIBasic','uiViewTIMain','uiViewTIAlt1')" align="center">&nbsp;Basic</td>
+	</tr>
+   </table>
+   <br>
+   </td>
+  </tr>
+
+ <tr>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>">
+   <table <? echo $var:cntrBorder ?> cellspacing=0 width="100%">
+    <tr valign=middle>
+     <td align=center style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint"><? echo $var:txtErrorHint ?></td>
+	 <td>&nbsp;</td>
+	 <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+	</tr>
+   </table> 
+  </td>
+ </tr>
+ </table>
+</form>
+<!-- END UI Preferences -->

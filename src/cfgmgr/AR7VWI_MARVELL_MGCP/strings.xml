@@ -1,0 +1,102 @@
+<strings>
+	<module id="cm"> <!-- common messages -->
+		<text id="mr">message received</text>
+		<text id="er">event %d received from module %s</text>
+		<text id="sa">starting...</text>
+		<text id="so">stopping...</text>
+		<text id="dt">detaching...</text>
+		<text id="es">error setting '%s' parameter to '%s'</text>
+		<text id="in">received interface name '%s'</text>
+		<text id="ls">received link state '%i'</text>
+	</module>
+	<module id="cl"> <!-- Core Logic -->
+		<text id="mr">message received to the Core Logic!</text>
+		<text id="cn">connecting %s to %s</text>
+		<text id="dc">disconnecting %s from %s</text>
+	</module>
+	<module id="lg"> <!-- Logger -->
+		<text id="kp">cannot create klog pipe</text>
+		<text id="kc">unable to create klogd child</text>
+		<text id="kl">unable to control the kernel logging device</text>
+		<text id="ss">cannot create syslog socket</text>
+		<text id="bs">cannot bind syslog socket, probably another syslogd is running</text>
+	</module>
+	<module id="et"> <!-- eth -->
+		<text id="bi">bringing interface %s</text>
+		<text id="up">up</text>
+		<text id="dn">down</text>
+		<text id="ri">reporting interface name '%s'</text>
+		<text id="ev">cannot read vmac stats</text>
+	</module>
+	<module id="st"> <!-- static -->
+		<text id="ci">configuring interface '%s'</text>
+	</module>
+	<module id="br"> <!-- bridge -->
+		<text id="cr">creating bridge '%s'</text>
+		<text id="if">adding interface '%s'</text>
+		<text id="dl">deleting bridge '%s'</text>
+	</module>
+	<module id="oe"> <!-- PPPoE -->
+		<text id="ri">reported interface '%s'</text>
+		<text id="cr">'%s' interface created</text>
+	</module>
+	<module id="oa"> <!-- PPPoA -->
+		<text id="rv">reported vci/vpi '%s'</text>
+		<text id="cr">'%s' interface created</text>
+	</module>
+	<module id="ub"> <!-- usb -->
+		<text id="is">insmod successful</text>
+		<text id="os">rmmod successful</text>
+	</module>
+	<module id="fw"> <!-- Firewall -->
+		<text id="fr">rule %s is in use for PC %s</text>
+		<text id="fp">overlapping port range</text>
+		<text id="fe">cannot change a rule in use</text>
+		<text id="af">exceeded limit. ACL supports 16 values</text>
+		<text id="al">ACL locked, processing request</text>
+		<text id="si">Source IP invalid</text>
+		<text id="sn">Source Netmask invalid</text>
+		<text id="dn">Destination Netmask invalid</text>
+		<text id="di">Destination IP invalid</text>
+		<text id="pt">Protocol invalid</text>
+		<text id="ps">Port Start invalid (1 - 65535)</text>
+		<text id="pm">Port Map invalid (1 - 65535)</text>
+		<text id="pe">Port End invalid (1 - 65535)</text>
+		<text id="es">Port End invalid: must be greater or equual than Port Start</text>
+		<text id="nm">Rule name missing</text>
+	</module>
+	<module id="sn"> <!-- SNTP -->
+		<text id="-c">(GMT-12:00) International Date Line West</text>
+		<text id="-b">(GMT-11:00) Midway Island</text>
+		<text id="-a">(GMT-10:00) Hawaii</text>
+		<text id="-9">(GMT-09:00) Alaska</text>
+		<text id="-8">(GMT-08:00) Pacific Time (US, Canada), Tijuana</text>
+		<text id="-7">(GMT-07:00) Arizona; Mountain Time (US, Canada)</text>
+		<text id="-6">(GMT-06:00) Central America; Central Time (US, Canada)</text>
+		<text id="-5">(GMT-05:00) Eastern Time (US, Canada)</text>
+		<text id="-4">(GMT-04:00) Atlantic Time (Canada)</text>
+		<text id="-3">(GMT-03:00) Brasilia; Buenos Aires; Greenland</text>
+		<text id="-2">(GMT-02:00) Mid-Atlantic</text>
+		<text id="-1">(GMT-01:00) Cape Vade</text>
+		<text id="00">(GMT) Greenwhich Mean Time: Dublin, Lisbon, London; Casablanca</text>
+		<text id="01">(GMT+01:00) Amsterdam, Berlin, Rome, Stockholm, Vienna, Paris</text>
+		<text id="02">(GMT+02:00) Athens, Istanbul, Cairo, Harare, Jerusalem</text>
+		<text id="03">(GMT+03:00) Baghdad, Kuwait, Riyadh, Moscow</text>
+		<text id="04">(GMT+04:00) Muscat</text>
+		<text id="05">(GMT+05:00) Islamabad, Karachi</text>
+		<text id="55">(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi</text>
+		<text id="06">(GMT+06:00) Dhaka</text>
+		<text id="07">(GMT+07:00) Bangkok, Hanoi, Jakartha</text>
+		<text id="08">(GMT+08:00) Beijing, Hong Kong</text>
+		<text id="09">(GMT+09:00) Tokyo, Seoul</text>
+		<text id="+a">(GMT+10:00) Brisbane, Sydney</text>
+		<text id="+b">(GMT+11:00) Magadan, Solomon Islands</text>
+		<text id="+c">(GMT+12:00) Auckland, Wellington, Fiji</text>
+	</module>
+	<module id="ds"> <!-- DHCPS? -->
+		<text id="ra">IP Addr Should be in %s network</text>
+	</module>
+	<module id="vo"> <!-- Voice -->
+		<text id="sf">Unsuccessful configuration save to config.xml</text>
+	</module>
+</strings>

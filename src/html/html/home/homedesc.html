@@ -1,0 +1,61 @@
+
+<!-- Page Description -->
+<table cellspacing=4 border=0 cellpadding=0 align=center id="uiViewBodyTable">
+ <tr>
+  <td valign=top bgcolor="<? echo $var:bgColorBody ?>" width=136>
+   <font size=1>				
+   <b>Setup</b></font>
+   <br>
+  <font size=1>The Setup section allows you to create new connections, edit existing connections, and configure other basic settings.</font></td>
+  
+  <td width=1 nowrap bgcolor="<? echo $var:bgColorTable ?>"></td>
+
+  <td valign=top bgcolor="<? echo $var:bgColorBody ?>" width=136>
+   <font size=1>
+   <b>Advanced</b></font>
+  <br>
+   <font size=1>The Advanced section lets you configure advanced features like RIP, Firewall, NAT, <? if eq `1` `$var:HasVoice` `Voice, ` ` ` ?>UPnP, IGMP, Bridge Filters, and LAN clients.</font>
+  </td>
+
+<? if eq `1` `$var:HasWireless`
+`
+  <td width=1 nowrap bgcolor="<? echo $var:bgColorTable ?>"></td>
+
+  <td valign=top bgcolor="<? echo $var:bgColorBody ?>" width=136>
+   <font size=1>
+   <b>Wireless</b></font>
+  <br>
+   <font size=1>The Wireless section lets you configure wireless related features.</font>
+  </td>
+` ` ` ?>
+  <td width=1 nowrap bgcolor="<? echo $var:bgColorTable ?>"></td>
+
+  <td valign=top bgcolor="<? echo $var:bgColorBody ?>" width=136>
+   <font size=1>
+   <b>Tools</b></font>
+  <br>
+  <font size=1>The Tools section lets you carry out system commands and perform simple system tests.</font></td>
+
+  <td width=1 nowrap bgcolor="<? echo $var:bgColorTable ?>"></td>
+
+  <td valign=top bgcolor="<? echo $var:bgColorBody ?>" width=136>
+   <font size=1>
+   <b>Status</b></font>
+  <br>
+   <font size=1>The Status section displays status, log and statistical information for all connections and interfaces.</font>
+  </td>
+
+  <td width=1 nowrap bgcolor="<? echo $var:bgColorTable ?>"></td>
+
+  <td valign=top bgcolor="<? echo $var:bgColorBody ?>" width=136>
+   <font size=1>
+   <b>Help</b></font>
+  <br>
+   <font size=1>The Help section provides information on configuration and settings for each section.</font>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=11 height=1 bgcolor="<? echo $var:bgColorTable ?>"></td>
+ </tr> 
+</table>
+<!-- END Page Description -->

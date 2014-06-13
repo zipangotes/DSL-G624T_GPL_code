@@ -1,0 +1,120 @@
+
+PREFIX=${TI_FILESYSTEM}
+
+LTC=tomcrypt
+LTM=tommath
+
+
+OBJS=dbutil.o session.o packet.o algo.o buffer.o kex.o dss.o bignum.o \
+		signkey.o rsa.o random.o service.o auth.o authpasswd.o channel.o \
+		chansession.o queue.o sshpty.o termcodes.o authpubkey.o runopts.o \
+		loginrec.o atomicio.o x11fwd.o agentfwd.o localtcpfwd.o
+
+DROPBEAROBJS=main.o
+
+DROPBEARKEYOBJS=dropbearkey.o gendss.o genrsa.o
+
+CONVERTOBJS=dropbearconvert.o keyimport.o
+
+HEADERS=options.h dbutil.h session.h packet.h algo.h ssh.h buffer.h kex.h \
+		dss.h bignum.h signkey.h rsa.h random.h service.h auth.h authpasswd.h \
+		debug.h channel.h chansession.h debug.h config.h queue.h sshpty.h \
+		termcodes.h gendss.h genrsa.h authpubkey.h runopts.h includes.h \
+		loginrec.h atomicio.h x11fwd.h agentfwd.h localtcpfwd.h
+
+ALLOBJS=$(OBJS) $(DROPBEARKEYOBJS) $(DROPBEAROBJS)
+
+prefix=/usr/local
+exec_prefix=${prefix}
+bindir=${exec_prefix}/bin
+sbindir=${exec_prefix}/sbin
+
+CC=gcc
+LD=gcc
+CFLAGS=-Wall -W -Ilibtomcrypt -O2
+LIBS= -l$(LTC) -l$(LTM) -lcrypt -lutil -lnsl
+
+LDFLAGS=
+
+# these are exported so that libtomcrypt's makefile will use them
+export CC
+export CFLAGS
+
+all: dropbear dropbearkey dropbearconvert
+	@echo
+	@echo Run \"make strip\" if you want stripped binaries,
+	@echo or \"make install\" to install to ${prefix}
+
+strip:
+	-strip dropbear
+	-strip -R .note dropbear
+#	-strip dropbearkey
+#	-strip dropbearconvert
+
+install: all
+	install -d -m 755 $(DESTDIR)$(sbindir)
+	install -m 755 dropbear $(DESTDIR)$(sbindir)
+#	-chown root:root $(DESTDIR)$(sbindir)/dropbear
+#	-chown root:root $(DESTDIR)$(bindir)/dropbearkey
+#	-chown root:root $(DESTDIR)$(bindir)/dropbearconvert
+
+
+static: dropbear-static dropbearkey-static dropbearconvert-static
+
+$(ALLOBJS): $(HEADERS) Makefile
+
+dropbear: $(DROPBEAROBJS) $(OBJS) $(HEADERS) Makefile 
+	$(LD) $(LDFLAGS) -o dropbear $(DROPBEAROBJS) $(OBJS) $(LIBS)
+
+dropbear-static: $(DROPBEAROBJS) $(OBJS) $(HEADERS) Makefile  
+	$(LD) $(LDFLAGS) -o staticdropbear $(DROPBEAROBJS) $(OBJS) $(LIBS) -static
+
+dropbearkey: $(OBJS) $(HEADERS) Makefile $(DROPBEARKEYOBJS) 
+	$(LD) $(LDFLAGS) -o dropbearkey $(DROPBEARKEYOBJS) \
+		$(OBJS) $(LIBS)
+
+dropbearkey-static: $(OBJS) $(HEADERS) Makefile $(DROPBEARKEYOBJS) 
+	$(LD) $(LDFLAGS) -o staticdropbearkey $(DROPBEARKEYOBJS) \
+		$(OBJS) $(LIBS) -static
+
+dropbearconvert: $(OBJS) $(HEADERS) Makefile $(CONVERTOBJS) 
+	$(LD) $(LDFLAGS) -o dropbearconvert $(CONVERTOBJS) $(OBJS) $(LIBS)
+
+dropbearconvert-static: $(OBJS) $(HEADERS) Makefile $(CONVERTOBJS) 
+	$(LD) $(LDFLAGS) -o staticdropbearconvert $(CONVERTOBJS) $(OBJS) $(LIBS) \
+		-static
+
+# multi-purpose binaries - make sure you make
+dropbearmulti: $(HEADERS) $(OBJS) $(CONVERTOBJS) $(DROPBEARKEYOBJS) $(DROPBEAROBJS) dbmulti.o
+	$(LD) $(LDFLAGS) -o dropbearmulti $(OBJS) $(LTM) $(LTM) $(CONVERTOBJS) $(DROPBEARKEYOBJS) $(DROPBEAROBJS) dbmulti.o $(LIBS)
+	@echo
+	@echo "You should now create symlinks, ie 'ln -s dropbearmulti dropbear'"
+
+dropbearmultistatic: $(HEADERS) $(OBJS) $(CONVERTOBJS) $(DROPBEARKEYOBJS) $(DROPBEAROBJS) dbmulti.o
+	$(LD) $(LDFLAGS) -o staticdropbearmulti $(OBJS) $(LTM) $(LTM) $(CONVERTOBJS) $(DROPBEARKEYOBJS) $(DROPBEAROBJS) dbmulti.o $(LIBS)
+	@echo
+	@echo "You should now create symlinks, ie 'ln -s staticdropbearmulti staticdropbear'"
+
+
+#$(LTC): $(HEADERS)
+#	cd libtomcrypt && $(MAKE) clean && $(MAKE) SHARED=$(SHARED)
+
+#$(LTM): $(HEADERS)
+#	cd libtommath && $(MAKE) clean && $(MAKE) SHARED=$(SHARED)
+
+#ltc-clean:
+#	cd libtomcrypt && $(MAKE) clean
+
+#ltm-clean:
+#	cd libtommath && $(MAKE) clean
+
+sizes: dropbear
+	objdump -t dropbear|grep ".text"|cut -d "." -f 2|sort -rn
+
+clean: 
+	-rm -f dropbear dropbear dropbearkey staticdropbear staticdropbearkey
+	-rm -f dropbearconvert staticdropbearconvert
+	-rm -f *.o *.da *.bb *.bbg *.prof
+
+tidy:
+	-rm -f *~ *.gcov */*~

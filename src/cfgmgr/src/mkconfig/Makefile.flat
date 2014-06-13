@@ -1,0 +1,13 @@
+include ../../../../TI_Build.make
+-include $(TARGET_HOME)/.config
+
+all: build install
+
+build:
+
+install:
+	install -m 0755 mkconfig $(TI_base)/tools/bin
+
+clean:
+	rm -f $(TI_base)/tools/bin/mkconfig
+

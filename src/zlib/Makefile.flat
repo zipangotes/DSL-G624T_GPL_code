@@ -1,0 +1,14 @@
+#include ../TI_Build.make
+
+all: clean build install
+
+build:
+	$(NATIVEPATH) $(MAKE) libz.a
+
+install: 
+	install -m 0644 -D libz.a ../../tools/lib/libztemp.a
+	install -m 0644 zlib.h ../../tools/lib/
+
+clean: 
+	rm -f ../../tools/lib/libztemp.a
+	$(MAKE) clean

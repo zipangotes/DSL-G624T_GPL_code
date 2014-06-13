@@ -1,0 +1,58 @@
+
+<!-- UPNP -->
+<form onsubmit="return false"> 
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">UPnP</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center height=28><font size=1>To enable UPnP, check the Enable UPnP box and select a connection below.</font></td>
+ </tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+  
+   <div style="height: 12px"></div>
+
+   <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1>
+    <tr>
+	 <td colspan=2 nowrap>
+      <table border=0 cellspacing=1 cellpadding=1>
+       <tr>
+          <td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewUpnpState"  value="off" onclick="jslDoToggleCheckBox(id);uiChangeUPNPStatus(value)" alt=""></td>
+        <td align=left><b class="header">Enable UPNP</b></td>
+       </tr>
+      </table> 
+     </td>
+    </tr>
+	<tr><td colspan=2 height=4 nowrap></td></tr>
+	<tr>
+	 <td colspan=2>
+	  <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1 align=center>
+       <tr>
+	     <td align=left nowrap>WAN Connection: </td>
+	     <td align=left>
+		 <select onchange="uiDoSelectWAN(value)" id="uiViewUpnpWAN" style="width: 150px;">
+                   <? multiquery manager:command/connection/list "<option value='$01'>$02</option>" ?>
+		 </select>	
+		</td>
+       </tr>
+ 	   <tr>
+	      <td align=left nowrap>LAN Connection: </td>
+	      <td align=left>
+		 <select onchange="uiDoSelectLAN(value)" id="uiViewUpnpLAN" style="width: 150px;>
+		     <option value="0">None</option>
+                   <? multiquery manager:command/lan/list_used "<option value='$01'>$02</option>" ?>
+		 </select>	
+		</td>
+          </tr>
+	  </table>
+	 </td>
+	</tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</table>
+</form>
+<!-- END UPNP -->
+

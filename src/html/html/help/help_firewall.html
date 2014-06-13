@@ -1,0 +1,73 @@
+
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=20 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Firewall Help</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>">
+  	        <font size=1><b>NAT and Firewall service</b><br>
+	The DSL Router uses Network Address Translation (NAT) and Stateful Packet Inspection (SPI) Firewall  to protect your home network.
+        The NAT and Firewall Service can be globally (for LAN and all WAN connections) disabled/enabled from the Setup 
+        Firewall/NAT Service page. If disabled no NAT functionality nor firewall protection can be provided.
+        
+        For each WAN connection (e.g. the Internet connection) NAT and Firewall (SPI) can be enabled/disabled.
+        With Firewall (SPI) enabled on a WAN connection all incoming packets are examined by the Stateful Packet Inspection engine
+        and traffic is dropped if it is not matching an existing connection opened from LAN side or a port forwarding rule. 
+        Connections from LAN side to the Internet are trusted and allowed to pass thru the router unless explicit IP Filter rules are used 
+        to block the LAN traffic. This Asymetric Permisive Firewall setup (drop from WAN, allow from LAN) provides
+        easy to use Internet access while protecting the home network. 
+        </td>
+</tr>
+
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>">
+	<font size=1><b>Port Forwarding</b><br>
+		Using the Port Forwarding page, you can provide local services (for example web hosting) 
+for people on the Internet or play Internet games. To configure a service, game or other application
+select the external connection (for example the Internet connection), 
+select the computer hosting the service and add the corresponding firewall rule.  
+If you want to add a custom application, select the User category, click New and fill in the port, 
+protocols and description for your application. You can also add/edit/delete rules without using the pre-defined Firewall Policy Database (games, services, etc.). Click on "Custom Rules" to access this type of interface. In the presence of the firewall, anonymous Internet traffic is blocked.</font>
+	</td>
+</tr>
+
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>">
+	<font size=1><b>IP Filters</b><br>
+		This firewall feature allows you to block network access based on a user's computer IP address.
+You can use this page to block specific traffic (for example block web access) or any traffic from a computer on your local network.
+To configure an IP Filter rule select the computers' IP address and add the corresponding firewall traffic definition from the Firewall Policy Database.
+If the traffic type is set to "Any" all network traffic from that computer will be blocked. You can also add/edit/delete IP FIlter rules without using the pre-defined Firewall Policy Database (games, services, etc.). Click on "Custom Rules" to access this type of interface.</font>
+	</td>
+</tr>
+
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>">
+	<font size=1><b>Access Control</b><br>
+Open the access from the Internet (WAN) or LAN to the router's management ports (web, telnet, ssh, ftp, tftp, snmp). There are security risks associated with this action.
+For this reason remote management is restricted to computers on the network specified in the IP Access Control List that can hold up
+to 16 IP addresses.  The Access Control List provides a global enable/disable that will enable or disable the ACL.  If the ACL is
+disabled, the default behaviour (i.e. DENY on the WAN, Accept on the LAN is enabled for all IP addresses) is enforced.  If no IP addresses are
+specified within the ACL, the ACL will be will act as if it is disabled until the first IP address is added.<br>
+</font>
+	</td>
+</tr>
+	
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>">
+	<font size=1><b>DMZ</b><br>
+		Setting a computer on your local network as DMZ forwards any network traffic that is not 
+redirected to another computer via the port forwarding feature to the computer's IP address. 
+This opens the access to the DMZ computer from the Internet.</font>
+	</td>
+</tr>
+
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>">
+	<font size=1><b>PING</b><br>
+		Enabling incoming ping (ICMP) requests on the Port Forwarding page allows the router to respond to a ping from the Internet. Blocking outgoing ping (ICMP) (IP Filters page) generated from a particular LAN IP can be used if your PC has a virus that attempts a Ping-of-Death Denial of Service attack.</font>
+	</td>
+</tr>
+
+</table>

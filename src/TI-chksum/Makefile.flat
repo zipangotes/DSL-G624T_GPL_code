@@ -1,0 +1,16 @@
+#include ../TI_Build.make
+TEMPPATH = /bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin/:/usr/local/bin
+
+all: build install
+
+build:
+	PATH=$(TEMPPATH) $(MAKE)
+
+install: 
+	install -m 0755 tichksum ../../tools/bin
+
+clean:
+	rm -f ../../tools/bin/tichksum 
+	$(MAKE) clean
+
+

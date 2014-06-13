@@ -1,0 +1,73 @@
+      <table border=0 cellspacing=1 cellpadding=0>
+	<tr>
+	  <td colspan=2 height=20 valign=middle class="statusSubHeader">Transmit</td>
+	</tr>
+	<tr>
+	 <td width=25 nowrap></td>
+ 	 <td>
+         <table border=0 cellspacing=1 cellpadding=0 class="">
+          <input type="hidden" name="ap:status/wireless_statistics" value="<? query ap:status/wireless_statistics ?>">
+           <? multiquery ap:status/wireless_tx_stats
+            '<tr>
+              <td>MPDUs</td>
+              <td width=17 nowrap rowspan=5></td>
+              <td>$01</td>
+            </tr>
+            <tr>
+              <td>MSDUs</td>
+              <td>$02</td>
+            </tr>
+            <tr>
+              <td>Multicast MSDUs</td>
+              <td>$03</td>
+            </tr>
+            <tr>
+              <td>Failed MSDUs</td>
+              <td>$04</td>
+            </tr>
+            <tr>
+              <td>Retry MSDUs</td>
+              <td>$05</td>
+            </tr>
+           ' ?>
+         </table>
+        </td>
+       </tr>
+	<tr>
+	  <td colspan=2 height=20 valign=middle class="statusSubHeader">Receive</td>
+	</tr>
+	<tr>
+         <td width=25 nowrap></td>
+	  <td>
+           <table border=0 cellspacing=1 cellpadding=0>
+             <? multiquery ap:status/wireless_rx_stats
+                '<tr>
+                   <td>MPDUs</td>
+                   <td width=17 nowrap rowspan=6></td>
+                   <td>$01</td>
+                 </tr>
+                 <tr>
+                   <td>MSDUs</td>
+                   <td>$02</td>
+                 </tr>
+                <tr>
+                  <td>Multicast MSDUs</td>
+                  <td>$03</td>
+                </tr>
+                <tr>
+                  <td>FCS Error MPDUs</td>
+                  <td>$04</td>
+                </tr>
+                <tr>
+                  <td>MIC Failure MSDUs</td>
+                  <td>$05</td>
+                </tr>
+                <tr>
+                  <td>Decrypt Error MPDUs</td>
+                  <td>$06</td>
+                </tr>
+               ' ?>
+           </table>
+	 </td>
+      </tr>
+    </table>

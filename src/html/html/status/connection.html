@@ -1,0 +1,61 @@
+
+<? setvariable var:numconnections <? multiquerycount manager:command/connection/list ?> ?>
+<!-- Connection Status -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 align=center bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Connection Status <? if neq 0 $var:numconnections `($var:numconnections)` `` ?></font></td>
+ </tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top height=337>
+   <br>
+   <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=2>		
+   <? if eq 0 `$var:numconnections`
+   `<tr><td bgcolor="<? echo $var:bgColorBody ?>" align=center><font size=1><b>No Connections Available</b></font></td></tr>`
+   `<tr>
+     <td align=left><u>Description</u></td>
+     <td width=5 nowrap rowspan=9></td>
+     <td align=left><u>Type</u></td>
+     <td width=5 nowrap rowspan=9></td>
+     <td align=center><u>IP</u></td>
+     <td width=5 nowrap rowspan=9></td>
+     <td align=left><u>State</u></td>
+     <td width=5 nowrap rowspan=9></td>
+     <td align=center><u>Online</u></td>
+     <td width=5 nowrap rowspan=9></td>
+     <td align=left><u>Disconnect Reason</u></td>	
+    </tr>
+    <? multiquery manager:command/connection/list_group '
+    <tr>
+     <td align=left><b class="header">$14</b></td>
+     <td align=left>$16</td>
+     <? if eq `$16` `pppoa`
+         `
+           <td align=center><? if eq <? query $13:$16:status/ip ?> "" "NA" <? query $13:$16:status/ip ?> ?></td>
+           <td align=left><? if eq <? query $13:$16:status/connect ?> "" "NA" "<b class='header'><? query $13:$16:status/connect ?></b>" ?></td>
+           <td align=center><? if eq <? query $13:$16:status/uptime ?> "" "NA" <? query $13:$16:status/uptime ?> ?></td>
+           <td align=left><? if eq <? query $13:$16:status/detail ?> "" "NA" <? query $13:$16:status/detail ?> ?></td>
+         `
+         ` <? if eq `$16` `clip`
+              `
+	           <td align=center><? if eq <? query $13:$16:status/ip ?> "" "NA" <? query $13:$16:status/ip ?> ?></td>
+	           <td align=left><? if eq <? query $13:$16:status/connect ?> "" "NA" "<b class='header'><? query $13:$16:status/connect ?></b>" ?></td>
+	           <td align=center><? if eq <? query $13:$16:status/uptime ?> "" "NA" <? query $13:$16:status/uptime ?> ?></td>
+	           <td align=left><? if eq <? query $13:$16:status/detail ?> "" "NA" <? query $13:$16:status/detail ?> ?></td>
+              `
+              `
+     <td align=center><? if eq <? query $11:$16:status/ip ?> "" "NA" <? query $11:$16:status/ip ?> ?></td>
+     <td align=left><? if eq <? query $11:$16:status/connect ?> "" "NA" "<b class='header'><? query $11:$16:status/connect ?></b>" ?></td>
+     <td align=center><? if eq <? query $11:$16:status/uptime ?> "" "NA" <? query $11:$16:status/uptime ?> ?></td>
+     <td align=left><? if eq <? query $11:$16:status/detail ?> "" "NA" <? query $11:$16:status/detail ?> ?></td>
+              ` ?>         
+         ` ?>
+    </tr>' ?> 
+    ` ?>
+   </table>
+ <tr> 
+  <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28 valign=middle>
+   <input <? echo $var:widDefBtnRefresh ?> onclick="uiDoRefresh()" alt="Refresh">
+  </td>
+ </tr>
+</table>
+<!-- END Connection Status -->

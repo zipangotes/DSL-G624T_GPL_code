@@ -1,0 +1,172 @@
+<!-- Wireless Advanced -->
+<table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="#757575" width=510>
+  <form onSubmit="return false">
+    <tr>
+      <td align=center class="header" bgcolor="#FFFFFF">Wireless Advanced</td>
+    </tr>
+    <tr>
+      <td height=5 nowrap bgcolor="#D3D9DF"></td>
+    </tr>
+    <tr>
+      <td bgcolor="#FFFFFF" valign=top align=center>
+       <table cellspacing=0 border=0 cellpadding=1 align=center>
+        <tr>
+	    <td class="headerLeft">Preamble Algo</td>
+       </tr>
+       <tr>
+	   <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+	       <tr>
+		  <td width=8 nowrap></td>
+	         <? multiquery ap:valid_settings/premble_algo 
+	            "<td width=20><input type='image' src='/usr/www_safe/html/images/ti_radio_off.gif' id='uiViewPreambleAlgo$0' value='off' onclick='uiChangePreambleAlgo($0)' alt='' width=20 height=20 border=0></td><td><font size=1>$1</font></td>" ?>
+	       </tr>
+	     </table>
+	   </td>
+       </tr>
+       <tr>
+	   <td class="headerLeft">Time Slot Algo</td>
+       </tr>
+       <tr>
+	  <td align=left>
+	    <table cellspacing=2 border=0 cellpadding=0>
+	      <tr>
+		 <td width=8 nowrap></td>
+	        <? multiquery ap:valid_settings/time_slot_algo 
+	            "<td width=20><input type='image' src='/usr/www_safe/html/images/ti_radio_off.gif' id='uiViewTimeSlotAlgo$0' value='off' onclick='uiChangeTimeSlotAlgo($0)' alt='' width=20 height=20 border=0></td><td><font size=1>$1</font></td>" ?>
+	      </tr>
+	    </table>
+	  </td>
+       </tr>
+       <tr>
+	   <td class="headerLeft">PBCC Algo</td>
+       </tr>
+       <tr>
+	   <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+	       <tr>
+		   <td width=8 nowrap></td>
+	          <? multiquery ap:valid_settings/pbcc_algo 
+	            "<td width=20><input type='image' src='/usr/www_safe/html/images/ti_radio_off.gif' id='uiViewPBCCAlgo$0' value='off' onclick='uiChangePBCCAlgo($0)' alt='' width=20 height=20 border=0></td><td><font size=1>$1</font></td>" ?>
+	       </tr>
+	     </table>
+	  </td>
+       </tr>
+       <tr>
+ 	   <td class="headerLeft">ERP Mode</td>
+       </tr>
+       <tr>
+	    <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+	       <tr>
+		  <td width=8 nowrap></td>
+	         <? multiquery ap:valid_settings/erp_mode 
+	            "<td width=20><input type='image' src='/usr/www_safe/html/images/ti_radio_off.gif' id='uiViewERPMode$0' value='off' onclick='uiChangeERPMode($0)' alt='' width=20 height=20 border=0></td><td><font size=1>$1</font></td>" ?>
+	       </tr>
+	     </table>
+	   </td>
+       </tr>
+       <tr>
+	   <td class="headerLeft">ERP Type</td>
+       </tr>
+       <tr>
+	   <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+                <tr>
+		      <td width=8 nowrap></td>
+                    <? multiquery ap:valid_settings/erp_type 
+                       "<td width=20><input type='image' src='/usr/www_safe/html/images/ti_radio_off.gif' id='uiViewERPType$0' value='off' onclick='uiChangeERPType($0)' alt='' width=20 height=20 border=0></td><td><font size=1>$1</font></td>" ?>
+	         </tr>
+	     </table>
+	   </td>
+       </tr>
+       <tr>
+	   <td height=8 nowrap></td>
+       </tr>
+       <tr>
+	   <td align=center>
+	      <table cellspacing=1 border=0 cellpadding=1>
+	         <tr>
+		    <td align=right>Max 802.11b Basic rate:&nbsp;</td>
+		    <td>
+		       <select onchange="uiChangeBasicRate(value)" id="uiViewBasicRate">
+		          <option value="1">1</option>
+		          <option value="2">2</option>
+		          <option value="5.5">5.5</option>
+		          <option value="11">11</option>
+		       </select>
+		    </td>
+	         </tr>
+	         <tr>
+		    <td align=right>Max 802.11b Supported rate:&nbsp;</td>
+		    <td>
+		      <select onchange="uiChangeSuppRate(value)" id="uiViewSuppRate">
+		        <option value="1">1</option>
+		        <option value="2">2</option>
+		        <option value="5.5">5.5</option>
+		        <option value="11">11</option>
+ 		        <option value="22">22</option>
+		      </select>
+		    </td>
+                </tr>
+              </table>
+            </td>
+         </tr>
+         <tr>
+            <td height=8 nowrap></td>
+         </tr>
+         <tr>
+           <td class="headerLeft">Additional 802.11g AP Legacy rates</td>
+         </tr>
+         <tr>
+           <td align=left>
+               6M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG1">
+               9M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG2">
+               12M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG3">
+               18M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG4">
+               24M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG5">
+               36M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG6">
+               48M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG7">
+               54M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG8">
+            </td>
+         </tr>
+         <tr>
+            <td align=left><font size=1><br><i>Y = Supported, N = Not Supported, B = Basic Supported</i></font></td>
+         </tr>
+         <tr>
+	     <td class="headerLeft">Additional 802.11g AP Extended rates</td> 
+         </tr>
+         <tr>
+	    <td align=left>
+               6M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP1">
+               9M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP2">
+               12M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP3">
+               18M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP4">
+               24M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP5">
+               36M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP6">
+               48M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP7">
+               54M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP8">
+            </td>
+          </tr>
+          <tr>
+	      <td align=left><font size=1><br><i>Y = Supported, N = Not Supported, B = Basic Supported</i></font></td>
+           </tr>
+         </table>
+       </td>
+   </tr>
+   <tr>
+      <td align=right bgcolor="#FFFFFF">
+	 <table border=0 cellspacing=0 width=124>
+	   <tr valign=middle>
+	      <td width=62 height=19><input type="image" src="/usr/www_safe/html/images/ti_button_apply.gif" onclick="uiDoSave()" alt="Apply" width="62" height="19" border=0></td>
+	      <td width=62 height=19><input type="image" src="/usr/www_safe/html/images/ti_button_cancel.gif" onClick="uiDoCancel()" alt="Cancel" width="62" height="19" border=0></td>
+	   </tr>
+	 </table>	 
+      </td>
+    </tr>
+  </form>
+</table>
+
+<div style="height: 10px"></div>
+<!-- END Wireless Advanced -->
+

@@ -1,0 +1,96 @@
+
+<!-- Management IP -->
+<form id="uiViewBridgeMgmtForm" onSubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Management IP</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 12px"></div>
+
+   <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=center>
+    <tr id="ipAddress">
+     <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewIPAddrMark" <? echo $var:dimImgErrorMark ?> ></td>
+     <td align=right>IP Address:</td>
+     <td align=left><input type="text" name="uiViewIPAddrMark" value="" maxlength="15" size="20" id="uiViewIPAddr"></td>
+    </tr>
+    <tr id="netMask">
+     <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewNetMaskMark" <? echo $var:dimImgErrorMark ?> ></td>
+     <td align=right>Netmask:</td>
+     <td align=left><input type="text" name="uiViewNetMaskMark" value="" maxlength="15" size="20" id="uiViewNetMask"></td>
+    </tr>
+    <tr id="gateway">
+     <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewGatewayMark" <? echo $var:dimImgErrorMark ?> ></td>
+     <td align=right>Default Gateway:</td>
+     <td align=left><input type="text" name="uiViewGatewayMark" value="" maxlength="15" size="20" id="uiViewGateway"></td>
+    </tr>
+    <tr>
+     <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewHostnameMark" <? echo $var:dimImgErrorMark ?>></td>
+     <td align=right>Hostname:</td>
+     <td align=left><input type="text" name="uiViewHostnameMark" value="" maxlength="15" size="20" id="uiViewHostname"></td>
+    </tr>
+    <tr>
+     <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDomainnameMark" <? echo $var:dimImgErrorMark ?> ></td>
+     <td align=right>Domain Name:</td>
+     <td align=left><input type="text" name="uiViewDomainnameMark" value="" maxlength="15" size="20" id="uiViewDomainname"></td>
+    </tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td align=right>Physical Port1:</td>
+     <td align=left>
+     		<select id=uiViewPort1 onchange="jslSetValue('uiPostPort1','uiViewPort1')">
+		  <? multiquery eth0:status/port1
+		   '<option value=$01>$02</option>' ?>
+		</select>	
+     </td>
+    </tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td align=right>Physical Port2:</td>
+     <td align=left>
+     		<select id=uiViewPort2 onchange="jslSetValue('uiPostPort2','uiViewPort2')">
+		  <? multiquery eth0:status/port2
+		   '<option value=$01>$02</option>' ?>
+		</select>	
+     </td>
+    </tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td align=right>Physical Port3:</td>
+     <td align=left>
+     		<select id=uiViewPort3 onchange="jslSetValue('uiPostPort3','uiViewPort3')">
+		  <? multiquery eth0:status/port3
+		   '<option value=$01>$02</option>' ?>
+		</select>	
+     </td>
+    </tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td align=right>Physical Port4:</td>
+     <td align=left>
+     		<select id=uiViewPort4 onchange="jslSetValue('uiPostPort4','uiViewPort4')">
+		  <? multiquery eth0:status/port4
+		   '<option value=$01>$02</option>' ?>
+		</select>	
+     </td>
+    </tr>
+   </table>
+   <br>
+  </td>
+ </tr>
+ <tr>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+   <table <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=0 width="100%">
+    <tr valign=middle>
+     <td align=center style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint" ><? echo $var:txtErrorHint ?></td>
+	 <td>&nbsp;</td>
+	 <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+	</tr>
+   </table> 
+  </td>
+ </tr>
+</table>
+</form>
+<!-- END Management IP -->

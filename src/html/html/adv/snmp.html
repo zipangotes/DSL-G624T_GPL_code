@@ -1,0 +1,147 @@
+<form onsubmit="return false">
+<table cellspacing=1 border=0 cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+   <td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">SNMP Management</font></td>
+ </tr>
+ <tr>
+   <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+     <div style="height: 15px"></div>
+     <table border=0 align=center cellpadding=1 cellspacing=2>
+       <tr>
+         <td align=center>
+           <table border=0 align=center cellpadding=1 cellspacing=0>
+              <tr>
+                <td>&nbsp;</td>
+   	         <td align=center><input <? echo $var:widDefCheckBoxOff ?> id="uiViewSNMPAgent" onclick="jslDoToggleCheckBox(id);" alt="Enable SNMP Agent"></td>
+	         <td align=left><b>Enable SNMP Agent</b></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+	         <td align=center><input <? echo $var:widDefCheckBoxOff ?> id="uiViewSNMPTrap" onclick="jslDoToggleCheckBox(id);" alt="Enable SNMP Traps"></td>
+	         <td align=left><b>Enable SNMP Traps</b></td>
+              </tr>
+            <tr>
+              <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSysNameMark"></td>
+              <td align=right>Name:</td>
+	       <td><input type="text" size="20" name="uiViewSysNameMark" value="" id="uiViewSysName"></td>
+            </tr>
+            <tr>
+              <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSysLocationMark"></td>
+              <td align=right>Location:</td>
+	       <td><input type="text" size="20" name="uiViewSysLocationMark" value="" id="uiViewSysLocation"></td>
+            </tr>
+            <tr>
+              <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSysContactMark"></td>
+              <td align=right>Contact:</td>
+	       <td><input type="text" size="20" name="uiViewSysContactMark" value="" id="uiViewSysContact"></td>
+            </tr>
+	      <? multiquery snmpcm:settings/system
+  	      '
+              <tr>
+                <td>&nbsp;</td>
+                <td align=right>Vendor OID:</td>
+	         <td>$02</td>
+              </tr>
+             '  ?>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align=center>
+	   <? if eq <? error found ?> 1 `<? include /usr/www_safe/html/setup/error.html ?>`
+	  `` ?>
+        </td>
+      </tr>
+      <tr>
+        <td height=12 align=center><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=385 height=1></td>
+      </tr>
+      <tr>
+        <td align=center>
+         <table border=0 align=center cellpadding=1 cellspacing=0>
+           <tr>
+              <td class="header" colspan=4 align=center>Community</td>
+	    </tr>
+           <tr>
+             <td align=center><u>Name</u></td>
+	      <td width=6 nowrap></td>
+	      <td align=center nowrap><u>Access Right</u></td>
+	      <td width=6 nowrap></td>
+           </tr>
+           <? multiquery snmpcm:settings/community/entry `
+            <tr>
+	       <td align=center>
+	         <input type="text" name="snmpcm:settings/community/entry$00/name" value="$01" id="uiViewName$00">
+	       </td>
+	       <td width=6 nowrap></td>
+	       <td align=center>
+	    	   <select name="snmpcm:settings/community/entry$00/access" id="uiViewAccessRights$00">
+			<option value="ro">ReadOnly</option>
+			<option value="rw">ReadWrite</option>
+			<option value=""></option>
+		   </select>
+	       </td>
+  	       <td width=6 nowrap></td>
+            </tr>` 
+            ?>
+          </table>
+         </td>
+       </tr>
+       <tr>
+          <td height=12 align=center><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=385 height=1></td>
+       </tr>
+    <tr>
+     <td align=center>
+      <table border=0 align=center cellpadding=1 cellspacing=0>
+       <tr>
+        <td class="header" colspan=6 align=center>Traps</td>
+	</tr>
+       <tr>
+        <td align=center><u>Destination IP</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center nowrap><u>Trap Community</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center nowrap><u>Trap Version</u></td>
+	 <td width=6 nowrap></td>
+       </tr>
+       <? multiquery snmpcm:settings/trapinfo/entry `
+        <tr>
+	  <td align=center>
+	        <input type="text" name="snmpcm:settings/trapinfo/entry$00/trapdest" value="$01" id="uiViewTrapDest$00">
+	  </td>
+	  <td width=6 nowrap></td>
+	  <td align=center>
+	        <input type="text" name="snmpcm:settings/trapinfo/entry$00/trapcommunity" value="$02" id="uiViewTrapComm$00">
+	  </td>
+  	  <td width=6 nowrap></td>
+	  <td align=center>
+	    	<select name="snmpcm:settings/trapinfo/entry$00/trapversion" id="uiViewTrapVer$00">
+				<option value="1">SNMP v1</option>
+				<option value="2">SNMP v2c</option>
+				<option value=""></option>
+		</select>
+	  </td>
+  	  <td width=6 nowrap></td>
+        </tr>` 
+       ?>
+      </table>
+     </td>
+    </tr>
+    
+   </table>
+  </td>
+ </tr>
+ 
+ <tr>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+   <table border=0 cellspacing=0 width="100%">
+    <tr valign=middle>
+     <td align=center><input type=text size=40 value="" readonly id="uiViewErrorHint" class="uiErrorHint" style="background-color: <? echo $var:bgColorBody ?>;"></td>
+     <td>&nbsp;</td>
+     <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+    </tr>
+   </table> 
+  </td>
+ </tr>
+</table>
+<div style="height: 10px"></div>
+</form>

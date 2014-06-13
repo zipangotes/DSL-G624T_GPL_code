@@ -1,0 +1,69 @@
+#!/bin/sh
+NSP_VERSION=
+# BEWARE !!! DON'T CHANGE anything above this line. nsp/Makefile adds
+# the NSP version in the above variable
+FSSTAMP=`date +'%Y%m%d%H%M%S'`
+
+echo ""
+# temporary filesystem dir, so contents of /var can be deleted after var.tar creation
+cp -a filesystem filesystem_temp
+cd filesystem_temp
+tar cvf var.tar var
+cd ..
+rm -rf filesystem_temp/var/*
+
+echo ""
+echo  "*** Creating Annex B images..." 
+cp bin/ar0700db.bin filesystem_temp/lib/modules/ar0700xx.bin
+./bin/mksquashfs filesystem_temp nsp.annexB.squashfs.img -noappend
+chmod 644 nsp.annexB.squashfs.img
+cp nsp.annexB.squashfs.img nsp.annexB.squashfs.upgrade.img
+./bin/tichksum nsp.annexB.squashfs.upgrade.img
+
+echo "*** Creating Annex B single image..."
+./bin/mknspimg -o nsp.annexB.firmware.img -i ram_zimage.ar7xxx.nsp.squashfs.bin \
+	-i nsp.annexB.squashfs.img -a 0 4096 -v
+
+cp nsp.annexB.firmware.img nsp.annexB.firmware.upgrade.img
+./bin/tichksum nsp.annexB.firmware.upgrade.img
+
+#echo ""
+#echo  "*** Creating Annex C images... "
+#cp bin/ar0700dc.bin filesystem_temp/lib/modules/ar0700xx.bin
+#./bin/mksquashfs filesystem_temp nsp.annexC.img -noappend
+#chmod 644 nsp.annexC.img
+#cp nsp.annexC.img nsp.annexC.upgrade.img
+#./bin/tichksum nsp.annexC.upgrade.img
+
+#echo ""
+#echo "*** Creating Annex S=1/2 images..." 
+#cp bin/ar0700mp_s1_2.bin filesystem_temp/lib/modules/ar0700xx.bin
+#./bin/mksquashfs filesystem_temp nsp.annexS1_2.img -noappend
+#chmod 644 nsp.annexS1_2.img
+#cp nsp.annexS1_2.img nsp.annexS1_2.upgrade.img
+#./bin/tichksum nsp.annexS1_2.upgrade.img
+
+echo ""
+echo  "*** Creating Annex A images..." 
+cp bin/ar0700mp.bin filesystem_temp/lib/modules/ar0700xx.bin
+./bin/mksquashfs filesystem_temp nsp.annexA.squashfs.img -noappend
+chmod 644 nsp.annexA.squashfs.img
+cp nsp.annexA.squashfs.img nsp.annexA.squashfs.upgrade.img
+./bin/tichksum nsp.annexA.squashfs.upgrade.img
+
+echo "*** Creating Annex A single image..."
+./bin/mknspimg -o nsp.annexA.firmware.img -i ram_zimage.ar7xxx.nsp.squashfs.bin \
+	-i nsp.annexA.squashfs.img -a 0 4096 -v
+
+cp nsp.annexA.firmware.img nsp.annexA.firmware.upgrade.img
+./bin/tichksum nsp.annexA.firmware.upgrade.img
+
+awk '{ if(NR==1) print "<config version=\"'$NSP_VERSION'\" fsstamp=\"'$FSSTAMP'\">"; else print $0 }' \
+		filesystem/etc/config.xml > config.xml
+
+./bin/mkconfig -i config.xml -o config.ar7xxx.img
+
+rm -rf filesystem_temp
+rm -f config.xml
+rm -f nsp.annexA.squashfs.img
+rm -f nsp.annexB.squashfs.img 

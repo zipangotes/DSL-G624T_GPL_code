@@ -1,0 +1,126 @@
+
+<!-- PPP Setup -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>"><? if eq pppoa `$var:contype` `PPPoA` `PPPoE` ?> Connection Setup</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  
+   <div style="height: 12px"></div>
+   
+   <? include /usr/www_safe/html/setup/header.html ?>
+   
+   <table align=center cellpadding=0 cellspacing=0 width=497>
+    <tr>
+     <td valign=top align=right width="50%">
+	  <!-- PPP Settings -->
+      <table align=center cellpadding=1 cellspacing=0 <? echo $var:cntrBorder ?> >
+       <tr><td colspan=6 align=center class="header" height=21>PPP Settings</td></tr>
+       <? if eq pppoa `$var:contype`
+       `<!-- PPPoA Encapsulation -->
+	    <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewUserNameMarkBlank" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Encapsulation:&nbsp;</td>	
+         <td align=left nowrap colspan=4>
+		  <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=0>
+		   <tr>
+		    <td><input <? echo $var:widDefRadioBtnOn ?> onclick="jslDoToggleRadio('uiViewEncaps',0,2)" value=on id="uiViewEncaps0" align="middle"></td>
+			<td>&nbsp;LLC</td>
+            <td><input <? echo $var:widDefRadioBtnOff ?> onclick="jslDoToggleRadio('uiViewEncaps',1,2)" value=off  id="uiViewEncaps1" align="middle"></td>
+			<td>&nbsp;VC</td>
+		   </tr>
+		  </table>
+         </td>
+        </tr>
+		<!-- PPPoA Encapsulation -->` `` ?>
+        <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewUserNameMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Username:&nbsp;</td>
+         <td align=left colspan=4><input type="text" value="" size="14" maxlength="128" name="uiViewUserNameMark" id="uiViewUserName"></td>
+        </tr>
+        <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPasswordMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Password:&nbsp;</td>
+         <td align=left colspan=4><input type="password" value="" size="14" maxlength="128" name="uiViewPasswordMark" id="uiViewPassword"></td>
+        </tr>
+        <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewIdleTimeMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Idle Timeout:&nbsp;</td>
+         <td align=left colspan=4><input type="text" value="" maxlength="6" size="6" name="uiViewIdleTimeMark" id="uiViewIdleTime">&nbsp;secs</td>
+        </tr>
+        <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewKeepAliveMark" alt="" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Keep Alive:&nbsp;</td>
+         <td align=left colspan=4><input type="text" value="" maxlength="6" size="6" name="uiViewKeepAliveMark" id="uiViewKeepAlive">&nbsp;min</td>
+        </tr>
+        <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewAuthMark" alt="" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Authentication:&nbsp;</td>
+         <td align=left colspan=4 nowrap>
+             <input <? echo $var:widDefRadioBtnOff ?> id="uiViewAuth0" onclick="jslDoToggleRadio('uiViewAuth',0,3);uiDoChangeAuth('Auto')" value="off" align=middle> Auto
+             <input <? echo $var:widDefRadioBtnOff ?> id="uiViewAuth1" onclick="jslDoToggleRadio('uiViewAuth',1,3);uiDoChangeAuth('CHAP')" value="off" align=middle> CHAP
+             <input <? echo $var:widDefRadioBtnOff ?> id="uiViewAuth2" onclick="jslDoToggleRadio('uiViewAuth',2,3);uiDoChangeAuth('PAP')" value="off" align=middle> PAP
+        </tr>
+        <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewMRUMark" alt="" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>MTU:&nbsp;</td>
+         <td align=left colspan=4><input type="text" value="" maxlength="6" size="6" name="uiViewMRUMark" id="uiViewMRU">&nbsp;bytes</td>
+        </tr>
+        <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewOnDemandMark" alt="" <? echo $var:dimImgErrorMark ?> ></td>  
+         <td align=right nowrap>On Demand:&nbsp;</td>
+         <td align=left><input <? echo $var:widDefCheckBoxOff ?> id="uiViewOnDemand" onclick="pppDoChangeOnDemand(id)" value="off" align=middle></td>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSetRouteMark" alt="" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Default Gateway:&nbsp;</td>
+         <td align=left><input <? echo $var:widDefCheckBoxOff ?> id="uiViewSetRoute" onclick="jslDoToggleCheckBox(id)" value="off" align=middle></td>
+        </tr>
+        <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="" alt="" <? echo $var:dimImgErrorMark ?> ></td>
+         <? if eq pppoe `$var:contype`
+		 `<td align=right nowrap>Enforce MTU:&nbsp;</td>
+          <td align=left>
+		   <input <? echo $var:widDefCheckBoxOff ?> id="uiViewEnforceMRU" onclick="jslDoToggleCheckBox(id);pppDoChangeEnforceMRU(id)" value="off" align=middle>
+		  </td>`
+         `<td align=right nowrap>&nbsp;</td>
+          <td align=left>&nbsp;</td>` ?>
+          <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="" alt="" <? echo $var:dimImgErrorMark ?> ></td>
+          <td align=right nowrap>Debug:&nbsp;</td>
+          <td align=left><input <? echo $var:widDefCheckBoxOff ?> id="uiViewDebug" onclick="jslDoToggleCheckBox(id);pppDoChangeDebug(id)" value="off" align=middle></td>
+        </tr>
+	    <tr>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="" alt="" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>PPP Unnumbered:&nbsp;</td>
+         <td align=left>
+		   <input <? echo $var:widDefCheckBoxOff ?> id="uiViewPppUnNum" onclick="jslDoToggleCheckBox(id);uiPPPUnnum(value)" value="off" align=middle>
+	  </td>
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="" alt="" <? echo $var:dimImgErrorMark ?> ></td>
+          <td align=right nowrap>LAN:&nbsp;</td>
+          <td align=left>
+               <select onchange="uiDoSelectLAN(value)" id="uiViewPppUnLan" style="width: 100px;">
+                   <? multiquery manager:command/lan/list_used `<option value='$01'>$02</option>` ?>
+		 </select>
+           </td>
+        </tr>
+
+        <tr>
+	    	<td></td>
+			<td colspan=5 align=center height=10><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="100%" height=1></td>
+	    </tr>
+        <tr>
+          <td colspan=2></td>
+          <td colspan=4 align=right nowrap><input <? echo $var:widDefBtnConnect ?> id="uiViewConnectButton" onClick="uiDoConnect()" alt="Connect"><input <? echo $var:widDefBtnDisconnect ?> id="uiViewDisconnectButton" onClick="uiDoDisconnect()" alt="Disconnect"></td>
+        </tr> 
+      </table>
+      <!-- END PPP Settings -->
+	 </td>
+     <td valign=top align=left width="50%"><? if eq `1` `$var:HasDsl` `<? include /usr/www_safe/html/setup/pvc.html ?>` `&nbsp;` ?></td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/setup/footer.html ?></td></tr>
+</table>
+</form>
+<!-- END PPP Setup -->

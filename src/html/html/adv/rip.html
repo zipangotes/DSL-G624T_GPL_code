@@ -1,0 +1,117 @@
+
+<!-- Dynamic Routing -->
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Dynamic Routing</font></td>
+</tr>
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>	
+
+    <div style="height: 15px"></div>
+   
+	<table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=1 width=355>
+	<tr>
+	  <td width=19 nowrap height=20 align=right><input <? echo $var:widDefCheckBoxOff ?> id="uiViewRipStatus" value=off onclick="jslDoToggleCheckBox(id);uiDoChangeRipStatus(value)" alt="" align="center"></td>
+	  <td align=left>Enable RIP</td>
+	</tr>
+	<tr>
+		<td nowrap></td>
+		
+		<td align=left>
+		
+		<table <? echo $var:cntrBorder ?> cellpadding=1 cellspacing=0>
+		<tr>
+			<td nowrap align=right>Protocol: </td>
+			<td align=left>
+				<select name="" onchange="uiDoChangeRipProtocol(value)" id="uiViewRipProtocol">
+					<option value="1">RIP v1</option>
+					<option value="2">RIP v2</option>
+					<option value="3">RIP v1 Compatible</option>
+				</select>
+			</td>
+			<td width=8 nowrap></td>
+			<td nowrap align=right>&nbsp;</td>
+			<td align=left>&nbsp;</td>
+		</tr>
+		</table>
+		
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 height=20 nowrap></td>
+	</tr>
+	<tr>
+	  <td width=19 nowrap height=20 align=right><input <? echo $var:widDefCheckBoxOff ?> name="" value="off" id="uiViewRipPasswordReq" onclick="jslDoToggleCheckBox(id);uiDoChangeRipPasswordReq()" alt="" align="center"></td>
+	  <td id="uiViewText1" align=left>Enable Password</td>
+	</tr>
+	<tr>
+		<td nowrap></td>
+		
+		<td align=left>
+		
+		<table <? echo $var:cntrBorder ?> cellpadding=1 cellspacing=0>
+		<tr>
+			<td nowrap align=right id="uiViewText2">Password: </td>
+			<td align=left>
+	    		<input type="password" maxlength="16" size="16" id="uiViewRipPassword">
+			</td>
+		</tr>
+		</table>
+		
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 height=20 nowrap></td>
+	</tr>
+       <tr>
+		<td colspan=2 align=center>
+			<table <? echo $var:cntrBorder ?> cellpadding=1 cellspacing=0>
+		   	   <tr>
+		   	   	<td class=header>Interface</td>
+		   	   	<td width=50>&nbsp;</td>
+		   	   	<td class=header>Direction</td>
+			   </tr>
+			<? multiquery manager:command/lan/list_used 
+			`   <tr>
+			      <td>$02</td>
+		   	   	<td>&nbsp;</td>
+			      <td>
+			   	<select name="" onchange="uiDoChangeRipDirection(value,'uiPostLanDirection$00')" id="uiViewLanDirection$00">
+					<option value="0">None</option>
+					<option value="1">In</option>
+					<option value="2">Out</option>
+					<option value="3">Both</option>
+				</select>
+			     </td>
+			   </tr>
+			 ` ?>
+			<? multiquery manager:command/connection/list_group 
+			` <? if neq `bridge` `<? query $01:settings/type ?>` 
+			`   <tr>
+			      <td>$04</td>
+		   	   	<td>&nbsp;</td>
+			      <td>
+			   	<select name="" onchange="uiDoChangeRipDirection(value,'uiPostWanDirection$00')" id="uiViewWanDirection$00">
+					<option value="0">None</option>
+					<option value="1">In</option>
+					<option value="2">Out</option>
+					<option value="3">Both</option>
+				</select>
+			     </td>
+			   </tr> ` ` ` ?>
+			 ` ?>
+			</table>
+		</td>
+       </tr>
+	</table>
+
+	</td>
+</tr>
+<tr>
+ <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?> </td>
+</tr>
+</table>
+
+<!-- END Dynamic Routing -->
+

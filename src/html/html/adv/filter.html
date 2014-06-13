@@ -1,0 +1,179 @@
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Custom IP Filters</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+  
+   <div style="height: 12px"></div>
+
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+    <tr>
+     <td>
+      <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=2>
+       <tr><td align=center colspan=10><? include /usr/www_safe/html/setup/error.html ?></td></tr>
+       <tr>
+        <td align=right>Filter Name:</td>
+        <td><input type=text size=15 name="<? echo $var:langrp ?>:flan:settings/name" id="uiViewName" maxlength=15></td>
+        <td width=10 nowrap></td>
+        <td align=right>Enable</td>
+        <td align=left><input <? echo $var:widDefCheckBoxOff ?> id="uiViewState" onclick="jslDoToggleCheckBox(id);" alt="Enable Filters" <? echo $var:dimBtnCheckBox ?>></td>
+       </tr>
+       <tr>
+        <td align=right nowrap>Source IP:</td>
+        <td><input type=text size=15 name="<? echo $var:langrp ?>:flan:settings/srcip_start" id="uiViewSrcIPStart" maxlength=15></td>
+        <td width=10 nowrap></td>
+        <td align=right nowrap>Source Netmask:</td>
+        <td><input type="text" size=15 name="<? echo $var:langrp ?>:flan:settings/srcip_mask" id="uiViewSrcMask" maxlength=15></td>
+       </tr>
+       <tr>
+        <td align=right nowrap>Destination IP:</td>
+        <td><input type=text size=15 name="<? echo $var:langrp ?>:flan:settings/dstip_start" id="uiViewDstIPStart" maxlength=15></td>
+        <td width=10 nowrap></td>
+        <td align=right nowrap>Destination Netmask:</td>
+        <td><input type="text" size=15 name="<? echo $var:langrp ?>:flan:settings/dstip_mask" id="uiViewDstMask" maxlength=15></td>
+       </tr>
+       <tr>
+        <td align=right nowrap>Port Start:</td>
+        <td><input type="text" size=5 name="<? echo $var:langrp ?>:flan:settings/portstart" id="uiViewPortStart" maxlength=5></td>
+        <td width=10 nowrap></td>
+        <td align=right nowrap>Port End:</td>
+        <td><input type="text" size=5 name="<? echo $var:langrp ?>:flan:settings/portend" id="uiViewPortEnd" maxlength=5></td>
+       </tr>
+       <tr>
+        <td align=right>Protocol:</td>
+        <td>
+         <select id="uiViewProtocol">
+          <option value="TCP">TCP</option>
+          <option value="UDP">UDP</option>
+          <option value="TCP,UDP">TCP and UDP</option>
+          <option value="ICMP">ICMP</option>
+          <option value="*">Any</option>
+         </select>
+        </td>
+       </tr>
+       <tr><td><input type="hidden" size=5 name="<? echo $var:langrp ?>:flan:settings/action" value="DENY" id="uiViewAction" maxlength=5></td></tr>
+      </table>
+     </td>
+    </tr>		
+    <tr>
+     <td align=center>
+     <!-- LAN IP Address Table -->
+      <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=1>
+                <tr><td height=2 colspan=20 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+                <tr>
+			<td align=center nowrap><b>Enabled</b></td>
+                     <td width=3 nowrap></td>
+			<td align=center nowrap><b>Name</b></td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap><b>Source IP</b></td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap><b>Destination IP</b></td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap><b>PortStart</b></td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap><b>Protocol</b></td>
+			<td width=3 nowrap></td>
+			<td align=center><b>Edit</b></td>
+                     <td width=3 nowrap></td>
+			<td align=center><b>Delete</b></td>
+                </tr>
+                <tr>
+			<td align=center nowrap>&nbsp;</td>
+                     <td width=3 nowrap></td>
+			<td align=center nowrap>&nbsp;</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap><b>Mask</b></td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap><b>Mask</b></td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap><b>PortEnd<b></td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>&nbsp;</td>
+			<td width=3 nowrap></td>
+			<td align=center>&nbsp;</td>
+                     <td width=3 nowrap></td>
+			<td align=center>&nbsp;</td>
+                </tr>
+                <tr><td height=2 colspan=20 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+
+		  <? multiquery $var:langrp:flan:status/filter `
+		  <tr>
+        <input type="hidden" name="$var:langrp:flan:command/del" value="$01" id="uiViewDeletePP$00" disabled>
+        <!-- State -->
+                        <td align=left>
+				<input type="text" class="uiNoBorder" size="3" value="<? if eq $04 0 'off' 'on' ?>" id="uiEditEnable$00" readonly>
+			   </td>
+        <td width=3 nowrap></td>
+        <!-- Name -->
+                        <td align=left>
+				<input type="text" class="uiNoBorder" size="15" value="$02" id="uiEditName$00" readonly>
+                        </td>
+        <td width=3 nowrap></td>
+        <!-- Src IP Start -->
+			<td align=left>
+				<input type="text" class="uiNoBorder" size="15" value="$05" id="uiEditSrcIPStart$00" readonly>
+			</td>
+        <td width=3 nowrap></td>
+        <!-- Src IP End -->
+			<td align=left>
+				<input type="text" class="uiNoBorder" size="15" value="$07" id="uiEditDstIPStart$00" readonly>
+			    </td>
+        <td width=3 nowrap></td>
+			<!-- Port Start -->
+			<td align=left>
+				<input type="text" class="uiNoBorder" size="4" value="$09" id="uiEditPortStart$00" readonly>
+			</td>
+        <td width=3 nowrap></td>
+			<!-- Protocol -->
+			<td align=center>
+				<input type="text" class="uiNoBorder" size="11" value="$0b" id="uiEditProtocol$00" readonly>
+			</td>
+			<!-- delete control -->
+        <td width=3 nowrap></td>
+        <td align=center><input  $var:widDefRadioBtnOff  value="off" name="$00" id="uiViewFilterStatus$00" onclick="uiDoEdit('$00');" alt="Select this entry"></td></td>
+        <td width=3 nowrap></td>
+        <td align=center><input  $var:widDefCheckBoxOff  id="uiViewDeletePPCheckBox$00" onclick="uiDoToggleDelete(id,'uiPostDelete$00'); return false;" value="off" alt=""></td>
+       </tr>
+
+       <tr>
+         <td align=left>&nbsp;</td>
+         <td width=3 nowrap></td>
+         <td align=left>&nbsp;</td>
+         <td width=3 nowrap></td>
+        <!-- Src Mask  -->
+  	  <td align=left>
+	     <input type="text" class="uiNoBorder" size="15" value="$06" id="uiEditSrcMask$00" readonly>
+	  </td>
+         <td width=3 nowrap></td>
+        <!-- Dest Mask -->
+	  <td align=left>
+	     <input type="text" class="uiNoBorder" size="15" value="$08" id="uiEditDstMask$00" readonly>
+         </td>
+         <td width=3 nowrap></td>
+  	  <!-- Port End -->
+	  <td align=left>
+		<input type="text" class="uiNoBorder" size="4" value="$0a" id="uiEditPortEnd$00" readonly>
+	  </td>
+         <td width=3 nowrap></td>
+  	  <td align=center>&nbsp;</td>
+        <td width=3 nowrap></td>
+        <td align=center>&nbsp;</td>
+        <td width=3 nowrap></td>
+        <td align=center>&nbsp;</td>
+       </tr>
+       <tr><td height=2 colspan=20 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+       ` ?>
+       <input type="hidden" value="<? multiquerycount $var:langrp:flan:status/filter ?>" id="uiViewTableSize">
+      </table>	
+     <!-- END Filter IP Table -->
+     </td>
+	</tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</table>
+</form>
+<!-- END Linksys Filter IP -->

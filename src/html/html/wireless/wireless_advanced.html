@@ -1,0 +1,232 @@
+<!-- Wireless Advanced -->
+  <form onSubmit="return false">
+  <table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+    <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Advanced</font></td>
+    </tr>
+    <tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+
+       <table cellspacing=0 border=0 cellpadding=1 align=center>
+        <tr>
+          <td align=center height=30 colspan=6><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+       </tr>
+       <tr>
+	   <td align=right>
+	     <table cellspacing=2 border=0 cellpadding=0>
+                <tr>
+		      <td  nowrap >Select Band:</td>
+	   		<td>
+			   <select onchange='uiChangeWoneBand(value)' id='uiViewWoneBand' style="width: 85px;">
+			        <? multiquery ap:valid_settings/wone_band 
+			          `<option value="$01">$02</option> `  ?>
+			   </select>
+			</td>
+	         </tr>
+	     </table>
+	   </td>
+       </tr>
+     <? if eq `1` `<? query ap:status/dot11a_supported ?>`
+     ` <tr>
+	   <td class="headerLeft">wONE Usage Time</td>
+       </tr>
+       <tr>
+	   <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+                <tr>
+		      <td width=8 nowrap></td>
+                       <td width=20><input  <? echo $var:widDefRadioBtnOn ?> id='uiViewWONE0' value='on' onclick="jslDoToggleRadio('uiViewWONE',0,2);uiChangeWONE(0)" alt='' ></td><td><font size=1>Long</font></td>
+                       <td width=20><input  <? echo $var:widDefRadioBtnOff ?> id='uiViewWONE1' value='off' onclick="jslDoToggleRadio('uiViewWONE',1,2);uiChangeWONE(1)" alt='' ></td><td><font size=1>Short</font></td>
+	         </tr>
+	     </table>
+	   </td>
+       </tr>
+       ` ` ` ?>
+        <tr>
+	    <td class="headerLeft">Preamble Algo</td>
+       </tr>
+       <tr>
+	   <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+	       <tr>
+		  <td width=8 nowrap></td>
+	         <? multiquery ap:valid_settings/premble_algo 
+	            `<td width=20><input  $var:widDefRadioBtnOff  id='uiViewPreambleAlgo$00' value='off' onclick='uiChangePreambleAlgo($00)' alt='' ></td><td><font size=1>$01</font></td>` ?>
+	       </tr>
+	     </table>
+	   </td>
+       </tr>
+       <tr>
+	   <td class="headerLeft">Time Slot Algo</td>
+       </tr>
+       <tr>
+	  <td align=left>
+	    <table cellspacing=2 border=0 cellpadding=0>
+	      <tr>
+		 <td width=8 nowrap></td>
+	        <? multiquery ap:valid_settings/time_slot_algo 
+	            `<td width=20><input  $var:widDefRadioBtnOff  id='uiViewTimeSlotAlgo$00' value='off' onclick='uiChangeTimeSlotAlgo($00)' alt='' ></td><td><font size=1>$01</font></td>` ?>
+	      </tr>
+	    </table>
+	  </td>
+       </tr>
+       <tr>
+	   <td class="headerLeft">PBCC Algo</td>
+       </tr>
+       <tr>
+	   <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+	       <tr>
+		   <td width=8 nowrap></td>
+	          <? multiquery ap:valid_settings/pbcc_algo 
+	            `<td width=20><input  $var:widDefRadioBtnOff  id='uiViewPBCCAlgo$00' value='off' onclick='uiChangePBCCAlgo($00)' alt='' ></td><td><font size=1>$01</font></td>` ?>
+	       </tr>
+	     </table>
+	  </td>
+       </tr>
+       <tr>
+ 	   <td class="headerLeft">ERP Mode</td>
+       </tr>
+       <tr>
+	    <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+	       <tr>
+		  <td width=8 nowrap></td>
+	         <? multiquery ap:valid_settings/erp_mode 
+	            `<td width=20><input  $var:widDefRadioBtnOff  id='uiViewERPMode$00' value='off' onclick='uiChangeERPMode($00)' alt='' ></td><td><font size=1>$01</font></td>` ?>
+	       </tr>
+	     </table>
+	   </td>
+       </tr>
+       <tr>
+	   <td class="headerLeft">ERP Type</td>
+       </tr>
+       <tr>
+	   <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+                <tr>
+		      <td width=8 nowrap></td>
+                    <? multiquery ap:valid_settings/erp_type 
+                       `<td width=20><input  $var:widDefRadioBtnOff  id='uiViewERPType$00' value='off' onclick='uiChangeERPType($00)' alt='' ></td><td><font size=1>$01</font></td>` ?>
+	         </tr>
+	     </table>
+	   </td>
+       </tr>
+       <tr>
+	   <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+       <tr>
+			<td align="right" nowrap>ERP TI:&nbsp;</td>
+      			<td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewERPTI"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0></td>
+			<td>&nbsp;</td>
+			<td align="right" nowrap>Rate Adaption Algorithm:&nbsp;</td>
+       		<td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewRateAdaption"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0></td>
+                </tr>
+
+              </table>
+            </td>
+         </tr>
+         <tr>
+           <td class="headerLeft">Additional 802.11g AP Legacy rates</td>
+         </tr>
+         <tr>
+           <td align=left>
+               6M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG1">
+               9M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG2">
+               12M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG3">
+               18M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG4">
+               24M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG5">
+               36M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG6">
+               48M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG7">
+               54M<input type="text" value="" maxlength="1" size="1" id="uiViewRateG8">
+            </td>
+         </tr>
+         <tr>
+	     <td class="headerLeft">Additional 802.11g AP Extended rates</td> 
+         </tr>
+         <tr>
+	    <td align=left>
+               6M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP1">
+               9M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP2">
+               12M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP3">
+               18M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP4">
+               24M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP5">
+               36M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP6">
+               48M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP7">
+               54M<input type="text" value="" maxlength="1" size="1" id="uiViewRateGP8">
+            </td>
+          </tr>
+       <? if eq `1` `<? query ap:status/dot11a_supported ?>`
+       ` <tr>
+	     <td class="headerLeft">Additional 802.11a AP rates</td> 
+         </tr>
+         <tr>
+	    <td align=left>
+               6M<input type="text" value="" maxlength="1" size="1" id="uiViewRate11AGP1">
+               9M<input type="text" value="" maxlength="1" size="1" id="uiViewRate11AGP2">
+               12M<input type="text" value="" maxlength="1" size="1" id="uiViewRate11AGP3">
+               18M<input type="text" value="" maxlength="1" size="1" id="uiViewRate11AGP4">
+               24M<input type="text" value="" maxlength="1" size="1" id="uiViewRate11AGP5">
+               36M<input type="text" value="" maxlength="1" size="1" id="uiViewRate11AGP6">
+               48M<input type="text" value="" maxlength="1" size="1" id="uiViewRate11AGP7">
+               54M<input type="text" value="" maxlength="1" size="1" id="uiViewRate11AGP8">
+            </td>
+          </tr>
+          <tr>
+	      <td align=left><font size=1><br><i>Y = Supported, N = Not Supported, B = Basic Supported</i></font></td>
+           </tr>
+	` ` ` ?>
+	<tr>
+	   <td align=left>
+	     <table cellspacing=2 border=0 cellpadding=0>
+		<tr>
+			<td align="right" nowrap>CwMin Mode:&nbsp;</td>
+			<td><input type="text" value="" maxlength="1" size="5" id="uiViewCWMinMode"></td>
+			<td align="right"  nowrap>Usage Time:&nbsp;</td>
+			<td nowrap><input type="text" value="" maxlength="2" size="5" id="uiViewUsageTime">msec</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="right" nowrap>Long Retry Limit:&nbsp;</td>
+			<td><input type="text" value="" maxlength="3" size="5" id="uiViewLongRetryLimit"></td>
+			<td align="right"  nowrap>Short Retry Limit:&nbsp;</td>
+			<td><input type="text" value="" maxlength="3" size="5" id="uiViewShortRetryLimit"></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="right" nowrap>Tx Lifetime Limit:&nbsp;</td>
+			<td><input type="text" value="" maxlength="10" size="10" id="uiViewTxLifeTimeLimit"></td>
+			<td align="right"  nowrap>Rx Lifetime Limit:&nbsp;</td>
+			<td><input type="text" value="" maxlength="10" size="10" id="uiViewRxLifeTimeLimit"></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="right" nowrap>Energy Detect:&nbsp;</td>
+       		<td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewEnergyDetect"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0></td>
+			<td align="right"  nowrap>Radio Calibration:&nbsp;</td>
+			<td><input type="text" value="" maxlength="2" size="5" id="uiViewRadioCalibration"></td>
+			<td align="right"  nowrap>Radio Calibration Interval:&nbsp;</td>
+			<td nowrap><input type="text" value="" maxlength="5" size="5" id="uiViewRadioCaliInterval">sec</td>
+		</tr>
+		<tr>
+ 			<td align="right" nowrap>Rate Fallback:&nbsp;</td>
+			<td><input type="text" value="" maxlength="3" size="5" id="uiViewRateFallback"></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+	     </table>
+	   </td>
+	</tr>
+         </table>
+       </td>
+   </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</table>
+ </form>
+<!-- END Wireless Advanced -->
+

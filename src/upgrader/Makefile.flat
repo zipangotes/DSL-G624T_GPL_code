@@ -1,0 +1,29 @@
+include ../../TI_Build.make
+-include ./.config
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+export TI_base
+export TI_rlibdir
+
+all: build install
+
+build: 
+#	$(MAKE) clean
+	$(MAKE) dep
+	$(MAKE) ETC=/etc/ BOARD=$(BOARD)
+
+install:
+	install -d $(TI_base)$(TI_vardir)
+	install -d $(TI_base)$(TI_vardir)/var
+	install -d $(TI_base)$(TI_varflashdir)
+	install -d $(TI_base)$(TI_vardevdir)
+	install -d $(TI_base)$(TI_varprocdir)
+	install -m 0755 -s src/upgrader/upgrader $(TI_base)$(TI_vardir)
+#	install -m 0755 -s src/upgled/upgled $(TI_base)$(TI_vardir)
+	install -m 0755 -s src/upgrade/upgrade $(TI_base)$(TI_bindir)
+#	install -m 0755 -s src/upgmon/upgmon $(TI_base)$(TI_bindir)
+
+clean:
+	find . \( -name '*.[oas]' -o -name core -o -name '.depend' -o -name '*~' -o -name '.*~' -o -name '.#*' -o -name '*.so' \) -type f -print | xargs rm -f
+	-rm -f src/upgrader/upgrader src/upgrade/upgrade
+

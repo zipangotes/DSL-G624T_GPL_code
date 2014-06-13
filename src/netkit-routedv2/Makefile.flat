@@ -1,0 +1,21 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+all: build install
+
+build:
+	CFLAGS="-Os -Wall -W -Wpointer-arith -Wbad-function-cast -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Winline" ./configure --prefix=$(TI_filesystem_path)/usr 
+	$(MAKE)
+
+install: 
+	cd routed; mips_fp_le-strip -s routed
+	$(MAKE) install
+
+
+clean: 
+	$(MAKE) clean
+
+distclean:
+	$(MAKE) distclean
+

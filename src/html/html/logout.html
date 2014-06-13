@@ -1,0 +1,31 @@
+
+<!-- Log Out -->
+<form onSubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 align=center bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>"  height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Log Out</font></td>
+</tr>
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>" align=center height=335>				
+
+	<table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=1>
+	<tr><td height=90 valign=top>Are you sure you want to Log Out?</td></tr>
+	</table>
+  
+	</td>
+</tr>
+<tr> 
+	<td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28 valign=middle>
+
+	<table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=0 width=124>
+	<tr valign=middle>
+		<td><input <? echo $var:widDefBtnLogout ?> onclick="uiDoLogout()" alt="<? echo $var:altBtnLogout ?>"></td>
+		<td><input <? echo $var:widDefBtnCancel ?> onClick="uiDoCancel()" alt="Cancel"></td>
+	</tr>
+	</table>
+	
+	</td>
+</tr>
+</table>
+</form>
+<!-- END Log Out -->

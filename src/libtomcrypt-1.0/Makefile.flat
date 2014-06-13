@@ -1,0 +1,39 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+export CROSS_COMPILE_PREFIX=$(TI_uclibc_base)
+
+lib_current=1
+lib_age=0
+lib_revision=0
+Version=1.0
+
+export MAJOR=${lib_current}
+export MINOR=${lib_age}
+export RELEASE=${lib_revision}
+export VERSION=${version}
+export SHARED = ON
+
+all: build install
+
+build:
+	$(MAKE) default
+
+install:
+	mips_fp_le-strip -s libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision}
+# Copy libs to uclibc for dropbear,tisign.tikeygen to link against...
+	install -c -m 755 libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision} ${TI_uclibc_library}
+	ln -sf libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision} ${TI_uclibc_library}/libtomcrypt.so.${lib_current}
+	ln -sf libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision} ${TI_uclibc_library}/libtomcrypt.so
+	install -c -m 755 libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision} ${TI_filesystem_path}/lib/libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision}
+	ln -sf libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision} ${TI_filesystem_path}/lib/libtomcrypt.so.${lib_current}
+	ln -sf libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision} ${TI_filesystem_path}/lib/libtomcrypt.so
+
+clean:
+	$(MAKE) clean
+	-rm  ${TI_uclibc_library}/libtomcrypt.so
+	-rm  ${TI_uclibc_library}/libtomcrypt.so.${lib_current}
+	-rm  ${TI_uclibc_library}/libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision}
+	-rm  ${TI_filesystem_path}/lib/libtomcrypt.so
+	-rm  ${TI_filesystem_path}/lib/libtomcrypt.so.${lib_current}
+	-rm  ${TI_filesystem_path}/lib/libtomcrypt.so.${lib_current}.${lib_age}.${lib_revision}

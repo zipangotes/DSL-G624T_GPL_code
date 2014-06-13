@@ -1,0 +1,84 @@
+
+<html>
+<head>
+<title>DHCP Clients</title>
+<link rel="stylesheet" href="../css/nsp.css" type="text/css">
+<script language="JavaScript" src="../js/jsl.js"></script>
+<script language="JavaScript">
+
+function uiRefresh()
+{
+		location.location.reload();
+}
+
+</script>
+</head>
+<body>
+<form method="POST" action="webcm" id="uiPostDHCPclientsForm">
+  <? multiquery $var:dhcps:status/leasetable '   
+    <input type="hidden" name="" value="$1" id="uiPostLeaseTimeRemain">
+    <input type="hidden" name="" value="$2" id="uiPostMACAddr">
+    <input type="hidden" name="" value="$3" id="uiPostIPAddr">
+  '?>
+</form>
+
+<!-- Visual Elements -->
+<table border="0" width="100%" align="center" cellpadding="0" cellspacing="0">   
+<form id="uiViewDHCPclientsForm" onSubmit="return false">
+   <tr>
+     <td width="2%" align="center">&nbsp;</td>
+     <td width="30%" align="center"><b>Lease Time Remaining</b></td>
+     <td width="30%" align="center"><b>MAC Address</b></td>
+     <td width="30%" align="center"><b>IP Address</b></td>
+     <td align="center">&nbsp;</td>
+   </tr>
+   <tr>
+     <td width="2%" align="center">&nbsp;</td>
+     <td width="30%" align="center">10 hours 35 min</td>
+     <td width="30%" align="center">00-a0-e6-44-a5-32</td>
+     <td width="30%" align="center">192.168.10.100</td>
+     <td align="center">&nbsp;</td>
+   </tr>
+   <tr>
+     <td width="2%" align="center">&nbsp;</td>
+     <td width="30%" align="center">10 hours 35 min</td>
+     <td width="30%" align="center">00-a0-e6-44-a5-32</td>
+     <td width="30%" align="center">192.168.10.100</td>
+     <td align="center">&nbsp;</td>
+   </tr>
+   <tr>
+     <td width="2%" align="center">&nbsp;</td>
+     <td width="30%" align="center">10 hours 35 min</td>
+     <td width="30%" align="center">00-a0-e6-44-a5-32</td>
+     <td width="30%" align="center">192.168.10.100</td>
+     <td align="center">&nbsp;</td>
+   </tr>
+   <tr>
+     <td width="2%" align="center">&nbsp;</td>
+     <td width="30%" align="center">10 hours 35 min</td>
+     <td width="30%" align="center">00-a0-e6-44-a5-32</td>
+     <td width="30%" align="center">192.168.10.100</td>
+     <td align="center">&nbsp;</td>
+   </tr>
+   <tr>
+     <td width="2%" align="center">&nbsp;</td>
+     <td width="30%" align="center">10 hours 35 min</td>
+     <td width="30%" align="center">00-a0-e6-44-a5-32</td>
+     <td width="30%" align="center">192.168.10.100</td>
+     <td align="center">&nbsp;</td>
+   </tr>
+   <tr>
+   	<td colspan="5" align="center">&nbsp;</td>
+  </tr>
+   <tr>
+   	<td colspan="4" align="right">
+           <input type="image" src="../img/apply.gif" id="uiViewRefresh" onClick="uiRefresh()"><b>Refresh</b>&nbsp;
+       </td>
+     <td align="center">&nbsp;</td>
+  </tr>
+
+</form>
+</table>
+
+</body>
+</html>

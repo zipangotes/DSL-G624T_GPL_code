@@ -1,0 +1,89 @@
+
+<!-- Firewall/NAT Services -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Ethernet Switch Configuration</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 10px"></div>
+
+   <table border=0 align="center" cellpadding=0 cellspacing=1>
+    <tr><td colspan=5>&nbsp;</td></tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td align=right>&nbsp;</td>
+     <td align=center class="header">Set Value</td>
+     <td align=right>&nbsp;</td>
+     <td align=center class="header">Fallback Value</td>
+    </tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td align=right>Physical Port1:</td>
+     <td align=left>
+     		<select id=uiViewPort1 onchange="jslSetValue('uiPostPort1','uiViewPort1')">
+		  <? multiquery eth0:valid_settings/port1
+		   '<option value=$01>$02</option>' ?>
+		</select>	
+     </td>
+     <td align=right>&nbsp;</td>
+     <td align=center><? query eth0:status/port1 ?></td>
+    </tr>
+    <tr><td colspan=5>&nbsp;</td></tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td align=right>Physical Port2:</td>
+     <td align=left>
+     		<select id=uiViewPort2 onchange="jslSetValue('uiPostPort2','uiViewPort2')">
+		  <? multiquery eth0:valid_settings/port2
+		   '<option value=$01>$02</option>' ?>
+		</select>	
+     </td>
+     <td align=right>&nbsp;</td>
+     <td align=center><? query eth0:status/port2 ?></td>
+    </tr>
+    <tr><td colspan=5>&nbsp;</td></tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td align=right>Physical Port3:</td>
+     <td align=left>
+     		<select id=uiViewPort3 onchange="jslSetValue('uiPostPort3','uiViewPort3')">
+		  <? multiquery eth0:valid_settings/port3
+		   '<option value=$01>$02</option>' ?>
+		</select>	
+     </td>
+     <td align=right>&nbsp;</td>
+     <td align=center><? query eth0:status/port3 ?></td>
+    </tr>
+    <tr><td colspan=5>&nbsp;</td></tr>
+    <tr>
+     <td>&nbsp;</td>
+     <td align=right>Physical Port4:</td>
+     <td align=left>
+     		<select id=uiViewPort4 onchange="jslSetValue('uiPostPort4','uiViewPort4')">
+		  <? multiquery eth0:valid_settings/port4
+		   '<option value=$01>$02</option>' ?>
+		</select>	
+     </td>
+     <td align=right>&nbsp;</td>
+     <td align=center><? query eth0:status/port4 ?></td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28>
+      <table border=0 cellspacing=0 width="100%">
+       <tr valign=middle>
+	    <td align=center><input type=text size=40 value="" style="background-color: <? echo $var:bgColorBody ?>;" readonly id="uiViewErrorHint" class="uiErrorHint"></td>
+	    <td>&nbsp;</td>
+	    <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+	   </tr>
+      </table> 
+  </td>
+ </tr>
+</table>
+</form>
+<!-- END Firewall/NAT Services -->

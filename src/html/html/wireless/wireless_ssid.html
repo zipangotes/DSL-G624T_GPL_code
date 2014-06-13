@@ -1,0 +1,132 @@
+<!-- Wireless SSID -->
+<form onSubmit="return false">
+ <table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Configure Multiple SSID</font></td>
+</tr>
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+
+		<table width=387 border=0 cellpadding=0 cellspacing=0>
+		<tr>
+                    <td align=center height=30 colspan=6><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+              </tr>
+		<tr>
+			<td height=6 nowrap></td>
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td height=6 nowrap></td>
+		</tr>
+		</table>
+	  <table cellspacing=0 border=0 cellpadding=1 align=center>
+            <tr>
+               <td width=20> <input <? echo $var:widDefCheckBoxOff ?> id="uiViewEnableMSSID" value="on" onclick="jslDoToggleCheckBox(id); uiToggleSSIDFields(value) " alt="" width=19 height=20 border=0></td> 
+	       <td align=left colspan=2>Enable Multiple SSID&nbsp;</td>
+	  </tr> 
+	    <tr>		   
+		 <td>&nbsp;</td> 
+		 <td align=right height=30>Secondary SSID:&nbsp;</td>
+		 <td><input type="text" id="uiViewAddSSID" size="17" maxlength="32"></td>
+	    </tr>
+	    <tr>		   
+		 <td>&nbsp;</td> 
+		 <td align=right height=30>VLAN ID:&nbsp;</td>
+		 <td><input type="text" id="uiViewAddVlanID" size="5" maxlength="4"></td>
+	    </tr>
+	    <tr>		   
+		 <td>&nbsp;</td> 
+		 <td align=right height=30>Priority:&nbsp;</td>
+		 <td><input type="text" id="uiViewAddPriority" value="0" size="5" maxlength="1"></td>
+	    </tr>
+
+            <!--
+	    <tr>
+		 <td>&nbsp;</td> 
+		 <td align=right height=30>Hidden SSID:&nbsp;</td>
+		 <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewHiddenSSID"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0></td>
+	    </tr>
+            -->
+	    <tr>		   
+                 <td align=left colspan=3><font size=1>
+                                         </font>
+                 </td>
+		 <td width=62 height=19 align=left><input <? echo $var:widDefBtnAdd ?> id="uiViewAddSSIDButton" onclick="uiDoAddSSID()" alt="Add" ></td>
+	    </tr>
+   	  </table>
+	<? if eq 1 <? multiquerycount ap:status/mssid_list?> ` `  
+     `
+   	  <table cellspacing=0 border=0 cellpadding=0>
+ 	    <tr>
+		 <!--<td height=10 valign=bottom><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=225 height=1 border=0></td>-->
+                 <td align=center>Available secondary SSID(s)</td>
+	    </tr>
+   	  </table>
+	  <table cellspacing=2 border=0 cellpadding=0>
+	     <tr>		   
+		 <td align=center><u>Delete</u></td>
+		 <td width=5 nowrap></td>
+		 <td align=center><u>Key</u></td>
+		 <td width=5 nowrap></td>
+		 <td align=center><u>SSID</u></td>
+         <td width=5 nowrap></td>
+		 <td align=center><u>VLAN</u></td>
+         <td width=5 nowrap></td>
+		 <td align=center><u>Priority</u></td>
+	     </tr>
+	    <tr> 
+	         <td colspan=5>&nbsp;</td>
+	    </tr>
+	     <? multiquery ap:status/mssid_list
+		  `<tr>
+                     <? if neq `$11` 0
+                        `
+		         <td align=center><input  $var:widDefCheckBoxOff value="off"  id="uiViewSSID$10" onclick="jslDoToggleCheckBox(id);uiDoDelSSID('$11', id, '$10')" alt=""></td>
+		         <td width=5 nowrap></td>
+		         <td align=center>$11</td>
+		         <td width=5 nowrap></td>
+		         <td align=center>$12</td>
+	             <td width=5 nowrap></td>
+		         <td align=center>$13</td>
+	             <td width=5 nowrap></td>
+		         <td align=center>$14</td>
+                         `
+                         ``
+                      ?>
+		    </tr>
+		  ` ?>
+		    <tr> 
+		         <td colspan=5>&nbsp;</td>
+		    </tr>
+	  	    <tr valign=middle>
+              	  <td align=center ><input $var:widDefCheckBoxOff value="off" id="uiViewDeleteAllStatus" onclick="jslDoToggleCheckBox(id);uiViewDeleteAll(value, id)" alt="Delete All Entries"></td>
+		         <td width=5 nowrap></td>
+              	  <td align=left colspan=3><b>Delete All</b></td>
+	   	    </tr>	
+		  
+	   </table>
+         `  ?>	   
+          <table cellspacing=0 border=0 cellpadding=1 align=center>
+	        <tr>
+			<td align=left><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="SSIDError" value="<? error message ?>"></b></td>
+			</tr>
+
+	   </table>
+    	</td>
+    </tr>
+<tr>
+   <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+	
+	<table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+	<tr>
+		<td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+		<td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+	</tr>
+   </table>
+   
+   </td>
+</tr>
+</table>
+</form>
+<!-- END Wireless SSID -->

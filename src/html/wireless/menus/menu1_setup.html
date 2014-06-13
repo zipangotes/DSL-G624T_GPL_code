@@ -1,0 +1,37 @@
+<? setvariable var:pagepath `../cgi-bin/webcm?getpage=..%2Fhtml%2Fmenus%2Fmenu1.html&var:menu=setup&var:menutitle=Setup&var:pagename` ?>
+<!-- Setup Menu -->
+<table <? echo $var:dimTopMenuSetup ?>>
+ <tr><td><img src="<? echo $var:btnMenuSetupLAN ?>" width=130 height=21 alt="<? echo $var:altBtnMenuSetupLAN ?>"></td></tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=lan_dhcp&var:pagetitle=DHCP%20Configuration'>
+   <img src="<? echo $var:btnMenuSetupDHCP ?>" <? echo $var:dimBtnMenuSetupDHCP ?> alt="<? echo $var:altBtnMenuSetupDHCP ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=mgmt_ip&var:pagetitle=Management%20IP'>
+   <img src="<? echo $var:btnMenuSetupMgmtIP ?>" <? echo $var:dimBtnMenuSetupMgmtIP ?> alt="<? echo $var:altBtnMenuSetupMgmtIP ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=wireless_setup&var:pagetitle=Wireless%20Setup'>
+   <img src="/usr/www_safe/html/images/ti_menu_setup_wireless.gif" width=130 height=22 border=0 alt="Wireless"></a></td>
+ </tr>
+ <tr><td><img src="<? echo $var:btnMenuSetupWAN ?>" <? echo $var:dimBtnMenuSetupWAN ?> alt="<? echo $var:altBtnMenuSetupWAN ?>"></td></tr>
+ <tr>
+   <td><a href='<? echo $var:pagepath ?>=pppoe&var:pagetitle=New%20Connection&var:conid=<? query manager:command/connection/new ?>&var:mode=new'>
+   <img src="<? echo $var:btnMenuSetupNewConn ?>" <? echo $var:dimBtnMenuSetupNewConn ?> alt="<? echo $var:altBtnMenuSetupNewConn ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=modem&var:pagetitle=Modem%20Setup'>
+   <img src="<? echo $var:btnMenuSetupModem ?>" <? echo $var:dimBtnMenuSetupModem ?> alt="<? echo $var:altBtnMenuSetupModem ?>"></a></td>
+ </tr>
+<? multiquery manager:command/connection/list '
+ <tr>
+  <td><a href="$var:pagepath=<? query $1:settings/type ?>&var:pagetitle=<? query $1:settings/description ?>%20Setup&var:conid=$1" target="_self">
+   <img src="<? echo $var:btnMenuSetupConn?>$0<? echo $var:btnMenuSetupConnExt ?>" $var:dimBtnMenuSetupConn alt="Connection $0"></a></td>
+ </tr>
+' ?>
+ <? include /usr/www_safe/html/menus/menu1_logout.html ?>
+ <tr>
+  <td><img src="<? echo $var:imgLeftMenuBottom ?>" <? echo $var:dimImgLeftMenuBottom ?> alt="<? echo $var:altImgLeftMenuBottom ?>"></td>
+ </tr>
+</table>
+<!-- END Setup Menu -->

@@ -1,0 +1,22 @@
+export CROSS_COMPILE_PREFIX=$(TI_uclibc_base)
+
+TEMPPATH = /bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin/:/usr/local/bin
+
+native_build:
+	 PATH=$(TEMPPATH) $(MAKE) oldconfig 
+	 PATH=$(TEMPPATH) $(MAKE) dep 
+
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+build:
+	$(MAKE) 
+
+install: 
+	$(MAKE) PREFIX=$(TI_build_home)/$(TI_linux_home)/filesystem  install
+
+clean:
+	$(MAKE) -i  clean
+	-rm ./sysdeps/linux/nsp_config.in; \
+	-rm -f ./.config; \

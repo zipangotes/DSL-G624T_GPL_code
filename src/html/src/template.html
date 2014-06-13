@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0.1 Transitional//EN">
+<html>
+<!-- Web UI Template Page -->
+<head>
+<link rel="stylesheet" href="../css/nsp.css" type="text/css">
+<script language="JavaScript" src="../js/widgets.js"></script>
+<script language="JavaScript" src="../js/jsl.js"></script>
+<script language="JavaScript" src="../js/error.js"></script>
+<script language="JavaScript">
+
+// Page errors are per page because they have to be retrieved in the
+// same lifecycle of webcm with the current page.
+var uiPageErrors = new Array();
+var uiPageErrorState = true;     // <? query error ?>        Values: true/false
+var uiPageErrorCount = 4;        // <? query error_count ?>  Value: length of error array
+var uiPageErrorMessage = "Combo Error Message";  // <? query error_message ?> Value: Group error message
+
+// Error Format: {index, type(good,bad), tag_id, key_name, key_value, error_message}
+
+uiPageErrors[0] = new Array(0,'good','uiViewVisualElementID0','key','value','message');
+uiPageErrors[1] = new Array(1,'good','uiViewVisualElementID1','key','value','message');
+uiPageErrors[2] = new Array(2,'bad', 'uiViewVisualElementID2','key','value','message');
+uiPageErrors[3] = new Array(3,'good','uiViewVisualElementID3','key','value','message');
+
+// Page local variables
+var uiWanType="pppoe";
+
+function uiOnLoad()
+{
+  // 1. Load POSTFORM values
+
+  jslSetValue("uiView_________","uiPost________");
+  jslSetValue("uiView_________","uiPost________");
+  jslSetValue("uiView_________","uiPost________");
+  jslSetValue("uiView_________","uiPost________");
+  jslSetValue("uiView_________","uiPost________");
+
+  // 2. Load ERROR values
+  uiShowPageErrors();
+}
+
+function uiSave()
+{
+  // 3. Validate visual data and trap errors
+
+  // 4. Save VISUAL values
+  document.getElementById("uiPostPppEncaps").value=uiGetEncapsulation();
+  document.getElementById("uiPostPppMode").value=uiGetOnDemand();
+  document.getElementById("uiPostPppDefRoute").value=uiGetDefRoute();
+
+  jslSetValue("uiPost________","uiView_________");
+  jslSetValue("uiPost________","uiView_________");
+  jslSetValue("uiPost________","uiView_________");
+  jslSetValue("uiPost________","uiView_________");
+  jslSetValue("uiPost________","uiView_________");
+
+  // 5. Submit and Refresh
+  document.getElementById("uiPostForm").submit();
+}
+// ----------- Visual Form behavior & Visual <-> Post conversion ---------
+function uiGetOnDemand(arg)
+{
+  if(document.getElementById(arg).value=="off") return "lcp";
+  else return "on_demand";
+}
+function uiSetOnDemand(ondemand)
+{
+  var checkbox = document.getElementById('uiViewOnDemand');
+  switch(ondemand)
+  {  
+    case "on_demand":
+     checkbox.value="off";
+	 jslDoToggleCheckBox('uiViewOnDemand');
+     jslDoToggleViews('uiViewIdleTimeRow','uiViewKeepAliveRow');
+    break;
+    case "lcp":
+    default:
+     checkbox.value="on";
+	 jslDoToggleCheckBox('uiViewOnDemand');
+     jslDoToggleViews('uiViewKeepAliveRow','uiViewIdleTimeRow');
+    break;
+  }
+}
+function uiChangeOnDemand(arg)
+{
+  if(document.getElementById(arg).value=="off") uiSetOnDemand("on_demand");
+    else uiSetOnDemand("lcp");
+  return false;
+}
+function uiSetDefRoute(arg)
+{
+  if(arg=="0") document.getElementById("uiViewSetRoute").value="on";
+  else document.getElementById("uiViewSetRoute").value="off";
+  jslDoToggleCheckBox("uiViewSetRoute");
+}
+function uiGetDefRoute()
+{
+  if(document.getElementById("uiViewSetRoute").value=="on") return "1";
+  return "0";
+}
+function uiGetEncapsulation()
+{
+  if(document.getElementById("uiViewEncapsVC").value=="on") return "vc-encaps";
+  if(document.getElementById("uiViewEncapsLLC").value=="on") return "llc-encaps";
+}
+function uiSetEncapsulation(arg)
+{
+   if(arg=="vc-encaps")  jslDoToggleCheckBox("uiViewEncapsVC","uiViewEncapsLLC");
+   if(arg=="llc-encaps") jslDoToggleCheckBox("uiViewEncapsLLC","uiViewEncapsVC");
+}
+</script>
+</head>
+<body onload="uiOnLoad()">
+<!-- Refresh pages -->
+<form method="POST" action="webcm" target="_self" id="uiPostForm">
+<input type="hidden" name="getpage" value="../blank.html" id="uiNextPage">
+<input type="hidden" name="errpage" value="../setup/wan_ppp.html" id="uiErrorPage">
+<!-- Submit data -->
+<input type="hidden" name="<? echo $var:conname ?>:<? query $var:conname:settings/contype ?>:settings/plugin" value="<? echo $var:contype ?>" id="uiPostPppPlugin">
+<input type="hidden" name="<? echo $var:conname ?>:<? query $var:conname:settings/contype ?>:settings/encaps" value="<? query $var:conname:$var:contype:settings/encaps ?>" id="uiPostPppEncaps">
+<input type="hidden" name="{uiViewUserName}<? echo $var:conname ?>:<? query $var:conname:settings/contype ?>:settings/username" value="<? query $var:conname:$var:contype:settings/username ?>" id="uiPostPppUsername">
+<input type="hidden" name="{uiViewPassword}<? echo $var:conname ?>:<? query $var:conname:settings/contype ?>:settings/password" value="<? query $var:conname:$var:contype:settings/password ?>" id="uiPostPppPassword">
+<input type="hidden" name="{uiViewIdleTime}<? echo $var:conname ?>:<? query $var:conname:settings/contype ?>:settings/idle" value="<? query $var:conname:$var:contype:settings/idle ?>" id="uiPostPppIdleTimeout">
+<input type="hidden" name="{uiViewMaxFail}<? echo $var:conname ?>:<? query $var:conname:settings/contype ?>:settings/maxfail" value="<? query $var:conname:$var:contype:settings/maxfail ?>" id="uiPostPppMaxFail">
+<input type="hidden" name="<? echo $var:conname ?>:<? query $var:conname:settings/contype ?>:settings/mode" value="<? query $var:conname:$var:contype:settings/mode ?>" id="uiPostPppMode">
+<input type="hidden" name="<? echo $var:conname ?>:<? query $var:conname:settings/contype ?>:settings/lcp_echo_failure" value="<? query $var:conname:$var:contype:settings/lcp_echo_failure ?>" id="uiPostPppKeepAlive">
+<input type="hidden" name="<? echo $var:conname ?>:<? query $var:conname:settings/contype ?>:settings/defaultroute" value="<? query $var:conname:$var:contype:settings/defaultroute ?>" id="uiPostPppDefRoute">
+<input type="hidden" name="<? echo $var:conname ?>:command/start" value="">
+<!-- Page forward variables -->
+<input type="hidden" name="var:conname" value="<? echo $var:conname ?>">
+<input type="hidden" name="var:contype" value="<? echo $var:contype ?>">
+<input type="hidden" name="var:mode" value="<? echo $var:mode ?>"> 
+</form>
+
+<!-- Visual Elements -->
+<table border="0" width="100%" align="center" cellpadding="0" cellspacing="1">
+ <form>
+  <tr id="uiViewEncapsulationBlank" style="display:none">
+   <td colspan="10" align="right">&nbsp;</td>
+  </tr>
+  <tr id="uiViewEncapsulation">
+   <td colspan="3" align="right">Encapsulation&nbsp;</td>
+   <td align="left">
+      <input type="image" src="../img/check_tick.gif" id="uiViewEncapsLLC" onclick="return jslDoToggleCheckBox(id,'uiViewEncapsVC')" value="on">&nbsp;LLC&nbsp;
+	  <input type="image" src="../img/check.gif" id="uiViewEncapsVC" onclick="return jslDoToggleCheckBox(id,'uiViewEncapsLLC')" value="off">&nbsp;VC&nbsp;
+   </td>
+  </tr>
+  <tr>
+    <td width="10%" align="right">&nbsp;</td>
+    <td width="25" align="right">
+	  <img src="../img/right_red.gif" id="uiViewUserNameMark" style="display:none">
+      <img src="../img/right_blank.gif" id="uiViewUserNameMarkBlank">
+	</td>
+    <td width="33%" align="right">Username&nbsp;</td>
+    <td width="50%" align="left">
+      <input type="text" value="" size="14" maxlength="32" name="uiViewUserNameMark" id="uiViewUserName">
+    </td>
+  </tr>
+  <tr>
+    <td width="10%" align="right">&nbsp;</td>
+    <td width="25" align="right">
+	  <img src="../img/right_red.gif" id="uiViewPasswordMark" style="display:none">
+      <img src="../img/right_blank.gif" id="uiViewPasswordMarkBlank">
+	</td>
+    <td width="33%" align="right">Password&nbsp;</td>
+    <td width="50%" align="left">
+      <input type="password" value="" size="14" maxlength="32" name="uiViewPasswordMark" id="uiViewPassword">
+    </td>
+  </tr>
+  <tr id="uiViewIdleTimeRow" style="display:none">
+    <td width="10%" align="right">&nbsp;</td>
+    <td width="25" align="right">
+	  <img src="../img/right_red.gif" id="uiViewIdleTimeMark" style="display:none">
+      <img src="../img/right_blank.gif" id="uiViewIdleTimeMarkBlank">
+	</td>
+    <td width="33%" align="right">Idle Timeout&nbsp;</td>
+    <td width="50%" align="left">
+      <input type="text" value="" size="6" maxlength="5" name="uiViewIdleTimeMark" id="uiViewIdleTime">&nbsp;min
+    </td>
+  </tr>
+  <tr id="uiViewKeepAliveRow">
+    <td width="10%" align="right">&nbsp;</td>
+    <td width="25" align="right">
+	  <img src="../img/right_red.gif" id="uiViewKeepAliveMark" style="display:none">
+      <img src="../img/right_blank.gif" id="uiViewKeepAliveMarkBlank">
+	</td>
+    <td width="33%" align="right">Keep Alive&nbsp;</td>
+    <td width="50%" align="left">
+      <input type="text" value="" size="6" maxlength="5" name="uiViewKeepAliveMark" id="uiViewKeepAlive">&nbsp;min
+    </td>
+  </tr>
+  <tr>
+    <td width="10%" align="right">&nbsp;</td>
+    <td width="25" align="right">
+	  <img src="../img/right_red.gif" id="uiViewMaxFailMark" style="display:none">
+      <img src="../img/right_blank.gif" id="uiViewMaxFailMarkBlank">
+	</td>
+    <td width="33%" align="right">MAX Fail&nbsp;</td>
+    <td width="50%" align="left">
+      <input type="text" value="" size="3" maxlength="4" name="uiViewMaxFailMark" id="uiViewMaxFail">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right">On Demand&nbsp;</td>
+    <td width="50%" align="left">
+      <input type="image" src="../img/check.gif" id="uiViewOnDemand" onclick="return uiChangeOnDemand(id)" value="off">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right">Set Route&nbsp;</td>
+    <td width="50%" align="left">
+      <input type="image" src="../img/check.gif" id="uiViewSetRoute" onclick="return jslDoToggleCheckBox(id)" value="off">
+    </td>
+  </tr>
+  <tr>
+    <td colspan="5">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="5" align="center" style="color:red">CHECK FOR ERRORS</td>
+  </tr>
+ </form>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+
+<!-- DHCPC Setup -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">DHCP Connection Setup</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  
+   <div style="height: 12px"></div>
+   
+   <? include /usr/www_safe/html/setup/header.html ?>
+   
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=0 width=497>
+    <tr>
+     <td valign=top align=right width="50%">
+      <table border=0 align=center cellpadding=2 cellspacing=0 id="uiViewDHCPTable">
+       <tr><td colspan=2 align=center class="header">DHCP Settings</td></tr>
+      <? if eq `1` `$var:HasDsl`
+      `<tr>
+        <td align=right nowrap><img src="$var:imgErrorBlank" id="uiViewEncapsMarkBlank" alt="" $var:dimImgErrorMark align=left>&nbsp;&nbsp;Encapsulation:</td>
+        <td align=left nowrap>
+          <table $var:cntrBorder cellspacing=0 cellpadding=1>
+		   <tr>
+		     <td><input $var:widDefRadioBtnOn onclick="jslDoToggleRadio('uiViewEncaps',0,2)" value="on" id="uiViewEncaps0" align="middle"></td>
+			<td>&nbsp;LLC</td>
+                   <td><input $var:widDefRadioBtnOff onclick="jslDoToggleRadio('uiViewEncaps',1,2)" value="off"  id="uiViewEncaps1" align="middle"></td>
+			<td>&nbsp;VC</td>
+		   </tr>
+		  </table>
+        </td>
+       </tr>
+      ` ` ` ?>
+       <tr>
+        <td align=right nowrap><img src="<? echo $var:imgErrorBlank ?>" id="uiViewIpAddressMarkBlank" alt="" <? echo $var:dimImgErrorMark ?> align=left>&nbsp;&nbsp;IP Address:</td>
+   		<td align=left><? query $var:conid:dhcpc:settings/ip ?></td>
+       </tr>
+       <tr>
+        <td align=right nowrap><img src="<? echo $var:imgErrorBlank ?>" id="uiViewNetMaskMarkBlank" alt="" <? echo $var:dimImgErrorMark ?> align=left>&nbsp;&nbsp;Mask:</td>
+   		<td align=left><? query $var:conid:dhcpc:settings/netmask ?></td>
+       </tr>
+       <tr>
+        <td align=right nowrap><img src="<? echo $var:imgErrorBlank ?>" id="uiViewGatewayMarkBlank" alt="" <? echo $var:dimImgErrorMark ?> align=left>&nbsp;&nbsp;Gateway:</td>
+        <td align=left><? query $var:conid:dhcpc:settings/router ?></td>
+       </tr>
+       <tr>
+         <td align=right nowrap>Default Gateway:&nbsp;</td>
+         <td align=left><input <? echo $var:widDefCheckBoxOff ?> id="uiViewSetRoute" onclick="jslDoToggleCheckBox(id)" value="off" align=middle></td>
+ 	</tr>
+ 	<tr>
+	   <td colspan=2 align=center height=4><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="100%" height=1></td>
+	</tr>
+      <tr>
+        <td colspan=2 align=right><input <? echo $var:widDefBtnRenew ?> onclick="uiDoRenew()" alt="Renew"><input <? echo $var:widDefBtnRelease ?> onclick="uiDoRelease()" alt="Release"></td>
+       </tr>
+      </table>
+     </td>
+     <td valign=top align=left width="50%"><? if eq `1` `$var:HasDsl` `<? include /usr/www_safe/html/setup/pvc.html ?>` `&nbsp;` ?></td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/setup/footer.html ?></td></tr>
+</table>
+</form>
+<!-- END DHCPC Setup -->
+

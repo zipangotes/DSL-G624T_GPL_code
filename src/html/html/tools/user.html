@@ -1,0 +1,35 @@
+
+<!-- User Management -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">User Management</font></td>
+</tr>
+  <tr><td bgcolor="<? echo $var:bgColorBody ?>" height=28 align=center><font size=1>&nbsp;User Management is used to change your User Name or Password.</font></td></tr>
+  <tr> 
+   <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+   <div style="height: 8px"></div>
+	<table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=center>
+     <tr>
+      <td align=right nowrap>User Name:</td>
+      <td align=left><input type="text" maxlength="64" size="16" name="uiViewUserNameMark" id="uiViewUserName"></td>
+     </tr>
+     <tr>
+      <td align=right nowrap>Password:</td>
+      <td align=left><input type="password" maxlength="64" size="16" name="uiViewPassword" id="uiViewPassword"></td>
+     </tr>
+     <tr>
+      <td align=right nowrap>Confirmed Password:</td>
+      <td align=left><input type="password" maxlength="64" size="16" name="uiViewPasswordConfirm" id="uiViewPasswordConfirm"></td>
+     </tr>
+     <tr>
+      <td align=right nowrap>Idle Timeout:</td>
+      <td align=left><input type="text" maxlength="5" size="5" name="uiViewIdleTimeout" id="uiViewIdleTimeout">&nbsp;minutes</td>
+     </tr>    
+    </table>				
+   </td>
+  </tr>
+  <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28 valign=middle><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+ </table>
+</form>
+<!-- END User Management -->

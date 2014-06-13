@@ -1,0 +1,150 @@
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">LAN Clients</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center height=28><font size=1>To add a LAN Client, Enter IP Address and Hostname, then click Apply.</font></td>
+ </tr>
+  <tr>
+   <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+   <div style="height: 10px"></div>
+   <input type="hidden" name="<? query manager:status/$var:langrp/dhcps ?>:/command/add" value="<? query <? query manager:status/$var:langrp/dhcps ?>:/settings/newid ?>">
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+    <tr>
+     <td>
+      <table <? echo $var:cntrBorder ?> align=center cellpadding=2 cellspacing=0>
+       <tr>
+          <td>&nbsp;</td>
+	  <td align=left nowrap>Select LAN Connection: </td>
+	  <td align=left>
+		<select onchange="uiDoSelectLAN(value)" id="uiViewLANConn" >
+                   <? multiquery manager:command/lan/list_used "<option value='$01'>$02</option>" ?>
+		</select>	
+	  </td>
+       </tr>
+       <tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewIpAddressMark" <? echo $var:dimImgErrorMark ?> ></td>
+        <td align=right>Enter IP Address:</td>
+	 <td><input type="text" size="20" name="uiViewIpAddressMark" value="" id="uiViewIpAddress" maxlength=15></td>
+       </tr>
+       <tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewNewHostnameMark" <? echo $var:dimImgErrorMark ?> ></td>
+        <td align=right>Hostname:</td>
+	 <td><input type=text size=20 name="uiViewNewHostnameMark" id="uiViewNewHostname" maxlength=50></td>
+       </tr>
+       <tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewNewMACMark" <? echo $var:dimImgErrorMark ?> ></td>
+        <td align=right>MAC Address:</td>
+	 <td><input type=text size=20 name="uiViewNewMACMark" id="uiViewNewMAC" maxlength=50></td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+    <tr>
+     <td align=center colspan=10>
+	<? if eq <? error found ?> 1 `<? include /usr/www_safe/html/setup/error.html ?>`
+	  ` ` ?>
+     </td>
+    </tr>
+       <? if eq 0 <? multiquerycount  <? query manager:status/$var:langrp/dhcps ?>:status/staticlist ?> ` `  
+       `
+    <tr>
+     <td height=12 align=center><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=385 height=1></td>
+    </tr>
+    <tr>
+     <td align=center>
+      <table border=0 align=center cellpadding=0 cellspacing=2>
+       <tr>
+        <td class="header" colspan=10 align=center height=21>Static Addresses</td>
+	</tr>
+       <tr>
+     <td align=center><u>Delete</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center nowrap><u>IP Address</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center><u>Hostname</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center><u>MAC</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center><u>Type</u></td>
+       </tr>
+       <? multiquery  <? query manager:status/$var:langrp/dhcps ?>:status/staticlist `
+        <input type="hidden" name="<? query manager:status/$var:langrp/dhcps ?>:command/del" value="$11" id="uiViewDeletePP$10" disabled>
+        <tr>
+	  <td align=center>
+        <input $var:widDefCheckBoxOff id="uiViewDeletePPCheckBox$10" onclick="uiDoToggleDelete(id,'uiPostDeletePP$10'); return false;" value="off" alt="">
+	  </td>
+	  <td width=6 nowrap></td>
+	  <td align=left>$12</td>
+	  <td width=6 nowrap></td>
+	  <td align=left>$13</td>
+	  <td width=6 nowrap></td>
+	  <td align=left>$14</td>	
+	  <td width=6 nowrap></td>
+	  <td align=left>$16</td>	
+        </tr>`  ?>
+                 </table>
+              </td>
+          </tr>
+       ` ?>
+    
+       <? if eq 0 <? multiquerycount  <? query manager:status/$var:langrp/dhcps ?>:status/dynamiclist ?> ` `  
+       `
+    <tr>
+       <td height=1 align=center colspan=7 bgcolor="<? echo $var:bgColorTable ?>"></td>
+    </tr>
+	<tr>
+            <td align=center>
+               <table border=0 align=center cellpadding=0 cellspacing=2>
+  	          <tr>
+        <td class="header" colspan=10 align=center height=21>Dynamic Addresses</td>
+	</tr>
+       <tr>
+        <td align=center><u>Reserve</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center nowrap><u>IP Address</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center><u>Hostname</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center><u>MAC</u></td>
+	 <td width=6 nowrap></td>
+	 <td align=center><u>Type</u></td>
+	</tr>
+	<? multiquery <? query manager:status/$var:langrp/dhcps ?>:status/dynamiclist `
+	 <tr>
+	  <input type="hidden" name="<? query manager:status/$var:langrp/dhcps ?>:command/reserve" value="$11" id="uiViewReservePP$10" disabled>
+         <td align=center>
+	   <input $var:widDefCheckBoxOff id="uiViewReservePPCheckBox$10" onclick="uiDoToggleDelete(id,'uiPostReservePP$10'); return false;" value="off" alt="">
+	  </td>
+	  <td width=6 nowrap></td>
+	  <td align=left>$12</td>
+	  <td width=6 nowrap></td>
+	  <td align=left>$13</td>
+	  <td width=6 nowrap></td>
+	  <td align=left>$14</td>
+	  <td width=6 nowrap></td>
+	  <td align=left>$16</td>
+	          </tr>
+	          ` 	?>
+      </table>
+     </td>
+    </tr>
+         `  ?>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+   <table <? echo $var:cntrBorder ?> cellspacing=0 width="100%">
+    <tr valign=middle>
+	 <td align=center style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint">Point at the error marker to see the error description</td>
+     <td>&nbsp;</td>
+     <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+    </tr>
+   </table> 
+  </td>
+ </tr>
+</table>
+<div style="height: 10px"></div>
+</form>

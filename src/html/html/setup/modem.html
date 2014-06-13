@@ -1,0 +1,31 @@
+
+<!-- Modem Setup -->
+<form id="uiViewBridgeMgmtForm" onSubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Modem Setup</font></td>
+</tr>
+  <tr><td bgcolor="<? echo $var:bgColorBody ?>" align=center height=22><font size=1>Select the modulation type.</font></td></tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 10px"></div>
+
+	<table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1>
+    <? multiquery sar:valid_settings/modulation  
+    ` 
+          <tr>
+      <td align=center width=20>
+       <input <? if eq `0` `$01` `type=hidden` ` ` ?> <? if eq `0x0` `$01` `<? if neq `NO_MODE` `$02` `$var:widDefRadioBtnOffGrey` `$var:widDefRadioBtnOff` ?>` `$var:widDefRadioBtnOff` ?> id='uiViewModulation$00' value='off' onclick='uiChangeModulation($00)' alt=''>
+      </td>
+            <td align=left><? if eq `0` `$01` ` ` `$02` ?></td>
+          </tr>
+     ` ?>
+	</table>
+   </td>
+  </tr>
+  <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+ </table>
+</form>
+
+<!-- END Modem Setup -->

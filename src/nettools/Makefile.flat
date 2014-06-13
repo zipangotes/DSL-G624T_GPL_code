@@ -1,0 +1,16 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+all: build install
+
+build:
+	$(MAKE)
+
+install: 
+	install -s -m 0755 arp $(TI_base)$(TI_rsbindir)
+
+clean: 
+	$(MAKE) clean
+
+

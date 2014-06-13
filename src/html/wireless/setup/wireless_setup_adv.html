@@ -1,0 +1,111 @@
+<!-- Wireless Setup -->
+<form onSubmit="return false">
+  <table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="#757575" width=455>
+    <tr>
+	<td align=center class="header" bgcolor="#FFFFFF">Wireless Setup</td>
+    </tr>
+    <tr>
+       <td height=5 nowrap bgcolor="#D3D9DF"></td>
+    </tr>
+    <tr>
+       <td bgcolor="#FFFFFF" valign=top align=center>
+	<table cellspacing=1 border=0 cellpadding=2 align=center width=350>
+          <tr>
+	      <td align=right nowrap>Enable AP:&nbsp;</td>
+	      <td width=19><input type="image" src="/usr/www_safe/html/images/ti_check_off.gif" id="uiViewAPEnabled"  value="on" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0></td>
+	      <td>&nbsp;</td>
+	      <td align=right nowrap>Channel:&nbsp;</td>
+	      <td>
+	       <select onchange="uiChangeChannel(value)" id="uiViewChannel">
+		   <option value="1">1</option>
+		   <option value="2">2</option>
+		   <option value="3">3</option>
+		   <option value="4">4</option>
+		   <option value="5">5</option>
+		   <option value="6">6</option>
+		   <option value="7">7</option>
+		   <option value="8">8</option>
+		   <option value="9">9</option>
+		   <option value="10">10</option>
+		   <option value="11">11</option>
+		   <option value="12">12</option>
+		   <option value="13">13</option>
+		   <option value="14">14</option>
+		 </select>
+	       </td>
+           </tr>
+	    <tr>
+		<td align=right>SSID:&nbsp;</td>
+		<td><input type="text" value="" maxlength="32" size="20" id="uiViewSSID"></td>
+		<td colspan=3></td>
+           </tr>
+	    <tr>
+		<td align=right>Domain:&nbsp;</td>
+		<td colspan=5><? query ap:status/domain ?></td>
+	    </tr>
+	    <tr>
+		<td colspan=5 align=center height=15><img src="/usr/www_safe/html/images/ti_px757575.gif" alt="" width="350" height=1></td>
+	    </tr>
+	    <tr>
+		<td align=right nowrap>Beacon Period:&nbsp;</td>
+		<td colspan=4><input type="text" value="" maxlength="5" size="5" id="uiViewBeacon"></td>
+           </tr>
+	    <tr>
+		<td align=right nowrap>DTIM Period:&nbsp;</td>
+		<td colspan=4><input type="text" value="" maxlength="3" size="3" id="uiViewDtim"></td>
+	    </tr>
+	    <tr>
+		<td align=right nowrap>RTS Threshold:&nbsp;</td>
+		<td colspan=4><input type="text" value="" maxlength="4" size="4" id="uiViewRTSThreshold"></td>
+	    </tr>
+	    <tr>
+		<td align=right nowrap>Frag Threshold:&nbsp;</td>
+		<td colspan=4><input type="text" value="" maxlength="4" size="4" id="uiViewFragThreshold"></td>
+	    </tr>
+	    <tr>
+		<td align=right nowrap>Power Level:&nbsp;</td>
+		<td colspan=4>
+		   <select onchange='uiChangePowerLevel(value)' id='uiViewPowerLevel'>
+		     <? multiquery ap:valid_settings/power_level `<option value=$0>$1</option>` ?>
+		   </select>
+		</td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>b/g Mode:&nbsp;</td>
+		<td colspan=4>
+		   <select onchange='uiChangebgMode(value)' id='uiViewbgMode'>
+		      <? multiquery ap:valid_settings/bgmode `<option value=$0>$1</option>` ?>
+		   </select>
+		</td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>Hidden SSID:&nbsp;</td>
+		<td colspan=4><input type="image" src="/usr/www_safe/html/images/ti_check_off.gif" id="uiViewHiddenSSID"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>TI g+ Support:&nbsp;</td>
+		<td colspan=4><input type="image" src="/usr/www_safe/html/images/ti_check_off.gif" id="uiViewagEnabled"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+	  </table>
+	  <table cellspacing=0 border=0 cellpadding=1 align=center>
+	    <tr>
+		<td height=20><font size=1>Note: you must <a href="../cgi-bin/webcm?getpage=%2Fusr%2Fwww_safe%2Fhtml%2Fmenus%2Fmenu1.html&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+	    </tr>
+         </table>
+       </td>
+    </tr>
+    <tr>
+       <td align=right bgcolor="#FFFFFF">
+	  <table border=0 cellspacing=0 width=124>
+	     <tr valign=middle>
+		<td width=62 height=19><input type="image" src="/usr/www_safe/html/images/ti_button_apply.gif" onclick="uiDoSave()" alt="Apply" width="62" height="19" border=0></td>
+		<td width=62 height=19><input type="image" src="/usr/www_safe/html/images/ti_button_cancel.gif" onClick="uiDoCancel()" alt="Cancel" width="62" height="19" border=0></td>
+	     </tr>
+	  </table>	 
+       </td>
+    </tr>
+   </table>
+   <div style="height: 10px"></div>
+</form>
+<!-- END Wireless Setup -->
+

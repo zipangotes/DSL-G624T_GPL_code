@@ -1,0 +1,206 @@
+<!-- Advanced home -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Advanced</font></td>
+</tr>
+ <tr><td bgcolor="<? echo $var:bgColorBody ?>" height=20><font size=1>The Advanced section lets you configure advanced features like RIP, Firewall, NAT, <? if eq `1` `$var:HasVoice` `Voice, ` ` ` ?>UPnP, IGMP, Bridge Filters, and LAN clients.</font></td></tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center>
+  	
+	<div style="height: 3px"></div>
+
+  	<!-- Adv Home Menu -->
+	<table cellspacing=5 border=0 cellpadding=0 width=425>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<? if eq `1` `$var:HasVoice`
+	` <tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Voice</b></font>
+		</td>
+		<td>
+			<font size=1>Configure Voice for different connections.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	` ` ` ?>
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>UPnP</b></font>
+		</td>
+		<td>
+			<font size=1>Configure UPnP for different connections.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>SNTP</b></font>
+		</td>
+		<td>
+			<font size=1>Configure SNTP to configure time server on Internet.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+ 	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>SNMP</b></font>
+		</td>
+		<td>
+			<font size=1>Configure SNMP Management.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>IP QoS</b></font>
+		</td>
+		<td>
+			<font size=1>Configure IP Quality of Service for different connections.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Port Forwarding</b></font>
+		</td>
+		<td>
+			<font size=1>Configure Firewall and NAT pass-through to your hosted applications.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>IP Filters</b></font>
+		</td>
+		<td>
+			<font size=1>Configure Firewall to block your LAN PCs from accessing the Internet.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>LAN Clients</b></font>
+		</td>
+		<td>
+			<font size=1>Configure LAN Clients.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>LAN Isolation</b></font>
+		</td>
+		<td>
+			<font size=1>Disable traffic between LANs.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Bridge Filters</b></font>
+		</td>
+		<td>
+			<font size=1>Select to setup Bridge Filters.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<? if eq `1` `$var:HasWireless`
+	`<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Web Filters</b></font>
+		</td>
+		<td>
+			<font size=1>Select to setup Web Filters.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	` ` ` ?>
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Multicast</b></font>
+		</td>
+		<td>
+			<font size=1>Configure Multicast pass-through for different connections.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Static Routing</b></font>
+		</td>
+		<td>
+			<font size=1>Configure Static routes.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Dynamic Routing</b></font>
+		</td>
+		<td>
+			<font size=1>Configure RIP.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Access Control</b></font>
+		</td>
+		<td>
+			<font size=1>Configure access control list.</font>
+		</td>
+	</tr>
+	</table>
+	
+	<div style="height: 12px"></div>
+
+	</td>
+   </tr>
+</table>
+
+<!-- END Advanced home -->

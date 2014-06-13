@@ -1,0 +1,114 @@
+
+<!-- LAN DHCP Setup -->
+<form id="uiViewLanDHCPForm" onSubmit="return false">
+ <input type="hidden" name="<? query manager:status/$var:langrp/dhcps ?>:settings/state" value="<? query <? query manager:status/$var:langrp/dhcps ?>:settings/state ?>" id="uiViewServerState">
+ <input type="hidden" name="<? query manager:status/$var:langrp/relay ?>:settings/state" value="<? query <? query manager:status/$var:langrp/relay ?>:settings/state ?>" id="uiViewRelayState">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">DHCP Service</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 12px"></div>
+
+    <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=4 align=center width=350>
+     <tr valign=top>
+      <td>
+       <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1>
+        <tr valign=middle>
+         <td width=20 height=20>
+	      <input <? echo $var:widDefRadioBtnOff ?> id="uiViewSrvRelayStatus1" onclick="jslDoToggleRadio('uiViewSrvRelayStatus',1,3);uiServerStatus(this)" alt="">
+	     </td>
+	     <td align=left nowrap>Server On</td>
+	    </tr>
+       </table>
+      </td>
+      <td>
+       <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=0>
+	    <tr>
+	     <td align=right id="uiViewStartIPLabel">
+		  <img src="<? echo $var:imgErrorBlank ?>" id="Img6" alt="" align=left <? echo $var:dimImgErrorMark ?> >&nbsp;Start IP:</td>
+	 <td align="left">
+	  <input type="text" value="" size="15" maxlength="15" name="uiViewStartIPName" id="uiViewStartIP">
+	 </td>
+	</tr>
+	<tr>
+	 <td align=right id="uiViewEndIPLabel">
+ 	  <img src="<? echo $var:imgErrorBlank ?>" id="Img6" alt="" align=left <? echo $var:dimImgErrorMark ?> >&nbsp;End IP: 
+ 	 </td>
+	 <td align="left">
+	  <input type="text" value="" size="15" maxlength="15" name="uiViewEndIPName" id="uiViewEndIP">
+	 </td>
+	</tr>
+	<tr>
+	 <td align=right id="uiViewLeaseLabel">
+	  <img src="<? echo $var:imgErrorBlank ?>" id="Img6" alt="" <? echo $var:dimImgErrorMark ?> align=left>&nbsp;Lease Time: 
+	 </td>
+	 <td align="left">
+	  <input type="text" value="" size="5" maxlength="6" name="uiViewLeaseName" id="uiViewLease"> Seconds
+	 </td>
+	</tr>
+      </table>
+     </td>
+    </tr>
+    <tr> 
+     <td colspan=2 height=16 nowrap align=right><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=350 height=1>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1>
+	<tr valign=middle>
+	 <td width=20 height=20>
+	  <input <? echo $var:widDefRadioBtnOff ?> id="uiViewSrvRelayStatus2" onclick="jslDoToggleRadio('uiViewSrvRelayStatus',2,3);uiRelayStatus(this)" alt="">
+	 </td>
+	 <td align=left nowrap>Relay On</td>
+	</tr>
+      </table>
+     </td>
+     <td>
+      <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=0>
+       <tr>
+	 <td align=right id="uiViewRelayIPLabel">
+	  <img src="<? echo $var:imgErrorBlank ?>" id="Img6" alt="" <? echo $var:dimImgErrorMark ?> align=left>&nbsp;Relay IP: 
+	 </td>
+	 <td align="left">
+	  <input type="text" value="" size="15" maxlength="15" name="uiViewRelayIPName" id="uiViewRelayIP">
+	 </td>
+	</tr>
+      </table>
+     </td>
+    </tr>
+    <tr> 
+     <td colspan=2 height=16 nowrap align=right><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=350 height=1></td>
+    </tr>
+    <tr>
+     <td colspan=2>
+	<table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1>
+	<tr valign=middle>
+	 <td width=20 height=20>
+	  <input <? echo $var:widDefRadioBtnOn ?> id="uiViewSrvRelayStatus0" onclick="jslDoToggleRadio('uiViewSrvRelayStatus',0,3);uiNoneStatus(this)" alt="">
+	 </td>
+	 <td align=left nowrap>Server and Relay Off</td>
+	</tr>
+      </table>
+     </td>
+    </tr>
+   </table>
+  </td>
+</tr>
+<tr>
+ <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+  <table <? echo $var:cntrBorder ?> cellspacing=0 width="100%">
+   <tr valign=middle>
+    <td align=center style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint"><? echo $var:txtErrorHint ?></td>
+    <td>&nbsp;</td>
+    <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+   </tr>
+  </table> 
+ </td>
+</tr>
+</table>
+</form>
+<!-- END LAN DHCP Setup -->

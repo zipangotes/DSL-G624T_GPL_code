@@ -1,0 +1,36 @@
+
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=20 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">PPP Connection Help</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top>
+  
+<div style="height: 5px"></div>
+
+<font size=1>
+Username:   The username for the DSL access.<br><br>
+Password:   The password for the DSL access.<br><br>
+Authenication:  Specifies the authenication protocol required to establish connection.<br><br>
+On-Demand:  Enable on-demand mode.  The connection will disconnect if no 
+activity is detected after the specified idle timeout value.<br><br>
+Idle Timeout:  Specifies that DSL should disconnect if the link has no 
+activity detected for n seconds. A non-zero value.<br><br>
+Keep Alive:  When on-demand option is not enable, this value specifies the 
+time to wait without being connected to your provider before terminating the 
+connection.  A non-zero value.<br><br>
+Set Defaultroute:  Specify connection as the default-route.<br><br>
+MRU: Maximum Receive Unit the DSL connection can receive.  It is an negotiated 
+value that ask the provider to send packets of no more than n bytes.  The  
+minimum  MRU value is 128.<br><br>
+Enforce MRU: 
+Check this box if you experience problems accessing the Internet over a PPPoE connection.  
+This feature will force all TCP traffic to conform with PPP MRU by changing TCP Maximum Segment Size to PPP MRU.<br><br>
+Debug:  Enables PPP connection debugging facilities.<br><br>
+Connect:  Use the current settings to establish a ppp connection. In "On Demand" mode "Connect" takes no action in establishing connection.<br><br>
+Disconnect:  Disconnects the ppp connection.</font>
+	</td>
+</tr>
+
+</table>

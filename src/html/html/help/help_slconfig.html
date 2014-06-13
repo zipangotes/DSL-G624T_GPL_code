@@ -1,0 +1,27 @@
+
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=20 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">LAN Configuration Help</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top>
+  
+<div style="height: 5px"></div>
+
+<font size=1>
+Configuring  LAN Groups with static IP address must be done in a way that
+the range of assignable IP address on each of the LAN groups should not
+overlap with other lan groups. A rule of thumb would be that each lan group should be
+on its own network.<br><br>For example, say you have 3 lan groups each being
+setup with static IP addressing. Below is a sample configuration data,
+<br><br>LanGroup #1<br>IP Address 192.168.1.1<br> NetMask 255.255.255.0
+<br><br>LanGroup #2<br>IP Address 192.168.2.1<br> NetMask 255.255.255.0
+<br><br>LanGroup #3<br>IP Address 192.168.3.1<br> NetMask 255.255.255.0
+<br><br>The example shows that each lan group is on its own network and that
+there is no everlap in assignable IP address besed on netmask.
+</font>
+	</td>
+</tr>
+
+</table>

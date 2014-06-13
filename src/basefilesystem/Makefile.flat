@@ -1,0 +1,97 @@
+#
+# Texas Instruments
+#
+#
+
+include $(TARGET_HOME)/TI_Build.make
+include $(TARGET_HOME)/.config
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+all: build install
+
+build:
+
+install: 
+	install -m 0755 -d $(TI_filesystem_path)/etc
+	install -m 0755 -d $(TI_filesystem_path)/etc/init.d
+	install -m 0755 -d $(TI_filesystem_path)/etc/ppp
+	install -m 0755 -d $(TI_filesystem_path)/etc/udhcpc
+	install -m 0755 -d $(TI_filesystem_path)/etc/dropbear
+	install -m 0755 -d $(TI_filesystem_path)/bin
+	install -m 0755 -d $(TI_filesystem_path)/lib
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules
+	install -m 0755 -d $(TI_filesystem_path)/sbin
+	install -m 0755 -d $(TI_filesystem_path)/usr
+	install -m 0755 -d $(TI_filesystem_path)/usr/sbin
+	install -m 0755 -d $(TI_filesystem_path)/usr/bin
+	install -m 0755 -d $(TI_filesystem_path)/usr/lib
+	install -m 0755 -d $(TI_filesystem_path)/usr/share
+	install -m 0755 -d $(TI_filesystem_path)/usr/share/udhcpc
+	install -m 0711 -d $(TI_filesystem_path)/usr/www
+	install -m 0711 -d $(TI_filesystem_path)/usr/www_safe	
+	install -m 0711 -d $(TI_filesystem_path)/usr/www/cgi-bin
+	install -m 0711 -d $(TI_filesystem_path)/usr/www_safe/html	
+	install -m 0711 -d $(TI_filesystem_path)/usr/www/html
+	install -m 0755 -d $(TI_filesystem_path)/dev
+	install -m 0755 -d $(TI_filesystem_path)/proc
+	install -m 0755 -d $(TI_filesystem_path)/var
+	install -m 0755 -d $(TI_filesystem_path)/var/flash
+	install -m 0755 -d $(TI_filesystem_path)/var/dev
+	install -m 0755 -d $(TI_filesystem_path)/var/proc
+	install -m 0755 -d $(TI_filesystem_path)/var/cache
+	install -m 0755 -d $(TI_filesystem_path)/var/lock
+	install -m 0755 -d $(TI_filesystem_path)/var/log
+	install -m 0755 -d $(TI_filesystem_path)/var/run
+	install -m 0755 -d $(TI_filesystem_path)/var/tmp
+	install -m 0755 -d $(TI_filesystem_path)/var/lib
+	install -m 0755 -d $(TI_filesystem_path)/var/lib/misc
+	install -m 0644 ./gateways      $(TI_base)$(TI_vardir)/tmp/.
+	install -m 0644 ./resolv.conf   $(TI_base)$(TI_vardir)/tmp/.
+	install -m 0644 ./udhcpd.leases $(TI_base)$(TI_vardir)/lib/misc/.
+	install -m 0644 ./dproxy.cache  $(TI_base)$(TI_vardir)/cache/.
+	install -m 0644 ./hosts         $(TI_base)$(TI_vardir)/tmp/.
+	install -m 0644 ./udhcpd.conf   $(TI_base)$(TI_vardir)/tmp/.
+	install -m 0644 ./etc/fstab     $(TI_base)$(TI_etcdir)/.
+	install -m 0644 ./etc/group     $(TI_base)$(TI_etcdir)/.
+	install -m 0644 ./etc/host.conf $(TI_base)$(TI_etcdir)/.
+	@if [ "$(CONFIG_TI_CFGMGR_CMCLI)" = "y" ]; then \
+		install -m 0644 ./etc/inittab_cmcli   $(TI_base)$(TI_etcdir)/inittab; \
+		echo "install -m 0644 ./etc/inittab_cmcli   $(TI_base)$(TI_etcdir)/inittab"; \
+	else	\
+		if [ "$(CONFIG_TI_CFGMGR_TEXTUI)" = "y" ]; then \
+			install -m 0644 ./etc/inittab_textui   $(TI_base)$(TI_etcdir)/inittab; \
+			echo "install -m 0644 ./etc/inittab_textui   $(TI_base)$(TI_etcdir)/inittab"; \
+		else \
+			install -m 0644 ./etc/inittab   $(TI_base)$(TI_etcdir)/.; \
+			echo "install -m 0644 ./etc/inittab   $(TI_base)$(TI_etcdir)/."; \
+		fi; \
+	fi
+#install -m 0644 ./etc/passwd    $(TI_base)$(TI_etcdir)/.
+	install -m 0644 ./etc/protocols $(TI_base)$(TI_etcdir)/.
+	install -m 0644 ./etc/securetty $(TI_base)$(TI_etcdir)/.
+	install -m 0644 ./etc/services  $(TI_base)$(TI_etcdir)/
+#install -m 0644 ./etc/shadow    $(TI_base)$(TI_etcdir)/.
+	install -m 0644 ./etc/shells    $(TI_base)$(TI_etcdir)/.
+	install -m 0755 ./etc/init.d/rcS  $(TI_base)$(TI_etcdir)/init.d/.
+	@if [ "$(CONFIG_NFS_CLIENT)" = "y" ]; then \
+	(install -m 0755 ./etc/init.d/rcS_nfs  $(TI_base)$(TI_etcdir)/init.d/rcS); \
+	fi
+	install -m 0644 ./etc/dhcp-fwd.cfg    $(TI_base)$(TI_etcdir)/.
+	install -m 0755 ./etc/firewall_start  $(TI_base)$(TI_etcdir)/.
+	install -m 0755 ./etc/firewall_stop  $(TI_base)$(TI_etcdir)/.
+	install -m 0755 ./etc/flush_firewall  $(TI_base)$(TI_etcdir)/.
+	install -m 0644 ./etc/dropbear/dropbear_dss_host_key  $(TI_base)$(TI_etcdir)/dropbear/.
+	install -m 0644 ./etc/dropbear/dropbear_rsa_host_key  $(TI_base)$(TI_etcdir)/dropbear/.
+	(cd  $(TI_base)$(TI_etcdir); ln -sf ../var/tmp/gateways gateways)
+	(cd  $(TI_base)$(TI_etcdir); ln -sf ../var/tmp/resolv.conf resolv.conf)
+	(cd  $(TI_base)$(TI_etcdir); ln -sf ../var/tmp/hosts hosts)
+	(cd  $(TI_base)$(TI_etcdir)/udhcpc; ln -sf ../resolv.conf resolv.conf)
+	(cd  $(TI_base)$(TI_etcdir)/ppp; ln -sf ../resolv.conf resolv.conf)
+	(cd  $(TI_base)$(TI_etcdir); ln -sf ../var/tmp/udhcpd.conf udhcpd.conf)
+	(cd  $(TI_base)$(TI_etcdir); ln -sf ../var/tmp/passwd passwd)
+	(cd  $(TI_base)$(TI_etcdir); ln -sf ../var/tmp/shadow shadow)
+	(cd  $(TI_base)$(TI_etcdir); ln -sf ../var/tmp/TZ TZ)
+
+clean: 
+	$(MAKE) clean

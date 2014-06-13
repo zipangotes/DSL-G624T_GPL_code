@@ -1,0 +1,28 @@
+#!/usr/bin/perl 
+
+# Fixes the Root file in each CVS directory to point at the correct server
+#
+#  fix_cvs_server "<old_server_name>" " <new_server_name>"
+#
+# 
+$old_server = $ARGV[0];    
+$new_server = $ARGV[1];
+$count = 0;
+# Get a listing of all CVS/Root files, store in an array
+
+open(FIND, "find . -name Root -print|");
+$|=1;
+
+while($file_location = <FIND>){
+    chop $file_location;
+    open(ROOTFILE, "+<$file_location");
+    $temp_var = <ROOTFILE>;
+#    chop($temp_var);
+    $temp_var =~ s/$old_server/$new_server/;
+    seek(ROOTFILE,0,0);
+    print ROOTFILE $temp_var; 
+    close(ROOTFILE);
+    $count++;
+}
+close(FIND);
+print("$count records processed \n\n");

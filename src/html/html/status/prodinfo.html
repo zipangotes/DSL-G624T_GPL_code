@@ -1,0 +1,129 @@
+
+<!-- Product Information -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 align=center bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>">
+<tr>
+<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Product Information</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center height=337>
+   <!-- Inside Table -->
+   <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1>
+    <tr><td colspan=3 height=20 valign=middle class="Header">Product Information</td></tr>
+           <tr>
+             <td>Model Number</td>
+             <td>&nbsp;</td>
+             <td><? query logic:status/model ?></td>
+           </tr>
+	    <tr>
+             <td>HW Revision</td>
+             <td>&nbsp;</td>
+             <td><? query logic:status/hwrev ?></td>
+           </tr>
+           <tr>
+             <td>Serial Number</td>
+             <td>&nbsp;</td>
+             <td><? query logic:status/serial ?></td>
+           </tr>
+         <? if eq `1` `$var:HasUsb`
+          `<tr>
+             <td>USB PID</td>
+             <td>&nbsp;</td>
+             <td><? query usb:status/pid ?></td>
+           </tr>
+           <tr>
+             <td>USB VID</td>
+             <td>&nbsp;</td>
+             <td><? query usb:status/vid ?></td>
+           </tr>
+          ` ` ` ?>
+           <tr>
+             <td>Ethernet MAC</td>
+             <td>&nbsp;</td>
+             <td><? query logic:status/maca ?></td>
+	    </tr>
+         <? if eq `1` `$var:HasDsl`
+         `<tr>
+             <td>DSL MAC</td>
+             <td>&nbsp;</td>
+             <td><? query logic:status/macc ?></td>
+           </tr>
+          ` ` ` ?>
+         <? if eq `1` `$var:HasUsb`
+         `<tr>
+             <td>USB MAC</td>
+             <td>&nbsp;</td>
+             <td><? query usb:status/usb_mac ?></td>
+           </tr>
+           <tr>
+             <td>USB Host MAC</td>
+             <td>&nbsp;</td>
+             <td><? query usb:status/usb_host_mac ?></td>
+           </tr>
+          ` ` ` ?>
+         <? if eq `1` `$var:HasWireless`
+         `<tr>
+             <td>AP MAC</td>
+             <td>&nbsp;</td>
+             <td><? query ap:status/mac_address ?></td>
+          </tr>
+          ` ` ` ?>
+	  <!-- END USB, Ethernet, MAC -->
+    <tr><td valign=middle colspan=3 height=6><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=353 height=1></td></tr>
+    <tr><td colspan=3 height=20 valign=top class="Header">Software Versions</td></tr>
+	  <!-- Gateway, ATM, HAL, Firmware, Bootloader -->
+        <tr>
+          <td>Gateway</td>
+          <td>&nbsp;</td>
+          <td><? query logic:status/nspver ?></td>
+	 </tr>
+      <? if eq `1` `$var:HasDsl`
+      `<tr>
+          <td>ATM Driver</td>
+          <td>&nbsp;</td>
+          <td><? query sar:status/ATM_Driver_ver ?></td>
+       </tr>
+       <tr>
+         <td>DSL HAL</td>
+          <td>&nbsp;</td>
+         <td><? query sar:status/DSL_HAL_ver ?></td>
+       </tr>
+       <tr>
+         <td>DSL Datapump</td>
+          <td>&nbsp;</td>
+         <td><? query sar:status/DSP_Datapump_ver ?></td>
+       </tr>
+       <tr>
+        <td>SAR HAL</td>
+          <td>&nbsp;</td>
+        <td><? query sar:status/SAR_HAL_ver ?></td>
+       </tr>	
+       <tr>
+        <td>PDSP Firmware</td>
+          <td>&nbsp;</td>
+        <td><? query sar:status/PDSP_Firmware_ver ?></td>
+       </tr>
+      ` ` ` ?>
+      <? if eq `1` `$var:HasWireless`
+      `<tr>
+         <td>Wireless Firmware</td>
+          <td>&nbsp;</td>
+         <td><? query ap:status/firmware_ver ?></td>
+       </tr>
+       <tr>
+        <td>Wireless APDK</td>
+          <td>&nbsp;</td>
+        <td><? query ap:status/APDK_ver ?></td>
+       </tr>
+      ` ` ` ?>
+       <tr>
+        <td>Boot Loader</td>
+          <td>&nbsp;</td>
+        <td><? query logic:status/bootver ?></td>
+       </tr>
+	  <!-- END Gateway, ATM, HAL, Firmware, Bootloader -->
+   </table>
+   <!-- END Inside Table -->
+  </td>
+ </tr>
+</table>
+<!-- END Product Information -->

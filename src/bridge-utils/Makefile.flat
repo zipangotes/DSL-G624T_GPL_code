@@ -1,0 +1,15 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+all: build install
+
+build:
+	$(MAKE)
+	cd brctl; mips_fp_le-strip -s brctl
+
+install: 
+	install -m 0755 brctl/brctl $(TARGET_HOME)/$(TI_sbindir)/brctl 
+
+clean:
+	$(MAKE) clean

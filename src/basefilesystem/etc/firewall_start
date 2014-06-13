@@ -1,0 +1,4 @@
+echo 0 > /proc/sys/net/ipv4/netfilter/ip_conntrack_tcp_log_invalid_scale
+echo 0 > /proc/sys/net/ipv4/netfilter/ip_conntrack_tcp_log_out_of_window
+echo 120 > /proc/sys/net/ipv4/netfilter/ip_conntrack_tcp_timeout_close_wait
+echo 1 > /proc/net/firewall_start

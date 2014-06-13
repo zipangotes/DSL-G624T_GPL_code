@@ -1,0 +1,141 @@
+
+<!-- Secure Services -->
+<? setvariable var:pagegoto `../cgi-bin/webcm?getpage=..%2Fhtml%2Fdefs%2F$var:style%2Fmenus%2F$var:main.html&var:style=$var:style&var:main=$var:main&var:menu=setup&var:menutitle=Setup&var:pagename` ?>
+<form onsubmit="return false">
+ <table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 align=center bgcolor="<? echo $var:bgColorTable ?>" width=500>
+  <tr><td align=center class="header" bgcolor="<? echo $var:bgColorBody ?>">Access Control</td></tr>
+  <tr><td height=5 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+  <tr>
+   <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+   <!-- Services -->
+    <table <? echo $var:cntrBorder ?> align="center" cellpadding=0 cellspacing=1>
+	 <tr>
+	  <td colspan=2 align=left valign=middle>
+       <table <? echo $var:cntrBorder ?> cellpadding=1 cellspacing=0 width="100%">
+        <tr>
+         <td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewRemoteManagementState" onclick="jslDoToggleCheckBox(id);uiDoChangeState(value);"></td>
+         <td>&nbsp;Enable Access Control</td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+
+    <? if eq 0 0
+    `
+	<? if eq 0 0
+	`<tr>
+      <td width=19 nowrap></td>
+      <td height=15 align=center><img src="$var:imgHorizontalDivider" width=410 height=1></td>
+     </tr>
+     <!--
+     <tr>
+      <td align=left nowrap colspan=2 valign=middle><b>Select your WAN Connection:&nbsp;</b>
+       <select onchange="uiDoSelectConnection(value)" id="uiViewConnectionSelector">
+        <?-- multiquery manager:command/connection/list `<option value='$21'>$22</option>` --?>
+       </select>	
+      </td>
+     </tr>
+     -->
+     <? if eq 0 `<? query fdb:settings/categoryH/acl_state ?>`
+    `<tr><td nowrap colspan=2 style="color:red;" align=center>&nbsp;&nbsp;<b>All LAN access allowed, all WAN access denied.</b></td></tr>`
+    `<tr><td height=7 nowrap colspan=2><? include /usr/www_safe/html/setup/error.html ?></td></tr>` ?>
+     <tr>
+      <td width=19 nowrap></td>
+      <td align=left>
+       <table $var:cntrBorder cellpadding=1 cellspacing=0>
+        <tr>
+		 <td width=200 align=left>&nbsp;</td>
+		 <td width=40></td>
+               <td width=40 align=center><b>Enable</b></td>
+		 <td width=40></td>
+               <td width=40 align=center><b>Enable</b></td>
+        </tr>
+        <tr>
+		 <td width=200 align=left><b>Service Name</b></td>
+		 <td width=40></td>
+               <td width=40 align=center><b>WAN</b></td>
+		 <td width=40></td>
+         <td width=40 align=center><b>LAN</b></td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+     <tr>
+      <td width=19 nowrap></td>
+      <td align=left>
+       <table $var:cntrBorder cellpadding=1 cellspacing=0>
+        <? multiquery fdb:settings/categoryH/acl/acl_services
+       `<tr>
+		 <td width=200 align=left>$21</td>
+		 <td width=40></td>
+         <td width=40 align=center><input <? if eq 1 $23 `$var:widDefCheckBoxOn` `$var:widDefCheckBoxOff` ?> id="uiViewWanServiceState$20" onclick="jslDoToggleCheckBox(id);jslViewToPostCheckBox('uiPostServiceWAN$20',id)"></td>
+		 <td width=40></td>
+         <td width=40 align=center><input <? if eq 1 $25 `$var:widDefCheckBoxOn` `$var:widDefCheckBoxOff` ?> id="uiViewLanServiceState$20" onclick="jslDoToggleCheckBox(id);jslViewToPostCheckBox('uiPostServiceLAN$20',id)"></td>
+        </tr>` ?>
+       </table>
+      </td>
+     </tr>
+     <tr>
+      <td width=19 nowrap></td>
+      <td height=15 align=center><img src="$var:imgHorizontalDivider" width=410 height=1></td>
+     </tr>
+     <tr>
+	  <td colspan=3>
+	   <table cellspacing=0 cellpadding=0>
+	    <tr>
+         <td width=140 align=right nowrap valign=middle><b>IP Access List:&nbsp;</b></td>
+	     <td width=140>
+          <select id="uiViewLanAccessListSelector">
+		   <option value="invalid">Select IP</option>
+		   <? multiquery fdb:settings/categoryH/acl/acl_list `<option value="$21">$21</option>` ?>
+          </select>	
+         </td>
+	     <td align=center><input $var:widDefCheckBoxOff id="uiViewAccessItemDelete" onclick="jslDoToggleCheckBox(id)"></td>
+		 <td>&nbsp;Delete</td>
+		</tr>
+	   </table>
+	  </td>
+     </tr>
+     <tr>
+	  <td colspan=3>
+	   <table cellspacing=0 cellpadding=0>
+	    <tr>
+         <td width=140 nowrap align=right valign=middle>New IP:&nbsp;</td>
+	     <td width=140><input type="text" size=17 maxlength=15 id="uiViewLanAccessNewIP"></td>
+	     <td align=center><input $var:widDefCheckBoxOff id="uiViewAccessItemAdd" onclick="jslDoToggleCheckBox(id)"></td>
+		 <td>&nbsp;Add</td>
+		</tr>
+	   </table>
+	  </td>
+     </tr>
+    `
+	`<tr>
+      <td colspan=5 height=100><b>No connection available for Remote Management</b></td>
+     </tr>
+     <tr>
+      <td colspan=5><b>Go to&nbsp;</b><a href="$var:pagegoto=pppoe&var:pagetitle=New%20Connection&var:conid=<? query manager:command/connection/new ?>&var:mode=new">New Connection Setup</a></td>
+     </tr>` ?>
+	`
+	`<tr>
+      <td colspan=5 height=100 align=center valign=middle><b>Access Control feature has been disabled</b></td>
+     </tr>
+	` ?>
+     <tr><td height=5 nowrap colspan=2></td></tr>
+    </table>
+    <!-- END Services -->
+   </td>
+  </tr>
+  <tr>
+   <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=19>
+    <table <? echo $var:cntrBorder ?> cellspacing=0 width="100%">
+     <tr valign=middle>
+      <td align=center style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint"><? echo $var:txtErrorHint ?></td>
+	  <td>&nbsp;</td>
+	  <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+	 </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</form>
+<!-- END Secure Services -->

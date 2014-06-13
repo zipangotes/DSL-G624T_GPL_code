@@ -1,0 +1,19 @@
+include ../../TI_Build.make
+
+ZVER = 1.1.3
+ZLIBNAME = libz.so
+
+all: clean build install
+
+build:
+	$(MAKE) $(ZLIBNAME)
+
+install:
+	install -m 0644 $(ZLIBNAME).$(ZVER) $(TI_base)$(TI_rlibdir)
+	(cd $(TI_base)$(TI_rlibdir); \
+	ln -sf $(ZLIBNAME).$(ZVER) $(ZLIBNAME); \
+	ln -sf $(ZLIBNAME).$(ZVER) $(ZLIBNAME).1; \
+	ln -sf $(ZLIBNAME).$(ZVER) libcmz.so)
+
+clean:
+	$(MAKE) clean

@@ -1,0 +1,34 @@
+<!-- Main Home -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 align=center id="uiViewBodyTable" bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="#000000" height=21 class="header"><font size=1 color="#FFFFFF">Welcome to the TI <? if eq `1` `$var:HasDsl` `DSL Modem` `Router` ?></font></td>
+</tr>
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>" colspan=2>
+	
+	<? include /usr/www_safe/html/home/homedesc.html ?>
+	
+	<table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=0 align=center>
+	<tr><td align=center colspan=3 class="homeHeader" height=25><font size=1><b>Status Information</b></font></td></tr>
+	</table>
+
+	
+	<? include /usr/www_safe/html/home/statusinfo.html ?>
+	
+	<div style="height: 8px;"></div>
+	</td>	
+</tr>
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>" align=center colspan=2 height=20>
+		<!-- Logout and Refresh Controls -->
+		<table <? echo $var:cntrBorder ?> width="<? echo $var:dimHomeHomeBottomWidth ?>" cellspacing=0 cellpadding=0>
+		<tr>
+			<td width="50%" align=left height=20><input <? echo $var:widDefBtnLogout ?> onclick="uiDoLogout()" alt="Logout" align="left"</td>
+			<td width="50%" align=right><input <? echo $var:widDefBtnRefresh ?> onclick="uiDoRefresh()" alt="Refresh" align="right"></td>
+		</tr>
+		</table>
+		<!-- END Logout and Refresh Controls -->
+	</td>
+</tr>
+</table>
+<!-- END Main Home -->

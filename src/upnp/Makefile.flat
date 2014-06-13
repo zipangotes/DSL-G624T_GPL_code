@@ -1,0 +1,58 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+export CROSS_COMPILE_PREFIX=$(TI_uclibc_base)
+
+all: build install
+
+build:
+#	cd libupnp-1.2.1/upnp
+	$(MAKE) -C ./libupnp-1.2.1/upnp  WEB=0 CLIENT=0 STATIC=1
+#	cd  linux-igd
+	cp ./libupnp-1.2.1/ixml/src/libixml.a ./linux-igd
+	cp ./libupnp-1.2.1/threadutil/src/libthreadutil.a ./linux-igd
+	cp ./libupnp-1.2.1/upnp/bin/libupnp.a ./linux-igd
+	ln -sf ../libupnp-1.2.1/upnp/inc/ ./linux-igd/upnp
+	$(MAKE) -C ./linux-igd
+
+install:
+	install -d $(TI_base)$(TI_sbindir)
+	install -d $(TI_base)$(TI_etcdir)
+	install -d $(TI_base)$(TI_vartmpdir)
+	install -d $(TI_base)$(TI_vartmpdir)/linux-igd
+	strip linux-igd/upnpd
+	install -m 0755 linux-igd/upnpd $(TI_base)$(TI_sbindir)
+	install -m 0664 linux-igd/etc_linux-igd/gate* $(TI_base)$(TI_vartmpdir)/linux-igd
+	install -m 0664 linux-igd/etc_linux-igd/*.gif $(TI_base)$(TI_vartmpdir)/linux-igd
+	(cd  $(TI_base)$(TI_etcdir); ln -sf ../var/tmp/linux-igd)	
+clean:
+	$(MAKE) -C ./libupnp-1.2.1/ixml clean
+	$(MAKE) -C ./libupnp-1.2.1/threadutil/src clean
+	$(MAKE) -C ./libupnp-1.2.1/threadutil clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/sample/tvctrlpt/linux clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/sample/tvdevice/linux clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/src/gena clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/src/genlib/client_table clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/src/genlib/miniserver clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/src/genlib/net/http clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/src/genlib/net clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/src/genlib/service_table clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/src/genlib/util clean
+	$(MAKE) -C ./libupnp-1.2.1/upnp/src/urlconfig clean
+	$(MAKE) -C ./linux-igd clean
+	rm -f ./linux-igd/upnp
+distclean: clean
+	@rm -f ./libupnp-1.2.1/upnp/inc/FreeList.h
+	@rm -f ./libupnp-1.2.1/upnp/inc/LinkedList.h
+	@rm -f ./libupnp-1.2.1/upnp/inc/ThreadPool.h
+	@rm -f ./libupnp-1.2.1/upnp/inc/TimerThread.h
+	@rm -f ./libupnp-1.2.1/upnp/inc/iasnprintf.h
+	@rm -f ./libupnp-1.2.1/upnp/inc/ithread.h
+	@rm -f ./libupnp-1.2.1/upnp/inc/ixml.h
+	@rm -f ./libupnp-1.2.1/upnp/inc/inc
+	@rm -rf ./libupnp-1.2.1/threadutil/src/.deps
+	@rm -f ./libupnp-1.2.1/threadutil/src/libthreadutil_dbg.so
+	@rm -rf ./libupnp-1.2.1/upnp/lib
+
+

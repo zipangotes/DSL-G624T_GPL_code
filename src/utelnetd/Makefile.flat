@@ -1,0 +1,19 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+export CROSS_COMPILE_PREFIX=$(TI_uclibc_base)
+
+all: build install
+
+build:
+	$(MAKE) TI_FILESYSTEM=$(TI_filesystem_path)
+	mips_fp_le-strip -s utelnetd
+
+install: 
+	$(MAKE) TI_FILESYSTEM=$(TI_filesystem_path) INSTALL=install  install
+
+clean: 
+	$(MAKE) clean
+
+

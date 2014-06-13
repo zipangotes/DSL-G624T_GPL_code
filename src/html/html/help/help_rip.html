@@ -1,0 +1,46 @@
+
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=20 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">RIP ( Routing Information Protocol) Help</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top>
+  
+<div style="height: 5px"></div>
+
+	<font size=1>
+		Dynamic Routing uses RIP ( Routing Information Protocol) for exchanging routing 
+		information with other routers in the network.<br><br>
+
+		The user can set the following parameters:<br><br>
+
+		Enable   : Enable/Disable RIP<br><br>
+		Protocol : Choice of RIP version ( RIP v1/v2/Compatibility)<br><br>
+		Enable Password: RIP version v2/Compatibility allows the user to provide simple 
+		plaintext password based authentication to RIP packets.<br><br>
+		Password : The 16 character long plaintext password.<br><br>
+		Direction: Normally when RIP is enabled on a router it dynamically learns routes 
+		on all it's configured interfaces. This parameter allows the user to select the interfaces 
+		on which RIP is expected to learn and distribute routing information. This feature allows 
+		the user to control how and which routes get distributed through the network e.g. prevent 
+		routes to the private LAN networks from being sent over to the WAN side router.<br><br>
+		On a per-interface basis the user can choose to<br><br>
+
+		a) Both => Receive updates on the interface and also send it's routing table to other routers 
+		    connected to that interface.<br><br>
+		b) In =>  Receive routing updates from other routers connected to that interface but NOT send 
+		    routing updates on that interface.<br><br>
+		c) Out => Send routing updates but not receive updates on this interface from the other routers 
+		    connected to that interface<br><br>
+		d) None => Ignores this interface and not send or receive routing updates through this interface.<br><br>
+
+                Note: If the modem has multiple WAN connections and is expected to learn routes from WAN side 
+                      routers as well as route traffic between the WAN interfaces then NAT and Firewall services 
+                      should be disabled on all the relevant WAN interfaces.<br><br>
+</font>
+	</td>
+</tr>
+
+
+</table>

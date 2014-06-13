@@ -1,0 +1,35 @@
+<!-- Modulation Configuration-->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Modulation</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+  
+   <div style="height: 12px"></div>
+
+   <form onSubmit="return false">
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=2 cellspacing=2>   
+   <tr align=center>
+   <td align="right">Modulation String</td>
+   <td align="left">
+
+	   	<select name="" onchange='uiChangeModulationStr(value)' id="uiViewModulationStr">
+	<? multiquery sar:valid_settings/modulation	`<option value="$02">$02</option>` ?>
+			</select>
+   </td>
+   </tr>
+
+	<tr>
+	<td align=right>Modultion Value</td>
+	<td>
+	<input type=text name="modValue" value="" id="uiViewModulationVal" disabled>
+	</td>
+	</tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</form>
+</table>
+<!-- END Modulation Configuration -->

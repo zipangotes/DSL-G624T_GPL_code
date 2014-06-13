@@ -1,0 +1,54 @@
+
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=20 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Bridge Filter Help</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top>
+  
+<div style="height: 5px"></div>
+
+	<font size=1>
+		The bridge filtering mechanism provides a way for the users to define rules 
+to allow/deny frames through the bridge based on source MAC address, 
+destination MAC address and/or frame type.  When bridge filtering is enabled, 
+each frame is examined against the each defined filter rules sequentially, 
+and when a matched is determined, the appropriate filtering action 
+(determined by the access type selected ... i.e allow or deny) is performed.  
+The user should note that the bridge filter will only examined frames from 
+interfaces which is part of the bridge itself.  Twenty filter rules are 
+supported with bridge filtering.<br><br>
+The User Interface for Bridge Filter allows the user to add/edit/delete, as 
+well as, enable the filter rules.  To add a rules, simply define the source 
+MAC address, destination MAC address and frame type with desired filtering 
+type (i.e. allow/deny), and press the "Add" button.  The MAC address must be 
+in a xx-xx-xx-xx-xx-xx format, with 00-00-00-00-00-00 as "don't care".  
+Blanks can be used in the MAC address space, and would be considered also as 
+"don't care".<br><br>
+To edit/modify an exist filter rule, select the desired rule created 
+previously from "Add" in the "Edit" select box.  The selected filter rule 
+will appear on top section, as with the "Add" filter rule.  Make the desired 
+change to the MAC address, frame type and/or access type, and press "Apply".<br><br>
+To delete filter rule(s), select the filter rule entry to delete in the 
+"Delete" selection box.  Note that multiple deletion is possible.  Once all 
+the desired filter rule(s) is/are selected for deletion, press the "Apply" 
+button.  The "Select All" select box can also be used to delete all the 
+filter rule.  It provides a quick method of selecting all filter rules for 
+deletion.<br><br>
+The "Enable Bridge Filters" button allow the user to enable or disable bridge 
+filtering.  It can be set/unset during any add/edit/delete operation.  It can 
+also be set/unset independently by just pressing the "Apply" button.<br><br>
+Note:  There are three hidden filter rules within the bridge filter table.  
+These rules are entered automatically by the system to ensure the user does 
+not "lock" themselves out of the system.  The first rule allows any and all 
+ARP frames through the system.  The second rule allows all IPv4 frames with 
+the destination MAC address of the bridge to go through.  The third rule 
+allows all IPv4 frames with the source MAC address of the bridge to go 
+through.
+</font>
+	</td>
+</tr>
+
+
+</table>

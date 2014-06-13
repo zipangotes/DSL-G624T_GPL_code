@@ -1,0 +1,108 @@
+<!-- Status Home -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Status</font></td>
+</tr>
+ <tr><td bgcolor="<? echo $var:bgColorBody ?>" height=20><font size=1>The Status section allows you to view the Status/Statistics of different connections and interfaces.</font></td></tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 5px"></div>
+
+  	<!-- Status Home Menu -->
+	<table cellspacing=5 border=0 cellpadding=0 width=425>
+	<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>Network Statistics</b></font>
+		</td>
+		<td>
+			<font size=1>View the Statistics of different interfaces - Ethernet<? if eq `1` `$var:HasUsb` `/USB` `` ?><? if eq `1` `$var:HasDsl` `/DSL` `` ?><? if eq `1` `$var:HasWireless` `/Wireless.` `.` ?>	</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>Connection Status</b></font>
+		</td>
+		<td>
+			<font size=1>View the Status of different connections.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>DHCP Clients</b></font>
+		</td>
+		<td>
+			<font size=1>View the list of DHCP clients.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+<? if eq `1` `$var:HasDsl`
+     `<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>Modem Status</b></font>
+		</td>
+		<td>
+			<font size=1>View the Status and Statistics of your broadband (DSL) connection.</font>
+		</td>
+	</tr>
+
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+      ` ` ` ?>
+	 <tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>Product Information</b></font>
+		</td>
+		<td>
+			<font size=1>View the Product Information and Software Versions.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>System Log</b></font>
+		</td>
+		<td>
+			<font size=1>View the Log messages.</font>
+		</td>
+	</tr>
+      <? if eq `1` `$var:HasWireless`
+      `
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	 <tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>WDS Report</b></font>
+		</td>
+		<td>
+			<font size=1>View the WDS report and Statistics.</font>
+		</td>
+	</tr>
+      ` ` ` ?>
+	</table>
+	
+	<div style="height: 12px"></div>
+
+	</td>
+   </tr>
+</table>
+<!-- END Status Home -->

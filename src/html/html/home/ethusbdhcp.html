@@ -1,0 +1,28 @@
+<!-- Ethernet, USB, DHCP Server, SW Version -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 align=center id="uiViewBodyTable" width=220 bgcolor="<? echo $var:bgColorTable ?>">
+ <tr>
+  <td nowrap align=left bgcolor="#E5E5C3"><font size=1>Ethernet:</font></td>
+  <? if eq `1` `$var:HasMarvell` 
+    `<td align=left bgcolor="#E5E5C3"><font size=1><? if eq `<? query eth0:status/marvell_carrier ?>` `0` `Disconnected` `Connected` ?></font></td>
+    `
+    `<td align=left bgcolor="#E5E5C3"><font size=1><? if eq `<? query eth0:status/carrier ?>` `0` `Disconnected` `Connected` ?></font></td>
+    ` ?>
+ </tr>
+ <tr>
+  <td nowrap align=left bgcolor="#E5E5C3"><font size=1>USB:</font></td>
+  <td align=left bgcolor="#E5E5C3"><font size=1><? if eq <? query usb:status/carrier ?> 0 'Disconnected' 'Connected' ?> </font></td>
+ </tr>
+ <tr>
+  <td nowrap align=left bgcolor="#E5E5C3"><font size=1>DHCP Server:</font></td>
+  <td align=left bgcolor="#E5E5C3"><font size=1><? if eq <? query <? query manager:status/$var:langrp/dhcps ?>:settings/state ?> 0 'Not Running' 'Running'?></font></td>
+ </tr>
+ <tr>
+  <td nowrap align=left bgcolor="#E5E5C3"><font size=1>Software Version:</font></td>
+  <td align=left bgcolor="#E5E5C3"><font size=1><? query logic:status/nspver ?></font></td>
+ </tr>
+ <tr>
+  <td nowrap align=left bgcolor="#E5E5C3"><font size=1>SSID:</font></td>
+  <td align=left bgcolor="#E5E5C3"><font size=1><? query ap:settings/ssid ?></font></td>
+ </tr>
+</table>
+<!-- END Ethernet, USB, DHCP Server, SW Version -->

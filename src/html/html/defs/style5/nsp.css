@@ -1,0 +1,385 @@
+body {
+
+	background-color: #FFFFFF;
+
+	margin: 0px 0px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+}
+
+
+input:disabled {
+
+  background-color: #DFDFDF; 
+
+}
+
+
+
+a { 
+
+  text-decoration: none;
+}
+
+
+a:hover { 
+
+  text-decoration: underline;
+}
+
+
+a.pageLink {	
+
+	color: #000066;
+	text-decoration: underline;
+}
+
+
+a.pageLink:hover {
+
+	color: #000066;
+	text-decoration: none;
+}
+
+
+
+
+b { 
+
+  font-weight:      bold !important;  
+
+}
+
+
+
+ul {
+
+  list-style-type: none;
+
+}
+
+
+
+p, td {
+
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-weight: normal;
+	text-decoration: none;
+	color: #2A2A2A;
+
+}
+
+
+
+form {
+
+	margin: 0px;
+
+	padding: 0px;
+
+}
+
+
+
+textarea {
+
+	background-color: #FFFFFF;
+	margin: 0px 0px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+
+
+
+.header
+
+{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	font-weight: bold;
+}
+
+
+.uiErrorCell
+
+{
+  width:  20px;
+
+  height: 16px;
+
+  align:  left;
+
+  text-decoration:  none;
+  white-space: nowrap;
+
+}
+
+
+.uiErrorHint
+
+{
+  border-style: none;
+
+  color: #CC3366;
+}
+
+
+.homeHeader
+
+{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	font-weight: bold;
+	padding: 3px 0px 10px 0px;
+
+	text-align: center;
+}
+
+
+
+
+.errorMessage {
+
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #CC3366;
+	text-align: center;
+}
+
+
+
+
+.statusSubHeader {
+
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-weight: normal;
+}
+
+
+.uiNoBorder
+
+{
+  border-bottom: 0px;
+  border-top:    0px;
+  border-right:  0px;
+  border-left:   0px;
+  text-align:    center;
+}
+
+
+.uiSSID
+
+{
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  border-bottom: 0px;
+  border-top:    0px;
+  border-right:  0px;
+  border-left:   0px;
+}
+
+
+a.leftMenu
+
+{
+	font-size: 11px;
+	color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	font-weight: Bold;
+}
+
+
+a.leftMenu:hover { 
+
+	text-decoration: underline;
+}
+
+
+.leftMenu
+
+{
+	font-size: 11px;
+	color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	font-weight: Bold;
+}
+
+
+.leftMenuHeader
+
+{
+	font-size: 11px;
+	color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	font-weight: Bold;
+	text-align: center;
+	padding: 3px;
+
+}
+
+
+.inputButton
+
+{
+	border-color: #505050;
+	border-width: 1px;
+	background-color: #9595C7;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: Bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	width: 61px;
+
+	height: 18px;
+	vertical-align: middle;
+	margin: 4px;
+}
+
+
+.inputSmallButton
+
+{
+	border-color: #505050;
+	border-width: 1px;
+	background-color: #9595C7;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: Bold;
+	font-size: 9px;
+
+	color: #FFFFFF;
+	width: 58px;
+
+	height: 18px;
+	vertical-align: middle;
+	margin: 4px;
+}
+
+
+.inputButtonWide
+
+{
+	border-color: #505050;
+	border-width: 1px;
+	background-color: #9595C7;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: Bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	width: 75px;
+
+	height: 18px;
+	vertical-align: middle;
+	margin: 4px;
+}
+
+
+.inputButtonCommands
+
+{
+	border-color: #505050;
+	border-width: 1px;
+	background-color: #9595C7;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: Bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	width: 135px;
+
+	height: 19px;
+
+	vertical-align: middle;
+	text-align: center;
+}
+
+
+.inputButtonWireless
+
+{
+	border-color: #505050;
+	border-width: 1px 0px 1px 1px;
+	background-color: #9595C7;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: Bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	width: 152px;
+	height: 21px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+
+.inputButtonWirelessRight
+
+{
+	border-color: #505050;
+	border-width: 1px;
+	background-color: #9595C7;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: Bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	width: 152px;
+	height: 21px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+
+.inputButtonWirelessHilite
+
+{
+	border-color: #505050;
+	border-width: 1px 0px 1px 1px;
+	background-color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: Bold;
+	font-size: 11px;
+	color: #CC3366;
+	width: 152px;
+	height: 21px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+
+.inputButtonWirelessRightHilite
+
+{
+	border-color: #505050;
+	border-width: 1px;
+	background-color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: Bold;
+	font-size: 11px;
+	color: #CC3366;
+	width: 152px;
+	height: 21px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+
+.homeMenuHeader
+
+{
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	font-weight: normal;
+	color: black;
+
+	padding: 5px 0px 5px 56px;
+
+	text-align: left;
+
+}
+
+

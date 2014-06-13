@@ -1,0 +1,20 @@
+<? setvariable var:pagepath `../cgi-bin/webcm?getpage=%2Fusr%2Fwww_safe%2Fhtml%2Fdefs%2F$var:style%2Fmenus%2F$var:main.html&var:style=$var:style&var:main=$var:main&var:menu=help&var:menutitle=Help&var:pagename` ?>
+<!-- Help Menu -->
+<table <? echo $var:cntrBorder ?> bgcolor="<? echo $var:menuLeftBgColor ?>" cellspacing=0 cellpadding=0 width=155 height="<? echo $var:dimLeftMenuHeight ?>">
+	
+<? include /usr/www_safe/html/defs/$var:style/menus/$var:main_logout.html ?>
+
+<tr>
+	<!-- Empty -->
+	<td bgcolor="#000000" width=2 nowrap height=366></td>
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td nowrap></td>   
+	<td bgcolor="#000000" width=1 nowrap></td>
+</tr>
+
+<tr>
+	<td colspan=4 bgcolor="#000000" width=155 height=1 nowrap></td>
+</tr>
+
+</table>
+<!-- END Help Menu -->

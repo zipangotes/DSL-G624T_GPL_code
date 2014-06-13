@@ -1,0 +1,18 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+all: build install
+
+build:
+	$(MAKE) KERNEL_DIR=$(TI_kernel_path)/$(TI_kernel_version) LIBC_DIR=$(TI_uclibc_base)
+	mips_fp_le-strip -s -R .note tc/tc
+
+install:
+	install -m 0755 -d $(TARGET_HOME)/$(TI_rsbindir) 
+	install -m 0755 tc/tc $(TARGET_HOME)/$(TI_rsbindir)/tc
+
+clean:
+	$(MAKE) -i  clean
+
+

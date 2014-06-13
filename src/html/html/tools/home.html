@@ -1,0 +1,92 @@
+<!-- Tools Home -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Tools</font></td>
+</tr>
+ <tr><td bgcolor="<? echo $var:bgColorBody ?>" height=20><font size=1>The Tools section allows you to save the configuration, restart the gateway, update the gateway firmware, setup user and remote log information and run Ping and Modem tests.</font></td></tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 5px"></div>
+
+  	<!-- Tools Home Menu -->
+	<table cellspacing=5 border=0 cellpadding=0 width=425>
+	<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>System Commands</b></font>
+		</td>
+		<td>
+			<font size=1>Save the current configuration, Restart the gateway and Restore to factory defaults.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>Remote Log</b></font>
+		</td>
+		<td>
+			<font size=1>Setup Remote Log Information.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>User Management</b></font>
+		</td>
+		<td>
+			<font size=1>Configure User Name and password.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>Update Gateway</b></font>
+		</td>
+		<td>
+			<font size=1>Upgrade the Gateway Firmware.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	 <tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>Ping Test</b></font>
+		</td>
+		<td>
+			<font size=1>Run a Ping Test.</font>
+		</td>
+	</tr>
+<? if eq `1` `$var:HasDsl`
+      `<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle nowrap>
+			<font size=1>				
+			<b>Modem Test</b></font>
+		</td>
+		<td>
+			<font size=1>Check whether the Modem with a specific Connection is properly connected to the Network.</font>
+		</td>
+	</tr>
+      ` ` ` ?>
+	</table>
+	
+	<div style="height: 12px"></div>
+
+	</td>
+   </tr>
+</table>
+<!-- END Tools Home -->

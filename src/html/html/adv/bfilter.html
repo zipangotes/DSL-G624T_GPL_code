@@ -1,0 +1,136 @@
+
+<!-- Bridge Filters -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Bridge Filters</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+  
+   <div style="height: 12px"></div>
+
+   <form onSubmit="return false">
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=1>   
+    <tr>
+	 <td align=center><input <? echo $var:widDefCheckBoxOff ?> id="uiViewBridgeFilterStatus" onclick="jslDoToggleCheckBox(id);uiBridgeFilterStatus()" alt="Enable Bridge Filters"></td>
+	 <td colspan=4 align=left><b>Enable Bridge Filters</b></td>
+    </tr>
+    <tr>
+	 <td align=center><input <? echo $var:widDefCheckBoxOff ?> id="uiViewBridgeFilterHiddenStatus" onclick="jslDoToggleCheckBox(id);uiBridgeFilterHiddenStatus(value)" alt="Enable Bridge Filter Management Interface "></td>
+	 <td colspan=4 align=left><b>Enable Bridge Filter Management Interface</b></td>
+    </tr>
+    <tr>
+	 <td colspan=5 align=right>
+          <table <? echo $var:cntrBorder ?> align=right cellpadding=1 cellspacing=1>   
+            <tr>
+                 <td nowrap align=right><b>Select LAN:</b></td>
+                 <td align=left>
+ 	             <select id="uiViewLanGrp" onchange="uiBridgeLAN(value);">
+                      <? multiquery manager:command/lan/list_used
+		           `<option value="$01">$02</option> ` ?>
+	             </select>
+                 </td> 
+            </tr>
+            <tr>
+	      <td align=left><b>Bridge Filter Management Interface:</b></td>
+  	      <td align=left>
+	            <select id="uiViewBridgeFilterLANPort" onchange="uiBridgeFilterLANPort()">
+		       <? multiquery <? query manager:status/$var:langrp/below ?>:status/bf_lan_iface
+		         '<option value=$01>$02</option>' ?>
+		     </select>
+             </td>
+           </tr>
+          </table>
+	 </td>
+    </tr>
+    <tr>
+	 <td>&nbsp;</td>
+	 <td>
+	  <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=0>   
+	   <tr>
+		<td>&nbsp;</td>
+		<td class=header align=center nowrap>Src MAC</td>
+		<td class=header align=center nowrap>Src Port</td>
+		<td class=header align=center nowrap>Dest MAC</td>
+		<td class=header align=center nowrap>Dest Port</td>
+		<td class=header align=center nowrap>Protocol</td>
+		<td class=header align=center nowrap>Mode</td>
+		<td>&nbsp;</td>
+	   </tr>
+	   <tr>
+	    <td>&nbsp;</td>
+	    <td align=center><input type="text" size="17" maxlength="17"  value="00-00-00-00-00-00" id="uiEditSrcMac"></td>
+ 	    <td align=center>        
+		 <input type="hidden" name="" value="" id="uiEditSrcPort">
+		 <select id="uiEditSelectSrcPort" >
+		  <? multiquery <? query manager:status/$var:langrp/below ?>:status/bf_iface
+		   '<option value=$01>$02</option>' ?>
+		 </select>
+		</td>     
+ 	    <td align=center><input type="text" size="17" maxlength="17" value="00-00-00-00-00-00" id="uiEditDstMac"></td>
+ 	    <td align=center>        
+		 <input type="hidden" name="" value="" id="uiEditDstPort">
+		 <select id="uiEditSelectDstPort" >
+		  <? multiquery <? query manager:status/$var:langrp/below ?>:status/bf_iface
+		   '<option value=$01>$02</option>' ?>
+		 </select>
+		</td>     
+		<td align=center>        
+		 <input type="hidden" name="" value="" id="uiEditProtocol">
+		 <select id="uiEditSelectProtocol" >
+		  <? multiquery <? query manager:status/$var:langrp/below ?>:status/frame_type_list
+		   '<option value=$01>$02</option>' ?>
+		 </select>
+		</td>     
+		<td align=left>
+         <input type="hidden" name="" id="uiEditAccess" disabled>
+         <select id="uiEditSelectAccess">
+          <option value="0">Deny</option>
+          <option value="1">Allow</option>
+         </select>
+		</td>
+		<td>&nbsp;</td>
+       </tr>
+	   <tr valign=middle><td colspan=8 align=right><input <? echo $var:widDefBtnAdd ?> id="uiViewAdd" onClick="uiAdd()" alt="Add this entry"></td></tr>
+	   <tr>
+	    <td>&nbsp;</td>
+	    <td colspan=4 height=10><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="100%" height=1></td>
+	    <td>&nbsp;</td>
+	   </tr>
+       <tr><td colspan=10 align=center><? include /usr/www_safe/html/setup/error.html ?></td></tr>
+       <tr>
+	    <td class=header align=center >Edit</u></td>
+	    <td class=header align=center >Src MAC</u></td>
+	    <td class=header align=center >Src Port</u></td>
+	    <td class=header align=center >Dest MAC</u></td>
+	    <td class=header align=center >Dest Port</u></td>
+	    <td class=header align=center >Protocol</u></td>
+	    <td class=header align=center >Mode</u></td>
+	    <td class=header align=center >Delete</u></td>
+	   </tr>
+      <? multiquery <? query manager:status/$var:langrp/below ?>:settings/accesslist/array
+      '<tr>
+		<td align=center><input $var:widDefRadioBtnOff value="off" name="$00" id="uiViewMacFilterStatus$00" onclick="uiMacFilterStatus(id)" alt="Select this entry"></td>
+		<td align=center>$07</td>
+		<td align=center>$05</td>
+		<td align=center>$06</td>
+		<td align=center>$03</td>
+		<td align=center>$09</td>
+		<td align=center><? if eq $0a 0 `Deny` `Allow` ?></td>
+		<td align=center><input $var:widDefCheckBoxOff value="off" name="$00" id="uiViewMacFilterDelete$00" onclick="jslDoToggleCheckBox(id);uiFilterDelete(this)" alt="Delete this entry"></td>
+	   </tr>' ?>
+      <? if neq 0 `<? multiquerycount <? query manager:status/$var:langrp/below ?>:settings/accesslist/array ?>`
+	  `<tr id="uiViewSelectAll" valign=middle>
+        <td align=right colspan=5><b>Select All</b></td>
+        <td align=center ><input $var:widDefCheckBoxOff value="off" id="uiViewDeleteAllStatus" onclick="jslDoToggleCheckBox(id);uiViewDeleteAll(this)" alt="Delete All Entries"></td>
+	   </tr>`  `` ?>
+      </table>	
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</table>
+</form>
+<!-- END Bridge Filters -->

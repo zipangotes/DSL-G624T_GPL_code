@@ -1,0 +1,81 @@
+
+<!-- Home -->
+					
+	<table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="<? echo $var:bgColorTable ?>" width=520>
+	<tr>
+		<td colspan=4 align=center class="header" bgcolor="<? echo $var:bgColorBody ?>">Setup</td>
+	</tr>
+	<tr>
+		<td colspan=4 bgcolor="<? echo $var:bgColorBody ?>">
+		<font size=1>The Setup section allows you to configure new connections as well as </font>
+		</td>
+	</tr>
+
+	<tr>
+		<td nowrap colspan=4 bgcolor="<? echo $var:bgColorBody ?>" class="menuHeaderLeft"><font size=1>LAN Setup</font></td>
+	</tr>
+
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left bgcolor="<? echo $var:bgColorBody ?>" width=125>
+			<a href='<? echo $var:pagepath ?>=lan_dhcp&var:pagetitle=DHCP%20Configuration'><font size=1>DHCP Configuration</font></a>
+		</td>
+		<td align=left bgcolor="<? echo $var:bgColorBody ?>" width=300><font size=1>Select to setup DHCP Server/Relay.</font></td>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="<? echo $var:bgColorBody ?>"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left bgcolor="<? echo $var:bgColorBody ?>">
+			<a href='<? echo $var:pagepath ?>=mgmt_ip&var:pagetitle=Management%20IP'><font size=1>Management IP</font></a>
+		</td>
+		<td align=left bgcolor="<? echo $var:bgColorBody ?>"><font size=1>Select to configure Management IP Address.</font></td>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="<? echo $var:bgColorBody ?>"></td>
+	</tr>
+	
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left bgcolor="<? echo $var:bgColorBody ?>" width=125>
+			<a href='<? echo $var:pagepath ?>=wireless_setup&var:pagetitle=Wireless%20Setup'><font size=1>Wireless</font></a>
+		</td>
+		<td align=left class="" bgcolor="<? echo $var:bgColorBody ?>" width=300><font size=1>Select to setup and configure Wireless connections.</font></td>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+
+	<tr>
+		<td nowrap colspan=4 bgcolor="<? echo $var:bgColorBody ?>" class="menuHeaderLeft"><font size=1>WAN Setup</font></td>
+	</tr>
+
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left bgcolor="<? echo $var:bgColorBody ?>" width=125>
+			<a href='<? echo $var:pagepath ?>=pppoe&var:pagetitle=New%20Connection&var:conid=<? query manager:command/connection/new ?>&var:mode=new'>
+		<font size=1>New Connection</font></a>
+		</td>
+		<td align=left bgcolor="<? echo $var:bgColorBody ?>" width=300><font size=1>Select to Configure a new connection</font></td>	
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="<? echo $var:bgColorBody ?>"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left bgcolor="<? echo $var:bgColorBody ?>" width=125>
+			<a href='<? echo $var:pagepath ?>=modem&var:pagetitle=Modem%20Setup'>
+			<font size=1>Modem Setup</font></a>
+		</td>
+		<td align=left bgcolor="<? echo $var:bgColorBody ?>" width=300><font size=1>Select to setup your modem</font></td>	
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	</table>
+
+	<div style="height: 10px"></div>
+
+
+<!-- End Home -->

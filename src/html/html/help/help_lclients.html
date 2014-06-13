@@ -1,0 +1,26 @@
+
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=20 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">LAN Clients Help</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top>
+  
+<div style="height: 5px"></div>
+
+<font size=1>
+Using this feature user can see all the PCs on the LAN segment. Each PC is 
+qualified to be either "dynamic" (PC obtained a lease from this router) or 
+"static" (PC has a manually configured IP address).<br><br>
+User can add a "static" IP address( belonging to the network segment of the router LAN IP address ).
+Any existing static entry falling within dhcp server's range can be deleted and the IP address would be made available 
+for future allocation.<br><br>
+Once an IP address is allocated it shows up in the list of LAN clients as a 
+"dynamic" entry. Any dynamic entry can be converted into static by using "reserve" checkbox.<br><br>
+Note: Dynamic clients show up in the list only when DHCP server is running.
+</font>
+	</td>
+</tr>
+
+</table>

@@ -1,0 +1,51 @@
+
+<!-- DSL Stats -->
+<table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=0>
+ <tr><td colspan=2 height=20 valign=middle class="statusSubHeader">Transmit</td></tr>
+ <tr>
+  <td width=25 nowrap></td>
+  <td>
+   <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=0>
+   <? multiquery sar:status/sar_tx_stats
+   '<tr>
+     <td>Tx PDUs</td>
+     <td width=17 nowrap rowspan=4></td>
+     <td>$01</td>
+    </tr>
+    <tr>
+     <td>Tx Total Bytes</td>
+     <td>$02</td>
+    </tr>
+    <tr>
+     <td>Tx Total Error Counts</td>
+     <td>$03</td>
+    </tr>
+   ' ?>
+   </table>
+  </td>
+ </tr>				
+ <tr><td colspan=2 height=20 valign=middle class="statusSubHeader">Receive</td></tr>
+ <tr>
+  <td width=25 nowrap></td>					
+  <td>
+   <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=0>
+   <? multiquery sar:status/sar_rx_stats
+   '<tr>
+     <td>Rx PDUs</td>
+     <td width=17 nowrap rowspan=4></td>
+     <td>$01</td>
+	</tr>
+	<tr>
+     <td>Rx Total Bytes</td>
+     <td>$02</td>
+    </tr>
+    <tr>
+     <td>Rx Total Error Counts</td>
+     <td>$03</td>
+    </tr>
+   ' ?>
+   </table>
+  </td>
+ </tr>
+</table>
+<!-- END DSL Stats -->

@@ -1,0 +1,203 @@
+
+<!-- IP QoS -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">IP QoS</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+  
+   <div style="height: 12px"></div>
+
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+    <tr>
+     <td align=center valign=middle>
+      <table border=1 align=center cellspacing=1 cellpadding=0 width="">
+	<tr>
+        <td align=right nowrap width="50%">Choose a connection: </td>
+	 <td align=left width="50%">
+	  <select onchange="uiDoSelectConnection(value)" id="uiViewConnectionSelector" style="width: 150px;">
+            <? multiquery manager:command/connection/list_group '<? if neq `bridge` `<? query $01:settings/type ?>` `<option value='$03:qos'>$04</option>` ?>' ?> 
+            <? multiquery manager:command/lan/list_used "<option value='$01:qos'>$02</option>" ?>
+	  </select>	
+	 </td>
+	</tr>
+       <tr>
+        <td align=right nowrap width="50%">Low priority weight: </td>
+        <td align=left width="50%">
+         <select id="uiViewLowPriority" onchange="uiDoShowPriority('uiViewMedPriority',100-value)">
+          <option value=10>10%</option>
+          <option value=20>20%</option>
+          <option value=30>30%</option>
+          <option value=40>40%</option>
+          <option value=50>50%</option>
+          <option value=60>60%</option>
+          <option value=70>70%</option>
+          <option value=80>80%</option>
+          <option value=90>90%</option>
+         </select>	
+        </td>
+       </tr>				
+       <tr>
+        <td align=right nowrap width="50%">Medium priority weight: </td>
+        <td align=left width="50%">
+	     <select  id="uiViewMedPriority" onchange="uiDoShowPriority('uiViewLowPriority',100-value)">
+          <option value=10>10%</option>
+          <option value=20>20%</option>
+          <option value=30>30%</option>
+          <option value=40>40%</option>
+          <option value=50>50%</option>
+          <option value=60>60%</option>
+          <option value=70>70%</option>
+          <option value=80>80%</option>
+          <option value=90>90%</option>
+         </select>	
+        </td>
+       </tr>	
+        <tr>
+	  <td align=right nowrap width="50%">Enable IPQoS: </td>
+	  <td align=left width="50%"><input <? echo $var:widDefCheckBoxOff ?> value="off" id="uiViewIPQoS" onclick="jslDoToggleCheckBox(id);jslViewToPostCheckBox('uiPostIPQoS',id)" alt="Enable IPQoS"></td>
+       </tr>
+        <tr>
+	  <td align=right nowrap width="50%">Trusted Mode: </td>
+	  <td align=left width="50%"><input <? echo $var:widDefCheckBoxOff ?> id="uiViewTrustedMode" onclick="jslDoToggleCheckBox(id);jslViewToPostCheckBox('uiPostTrustedMode',id)" alt="Enable Trusted Mode"></td>
+       </tr>
+      </table>	
+     </td>
+    </tr>	
+    <tr><td align=center><? include /usr/www_safe/html/setup/error.html ?></td></tr>
+    <tr>
+	 <td align=center>
+      <table border=1 width="100%" cellspacing=1 cellpadding=0>
+       <tr><td height=2 colspan=20 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+       <tr>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Source</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Source</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Destination</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Destination</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+       </tr>
+
+       <tr>
+	 <td align=left nowrap><b>Name</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>IP</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Port Start</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>IP</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Port Start</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Protocol</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Priority</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Phy Port</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>TOS</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Delete</b></td>
+       </tr>
+
+       <tr>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Mask</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Port End</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Mask</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><b>Port End</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+       </tr>
+       <tr><td height=2 colspan=20 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+
+	<? multiquery $var:qosconid:status/rules 
+	 `
+       <tr>
+	 <td align=left nowrap><b>$02</b></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$03</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$05</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$07</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$09</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap><? if eq '*' '$0b' `ANY` `$0b`?></td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$0c</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$0d</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$0e</td>
+	 <td width=3 nowrap></td>
+        <td align=center>
+           <input $var:widDefCheckBoxOff name="$00"  id="uiViewDeleteCheckBox$00" onclick="  jslDoToggleCheckBox(id);uiDelete(this); return false;" value="off" alt="">
+        </td>
+       </tr>
+       <tr>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$04</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$06</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$08</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>$0a</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+	 <td width=3 nowrap></td>
+	 <td align=left nowrap>&nbsp;</td>
+       </tr>
+       <tr><td height=2 colspan=20 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+	`?>
+      </table>
+	 </td>
+    </tr>
+    <tr>
+    	<td colspan=10>&nbsp;</td>
+    </tr>
+    <tr><td align=right colspan=5><input <? echo $var:widDefBtnAdd ?> alt="Add IP QoS Traffic Rule" id="uiViewAddRule" onclick="uiDoIpQoSRule()"></td></tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</table>
+</form>
+<!-- END IP QoS -->
+

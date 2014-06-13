@@ -1,0 +1,108 @@
+<!-- Wireless Setup -->
+<form onSubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Setup</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 12px"></div>
+
+	<table cellspacing=1 border=0 cellpadding=2 align=center width=350>
+          <tr>
+	      <td align=right nowrap>Enable AP:&nbsp;</td>
+	      <td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewAPEnabled"  value="on" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0></td>
+	      <td>&nbsp;</td>
+	      <td align=right nowrap>Channel:&nbsp;</td>
+	      <td>
+	       <select onchange="uiChangeChannel(value)" id="uiViewChannel">
+		   <option value="1">1</option>
+		   <option value="2">2</option>
+		   <option value="3">3</option>
+		   <option value="4">4</option>
+		   <option value="5">5</option>
+		   <option value="6">6</option>
+		   <option value="7">7</option>
+		   <option value="8">8</option>
+		   <option value="9">9</option>
+		   <option value="10">10</option>
+		   <option value="11">11</option>
+		   <option value="12">12</option>
+		   <option value="13">13</option>
+		   <option value="14">14</option>
+		 </select>
+	       </td>
+           </tr>
+	    <tr>
+		<td align=right>SSID:&nbsp;</td>
+		<td><input type="text" value="" maxlength="32" size="20" id="uiViewSSID"></td>
+		<td colspan=3></td>
+           </tr>
+	    <tr>
+		<td align=right>Domain:&nbsp;</td>
+		<td colspan=5><? query ap:status/domain ?></td>
+	    </tr>
+	    <tr>
+		<td colspan=5 align=center height=10><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="350" height=1></td>
+	    </tr>
+	    <tr>
+		<td align=right nowrap>Beacon Period:&nbsp;</td>
+		<td colspan=4><input type="text" value="" maxlength="5" size="5" id="uiViewBeacon"></td>
+           </tr>
+	    <tr>
+		<td align=right nowrap>DTIM Period:&nbsp;</td>
+		<td colspan=4><input type="text" value="" maxlength="3" size="3" id="uiViewDtim"></td>
+	    </tr>
+	    <tr>
+		<td align=right nowrap>RTS Threshold:&nbsp;</td>
+		<td colspan=4><input type="text" value="" maxlength="4" size="4" id="uiViewRTSThreshold"></td>
+	    </tr>
+	    <tr>
+		<td align=right nowrap>Frag Threshold:&nbsp;</td>
+		<td colspan=4><input type="text" value="" maxlength="4" size="4" id="uiViewFragThreshold"></td>
+	    </tr>
+	    <tr>
+		<td align=right nowrap>Power Level:&nbsp;</td>
+		<td colspan=4>
+		   <select onchange='uiChangePowerLevel(value)' id='uiViewPowerLevel'>
+		     <? multiquery ap:valid_settings/power_level `<option value=$00>$01</option>` ?>
+		   </select>
+		</td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>b/g Mode:&nbsp;</td>
+		<td colspan=4>
+		   <select onchange='uiChangebgMode(value)' id='uiViewbgMode'>
+		      <? multiquery ap:valid_settings/bgmode `<option value=$00>$01</option>` ?>
+		   </select>
+		</td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>Hidden SSID:&nbsp;</td>
+		<td colspan=4><input <? echo $var:widDefCheckBoxOff ?> id="uiViewHiddenSSID"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>User Isolation:&nbsp;</td>
+		<td colspan=4><input <? echo $var:widDefCheckBoxOff ?> id="uiViewUserIsolation"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+	  </table>
+
+       </td>
+    </tr>
+	<tr>
+	   <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+		
+		<table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+		<tr>
+			<td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+			<td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+		</tr>
+	   </table>
+	   
+	   </td>
+	</tr>
+   </table>
+</form>
+<!-- END Wireless Setup -->
+

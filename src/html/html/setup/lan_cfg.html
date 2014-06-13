@@ -1,0 +1,6 @@
+<!-- LAN Configuration -->
+<? if eq `lan` `$var:langrp` `<? include /usr/www_safe/html/setup/lan_mgmt.html ?>` 
+                                         `<? if eq `` `<? echo $var:langrp ?>` `<? include /usr/www_safe/html/setup/lan_mgmt.html ?>` 
+                                                                                                 `<? include /usr/www_safe/html/setup/lan_services.html ?>` ?>` ?>
+<!-- END LAN Configuration -->
+

@@ -1,0 +1,262 @@
+<? multiquery <? query manager:status/lan0/dhcps ?>:status/hostlist <? setvariableonce var:lanip $02 ?> ?>
+<? setvariable var:blockmsg `javascript:alert('$var:advMsgBlockConn')` ?>
+<? setvariable var:pagepath `../cgi-bin/webcm?getpage=%2Fusr%2Fwww_safe%2Fhtml%2Fdefs%2F$var:style%2Fmenus%2F$var:main.html&var:style=$var:style&var:main=$var:main&var:menu=adv&var:menutitle=Advanced&var:pagename` ?>
+<? setvariable var:voicestate `<? query voice:settings/state ?>` ?>
+<? setvariable var:upnpstate `<? query upnp:settings/state ?>` ?>
+<? setvariable var:sntpstate `<? query sntp:settings/status ?>` ?>
+<? setvariable var:igmpstate `<? query igmpproxy:settings/state ?>` ?>
+<? setvariable var:snmpstate `<? query snmpcm:settings/snmpstate ?>` ?>
+
+<!-- Advanced Menu -->
+<table <? echo $var:cntrBorder ?> bgcolor="<? echo $var:menuLeftBgColor ?>" cellspacing=0 cellpadding=0 width=155>
+<? if eq `1` `$var:HasVoice`
+`
+   <tr <? if eq `voice` `$var:pagename` `style=background-color:$var:menuLeftRollOverBGColor; ` `style=background-color:$var:menuLeftRollOutBGColor; ` ?>>
+	<!-- 2 rowspans for every menu item in this tr -->
+	<td <? if eq `1` `$var:HasWireless` `rowspan=30` `rowspan=28` ?> bgcolor="#000000" width=2 nowrap></td>
+	<!-- Voice -->
+	<td align=right width=16 nowrap><!-- <img src="$var:imgLeftMenuPointerBlank" alt="" $var:dimImgLeftMenuPointer> --></td>
+	<td height=22>
+		<table width="100%" cellpadding=0 cellspacing=0 border=0>
+		<tr>
+			<td align=left><a href="<? if eq `0` `$var:concount` `$var:blockmsg` `$var:pagepath=voice&var:pagetitle=Voice&var:langrp=lan0` ?>" class="leftMenu" title="<? if neq `0` `<? multiquerycount manager:command/connection/list ?>` `Voice is <? if eq `1` `$var:voicestate` `on` `off` ?>` `No connection available for Voice` ?>">Voice</a></td>
+			<td align=right valign=bottom><img src="<? if eq `1` `$var:voicestate` `$var:imgLedGreen` `$var:imgLedRed` ?>"  $var:dimImgLed ></td>
+		</tr>
+		</table>
+	</td>   
+	<td <? if eq `1` `$var:HasWireless` `rowspan=30` `rowspan=28` ?> bgcolor="#000000" width=1 nowrap></td>
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+   <tr <? if eq `upnp` `$var:pagename` `style=background-color:$var:menuLeftRollOverBGColor; ` `style=background-color:$var:menuLeftRollOutBGColor; ` ?>>
+	<!-- UPnP -->
+	<td align=right width=16 nowrap><!-- <img src="$var:imgLeftMenuPointerBlank" alt=""  $var:dimImgLeftMenuPointer> --></td>
+	<td height=22>
+		<table width="100%" cellpadding=0 cellspacing=0 border=0>
+		<tr>
+			<td align=left><a href="<? if eq `0` `$var:concount` `$var:blockmsg` `$var:pagepath=upnp&var:pagetitle=UPnP&var:langrp=lan0` ?>" class="leftMenu" title="<? if neq `0` `<? multiquerycount manager:command/connection/list ?>` `UPnP is <? if eq `1` `$var:upnpstate` `on` `off` ?>` `No connection available for UPnP` ?>">UPnP</a></td>
+			<td align=right valign=bottom><img src="<? if eq `1` `$var:upnpstate` `$var:imgLedGreen` `$var:imgLedRed` ?>"  $var:dimImgLed ></td>
+		</tr>
+		</table>
+	</td>   
+    </tr>
+
+    <tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+    </tr>
+` 
+`
+   <!-- Else section of if has_voice -->
+   <tr <? if eq `upnp` `$var:pagename` `style=background-color:$var:menuLeftRollOverBGColor; ` `style=background-color:$var:menuLeftRollOutBGColor; ` ?>>
+	<!-- 2 rowspans for every menu item in this tr Here since voice is not there and this is first element -->
+	<td <? if eq `1` `$var:HasWireless` `rowspan=28` `rowspan=26` ?> bgcolor="#000000" width=2 nowrap></td>
+	<!-- UPnP -->
+	<td align=right width=16 nowrap><!-- <img src="$var:imgLeftMenuPointerBlank" alt=""  $var:dimImgLeftMenuPointer> --></td>
+	<td height=22>
+		<table width="100%" cellpadding=0 cellspacing=0 border=0>
+		<tr>
+			<td align=left><a href="<? if eq `0` `$var:concount` `$var:blockmsg` `$var:pagepath=upnp&var:pagetitle=UPnP&var:langrp=lan0` ?>" class="leftMenu" title="<? if neq `0` `<? multiquerycount manager:command/connection/list ?>` `UPnP is <? if eq `1` `$var:upnpstate` `on` `off` ?>` `No connection available for UPnP` ?>">UPnP</a></td>
+			<td align=right valign=bottom><img src="<? if eq `1` `$var:upnpstate` `$var:imgLedGreen` `$var:imgLedRed` ?>" $var:dimImgLed></td>
+		</tr>
+		</table>
+	</td>   
+	<td <? if eq `1` `$var:HasWireless` `rowspan=28` `rowspan=26` ?> bgcolor="#000000" width=1 nowrap></td>
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+` ?>
+
+<tr <? if eq `sntp` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- SNTP -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+		<table width="100%" cellpadding=0 cellspacing=0 border=0>
+		<tr>
+		<td align=left><a href="<? if eq 0 $var:concount $var:blockmsg `$var:pagepath=sntp&var:pagetitle=SNTP&var:langrp=lan0` ?>" class="leftMenu" title="<? if neq 0 `<? multiquerycount manager:command/connection/list ?>` `SNTP is <? if eq 1 '$var:sntpstate' 'on' 'off' ?>` `No connection available for SNTP` ?>">SNTP</a></td>
+		<td align=right valign=bottom><img src="<? if eq 1 `$var:sntpstate` `$var:imgLedGreen` `$var:imgLedRed` ?>" <? echo $var:dimImgLed ?>></td>
+		</tr>
+		</table>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+
+<tr <? if eq `snmp` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- SNMP Management -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+		<table width="100%" cellpadding=0 cellspacing=0 border=0>
+		<tr>
+		<td align=left><a href="<? echo $var:pagepath ?>=snmp&var:pagetitle=SNMP&var:langrp=lan0" class="leftMenu" title="">SNMP</a></td>
+		<td align=right valign=bottom><img src="<? if eq 1 `$var:snmpstate` `$var:imgLedGreen` `$var:imgLedRed` ?>" <? echo $var:dimImgLed ?>></td>
+		</tr>
+		</table>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+
+<tr <? if eq `ipqos` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` ` ` ?>
+      <? if eq `ipqos_rule` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` ` ` ?>>
+	<!-- IP QoS -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=ipqos&var:pagetitle=IP%20QoS&var:langrp=lan0" class="leftMenu">IP QoS</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `fwan` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` ` ` ?>
+      <? if eq `dmz` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` ` ` ?>
+      <? if eq `pf` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` ` ` ?>>
+	<!-- Port Forwarding -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? if eq 0 $var:concount $var:blockmsg <? if eq 0 <? multiquerycount <? query manager:status/lan0/dhcps ?>:status/hostlist ?> `javascript:alert('$var:advMsgBlockLanc')` `$var:pagepath=fwan&var:pagetitle=Port%20Forwarding&var:lanip=$var:lanip&var:langrp=lan0` ?> ?>" class="leftMenu">Port Forwarding</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `flan` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` ` ` ?>
+      <? if eq `filter` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` ` ` ?>>
+	<!-- IP Filters -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? if eq 0 <? multiquerycount <? query manager:status/lan0/dhcps ?>:status/hostlist ?> `javascript:alert('$var:advMsgBlockLanc')` `$var:pagepath=flan&var:pagetitle=IP%20Filters&var:lanip=$var:lanip&var:langrp=lan0` ?>" class="leftMenu">IP Filters</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `lan_clients` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- LAN Clients -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=lan_clients&var:pagetitle=LAN%20Clients&var:langrp=lan0" class="leftMenu">LAN Clients</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `lan_firewall` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- LAN Firewall -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=lan_firewall&var:pagetitle=LAN%20Isolation" class="leftMenu">LAN Isolation</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `bfilter` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Bridge Filters -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=bfilter&var:pagetitle=Bridge%20Filters&var:langrp=lan0" class="leftMenu">Bridge Filters</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<? if eq `1` `$var:HasWireless`
+`<tr <? if eq `webfilters` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Web Filters -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=webfilters&var:pagetitle=Web%20Filters" class="leftMenu">Web Filters</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+` ` ` ?>
+<tr <? if eq `igmp` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- IGMP Proxy -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+		<table width="100%" cellpadding=0 cellspacing=0 border=0>
+		<tr>
+		<td align=left><a href="<? if eq 0 $var:concount $var:blockmsg `$var:pagepath=igmp&var:pagetitle=Multicast%20Setup&var:langrp=lan0` ?>" class="leftMenu" title="<? if neq 0 `<? multiquerycount manager:command/connection/list ?>` `IGMP Proxy is <? if eq 1 '$var:igmpstate' 'on' 'off' ?>` `No connection available for Multicast` ?>">IGMP Proxy</a></td>
+		<td align=right valign=bottom><img src="<? if eq 1 `$var:igmpstate` `$var:imgLedGreen` `$var:imgLedRed` ?>" <? echo $var:dimImgLed ?>></td>
+		</tr>
+		</table>		
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `routing` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Static Routing -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=routing&var:pagetitle=Static%20Routing&var:langrp=lan0" class="leftMenu">Static Routing</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `rip` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Dynamic Routing -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=rip&var:pagetitle=Dynamic%20Routing&var:langrp=lan0" class="leftMenu">Dynamic Routing</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `access_cntrl` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Access Control -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? if eq 0 $var:fwnatstate $var:fwnatmsg <? if eq 0 0 `$var:pagepath=access_cntrl&var:pagetitle=Access%20Control&var:langrp=lan0` ?> ?>" class="leftMenu">Access Control</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `logout` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Log Out -->
+	<td bgcolor="#000000" width=2 nowrap></td>
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+    <td height=22 width=152><a href="<? echo $var:pagepath ?>=logout&var:pagetitle=Log%20Out" class="leftMenu">Log Out</a></td>   
+	<td bgcolor="#000000" width=1 nowrap></td>
+</tr>
+<tr>
+	<td colspan=4 bgcolor="#000000" width=155 height=1 nowrap></td>
+</tr>
+</table>
+<!-- END Advanced Menu -->

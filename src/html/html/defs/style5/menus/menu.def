@@ -1,0 +1,78 @@
+
+<?-- Base Definitions --?>
+
+<? setvariable var:dirImages `../html/defs/style5/images` ?>
+
+<? setvariable var:cntrBorder `border=<? if eq 1 '<? query webui:settings/debug/tables ?>' '1' '0' ?>` ?>
+<? setvariable var:cntrBorderImg `border=0` ?>
+<? setvariable var:cntrBorderTable `border=0` ?>
+
+<? setvariable var:imgMainBackground `` ?>
+
+<?-- Colors --?>
+
+<? setvariable var:bgColorBody `#ECECEC` ?> <?-- background grey --?>
+<? setvariable var:bgColorHeader `#000000` ?> <?-- black --?>
+<? setvariable var:bgColorHeaderText `#FFFFFF` ?> <?-- white --?>
+<? setvariable var:bgColorHorStripe `#505050` ?>  <?-- grey --?>
+<? setvariable var:bgColorTable `#505050` ?> <?-- grey --?>
+<? setvariable var:bgColorPageOutline `#000000` ?> <?-- black --?>
+
+
+<?-- Menus  --?>
+
+<? include /usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main?>_top.def ?>
+<? include /usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main?>_<? echo $var:menu ?>.def ?>
+
+<? setvariable var:menuLeftBgColor `#9595C7` ?>
+<? setvariable var:menuColorBlack `#000000` ?>
+<? setvariable var:menuLeftHeight `` ?>
+<? setvariable var:menuLeftWidth `` ?>
+
+<? setvariable var:menuLeftRollOverColor `#CC3366` ?>
+<? setvariable var:menuLeftRollOverBGColor `#000000` ?>
+<? setvariable var:menuLeftRollOutColor `#FFFFFF` ?>
+<? setvariable var:menuLeftRollOutBGColor `#9595C7` ?>
+
+<? setvariable var:dimHomeHomeBottomWidth `750` ?>
+<? setvariable var:dimMenuHomeInsideWidth `604` ?>
+<? setvariable var:dimMenuHomeHeight `390` ?>
+<? setvariable var:dimLeftMenuHeight `390` ?>
+
+
+<? setvariable var:imgLeftMenuPointer `$var:dirImages/ti_right_arrow.gif` ?>
+<? setvariable var:imgLeftMenuPointerBlank `$var:dirImages/ti_right_arrow_blank.gif` ?>
+<? setvariable var:dimImgLeftMenuPointer `width=15 height=15` ?>
+
+<? setvariable var:imgLedGreen `$var:dirImages/ti_led_green.gif` ?>
+<? setvariable var:imgLedRed `$var:dirImages/ti_led_red.gif` ?>
+<? setvariable var:imgLedBlank `$var:dirImages/ti_led_blank.gif` ?>
+<? setvariable var:dimImgLed `width=12 height=12` ?>
+
+<?-- Error Control --?>
+
+<? setvariable var:imgErrorMark `$var:dirImages/ti_error.gif` ?>
+<? setvariable var:imgErrorBlank `$var:dirImages/ti_error_blank.gif` ?>
+<? setvariable var:dimImgErrorMark `width=20 height=16 $var:cntrBorderImg` ?>
+
+<? setvariable var:txtErrorHint `Point at error markers to see error details` ?>
+<? setvariable var:txtErrorHintColor `#CC3366` ?>
+
+<?-- Buttons and Misc Images --?>
+
+<? setvariable var:btnCheckBoxOn `$var:dirImages/ti_check_on.gif` ?>
+<? setvariable var:btnCheckBoxOff `$var:dirImages/ti_check_off.gif` ?>
+<? setvariable var:dimBtnCheckBox `width=15 height=16 $var:cntrBorderImg` ?>
+
+<? setvariable var:btnRadioBtnOn `$var:dirImages/ti_radio_on.gif` ?>
+<? setvariable var:btnRadioBtnOff `$var:dirImages/ti_radio_off.gif` ?>
+<? setvariable var:btnRadioBtnOffGrey `$var:dirImages/ti_radio_off_grey.gif` ?>
+<? setvariable var:dimBtnRadioBtn `width=14 height=14 $var:cntrBorderImg` ?>
+
+<? setvariable var:imgHorizontalDivider `$var:dirImages/ti_px_505050.gif` ?>
+
+<? setvariable var:imgPageSpacer `$var:dirImages/ti_spacer.gif` ?>
+
+<?-- Widget Definitions --?>
+
+<? include `/usr/www_safe/html/defs/$var:style/widgets.def` ?>

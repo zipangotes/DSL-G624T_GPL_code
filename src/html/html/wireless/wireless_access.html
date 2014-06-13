@@ -1,0 +1,111 @@
+<!-- Wireless Access List -->
+<form onSubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Management</font></td>
+</tr>
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+		 
+	<table border=0 cellpadding=0 cellspacing=0>
+	<tr>
+            <td align=center height=30 colspan=6><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+        </tr>
+	<tr>
+		<td height=6 nowrap></td>
+	</tr>
+	<tr>
+
+		<td align=right><input <? echo $var:widDefBtnWirelessAccessHilite ?> alt="Access" id="uiViewManagement0" onclick="uiDoAccessPage(id)"></td>
+                <td>&nbsp&nbsp&nbsp</td>
+		<td align=left><input <? echo $var:widDefBtnWirelessAssoc ?> alt="Association" id="uiViewManagement1" onclick="uiDoStaPage(id)"></td>
+
+
+	</tr>
+	<tr>
+		<td height=6 nowrap></td>
+	</tr>
+	</table>
+
+	<table cellspacing=0 border=0 cellpadding=1 align=center>
+   <tr>		   
+	 <td colspan=4 align=center class="header" height=23>Access List</td>
+   </tr>
+   <tr>		   
+	 <td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewAccessEnable" value="off" onclick="uiDoEnableAccess(value)" alt=""></td>
+	 <td align=left colspan=3>Enable Access List</td>
+   <tr>
+	 <td>&nbsp;</td>
+	 <td colspan=3 align=center height=30>
+	<table cellspacing=0 border=0 cellpadding=1 align=center>
+		  <tr>
+		<td><input <? echo $var:widDefRadioBtnOff ?> id="uiViewAccessType0" value="off" onclick="jslDoToggleRadio('uiViewAccessType',0,2);uiDoAccessTypeChange(1)" alt=""></td>
+		<td width=60 align=left>Allow</td>
+		<td><input <? echo $var:widDefRadioBtnOff ?> id="uiViewAccessType1" value="off" onclick="jslDoToggleRadio('uiViewAccessType',1,2);uiDoAccessTypeChange(2)" alt=""></td>
+		<td width=60 align=left>Ban</td>
+		  </tr>
+	</table>
+	  </td>
+	</tr>
+	<tr>		   
+	  <td></td>
+	  <td align=right>Mac Address:&nbsp;</td>
+	  <td><input type="text" id="uiViewAddMac" name="ap:settings/mac_add" size="17" maxlength="17"></td>
+	  <td width=62 height=19><input <? echo $var:widDefBtnAdd ?> id="uiViewAddMacButton" onclick="uiDoAddMacAddress()" alt="Add" ></td>
+	</tr>
+	<? if eq 0 <? multiquerycount ap:status/access_list?> ` `  
+     `
+	<tr>		   
+	  <td align=center colspan=4 height=15><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=300 height=1></td>
+	</tr>
+  </table>
+	 <table cellspacing=0 border=0 cellpadding=1 align=center>
+	<tr>		   
+	  <td align=center><u>Delete</u></td>
+	  <td width=10 nowrap></td>
+	  <td align=center><u>Mac Address</u></td>
+	</tr>
+        <tr> 
+	        <td colspan=3>&nbsp;</td>
+	 </tr>
+	   <? multiquery ap:status/access_list
+	`<tr>
+		<td align=center>
+		<input $var:widDefCheckBoxOff value="off" id="uiViewMacAddress$10" onclick="jslDoToggleCheckBox(id);uiDeleteMacAddress('$11')" alt="" width=20 height=20 border=0>
+		</td>
+		<td width=10 nowrap></td>
+		<td align=center>$11</td>
+	 </tr>
+	` ?>
+        <tr> 
+	        <td colspan=3>&nbsp;</td>
+	 </tr>
+	 <tr valign=middle>
+              <td align=center ><input $var:widDefCheckBoxOff value="off" id="uiViewDeleteAllStatus" onclick="jslDoToggleCheckBox(id);uiViewDeleteAll(value)" alt="Delete All Entries"></td>
+              <td align=left colspan=2><b>Delete All</b></td>
+	 </tr>	
+   `  ?>
+   </table>
+	  <table cellspacing=0 border=0 cellpadding=1 align=center>
+	 <tr>
+		<td align=left height=50><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+	</tr>
+
+   </table>
+	</td>
+</tr>
+<tr>
+   <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+	
+	<table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+	<tr>
+		<td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+		<td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+	</tr>
+   </table>
+   
+   </td>
+</tr>
+  </table>
+</form>
+<!-- END Wireless Access List -->

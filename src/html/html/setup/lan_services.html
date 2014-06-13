@@ -1,0 +1,177 @@
+
+<!-- LAN Services -->
+<form id="uiViewLanServiceForm" onSubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>"><? if eq `lan0` `$var:langrp` `LAN Group 1` `<? if eq `lan1` `$var:langrp` `LAN Group 2` `<? if eq `lan2` `$var:langrp` `LAN Group 3` `LAN` ?> ` ?>` ?> Configuration</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 12px"></div>
+
+  <table align=center <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=1 width=497>
+    <tr>
+     <td valign=top align=right width="50%">
+      <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0 id="uiViewIPSettings">
+	   <tr><td colspan=2 class="header" align=center>IP Settings</td></tr>
+           <tr>
+               <td><input <? echo $var:widDefRadioBtnOff ?> id="uiViewIPType0" value="on" onclick="jslDoToggleRadio('uiViewIPType',0,4);uiUnManagedIP();" alt=""></td>
+               <td align=left>Unmanaged</td>
+           </tr>
+           <tr>
+               <td><input <? echo $var:widDefRadioBtnOff ?> id="uiViewIPType2" value="off" onclick="jslDoToggleRadio('uiViewIPType',2,4);uiDhcpcIP();" alt=""></td>
+               <td align=left>Obtain an IP address automatically</td>
+    </tr>
+    <tr>
+		<td colspan=2>
+                   <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=center>
+	    		<tr>
+             		 <td align=right>IP Address:</td>
+     			 <td align=left><input type="text" name="" value="<? query  $var:langrp:dhcpc:status/ip ?>" maxlength="15" size="20" id="uiViewDHCPCIPAddr" readonly>
+     			 <input <? echo $var:widDefBtnRelease ?> id="uiViewRelease" onclick="uiDoRelease()" alt="Release"></td>
+    	    		</tr>
+	    		<tr>
+             		 <td align=right>Netmask:</td>
+     			 <td align=left><input type="text" name="" value="<? query  $var:langrp:dhcpc:status/netmask ?>" maxlength="15" size="20" id="uiViewDHCPCNetmask" readonly>
+     			 <input <? echo $var:widDefBtnRenew ?> id="uiViewRenew" onclick="uiDoRenew()" alt="Renew"></td>
+    	    		</tr>
+          	     </table>
+          	 </td>
+           </tr>
+           <tr>
+               <td><input <? echo $var:widDefRadioBtnOff ?> id="uiViewIPType1" value="on" onclick="jslDoToggleRadio('uiViewIPType',1,4);uiPPPIP();" alt=""></td>
+               <td align=left>PPP IP Address</td>
+           </tr>
+           <tr>
+		<td colspan=2>
+                   <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=center>
+	    		<tr>
+             		 <td align=right>IP Address:</td>
+     			 <td align=left><input type="text" name="uiViewPPPIPAddrMark" value="" maxlength="15" size="20" id="uiViewPPPIPAddr" ></td>
+    	    		</tr>
+          	     </table>
+          	 </td>
+           </tr>
+    <tr>
+               <td><input <? echo $var:widDefRadioBtnOff ?> id="uiViewIPType3" value="off" onclick="jslDoToggleRadio('uiViewIPType',3,4);uiStatic();" alt=""></td>   	      
+               <td align=left>Use the following Static IP address</td>
+    </tr>
+           <tr>
+               <td>&nbsp;</td>
+               <td>
+                   <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=center>
+    <tr id="ipAddress">
+     <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewIPAddrMark" <? echo $var:dimImgErrorMark ?> ></td>
+                           <td align=right>IP Address:</td>
+     <td align=left><input type="text" name="uiViewIPAddrMark" value="" maxlength="15" size="20" id="uiViewIPAddr"></td>
+    </tr>
+    <tr id="netMask">
+     <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewNetMaskMark" <? echo $var:dimImgErrorMark ?> ></td>
+                          <td align=right>Netmask:</td>
+     <td align=left><input type="text" name="uiViewNetMaskMark" value="" maxlength="15" size="20" id="uiViewNetMask"></td>
+    </tr>
+                        <tr id="gateway">
+                          <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewGatewayMark" <? echo $var:dimImgErrorMark ?> ></td>
+                          <td align=right nowrap>Default Gateway:</td>
+                          <td align=left><input type="text" name="uiViewGatewayMark" value="" maxlength="15" size="20" id="uiViewGateway"></td>
+                        </tr>
+                        <tr id="hostname">
+                          <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewHostnameMark" <? echo $var:dimImgErrorMark ?> ></td>
+                          <td align=right>Host Name:</td>
+                          <td align=left><input type="text" name="uiViewHostnameMark" value="" maxlength="15" size="20" id="uiViewHostname"></td>
+                        </tr>
+                        <tr id="domainname">
+                          <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDomainnameMark" <? echo $var:dimImgErrorMark ?> ></td>
+                          <td align=right>Domain:</td>
+                          <td align=left><input type="text" name="uiViewDomainnameMark" value="" maxlength="15" size="20" id="uiViewDomainname"></td>
+                        </tr>
+    <tr>
+                          <td>&nbsp;</td>
+                          <td colspan=2 >
+                             <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=left>
+                                <tr>                          
+                                   <td><input <? echo $var:widDefRadioBtnOff ?> id="uiViewStaticIPType0" value="on" onclick="jslDoToggleRadio('uiViewStaticIPType',0,3);uiDhcps();" alt=""></td>
+                                   <td align=left>Enable DHCP Server</td>
+    </tr>
+    <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                     <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=left>
+           <tr>
+  	                                      <td align=right id="uiViewStartIPLabel" nowrap>
+		                                    <img src="<? echo $var:imgErrorBlank ?>" id="Img6" alt="" align=left <? echo $var:dimImgErrorMark ?> >&nbsp;Start IP:
+		                               </td>
+	                                      <td align="left">
+                                          	  <input type="text" value="" size="15" maxlength="15" name="uiViewStartIPName" id="uiViewStartIP">
+                                      	  </td>
+           </tr>
+           <tr>
+                                    	  <td align=right id="uiViewEndIPLabel" nowrap>
+                                          	  <img src="<? echo $var:imgErrorBlank ?>" id="Img6" alt="" align=left <? echo $var:dimImgErrorMark ?> >&nbsp;End IP: 
+ 	                                     </td>
+                                      	  <td align="left">
+                                          	  <input type="text" value="" size="15" maxlength="15" name="uiViewEndIPName" id="uiViewEndIP">
+                                   	  </td>
+           </tr>
+           <tr>
+	                                     <td align=right id="uiViewLeaseLabel" nowrap>
+                                           	  <img src="<? echo $var:imgErrorBlank ?>" id="Img6" alt="" <? echo $var:dimImgErrorMark ?> align=left>&nbsp;Lease Time: 
+                                       	  </td>
+                                     	  <td align="left">
+                                          	  <input type="text" value="" size="5" maxlength="6" name="uiViewLeaseName" id="uiViewLease"> Seconds
+	                                     </td>
+           </tr>
+                                     </table>                            
+                                    </td>
+           </tr>
+           <tr>
+                                   <td><input <? echo $var:widDefRadioBtnOff ?> id="uiViewStaticIPType1" value="off" onclick="jslDoToggleRadio('uiViewStaticIPType',1,3);uiRelay();" alt=""></td>   	      
+                                   <td align=left>Enable DHCP Relay</td>
+           </tr>
+           <tr>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                     <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=right>
+                                       <tr>
+	                                  <td align=right id="uiViewRelayIPLabel" nowrap>
+	                                     <img src="<? echo $var:imgErrorBlank ?>" id="Img6" alt="" align=left <? echo $var:dimImgErrorMark ?> >&nbsp;Relay IP: 
+	                                  </td>
+	                                  <td align="left">
+	                                     <input type="text" value="" size="15" maxlength="15" name="uiViewRelayIPName" id="uiViewRelayIP">
+	                                  </td>
+	                                </tr>
+                                     </table>                            
+                                    </td>
+           </tr>
+           <tr>
+                                   <td><input <? echo $var:widDefRadioBtnOff ?> id="uiViewStaticIPType2" value="off" onclick="jslDoToggleRadio('uiViewStaticIPType',2,3);uiStatic();" alt=""></td>   	      
+                                   <td align=left>Server and Relay Off</td>
+           </tr>
+         </table>
+      </td>
+    </tr>  
+   </table>
+                 </td> 
+             </tr>    
+         </table>
+     </td>
+     <td valign=top align=left width="50%"><? include /usr/www_safe/html/setup/lansrv.html ?></td>  
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+   <table <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=0 width="100%">
+    <tr valign=middle>
+     <td align=center style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint" ><? echo $var:txtErrorHint ?></td>
+	 <td>&nbsp;</td>
+	 <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+	</tr>
+   </table> 
+  </td>
+ </tr>
+</table>
+</form>
+<!-- END LAN Services -->

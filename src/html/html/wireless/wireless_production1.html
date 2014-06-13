@@ -1,0 +1,128 @@
+<!-- Wireless Setup -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Production 1</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 12px"></div>
+
+  	  <table cellspacing=1 border=0 cellpadding=2 align=center width=350>
+	     <tr>
+                 <td align=center height=30 colspan=6><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+            </tr>
+	     <tr>
+		<td align=right nowrap>4X Concatenate:&nbsp;</td>
+		<td colspan=4><input <? echo $var:widDefCheckBoxOff ?> id="uiView4XConcat"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>4X Packet Bursting:&nbsp;</td>
+		<td colspan=4><input <? echo $var:widDefCheckBoxOff ?> id="uiView4XPktBurst"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>4X Mixed:&nbsp;</td>
+		<td colspan=4><input <? echo $var:widDefCheckBoxOff ?> id="uiView4XMixed"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>4X Feature Set:&nbsp;</td>
+		<td colspan=4>
+		   <select onchange='uiChangeFeatureSet(value)' id='uiViewFeatureSet'>
+		      <option value="0">Version 0</option>
+		      <option value="1">Version 1</option>
+		   </select>
+		</td>
+	     </tr>
+	     <tr>
+	     	<td align=right nowrap>Power Constraint:&nbsp;</td>
+		<td colspan=4><input type="text" value="" maxlength="4" size="5" id="uiViewPowerConstraint"> (-50 to 50 dBm)</td>
+	     </tr>
+
+	    <tr>
+		<td align="right" nowrap>Multi Domain Capability:&nbsp;</td>
+ 	       <td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewMultiDomain"  value="off" onclick="jslDoToggleCheckBox(id);uiChangeMultiDomain(value);" alt="" width=19 height=20 border=0></td>
+		<td align="right" nowrap>Country String:</td>
+		<td><input type="text" value="" maxlength="3" size="15" id="uiViewCountryString"></td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	    </tr>
+	   <tr>
+		<td align="right" nowrap>&nbsp;</td>
+ 	       <td width=19>&nbsp;</td>
+		<td align="right" nowrap>&nbsp;</td>
+ 	     <? if eq `1` `<? query ap:status/dot11a_supported ?>`
+		`<td nowrap>Band A </td>
+		<td nowrap>Band B/G</td>
+		`
+		`
+		 <td nowrap>Band B/G</td>
+ 	 	 <td>&nbsp;</td>
+		` ?>
+		<td>&nbsp;</td>
+	    </tr>
+	   <tr>
+		<td align="right" nowrap>&nbsp;</td>
+ 	       <td width=19>&nbsp;</td>
+		<td align="right" nowrap>Current Reg. Domain:</td>
+ 	     <? if eq `1` `<? query ap:status/dot11a_supported ?>`
+		`<td align="left">
+		   <select onchange='uiChangeRegDomainA(value)' id='uiViewCurrRegDomainA' style="width: 85px;">
+		     <? multiquery ap:valid_settings/current_reg_domain_a  `<option value=$11>$12</option>` ?>
+		   </select>
+		 </td>
+		<td align="left">
+		   <select onchange='uiChangeRegDomainBG(value)' id='uiViewCurrRegDomainBG' style="width: 85px;">
+		     <? multiquery ap:valid_settings/current_reg_domain_g  `<option value=$11>$12</option>` ?>
+		   </select>
+		</td>
+		`
+		`
+		<td align="left">
+		   <select onchange='uiChangeRegDomainBG(value)' id='uiViewCurrRegDomainBG' style="width: 85px;">
+		     <? multiquery ap:valid_settings/current_reg_domain_g  `<option value=$11>$12</option>` ?>
+		   </select>
+		</td>
+		<td>&nbsp;</td>
+		` ?>
+		<td>&nbsp;</td>
+	    </tr>
+	   <tr>
+		<td align="right" nowrap>&nbsp;</td>
+ 	       <td width=19>&nbsp;</td>
+		<td align="right" nowrap>Private Reg. Domain:</td>
+ 	     <? if eq `1` `<? query ap:status/dot11a_supported ?>`
+	     `<td align="left"><input type="text" value="" maxlength="1" size="10" id="uiViewPrivateRegDomainA"></td>
+		<td align="left"><input type="text" value="" maxlength="1" size="10" id="uiViewPrivateRegDomainBG"></td>
+	     `
+	     `
+		<td align="left"><input type="text" value="" maxlength="1" size="10" id="uiViewPrivateRegDomainBG"></td>
+		<td>&nbsp;</td>
+	     ` ?>
+		<td>&nbsp;</td>
+	    </tr>
+
+
+
+	     <tr>
+		<td colspan=5 align=center height=10><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="350" height=1></td>
+            </tr>
+	   </table>
+
+       </td>
+     </tr>
+	<tr>
+	   <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+		
+		<table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+		<tr>
+			<td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+			<td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+		</tr>
+	   </table>
+	   
+	   </td>
+	</tr>
+  </form>
+</table>
+<!-- END Wireless Setup -->
+

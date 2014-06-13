@@ -1,0 +1,263 @@
+
+
+        <table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="<? echo $var:bgColorTable ?>" width=390>
+
+        <tr>
+
+          <td align=center class="header" bgcolor="<? echo $var:bgColorBody ?>">Product Information</td>
+
+        </tr>
+
+        <tr>
+
+          <td height=5 nowrap bgcolor="#D3D9DF"></td>
+
+        </tr>
+
+        <tr>
+
+		  <td bgcolor="<? echo $var:bgColorBody ?>" align=center>
+
+
+
+		    <table border=0 cellspacing=1 cellpadding=1 width=355>
+
+            <tr>
+
+             <td colspan=2 height=20 valign=middle class="statusSubHeader">Product Information</td>
+
+            </tr>
+
+            <tr>
+
+              <td width=25 nowrap></td>
+
+              <td>
+
+				<table border=0 cellspacing=0 cellpadding=1>
+
+                <tr>
+
+                  <td class="statusLeft">Model Number</td>
+
+				  <td width=17 nowrap rowspan=4></td>
+
+                  <td><? query logic:status/model ?></td>
+
+                </tr>
+
+                <tr>
+
+                  <td class="statusLeft">HW Revision</td>
+
+                  <td><? query logic:status/hwrev ?></td>
+
+                </tr>
+
+                <tr>
+
+                  <td class="statusLeft">Serial Number</td>
+
+                  <td><? query logic:status/serial ?></td>
+
+                </tr>
+
+                </table>
+
+              </td>
+
+             </tr>
+
+			<tr>					
+
+              <td height=6 colspan=2 nowrap></td>
+
+            </tr>
+
+			<tr>
+
+			  <td width=25 nowrap></td>
+
+			  <td>
+
+              <table border=0 cellspacing=0 cellpadding=1>
+
+			  <tr>
+
+				<td class="statusLeft">USB PID</td>
+
+				<td width=17 nowrap rowspan=6></td>
+
+				<td><? query logic:status/pid ?></td>
+
+			  </tr>
+
+			  <tr>
+
+				<td class="statusLeft">USB VID</td>
+
+				<td><? query logic:status/vid ?></td>
+
+			  </tr>
+
+			  <tr>
+
+				<td class="statusLeft">Ethernet MAC</td>
+
+				<td><? query logic:status/maca ?></td>
+
+			  </tr>
+
+			  <tr>
+
+				<td class="statusLeft">DSL MAC</td>
+
+				<td><? query logic:status/macc ?></td>
+
+			  </tr>
+
+			  <tr>
+
+				<td class="statusLeft">USB MAC</td>
+
+				<td><? query logic:status/usb_board_mac ?></td>
+
+			  </tr>
+
+			  <tr>
+
+				<td class="statusLeft">USB Host MAC</td>
+
+				<td><? query logic:status/usb_rndis_mac ?></td>
+
+			  </tr>
+
+			  <tr>
+
+				<td class="statusLeft">AP MAC</td>
+
+			    <td><? query ap:status/mac_address ?></td>
+
+			  </tr>
+
+		      </table>
+
+			  </td>
+
+            </tr>
+
+            <tr>					
+
+              <td valign=middle colspan=2 height=6>
+
+                <img src="/usr/www_safe/html/images/ti_px757575.gif" alt="" width=353 height=1>
+
+			  </td>
+
+            </tr>
+
+            <tr>
+
+              <td colspan=2 height=20 valign=top class="statusSubHeader">Software Versions</td>
+
+            </tr>
+
+            <tr>
+
+              <td width=25 nowrap></td>
+
+			  <td>
+
+				<table border=0 cellspacing=0 cellpadding=1>
+
+				<tr>
+
+					<td class="statusLeft">Gateway</td>
+
+					<td width=17 nowrap rowspan=7></td>
+
+					<td><? query logic:status/nspver ?></td>
+
+				</tr>
+
+				<tr>
+
+					<td class="statusLeft">ATM Driver</td>
+
+					<td><? query sar:status/ATM_Driver_ver ?></td>
+
+				</tr>
+
+				<tr>
+
+					<td class="statusLeft">DSL HAL</td>
+
+					<td><? query sar:status/DSL_HAL_ver ?></td>
+
+				</tr>
+
+				<tr>
+
+					<td class="statusLeft">DSL Datapump</td>
+
+					<td><? query sar:status/DSP_Datapump_ver ?></td>
+
+				</tr>
+
+				<tr>
+
+					<td class="statusLeft">SAR HAL</td>
+
+					<td><? query sar:status/SAR_HAL_ver ?></td>
+
+				</tr>	
+
+				<tr>
+
+					<td class="statusLeft">PDSP Firmware</td>
+
+					<td><? query sar:status/PDSP_Firmware_ver ?></td>
+
+				</tr>
+
+				<tr>
+
+					<td class="statusLeft">Wireless Firmware</td>
+
+					<td><? query ap:status/firmware_ver ?></td>
+
+				</tr>
+
+				<tr>
+
+					<td class="statusLeft">Wireless APDK</td>
+
+					<td><? query ap:status/APDK_ver ?></td>
+
+				</tr>
+
+				<tr>
+
+					<td class="statusLeft">Wireless Driver</td>
+
+					<td><? query ap:status/linux_drv_ver ?></td>
+
+				</tr>
+
+				<tr>
+
+					<td class="statusLeft">Boot Loader</td>
+
+					<td><? query logic:status/bootver ?></td>
+
+				</tr>
+
+
+				</table>
+
+			  </td>
+
+			</tr>
+
+			</table>
+

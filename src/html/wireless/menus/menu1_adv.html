@@ -1,0 +1,67 @@
+<? multiquery udhcps1:status/hostlist <? setvariableonce var:lanip $2 ?> ?>
+<? setvariable var:blockmsg `javascript:alert("$var:advMsgBlockConn")` ?>
+<? setvariable var:pagepath `../cgi-bin/webcm?getpage=..%2Fhtml%2Fmenus%2Fmenu1.html&var:menu=adv&var:menutitle=Advanced&var:pagename` ?>
+<? setvariable var:concount <? multiquerycount manager:command/connection/list ?> ?>
+<!-- Advanced Menu -->
+<table <? echo $var:dimTopMenuAdv ?>>
+ <tr>
+  <td>
+<? setvariable var:privacyLevel <? query ap:settings/privacy_type ?> ?>
+<? if eq `<? echo $var:privacyLevel ?>` `0` ` <a href='<? echo $var:pagepath ?>=security_none&var:pagetitle=Wireless%20Security'>` ?>
+<? if eq `<? echo $var:privacyLevel ?>` `1` ` <a href='<? echo $var:pagepath ?>=security_wep&var:pagetitle=Wireless%20Security'>` ?>
+<? if eq `<? echo $var:privacyLevel ?>` `2` ` <a href='<? echo $var:pagepath ?>=security_8021x&var:pagetitle=Wireless%20Security'>` ?>
+<? if eq `<? echo $var:privacyLevel ?>` `3` ` <a href='<? echo $var:pagepath ?>=security_wpa&var:pagetitle=Wireless%20Security'>` ?>
+	<img src="/usr/www_safe/html/images/ti_menu_adv_wire_sec.gif" width=130 height=21 border=0 alt="Wireless Security"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=wireless_access&var:pagetitle=Wireless%20Management'>
+	<img src="/usr/www_safe/html/images/ti_menu_adv_wire_mgmt.gif" width=130 height=22 border=0 alt="Wireless Management"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? if eq 0 $var:concount $var:blockmsg `$var:pagepath=upnp&var:pagetitle=UPnP` ?> '>
+	<img src="<? echo $var:btnMenuAdvUPnP ?>" <? echo $var:dimBtnMenuAdvUPnP ?> alt="<? echo $var:altBtnMenuAdvUPnP ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? if eq 0 $var:concount $var:blockmsg <? if eq 0 <? multiquerycount udhcps1:status/hostlist ?>
+   `javascript:alert("$var:advMsgBlockLanc")` `$var:pagepath=fwan&var:pagetitle=Port%20Forwarding&var:lanip=$var:lanip` ?> ?>'>
+   <img src="<? echo $var:btnMenuAdvPortf ?>" <? echo $var:dimBtnMenuAdvPortf ?> alt="<? echo $var:altBtnMenuAdvPortf ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? if eq 0 $var:concount $var:blockmsg <? if eq 0 <? multiquerycount udhcps1:status/hostlist ?>
+   `javascript:alert("You must enter an IP address on LAN Clients page to enter this setup.")` `$var:pagepath=security&var:pagetitle=Advanced%20Security%20Settings&var:lanip=$var:lanip` ?> ?>'>
+   <img src="/usr/www_safe/html/images/ti_menu_adv_adv_sec.gif" <? echo $var:dimBtnMenuAdvSec ?> alt="<? echo $var:altBtnMenuAdvSec ?>"></a></td>
+ </tr>
+  <tr>
+   <td><a href='<? if eq 0 <? multiquerycount udhcps1:status/hostlist ?> `javascript:alert("$var:advMsgBlockLanc")` `$var:pagepath=flan&var:pagetitle=Access%20Control&var:lanip=$var:lanip` ?>'>
+    <img src="<? echo $var:btnMenuAdvAccess ?>" <? echo $var:dimBtnMenuAdvAccess ?> alt="<? echo $var:altBtnMenuAdvAccess ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=lan_clients&var:pagetitle=LAN%20Clients'>
+   <img src="<? echo $var:btnMenuAdvLANC ?>" <? echo $var:dimBtnMenuAdvLANC ?> alt="<? echo $var:altBtnMenuAdvLANC ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=bfilter&var:pagetitle=Bridge%20Filters'>
+   <img src="<? echo $var:btnMenuAdvBridge ?>" <? echo $var:dimBtnMenuAdvBridge ?> alt="<? echo $var:altBtnMenuAdvBridge ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=webfilters&var:pagetitle=Web%20Filters'>
+   <img src="<? echo $var:btnMenuAdvWebFilters ?>" <? echo $var:dimBtnMenuAdvWebFilters ?> alt="<? echo $var:altBtnMenuAdvWebFilters ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? if eq 0 $var:concount $var:blockmsg `$var:pagepath=igmp&var:pagetitle=Multicast%20Setup` ?> '>
+   <img src="<? echo $var:btnMenuAdvMulti ?>" <? echo $var:dimBtnMenuAdvMulti ?> alt="<? echo $var:altBtnMenuAdvMulti ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=routing&var:pagetitle=Static%20Routing'>
+   <img src="<? echo $var:btnMenuAdvStatic ?>" <? echo $var:dimBtnMenuAdvStatic ?> alt="<? echo $var:altBtnMenuAdvStatic ?>"></a></td>
+ </tr>
+ <tr>
+  <td><a href='<? echo $var:pagepath ?>=rip&var:pagetitle=Dynamic%20Routing'>
+   <img src="<? echo $var:btnMenuAdvDynamic ?>" <? echo $var:dimBtnMenuAdvDynamic ?> alt="<? echo $var:altBtnMenuAdvDynamic ?>"></a></td>
+ </tr>
+ <? include /usr/www_safe/html/menus/menu1_logout.html ?>
+ <tr>
+  <td><img src="<? echo $var:imgLeftMenuBottom ?>" <? echo $var:dimImgLeftMenuBottom ?> alt="<? echo $var:altImgLeftMenuBottom ?>"></td>
+ </tr>
+</table>
+<!-- END Advanced Menu -->

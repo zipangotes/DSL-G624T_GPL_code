@@ -1,0 +1,83 @@
+
+<!-- FDB Rules -->
+<? if eq 1 `<? query fdb:settings/$var:category/edit ?>` `<? setvariable var:newprotocolport <? query fdb:settings/$var:category/$var:rule/newprotocolport ?> ?>` ?>
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 id="" bgcolor="<? echo $var:bgColorTable ?>" align=center width=430>
+ <tr><td align=center class="header" bgcolor="<? echo $var:bgColorBody ?>">Rule Management</td></tr>
+ <tr><td height=5 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+   <? if eq 0 `<? query fdb:settings/$var:category/edit ?>`
+   `<tr>
+     <td align=right>Rule Name:</td>
+     <td><? query fdb:settings/$var:category/$var:rule/description ?></td>
+    </tr>`
+   `<tr>
+     <td align=right>Rule Name:</td>
+     <td colspan=3 align=left><input type="text" maxlength="16" size=25 name="fdb:settings/$var:category/$var:rule/description" value="<? query fdb:settings/$var:category/$var:rule/description ?>"  maxlength=32 id="uiViewRuleName"></td>
+    </tr>
+    <tr>
+     <td align=right>Protocol:</td>
+     <td colspan=3 align=left>
+      <select name="fdb:settings/$var:category/$var:rule/$var:newprotocolport/protocol" id="uiViewProtocol">
+	  <? multiquery fdb:settings/protocoltype '<option value="$11">$11</option>' ?>
+	  </select>
+     </td>
+    </tr>
+    <tr>
+     <td align=right>Port Start:</td>
+     <td><input type="text" size=7 name="fdb:settings/$var:category/$var:rule/$var:newprotocolport/portstart" value="" id="uiViewPortStart" maxlength=5></td>
+     <td align=right>Port End:</td>
+     <td><input type="text" size=7 name="fdb:settings/$var:category/$var:rule/$var:newprotocolport/portend" value="" id="uiViewPortEnd" maxlength=5></td>
+    </tr>
+    <tr>
+     <td align=right>Port Map:</td>
+     <td colspan=3 align=left><input type="text" size=17 name="fdb:settings/$var:category/$var:rule/$var:newprotocolport/portmap" value="" id="uiViewPortMap" maxlength=15></td>
+    </tr>` ?>
+   </table>
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+    <tr>
+     <td align=right height=26 valign=middle colspan=2>
+     <? if eq 0 <? query fdb:settings/$var:category/edit ?>
+     `<input $var:widDefBtnCancel onclick="uiDoCancel()" alt="Cancel" id="uiViewCancelButton">`
+	 `<? include /usr/www_safe/html/applycancel.html ?>` ?>
+	 </td>
+    </tr>
+    <tr><td height=5 align=center><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=405 height=1></td></tr>
+    <tr><td align=center><? include /usr/www_safe/html/setup/error.html ?></td></tr>
+    <tr>
+	 <td valign=top>
+      <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=0>
+       <tr>
+        <td align=center><u>Protocol</u></td>
+        <td width=10 nowrap></td>
+        <td align=center><u>Port Start</u></td>
+        <td width=10 nowrap></td>
+        <td align=center><u>Port End</u></td>
+        <td width=10 nowrap></td>
+        <td align=center><u>Port Map</u></td>
+        <td width=10 nowrap></td>
+        <td align=center><? if eq 0 `<? query fdb:settings/$var:category/edit ?>` `&nbsp;` `<u>Delete</u>` ?></td>
+       </tr>
+      <? multiquery fdb:settings/$var:category/$var:rule/protocolportlist
+      `<tr>
+        <? if eq 1 <? query fdb:settings/$var:category/edit ?> '<input type="hidden" name="fdb:command/$var:category/$var:rule/$01" value="delete" id="uiViewDeletePP$00" disabled>' '' ?>
+        <td align=center><? query fdb:settings/$var:category/$var:rule/$01/protocol ?></td>
+        <td width=10 nowrap></td>
+        <td align=center><? query fdb:settings/$var:category/$var:rule/$01/portstart ?></td>
+        <td width=10 nowrap></td>
+        <td align=center><? query fdb:settings/$var:category/$var:rule/$01/portend ?></td>
+        <td width=10 nowrap></td>
+        <td align=center><? query fdb:settings/$var:category/$var:rule/$01/portmap ?></td>
+        <td width=10 nowrap></td>
+        <td align=center><? if eq 0 <? query fdb:settings/$var:category/edit ?> "&nbsp;" `<input $var:widDefCheckBoxOff id="uiViewDeletePPCheckBox$00" onclick="jslDoToggleCheckBox(id); uiDoToggleDelete('uiPostDeletePP$00'); return false" value="off">` ?></td>
+       </tr>` ?>
+      </table>
+     <td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+</table>
+<div style="height: 10px"></div>
+<!-- END FDB Rules -->

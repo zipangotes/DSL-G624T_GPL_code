@@ -1,0 +1,109 @@
+<!-- Wireless Setup -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Distribution System</font></td> 
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	  <table cellspacing=1 border=0 cellpadding=1 align=center width=350>
+	     <tr>
+                 <td align=center height=30 colspan=2><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+            </tr>
+             <table cellspacing=1 border=0 cellpadding=1 align="center" width=350>
+	     <tr>
+		<td align=right  nowrap>WDS Mode:&nbsp;</td>
+                <td>
+                
+                <select onchange='uiChangeWdsMode(value)' id='uiViewWdsMode'>
+                      <option value="3">Disabled</option>
+                      <option value="0">Bridge</option>
+                      <option value="1">Repeater</option>
+                      <option value="2">Crude</option>
+                </select>
+                </td>
+	     </tr>
+	     <tr>
+		<td align=right>WDS Name:&nbsp;</td>
+		<td><input type="text" value="" maxlength="8" size="8" id="uiViewWdsName"></td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>Activate as Root:&nbsp;</td>
+		<td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewWdsRoot"  value="off" onclick="jslDoToggleCheckBox(id); uiOnClickWdsRoot(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+             <tr>
+		<td align="right" nowrap>WDS Privacy:&nbsp;</td>
+                <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewWdsPrivacy"  value="off" onclick="jslDoToggleCheckBox(id);uiOnClickWdsPrivacy(id)" alt=""></td>
+                <td>Secret:&nbsp;</td>
+                <td><input type="password" id="uiViewWdsSecret"  value="" maxlength="32" size="16" > </td>
+	     </tr>
+	     <tr>
+		<td align="right" nowrap>Auto Channel Selection:&nbsp;</td>
+		<td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewAutoChSelect"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+	     <tr>
+		<td align="right" nowrap>Auto Configuration:&nbsp;</td>
+ 	        <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewAutoConfig"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0></td>
+	     </tr>
+             <tr>
+		<td colspan=5 align=center height=5><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="350" height=1></td>
+            </tr>
+             <tr>
+             <table cellspacing=1 border=0 cellpadding=1 align="center" >
+                <tr>
+                <td align="center" nowrap><u>Bridging Direction</u>&nbsp;&nbsp;</td>
+                <td align="center"><u>Enable</u></td>
+                <td align="center"><u>MAC address</u></td>
+                <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="right" nowrap>Uplink:&nbsp;</td>
+                  <td align="center" ><input <? echo $var:widDefCheckBoxOff ?> id="uiViewUplink"  value="off" onclick="jslDoToggleCheckBox(id); uiEnableMacField(id)"></td>
+                  <td><input type="text" id="uiViewUplinkMac"  value="" maxlength="17" size="17" > </td>
+                </tr>
+                <tr>
+                  <td align="right" nowrap>Downlink 1:&nbsp;</td>
+                  <td align="center"><input <? echo $var:widDefCheckBoxOff ?> id="uiViewDownlink1"  value="off" onclick="jslDoToggleCheckBox(id); uiEnableMacField(id)"></td>
+                  <td><input type="text" id="uiViewDownlinkMac1"  value="" maxlength="17" size="17" > </td>
+                </tr>
+                <tr>
+                  <td align="right" nowrap>Downlink 2:&nbsp;</td>
+                  <td align="center"><input <? echo $var:widDefCheckBoxOff ?> id="uiViewDownlink2"  value="off" onclick="jslDoToggleCheckBox(id);uiEnableMacField(id)"></td>
+                  <td><input type="text" id="uiViewDownlinkMac2"  value="" maxlength="17" size="17" > </td>
+                </tr>
+                 <tr>
+                  <td align="right" nowrap>Downlink 3:&nbsp;</td>
+                  <td align="center"><input <? echo $var:widDefCheckBoxOff ?> id="uiViewDownlink3"  value="off" onclick="jslDoToggleCheckBox(id);uiEnableMacField(id)"></td>
+                  <td><input type="text" id="uiViewDownlinkMac3"  value="" maxlength="17" size="17" > </td>
+                </tr>
+                 <tr>
+                  <td align="right" nowrap>Downlink 4:&nbsp;</td>
+                  <td align="center"><input <? echo $var:widDefCheckBoxOff ?> id="uiViewDownlink4"  value="off" onclick="jslDoToggleCheckBox(id);uiEnableMacField(id)"></td>
+                  <td><input type="text" id="uiViewDownlinkMac4"  value="" maxlength="17" size="17" > </td>
+                </tr>
+             </table> 
+             </tr>
+          <!--
+	     <tr>
+		<td colspan=5 align=center height=10><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="350" height=1></td>
+            </tr>
+            -->
+       </td>
+
+     </tr>
+	<tr>
+	   <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+		
+		<table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+		<tr>
+			<td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+			<td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+		</tr>
+	   </table>
+	   </td>
+	</tr>
+  </table>
+</table>
+<!-- END Wireless Setup -->
+

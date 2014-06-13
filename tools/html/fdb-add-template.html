@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0.1 Transitional//EN">
+<!--
+//----------------------------------------------------------------------------
+//           Copyright (c) 2003 Texas Instruments Incorporated
+//                        ALL RIGHTS RESERVED
+//
+//     "This computer program is subject to a separate license agreement
+//     signed by Texas Instruments Incorporated and the licensee, and is
+//     subject to the restrictions therein.  No other rights to reproduce,
+//     use, or disseminate this computer program, whether in part or in
+//     whole, are granted.
+//
+//----------------------------------------------------------------------------
+//
+// This file provides a template that can be modified to provide updates to the
+// TI Firewall Policy Database.
+//
+// It presents a table which can show each rule name and a description. Following that, is 
+// a form that contains the queries to add each rule.
+// 
+//
+//
+-->
+<html>
+<head>
+  <title>Firewall Policy Update</title>
+</head>
+
+<script language="JavaScript">
+
+function DoCancel()
+{
+	alert("User your Browsers back button or enter a different URL to cancel.");
+}
+
+function DoRules()
+{
+  // Submit the rules to update the policy database.
+  document.fdb.submit();
+  return true
+}
+</script>
+
+
+<body>
+<table border="1" width="100%" height="358">
+  <tr>
+    <td width="100%" colspan="2" valign="top" align="center" bgcolor="#D1E5F3" height="19">
+     <b> Gateway Policy Update Page</b>
+     <p><b>The following new policies are available for your use.</b></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="37%" height="19"></td>
+    <td width="63%" height="19"></td>
+  </tr>
+  <tr>
+    <td width="37%" bgcolor="#D1E5F3" height="19">New Game Server Policies</td>
+    <td width="63%" bgcolor="#D1E5F3" height="19">Description</td>
+  </tr>
+  <tr>
+    <td width="37%" height="19">new game</td>
+    <td width="63%" height="19">TEST 123</td>
+  </tr>
+  <tr>
+    <td width="37%" height="19">&nbsp;</td>
+    <td width="63%" height="19">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td width="100%" colspan="2" valign="middle" align="center"  height="50">
+    &nbsp;
+    <input type="button" value=" Cancel " style="width:150;height:25;background-color: #000000;color: #FFFFFF;" onClick="DoCancel()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" value=" Update Policies " style="width:150;height:25;background-color: #000000;color: #FFFFFF;" onClick="DoRules()"> </td>   
+  </tr>
+</table>
+
+<!-- This is the form that actually adds each rule. Every field should be hidden -->
+<form action="http://192.168.1.1/cgi-bin/webcm" name="fdb" method="post">
+
+<!--This is the page returned after the update -->
+<input type="hidden" name="getpage" value="../fdbreply.html">
+
+<!-- Add new game server policies here -->
+<!--   Substitute RuleName below with the actual name of the rule you are adding -->
+<!--   The description field contains the description of the rule -->
+<!--   Add as many proto / port pairs as you need for the rule -->
+<!--   Be sure the value fields are filled in with the values you want! -->
+<!--   Repeat this block for each rule you are adding -->
+
+
+<!-- uncomment to delete a rule input type="hidden" name="fdb:command/categoryG/ruleG29" value="delete" -->
+
+<input type="hidden" name="fdb:command/categoryG/ruleG29" value="add">
+<input type="hidden" name="fdb:settings/categoryG/ruleG29/description" value=" TEST 456" >
+
+<input type="hidden" name="fdb:settings/categoryG/ruleG29/protocolport1/portstart" value="222" >
+<input type="hidden" name="fdb:settings/categoryG/ruleG29/protocolport1/portend" value="333" >
+<input type="hidden" name="fdb:settings/categoryG/ruleG29/protocolport1/portmap" value="444" >
+<input type="hidden" name="fdb:settings/categoryG/ruleG29/protocolport1/protocol" value="UDP" >
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!-- Wireless Setup -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Setup</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 12px"></div>
+
+  	  <table cellspacing=1 border=0 cellpadding=2 align=center width=350>
+	     <tr>
+                 <td align=center height=30 colspan=6><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+            </tr>
+	     <tr>
+		<td align=right nowrap>Enable AP:&nbsp;</td>
+		<td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewAPEnabled"  value="on" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0></td>
+		<td colspan=3>&nbsp;</td>
+	     </tr>
+	     <tr>
+		<td align=right>Primary SSID:&nbsp;</td>
+		<td><input type="text" value="" maxlength="32" size="20" id="uiViewSSID"></td>
+		<td colspan=3></td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>Hidden SSID:&nbsp;</td>
+		<td colspan=4><input <? echo $var:widDefCheckBoxOff ?> id="uiViewHiddenSSID"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+
+	     </tr>
+             <tr>
+		<td align=right nowrap>VLAN ID:&nbsp;</td>
+		<td colspan=4><input type="text" id="uiViewVlanID"  value="0" maxlength="4" size="5" > </td>
+	     </tr>
+	    <tr>		   
+		 <td align=right nowrap>Priority:&nbsp;</td>
+		 <td colspan=4><input type="text" id="uiViewAddPriority" value="0" size="5" maxlength="1"></td>
+	    </tr>
+
+
+	     <? if eq `1` `<? query ap:status/dot11a_supported ?>`
+	     `<tr>
+		<td align=right nowrap>Band Mode:&nbsp;</td>
+		<td colspan=4>
+             	  <table cellspacing=1 border=0 cellpadding=0 align=left>
+                 <tr>
+		      <td><input <? echo $var:widDefRadioBtnOff ?> value="off" name="" id="uiViewBandMode0" onclick="jslDoToggleRadio('uiViewBandMode',0,3);uiChangeBandMode('0');" alt="Select this entry"></td>
+		      <td>A</td>
+		      <td>&nbsp;</td>
+		      <td><input <? echo $var:widDefRadioBtnOff ?> value="on" name="" id="uiViewBandMode1" onclick="jslDoToggleRadio('uiViewBandMode',1,3);uiChangeBandMode('1');" alt="Select this entry"></td>
+		      <td>B/G</td>
+		      <td>&nbsp;</td>
+		      <td><input <? echo $var:widDefRadioBtnOff ?> value="off" name="" id="uiViewBandMode2" onclick="jslDoToggleRadio('uiViewBandMode',2,3);uiChangeBandMode('2');" alt="Select this entry"></td>
+		      <td>A/B/G</td>
+                 </tr>
+                </table>
+              </td>
+	     </tr>
+            <tr>
+		<td align=right nowrap>Channel A:&nbsp;</td>
+		<td colspan=4 nowrap>
+		<input type="text" value="" maxlength="3" size="3" id="uiViewChannelA"> 
+       	       </td>
+	     </tr>	     
+	     ` ` ` ?>
+		<tr>
+		<td align=right nowrap>Channel B/G:&nbsp;</td>
+		<td colspan=4 nowrap>
+		  <input type="text" value="" maxlength="3" size="2" id="uiViewChannelBG"> 
+		</td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>802.11 Mode:&nbsp;</td>
+		<td colspan=4>
+		   <select onchange='uiChangeBGMode(value)' id='uiViewBGMode'>
+		      <? multiquery ap:valid_settings/bgmode `<option value=$00>$01</option>` ?>
+		   </select>
+		</td>
+	     </tr>
+	     <tr>
+		<td align=right nowrap>4X:&nbsp;</td>
+		<td colspan=4><input <? echo $var:widDefCheckBoxOff ?> id="uiView4x"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0> </td>
+	     </tr>
+	     <tr>
+		<td align="right" nowrap>User Isolation:&nbsp;</td>
+ 	       <td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewUserIsolation"  value="off" onclick="jslDoToggleCheckBox(id)" alt="" width=19 height=20 border=0></td>
+	     </tr>
+	     <tr>
+                <td align="right" nowrap>QoS Support:&nbsp;</td>
+ 	        <td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewQosType"  value="off" onclick="jslDoToggleCheckBox(id); uiChangeQosType( id )" alt="" width=19 height=20 border=0></td>
+              <!--  
+	       <td align="right" nowrap>Traffic Classification:&nbsp;</td>
+               <td>
+               <? setvariable var:qosType `<? query ap:settings/qos_type ?>` ?>
+	       <select onchange="uiChangeQosType(value)" id="uiViewQosType">
+	           <option value=0 <? if eq `0` `<? echo $var:qosType ?>` 
+                                     `selected` `` ?> >Disabled</option>
+	           <option value=1 <? if eq `1` `<? echo $var:qosType ?>` 
+                                     `selected` `` ?>>Enabled</option>
+                   
+                   <option value=2 <? if eq `2` `<? echo $var:qosType ?>` 
+                                     `selected` `` ?>>DiffServ</option>
+                                                                    -->
+               </select>
+               </td>
+	     </tr>
+
+	     <tr>
+		<td colspan=5 align=center height=10><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="350" height=1></td>
+            </tr>
+	   </table>
+
+       </td>
+     </tr>
+	<tr>
+	   <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+		
+		<table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+		<tr>
+			<td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+			<td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+		</tr>
+	   </table>
+	   
+	   </td>
+	</tr>
+  </form>
+</table>
+<!-- END Wireless Setup -->
+

@@ -1,0 +1,45 @@
+<? setvariable var:advMsgBlockConn `You must create a connection to enter this setup` ?>
+<? setvariable var:advMsgBlockLanc `You must enter an IP address on LAN Clients page for the selected lan group to enter this setup.` ?>
+
+<!-- LAN Services Setup -->
+<table align=center cellpadding=1 cellspacing=1 <? echo $var:cntrBorder ?>>
+           <tr>
+		 <td width=200 align=right class="header">Services</td>
+		 <td width=40></td>
+               <td width=40 align=center class="header">Status</td>
+           </tr>
+           <tr>
+               <? multiquery <? query manager:status/$var:langrp/dhcps ?>:status/hostlist <? setvariableonce var:lanip $02 ?> ?>
+               <? setvariable var:blockmsg `javascript:alert('$var:advMsgBlockConn')` ?>
+               <? setvariable var:pagepath `../cgi-bin/webcm?getpage=%2Fusr%2Fwww_safe%2Fhtml%2Fdefs%2F$var:style%2Fmenus%2F$var:main.html&var:style=$var:style&var:main=$var:main&var:menu=adv&var:menutitle=Advanced&var:pagename` ?>          
+ 	        <td width=200 align=right><a href="<? if eq 0 <? multiquerycount <? query manager:status/$var:langrp/dhcps ?>:status/hostlist ?> `javascript:alert('$var:advMsgBlockLanc')` `$var:pagepath=flan&var:pagetitle=IP%20Filters&var:lanip=$var:lanip&var:langrp=$var:langrp` ?>" >IP Filters</a></td>
+		 <td width=40></td>
+		 <td align=center valign=middle><img src="<? if eq `0` `<? query fdb:settings/service/state ?>` `$var:imgLedRed` `$var:imgLedGreen` ?>" <? echo $var:dimImgLed ?>></td>
+           </tr>
+           <tr>
+ 	        <td width=200 align=right><a href="<? echo $var:pagepath ?>=bfilter&var:pagetitle=Bridge%20Filters&var:langrp=<? echo $var:langrp ?>">Bridge Filters</a></td>
+		 <td width=40></td>
+		 <td align=center valign=middle><img src="<? if eq `0` `<? query `<? query manager:status/$var:langrp/below ?>:settings/activated` ?>` `$var:imgLedRed` `$var:imgLedGreen` ?>" <? echo $var:dimImgLed ?>></td>
+           </tr>
+           <tr>
+ 	        <td width=200 align=right><a href="<? if eq 0 $var:concount $var:blockmsg `$var:pagepath=upnp&var:pagetitle=UPnP&var:langrp=<? echo $var:langrp ?>` ?>" title="<? if neq 0 `<? multiquerycount manager:command/connection/list ?>` `UPnP is <? if eq 1 '$var:upnpstate' 'on' 'off' ?>` `No connection available for UPnP` ?>">UPnP</a></td>
+		 <td width=40></td>
+		 <td align=center valign=middle><img src="<? if eq `0` `<? query upnp:settings/state ?>` `$var:imgLedRed` `$var:imgLedGreen` ?>" <? echo $var:dimImgLed ?>></td>
+           </tr>
+           <tr>
+ 	        <td width=200 align=right><a href="<? echo $var:pagepath ?>=lan_clients&var:pagetitle=LAN%20Clients&var:langrp=<? echo $var:langrp ?>">LAN Clients</a></td>
+		 <td width=40></td>
+		 <td align=center valign=middle><img src="<? if eq `0` `<? query <? query manager:status/$var:langrp/dhcps ?>:settings/state ?>` `$var:imgLedRed` `$var:imgLedGreen` ?>" <? echo $var:dimImgLed ?>></td>
+           </tr>
+           <tr>
+ 	        <td width=200 align=right><a href="<? echo $var:pagepath ?>=ipqos&var:pagetitle=IP%20QoS&var:langrp=<? echo $var:langrp ?>&var:qosconid=<? echo $var:langrp ?>:qos&var:contype=qoslan">IP QoS</a></td>
+		 <td width=40></td>
+		 <td align=center valign=middle><img src="<? if eq `0` `<? query $var:langrp:qos:settings/enabled ?>` `$var:imgLedRed` `$var:imgLedGreen` ?>" <? echo $var:dimImgLed ?>></td>
+           </tr>
+           <tr>
+ 	        <td width=200 align=right><a href="<? echo $var:pagepath ?>=routing&var:pagetitle=Static%20Routing&var:langrp=<? echo $var:langrp ?>">Static Routing</a></td>
+		 <td width=40></td>
+		 <td align=center valign=middle>&nbsp;</td>
+           </tr>
+</table>
+<!-- END PVC Setup -->

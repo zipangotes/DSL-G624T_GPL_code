@@ -1,0 +1,70 @@
+
+<!-- System Commands -->
+<form onsubmit="return false">	  	
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">System Commands</font></td>
+</tr>
+ <tr>
+  <td colspan=2 bgcolor="<? echo $var:bgColorBody ?>" align=center>
+  <font size=1>System Commands allow you to carry out basic system actions. Press the button to execute a command.</font>
+  </td>
+ </tr>
+ <tr> 
+ <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=middle>
+ 
+<table cellspacing=0 border=0 cellpadding=5 width=485>
+ <tr>
+  <td nowrap align=center bgcolor="<? echo $var:bgColorBody ?>" width=155><input <? echo $var:widDefBtnSaveAll ?> onclick="uiSaveAll()" alt="Save All"></td>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>" width=330 height=72>
+	<font size=1>Press this button in order to permanently save the current configuration of the Gateway.
+	If you do restart the system without saving your configuration, the Gateway will revert back to the 
+	previously saved configuration.</font>
+  </td>	
+ </tr>
+ 
+ <tr>
+	<td colspan=2 align=center height=5><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="485" height=1></td>
+ </tr>
+
+ <tr>
+  <td nowrap align=center bgcolor="<? echo $var:bgColorBody ?>" width=155><input <? echo $var:widDefBtnRestart ?> onclick="uiRestart()" alt="Restart"></td>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>" width=330 height=72>
+   <font size=1>Use this button to restart the system.
+   If you have not saved your configurations, the Gateway will revert back to the previously saved configuration upon restarting.
+   NOTE: Connectivity to the unit will be lost. You can reconnect after the unit reboots.</font>
+  </td>	
+ </tr>
+ 
+ <tr>
+	<td colspan=2 align=center height=5><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="485" height=1></td>
+ </tr>
+
+<? if eq `1` `$var:HasWireless`
+` <tr>
+  <td nowrap align=center bgcolor="$var:bgColorBody" width=155><input $var:widDefBtnRestartAP onclick="uiRestartAP()" alt="Restart Access Point"></td>
+  <td align=left bgcolor="$var:bgColorBody" width=330 height=72>
+   <font size=1>Use this button to restart the Wireless Access Point. It is important to Restart Access Point any time you change your Wireless settings.
+	</font>
+  </td>	
+ </tr>
+` ` ` ?>
+ 
+ <tr>
+	<td colspan=2 align=center height=5><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="485" height=1></td>
+ </tr>
+
+ <tr>
+  <td nowrap align=center bgcolor="<? echo $var:bgColorBody ?>" width=155><input <? echo $var:widDefBtnRestoreDefaults ?>  onclick="uiRestoreFactoryDefaults()" alt="Restore Defaults"></td>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>" width=330 height=72>
+   <font size=1>Use this button to restore factory default configuration.
+   NOTE: Connectivity to the unit will be lost. You can reconnect after the unit reboots.</font>
+  </td>	
+ </tr>
+</table>
+
+   </td>
+  </tr>
+</table>
+</form>
+<!-- END System Commands -->

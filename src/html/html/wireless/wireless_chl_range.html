@@ -1,0 +1,112 @@
+<!-- Wireless Channel Range -->
+<table cellspacing=1 border=0 cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Channel Range</font></td>
+</tr>
+<tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+   <table cellspacing=0 border=0 cellpadding=1 align=center>
+    <tr>
+      <td align=center height=30 colspan=6><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+    </tr>
+ <? if neq `1` `$var:bandmode` 
+ `
+ <? if neq 0 `<? multiquerycount  ap:status/ch_range_a ?>`
+ `
+    <tr>
+      <td colspan=6 class=header align=center>BAND A</td>
+    </tr>
+    <tr>
+	    <td class=header align=center >Index</u></td>
+	    <td class=header align=center >Start</u></td>
+	    <td class=header align=center >Stop</u></td>
+	    <td class=header align=center >Step</u></td>
+	    <td class=header align=center >Power(db)</u></td>
+	    <td class=header align=center >Delete</u></td>
+    </tr>
+      <? multiquery ap:status/ch_range_a
+      '<tr>
+		<td align=center>$21</td>
+		<td align=center>$22</td>
+		<td align=center>$23</td>
+		<td align=center>$24</td>
+		<td align=center>$25</td>
+		<td align=center><input $var:widDefCheckBoxOff value="off" name="$20" id="uiViewDeleteA$20" onclick="jslDoToggleCheckBox(id);uiDeleteA(this)" alt="Delete this entry"></td>
+	   </tr>' ?>
+	   
+	<tr id="uiViewSelectAll_A" valign=middle>
+        <td align=right colspan=5><b>Select All</b></td>
+        <td align=center ><input $var:widDefCheckBoxOff value="off" id="uiViewDeleteAll_A" onclick="jslDoToggleCheckBox(id);uiDoDeleteAll_A(this)" alt="Delete All Entries"></td>
+	</tr>
+   `  `` ?>
+   `  `` ?>
+  <? if neq `0` `$var:bandmode` 
+  ` 
+  <? if neq 0 `<? multiquerycount  ap:status/ch_range_g ?>`
+  `
+    <tr>
+      <td colspan=6 class=header align=center>BAND B/G</td>
+    </tr>
+    <tr>
+	    <td class=header align=center >Index</u></td>
+	    <td class=header align=center >Start</u></td>
+	    <td class=header align=center >Stop</u></td>
+	    <td class=header align=center >Step</u></td>
+	    <td class=header align=center >Power(db)</u></td>
+	    <td class=header align=center >Delete</u></td>
+    </tr>
+      <? multiquery ap:status/ch_range_g
+      '<tr>
+		<td align=center>$21</td>
+		<td align=center>$22</td>
+		<td align=center>$23</td>
+		<td align=center>$24</td>
+		<td align=center>$25</td>
+		<td align=center><input $var:widDefCheckBoxOff value="off" name="$20" id="uiViewDeleteBG$20" onclick="jslDoToggleCheckBox(id);uiDeleteBG(this)" alt="Delete this entry"></td>
+	   </tr>' ?>
+	   
+   	<tr id="uiViewSelectAll_BG" valign=middle>
+        <td align=right colspan=5><b>Select All</b></td>
+        <td align=center ><input $var:widDefCheckBoxOff value="off" id="uiViewDeleteAll_BG" onclick="jslDoToggleCheckBox(id);uiDoDeleteAll_BG(this)" alt="Delete All Entries"></td>
+	</tr>
+    `  `` ?>
+   `  `` ?>
+
+    <tr><td colspan=6>&nbsp;</td></tr>
+    <tr><td colspan=6>&nbsp;</td></tr>
+       <tr>
+	    <td class=header align=center >Band</u></td>
+	    <td class=header align=center >Start</u></td>
+	    <td class=header align=center >Stop</u></td>
+	    <td class=header align=center >Step</u></td>
+	    <td class=header align=center >Power(db)</u></td>
+	    <td class=header align=center >&nbsp;</u></td>
+    </tr>
+    <tr>
+	<td align="center" nowrap>
+	    <select onchange='uiChangeBand(value)' id='uiViewBand' style="width: 55px;">
+	         <? if neq `1` `$var:bandmode` `<option value="a">A</option>` ` ` ?>
+	         <? if neq `0` `$var:bandmode` `<option value="g">B/G</option>` ` ` ?>
+	   </select>
+	</td>
+	<td align="center" ><input type="text" value="" maxlength="5" size="5" id="uiViewStart"></td>
+	<td align="center" ><input type="text" value="" maxlength="5" size="5" id="uiViewStop"></td>
+	<td align="center" ><input type="text" value="" maxlength="5" size="5" id="uiViewStep"></td>			
+	<td align="center" ><input type="text" value="" maxlength="5" size="5" id="uiViewPower"></td>
+	<td align="center"><input <? echo $var:widDefBtnAdd ?> id="uiViewAdd" onClick="uiDoAdd()" alt="Add this entry"></td>
+     </tr>
+   </table>
+  </td>
+</tr>
+<tr>
+   <td align=left colspan=6 bgcolor="<? echo $var:bgColorBody ?>" height=28>
+    <table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+      <tr>
+	 <td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+	 <td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+      </tr>
+   </table>
+  </td>
+ </tr>
+</table>
+<!-- END Wireless Configuration List -->

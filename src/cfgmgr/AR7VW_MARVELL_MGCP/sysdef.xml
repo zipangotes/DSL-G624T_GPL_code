@@ -1,0 +1,1142 @@
+<sysdef>
+	<containers>
+		<lan>
+			<type>selector</type>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<max_handles>4</max_handles>
+			<default>static</default>
+			<path>
+				<name>static</name>
+				<graph>
+					<top>
+						<flan/>
+					</top>
+					<flan>
+						<qos/>
+					</flan>
+					<qos>
+						<hostname/>
+					</qos>
+					<hostname>
+						<static/>
+					</hostname>
+					<static>
+						<bottom/>
+					</static>
+				</graph>
+			</path>
+			<path>
+				<name>dhcpc</name>
+				<graph>
+					<top>
+						<flan/>
+					</top>
+					<flan>
+						<qos/>
+					</flan>
+					<qos>
+						<hostname/>
+					</qos>
+					<hostname>
+						<dhcpc/>
+					</hostname>
+					<dhcpc>
+						<bottom/>
+					</dhcpc>
+				</graph>
+			</path>
+			<path>
+				<name>unmanaged</name>
+				<graph>
+					<top>
+						<static/>
+					</top>
+					<static>
+						<bottom/>
+					</static>
+				</graph>
+			</path>
+			<path>
+				<name>ppp</name>
+				<graph>
+					<top>
+						<flan/>
+					</top>
+					<flan>
+						<qos/>
+					</flan>
+					<qos>
+						<hostname/>
+					</qos>
+					<hostname>
+						<static/>
+					</hostname>
+					<static>
+						<bottom/>
+					</static>
+				</graph>
+			</path>
+		</lan>
+		<encaps>
+			<type>selector</type>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>atm</bottom_interface>
+			<max_handles>8</max_handles>
+			<default>rfc2684</default>
+			<path>
+				<name>rfc2684</name>
+				<graph>
+					<top>
+						<qos/>
+					</top>
+					<qos>
+						<rfc2684/>
+					</qos>
+					<rfc2684>
+						<pvc/>
+					</rfc2684>
+					<pvc>
+						<bottom/>
+					</pvc>
+				</graph>
+			</path>
+			<path>
+				<name>pppoa</name>
+				<graph>
+					<top>
+						<qos/>
+					</top>
+					<qos>
+						<pppoa/>
+					</qos>
+					<pppoa>
+						<pvc/>
+					</pppoa>
+					<pvc>
+						<bottom/>
+					</pvc>
+				</graph>
+			</path>
+			<path>
+				<name>clip</name>
+				<graph>
+					<top>
+						<qos/>
+					</top>
+					<qos>
+						<clip/>
+					</qos>
+					<clip>
+						<pvc/>
+					</clip>
+					<pvc>
+						<bottom/>
+					</pvc>
+				</graph>
+			</path>
+		</encaps>
+		<mux>
+			<type>selector</type>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<max_handles>8</max_handles>
+			<default>disable</default>
+			<path>
+				<name>disable</name>
+				<graph>
+					<top>
+						<bottom/>
+					</top>
+				</graph>
+			</path>
+			<path>
+				<name>enable</name>
+				<graph>
+					<top>
+						<wbridge/>
+					</top>
+					<wbridge>
+						<bottom/>
+					</wbridge>
+				</graph>
+			</path>
+			<path>
+				<name>vlan</name>
+				<graph>
+					<top>
+						<wbridge/>
+					</top>
+					<wbridge>
+						<bottom/>
+					</wbridge>
+				</graph>
+			</path>
+		</mux>
+		<connection>
+			<type>selector</type>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>atm</bottom_interface>
+			<max_handles>8</max_handles>
+			<default>static</default>
+			<path>
+				<name>static</name>
+				<graph>
+					<top>
+						<fwan/>
+					</top>
+					<fwan>
+						<static/>
+					</fwan>
+					<static>
+						<bottom/>
+					</static>
+				</graph>
+			</path>
+			<path>
+				<name>dhcpc</name>
+				<graph>
+					<top>
+						<fwan/>
+					</top>
+					<fwan>
+						<dhcpc/>
+					</fwan>
+					<dhcpc>
+						<bottom/>
+					</dhcpc>
+				</graph>
+			</path>
+			<path>
+				<name>pppoe</name>
+				<graph>
+					<top>
+						<fwan/>
+					</top>
+					<fwan>
+						<pppoe/>
+					</fwan>
+					<pppoe>
+						<bottom/>
+					</pppoe>
+				</graph>
+			</path>
+			<path>
+				<name>bridge</name>
+				<graph>
+					<top>
+						<bottom/>
+					</top>
+				</graph>
+			</path>
+			<path>
+				<name>asis</name>
+				<graph>
+					<top>
+						<fwan/>
+					</top>
+					<fwan>
+						<bottom/>
+					</fwan>
+				</graph>
+			</path>
+		</connection>
+	</containers>
+	<modules>
+		<bridge>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings/>
+		</bridge>
+		<wbridge>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings>
+				<vlan_id node="leaf">
+					<type>integer</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</vlan_id>
+                                <priority_bit node="leaf">
+                                        <type>string</type>
+                                        <default>0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </priority_bit>
+                        </settings>
+		</wbridge>
+		<bfilter>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings>
+				<activated node="leaf">
+					<type>string</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</activated>
+				<hidden_rules_en>
+					<type>string</type>
+                                        <default>0</default>
+                                        <required/>
+                                        <initial_value/>
+				</hidden_rules_en>
+			</settings>
+		</bfilter>
+		<fwan>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings>
+				<private>
+					<nat>
+						<state node="leaf">
+							<type>binary</type>
+							<default>1</default>
+							<required/>
+							<initial_value/>
+						</state>
+					</nat>
+					<spi>
+						<state node="leaf">
+							<type>binary</type>
+							<default>1</default>
+							<required/>
+							<initial_value/>
+						</state>
+					</spi>
+					<dmz>
+						<state node="leaf">
+							<type>binary</type>
+							<default>0</default>
+							<required/>
+							<initial_value/>
+						</state>
+						<InternalClient node="leaf">
+							<type>string</type>
+							<default>0.0.0.0</default>
+							<required/>
+							<initial_value/>
+						</InternalClient>
+					</dmz>
+					<log>
+						<state node="leaf">
+							<type>binary</type>
+							<default>0</default>
+							<required/>
+							<initial_value/>
+						</state>
+					</log>
+					<psd>
+						<state node="leaf">
+							<type>binary</type>
+							<default>0</default>
+							<required/>
+							<initial_value/>	
+						</state>
+					</psd>
+					<mtu>
+						 <state node="leaf">
+							<type>binary</type>
+							<default>1</default>
+							<required/>
+							<initial_value/>
+						</state>
+					</mtu>
+					<ping>
+						<state node="leaf">
+							<type>binary</type>
+							<default>0</default>
+							<required/>
+							<initial_value/>
+						</state>
+					</ping>
+					<rip>
+						<state node="leaf">
+							<type>binary</type>
+							<default>0</default>
+							<required/>
+							<initial_value/>
+						</state>
+					</rip>
+					<dhcp_relay>
+						<state node="leaf">
+							<type>binary</type>
+							<default>0</default>
+							<required/>
+							<initial_value/>
+						</state>
+					</dhcp_relay>
+					<remote_telnet>
+						<state node="leaf">
+							<type>binary</type>
+							<default>0</default>
+							<required/>
+							<initial_value/>
+						</state>
+						<RemoteHost node="leaf">
+							<type>string</type>
+							<default>0.0.0.0</default>
+							<required/>
+							<initial_value/>
+						</RemoteHost>
+						<RemoteNetmask node="leaf">
+							<type>string</type>
+							<default>255.255.255.255</default>
+							<required/>
+							<initial_value/>
+						</RemoteNetmask>
+					</remote_telnet>
+					<remote_web>
+						<state node="leaf">
+							<type>binary</type>
+							<default>0</default>
+							<required/>
+							<initial_value/>
+						</state>
+						<RemoteHost node="leaf">
+							<type>string</type>
+							<default>0.0.0.0</default>
+							<required/>
+							<initial_value/>
+						</RemoteHost>
+						<RemoteNetmask node="leaf">
+							<type>string</type>
+							<default>255.255.255.255</default>
+							<required/>
+							<initial_value/>
+						</RemoteNetmask>
+						<RedirectPort node="leaf">
+                                                        <type>string</type>
+                                                        <default>8080</default>
+                                                        <required/>
+                                                        <initial_value/>
+                                                </RedirectPort>
+					</remote_web>
+				</private>
+				<fdb/>
+				<public/>
+			</settings>
+		</fwan>
+		<flan>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings>
+				<private>
+					 <ping>
+						<state node="leaf">
+							<type>binary</type>
+							<default>0</default>
+							<required/>
+							<initial_value/>
+						</state>
+					</ping>
+					<block/>
+				</private>
+				<fdb/>
+				<public/>
+			</settings>
+		</flan>
+		<eth>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>phy</bottom_interface>
+			<settings>
+				<iface node="leaf">
+					<type>string</type>
+					<default>eth0</default>
+					<required/>
+					<initial_value/>
+				</iface>
+			</settings>
+		</eth>
+		<dhcpc>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings/>
+		</dhcpc>
+		<hostname>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings>
+				<name/>
+				<domain/>
+			</settings>
+		</hostname>
+		<qos>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings>
+				<trusted node="leaf">
+					<type>string</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</trusted>
+				<enabled node="leaf">
+					<type>string</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</enabled>
+				<qw_low node="leaf">
+					<type>string</type>
+					<default>40</default>
+					<required/>
+					<initial_value/>
+				</qw_low>
+				<qw_med node="leaf">
+					<type>string</type>
+					<default>60</default>
+					<required/>
+					<initial_value/>
+				</qw_med>
+				<qw_high node="leaf">
+					<type>string</type>
+					<default>100</default>
+					<required/>
+					<initial_value/>
+				</qw_high>
+				<qw_voice node="leaf">
+					<type>string</type>
+					<default>100</default>
+					<required/>
+					<initial_value/>
+				</qw_voice>
+				<ql_low node="leaf">
+					<type>string</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</ql_low>
+				<ql_med node="leaf">
+					<type>string</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</ql_med>
+				<ql_high node="leaf">
+					<type>string</type>
+					<default>15</default>
+					<required/>
+					<initial_value/>
+				</ql_high>
+				<ql_voice node="leaf">
+					<type>string</type>
+					<default>30</default>
+					<required/>
+					<initial_value/>
+				</ql_voice>
+				<qos_type node="leaf">
+					<type>string</type>
+					<default>ip</default>
+					<required/>
+					<initial_value/>
+				</qos_type>
+				<default_rule>
+					<rule_name node="leaf">
+						<type>string</type>
+						<default>Default</default>
+						<required/>
+						<initial_value/>
+					</rule_name>
+					<prot_type node="leaf">
+						<type>string</type>
+						<default>ip</default>
+						<required/>
+						<initial_value/>
+					</prot_type>
+					<sa_ip node="leaf">
+						<type>string</type>
+						<default>*</default>
+						<required/>
+						<initial_value/>
+					</sa_ip>
+					<sa_mask node="leaf">
+						<type>string</type>
+						<default>*</default>
+						<required/>
+						<initial_value/>
+					</sa_mask>
+					<sa_port_start node="leaf">
+						<type>string</type>
+						<default>*</default>
+						<required/>
+						<initial_value/>
+					</sa_port_start>
+					<sa_port_end node="leaf">
+						<type>string</type>
+						<default>*</default>
+						<required/>
+						<initial_value/>
+					</sa_port_end>
+					<da_ip node="leaf">
+						<type>string</type>
+						<default>*</default>
+						<required/>
+						<initial_value/>
+					</da_ip>
+					<da_mask node="leaf">
+						<type>string</type>
+						<default>*</default>
+						<required/>
+						<initial_value/>
+					</da_mask>
+					<da_port_start node="leaf">
+						<type>string</type>
+						<default>*</default>
+						<required/>
+						<initial_value/>
+					</da_port_start>
+					<da_port_end node="leaf">
+						<type>string</type>
+						<default>*</default>
+						<required/>
+						<initial_value/>
+					</da_port_end>
+					<protocol node="leaf">
+						<type>string</type>
+						<default>*</default>
+						<required/>
+						<initial_value/>
+					</protocol>
+					<priority node="leaf">
+						<type>string</type>
+						<default>low</default>
+						<required/>
+						<initial_value/>
+					</priority>
+					<phy_port node="leaf">
+						<type>string</type>
+						<default>0</default>
+						<required/>
+						<initial_value/>
+					</phy_port>
+				</default_rule>
+			</settings>
+		</qos>
+		<pppoa>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>vc</bottom_interface>
+			<settings>
+				<encaps node="leaf">
+					<type>binary</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</encaps>
+				<username node="leaf">
+					<type>string</type>
+					<default>username</default>
+					<required/>
+					<initial_value/>
+				</username>
+				<password node="leaf">
+					<type>string</type>
+					<default>test</default>
+					<required/>
+					<initial_value/>
+				</password>
+				<auth_type node="leaf">
+					<type>string</type>
+					<default>Auto</default>
+					<required/>
+					<initial_value/>
+				</auth_type>
+				<defaultroute node="leaf">
+					<type>binary</type>
+					<default>1</default>
+					<required/>
+					<initial_value/>
+				</defaultroute>
+				<usepeerdns node="leaf">
+					<type>binary</type>
+					<default>1</default>
+					<required/>
+					<initial_value/>
+				</usepeerdns>
+				<nodetach node="leaf">
+					<type>binary</type>
+					<default>1</default>
+					<required/>
+					<initial_value/>
+				</nodetach>
+				<mru node="leaf">
+					<type>integer</type>
+					<default>1500</default>
+					<required/>
+					<initial_value/>
+				</mru>
+				<maxfail node="leaf">
+					<type>integer</type>
+					<default>10</default>
+					<required/>
+					<initial_value/>
+				</maxfail>
+				<mode node="leaf">
+					<type>binary</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</mode>
+				<idle node="leaf">
+					<type>integer</type>
+					<default>60</default>
+					<required/>
+					<initial_value/>
+				</idle>
+				<lcp_echo_failure node="leaf">
+					<type>integer</type>
+					<default>10</default>
+					<required/>
+					<initial_value/>
+				</lcp_echo_failure>
+				<lcp_echo_interval node="leaf">
+					<type>integer</type>
+					<default>60</default>
+					<required/>
+					<initial_value/>
+				</lcp_echo_interval>
+				<debug node="leaf">
+					<type>binary</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</debug>
+                                <ppp_unnum node="leaf">
+                                        <type>binary</type>
+                                        <default>0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </ppp_unnum>
+                                <assigned_ip node="leaf">
+                                        <type>net_address</type>
+                                        <default>0.0.0.0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </assigned_ip>
+                                <pppun_lan node="leaf">
+                                        <type>string</type>
+                                        <default>lan0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </pppun_lan>
+                                <pppd_limit node="leaf">
+                                        <type>string</type>
+                                        <default>5</default>
+                                        <required/>
+                                        <initial_value/>
+                                </pppd_limit>
+                                <pppd_backoff node="leaf">
+                                        <type>string</type>
+                                        <default>Y</default>
+                                        <required/>
+                                        <initial_value/>
+                                </pppd_backoff>
+                                <pppd_conndelay node="leaf">
+                                        <type>string</type>
+                                        <default>60</default>
+                                        <required/>
+                                        <initial_value/>
+                                </pppd_conndelay>
+			</settings>
+		</pppoa>
+		<pppoe>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings>
+				<username node="leaf">
+					<type>string</type>
+					<default>username</default>
+					<required/>
+					<initial_value/>
+				</username>
+				<password node="leaf">
+					<type>string</type>
+					<default>test</default>
+					<required/>
+					<initial_value/>
+				</password>
+				<auth_type node="leaf">
+					<type>string</type>
+					<default>Auto</default>
+					<required/>
+					<initial_value/>
+				</auth_type>
+				<defaultroute node="leaf">
+					<type>binary</type>
+					<default>1</default>
+					<required/>
+					<initial_value/>
+				</defaultroute>
+				<usepeerdns node="leaf">
+					<type>binary</type>
+					<default>1</default>
+					<required/>
+					<initial_value/>
+				</usepeerdns>
+				<nodetach node="leaf">
+					<type>binary</type>
+					<default>1</default>
+					<required/>
+					<initial_value/>
+				</nodetach>
+				<maxfail node="leaf">
+					<type>integer</type>
+					<default>10</default>
+					<required/>
+					<initial_value/>
+				</maxfail>
+				<mode node="leaf">
+					<type>binary</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</mode>
+				<idle node="leaf">
+					<type>integer</type>
+					<default>60</default>
+					<required/>
+					<initial_value/>
+				</idle>
+				<mru node="leaf">
+					<type>integer</type>
+					<default>1492</default>
+					<required/>
+					<initial_value/>
+				</mru>
+				<lcp_echo_failure node="leaf">
+					<type>integer</type>
+					<default>10</default>
+					<required/>
+					<initial_value/>
+				</lcp_echo_failure>
+				<lcp_echo_interval node="leaf">
+					<type>integer</type>
+					<default>60</default>
+					<required/>
+					<initial_value/>
+				</lcp_echo_interval>
+				<debug node="leaf">
+					<type>binary</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</debug>
+                                <saveit node="leaf">
+                                        <type>string</type>
+                                        <default>1</default>
+                                        <required/>
+                                        <initial_value/>
+                                </saveit>
+                                <ppp_unnum node="leaf">
+                                        <type>binary</type>
+                                        <default>0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </ppp_unnum>
+                                <assigned_ip node="leaf">
+                                        <type>net_address</type>
+                                        <default>0.0.0.0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </assigned_ip>
+                                <pppun_lan node="leaf">
+                                        <type>string</type>
+                                        <default>lan0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </pppun_lan>
+                                <pppd_limit node="leaf">
+                                        <type>string</type>
+                                        <default>5</default>
+                                        <required/>
+                                        <initial_value/>
+                                </pppd_limit>
+                                <pppd_backoff node="leaf">
+                                        <type>string</type>
+                                        <default>Y</default>
+                                        <required/>
+                                        <initial_value/>
+                                </pppd_backoff>
+                                <pppd_conndelay node="leaf">
+                                        <type>string</type>
+                                        <default>60</default>
+                                        <required/>
+                                        <initial_value/>
+                                </pppd_conndelay>
+			</settings>
+		</pppoe>
+		<pvc>
+			<top_interface>vc</top_interface>
+			<bottom_interface>atm</bottom_interface>
+			<settings>
+                                <auto_vc node="leaf">
+                                        <type>string</type>
+                                        <default>0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </auto_vc>
+				<vpi node="leaf">
+					<type>integer</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</vpi>
+				<vci node="leaf">
+					<type>integer</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</vci>
+				<mac node="leaf">
+					<type>string</type>
+					<default>00.aa.bb.cc.dd.11</default>
+					<required/>
+					<initial_value/>
+				</mac>
+				<traffic_class node="leaf">
+					<type>list</type>
+					<default>UBR</default>
+					<value>CBR</value>
+					<value>UBR</value>
+					<value>VBR</value>
+					<required/>
+					<initial_value/>
+				</traffic_class>
+				<pcr node="leaf">
+					<type>integer</type>
+					<default>0</default>
+				</pcr>
+				<scr node="leaf">
+					<type>integer</type>
+					<default>0</default>
+				</scr>
+				<mbs node="leaf">
+					<type>integer</type>
+					<default>0</default>
+				</mbs>
+				<cdvt node="leaf">
+					<type>integer</type>
+					<default>0</default>
+				</cdvt>
+			</settings>
+		</pvc>
+		<reference>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings>
+				<read1 node="leaf">
+					<type>string</type>
+					<default>testr1</default>
+					<readonly/>
+					<required/>
+					<initial_value/>
+				</read1>
+				<read2 node="leaf">
+					<type>string</type>
+					<default>testr2</default>
+					<required/>
+					<initial_value/>
+					<readonly/>
+				</read2>
+				<write1 node="leaf">
+					<type>string</type>
+					<default>testw1</default>
+					<required/>
+					<initial_value/>
+				</write1>
+				<write2 node="leaf">
+					<type>string</type>
+					<default>testw2</default>
+					<required/>
+					<initial_value/>
+				</write2>
+				<list1 node="leaf">
+					<type>list</type>
+					<default>list1_A</default>
+					<required/>
+					<initial_value/>
+					<value>list1_A</value>
+					<value>list1_B</value>
+					<value>list1_C</value>
+					<value>list1_D</value>
+				</list1>
+				<list2 node="leaf">
+					<type>list</type>
+					<default>Apple</default>
+					<required/>
+					<initial_value/>
+					<value>Apple</value>
+					<value>Cumquat</value>
+					<value>Orange</value>
+					<value>Pear</value>
+					<value>Pinapple</value>
+				</list2>
+				<subtree>
+					<sub1 node="leaf">
+						<type>string</type>
+						<default>testw1</default>
+						<required/>
+						<initial_value/>
+					</sub1>
+					<sub2 node="leaf">
+						<type>string</type>
+						<default>testw2</default>
+						<required/>
+						<initial_value/>
+					</sub2>
+				</subtree>
+			</settings>
+		</reference>
+		<rfc2684>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>vc</bottom_interface>
+			<settings>
+				<encaps node="leaf">
+					<type>integer</type>
+					<default>0</default>
+					<required/>
+					<initial_value/>
+				</encaps>
+			</settings>
+		</rfc2684>
+		<sar>
+			<top_interface>atm</top_interface>
+			<bottom_interface>phy</bottom_interface>
+			<settings>
+				<iface node="leaf">
+					<type>string</type>
+					<default>wan0</default>
+					<required/>
+					<initial_value/>
+				</iface>
+				<modulation node="leaf">
+					<type>list</type>
+					<default>1</default>
+					<required/>
+					<initial_value/>
+					<value>1</value>
+				</modulation>
+				<oamType node="leaf">
+					<type>string</type>
+					<default>""</default>
+					<required/>
+					<initial_value/>
+				</oamType>
+				<connID node="leaf">
+					<type>string</type>
+					<default>""</default>
+					<required/>
+					<initial_value/>
+				</connID>
+				<pvc node="leaf">
+					<type>string</type>
+					<default>""</default>
+					<required/>
+					<initial_value/>
+				</pvc>
+			</settings>
+		</sar>
+		<clip>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>vc</bottom_interface>
+			<settings>
+				<ip node="leaf">
+					<type>net_address</type>
+					<default>0.0.0.0</default>
+					<required/>
+					<initial_value/>
+				</ip>
+				<gateway node="leaf">
+					<type>net_address</type>
+					<default>0.0.0.0</default>
+					<required/>
+					<initial_value/>
+				</gateway>
+			</settings>
+		</clip>
+		<static>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings>
+				<ip node="leaf">
+					<type>net_address</type>
+					<default>0.0.0.0</default>
+					<required/>
+					<initial_value/>
+				</ip>
+			</settings>
+		</static>
+		<route>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>802.3</bottom_interface>
+			<settings/>
+		</route>
+		<usb>
+			<top_interface>802.3</top_interface>
+			<bottom_interface>phy</bottom_interface>
+			<settings>
+				<iface node="leaf">
+					<type>string</type>
+					<default>usb0</default>
+					<required/>
+					<initial_value/>
+				</iface>
+			</settings>
+		</usb>
+                <sntp>
+                        <top_interface>802.3</top_interface>
+                        <bottom_interface>802.3</bottom_interface>
+                        <settings>
+                                <status node="leaf">
+                                        <type>binary</type>
+                                        <default>0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </status>
+                                <prim_server node="leaf">
+                                        <type>net_address</type>
+                                        <default>0.0.0.0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </prim_server>
+                                <secn_server node="leaf">
+                                        <type>net_address</type>
+                                        <default>0.0.0.0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </secn_server>
+                                <tert_server node="leaf">
+                                        <type>net_address</type>
+                                        <default>0.0.0.0</default>
+                                        <required/>
+                                        <initial_value/>
+                                </tert_server>
+                                <timeout node="leaf">
+                                        <type>integer</type>
+                                        <default>5</default>
+                                        <required/>
+                                        <initial_value/>
+                                </timeout>
+                                <retry_count node="leaf">
+                                        <type>integer</type>
+                                        <default>2</default>
+                                        <required/>
+                                        <initial_value/>
+                                </retry_count>
+                                <poll_interval node="leaf">
+                                        <type>integer</type>
+                                        <default>30</default>
+                                        <required/>
+                                        <initial_value/>
+                                </poll_interval>
+                                <timezone node="leaf">
+                                        <type>string</type>
+                                        <default>Greenwich Mean Time</default>
+                                        <required/>
+                                        <initial_value/>
+                                </timezone>
+                        </settings>
+                </sntp>
+	</modules>
+</sysdef>

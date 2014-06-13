@@ -1,0 +1,95 @@
+<? multiquery <? query manager:status/$var:langrp/dhcps ?>:status/hostlist <? setvariableonce var:lanip $02 ?> ?>
+<? setvariable var:blockmsg `javascript:alert("You must create a connection to enter this setup")` ?>
+<? setvariable var:pagepath `../cgi-bin/webcm?getpage=%2Fusr%2Fwww_safe%2Fhtml%2Fdefs%2F$var:style%2Fmenus%2F$var:main.html&var:style=$var:style&var:main=$var:main&var:menu=tools&var:menutitle=Tools&var:pagename` ?>
+<!-- Tools Menu -->
+<table <? echo $var:cntrBorder ?> bgcolor="<? echo $var:menuLeftBgColor ?>" cellspacing=0 cellpadding=0 width=155 height="<? echo $var:dimLeftMenuHeight ?>">
+<tr <? if eq `commands` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Make sure these rowspans cover all tr's in table -->
+	<td <? if eq `1` `$var:HasDsl` `rowspan=12` `rowspan=10` ?> bgcolor="#000000" width=2 nowrap></td>
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td width=152 height=22>
+	<a href="<? echo $var:pagepath ?>=commands&var:pagetitle=System%20Commands" onclick="uiToolsTopDoOnClick(href)" class="leftMenu">System Commands</a>
+	</td>   
+	<td <? if eq `1` `$var:HasDsl` `rowspan=12` `rowspan=10` ?> bgcolor="#000000" width=1 nowrap></td>
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `rlog` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Remote Log -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=rlog&var:pagetitle=Remote%20Log" onclick="uiToolsTopDoOnClick(href)" class="leftMenu">Remote Log</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `user` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- User Management -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=user&var:pagetitle=User%20Management" onclick="uiToolsTopDoOnClick(href)" class="leftMenu">User Management</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `update` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Update Gateway -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=update&var:pagetitle=Update%20Gateway" onclick="uiToolsTopDoOnClick(href)" class="leftMenu">Update Gateway</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr <? if eq `ping` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Ping Test -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=ping&var:pagetitle=Ping%20Test" onclick="uiToolsTopDoOnClick(href)" class="leftMenu">Ping Test</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<? if eq `1` `$var:HasDsl` 
+` <tr <? if eq `mtest` `$var:pagename` `style=background-color:$var:menuLeftRollOverBGColor; ` `style=background-color:$var:menuLeftRollOutBGColor; ` ?>>
+	<!-- Modem Test -->
+	<td align=right width=16 nowrap><!-- <img src="$var:imgLeftMenuPointerBlank" alt="" $var:dimImgLeftMenuPointer> --></td>
+	<td height=22>
+	<a href="$var:pagepath=mtest&var:pagetitle=Modem%20Test" onclick="uiToolsTopDoOnClick(href)" class="leftMenu">Modem Test</a>
+	</td>   
+</tr>
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+` ` ` ?>
+	
+<? include /usr/www_safe/html/defs/$var:style/menus/$var:main_logout.html ?>
+
+<tr>
+	<!-- Empty -->
+	<td bgcolor="#000000" width=2 nowrap height=228></td>
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td nowrap></td>   
+	<td bgcolor="#000000" width=1 nowrap></td>
+</tr>
+
+<tr>
+	<td colspan=4 bgcolor="#000000" width=155 height=1 nowrap></td>
+</tr>
+</table>
+<!-- END Tools Menu -->

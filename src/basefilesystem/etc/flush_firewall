@@ -1,0 +1,4 @@
+/sbin/iptables -F
+/sbin/iptables -X
+/sbin/iptables -t nat -F
+/sbin/iptables -t nat -X

@@ -1,0 +1,101 @@
+
+<!-- Common Setup Header -->
+<table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=0 width=355>
+ <tr>
+  <td valign=top align=center width="50%">
+   <table <? echo $var:cntrBorder ?> cellpadding=2 cellspacing=1>
+    <tr valign=middle>
+     <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewConDescMark" <? echo $var:dimImgErrorMark ?> ></td>
+     <td align=right>Name:</td>
+     <td align=left><input type="text" size="20" maxlength="32" name="uiViewConDescMark" value="" id="uiViewConDesc" title="This field is used to specify connection name."></td>
+	</tr>
+	<? if eq $var:contype bridge `
+     <tr valign=middle>
+     <td class="uiErrorCell"><img src="$var:imgErrorBlank" $var:dimImgErrorMark ></td>
+     <td align=right>Options:</td>
+     <td align=left>
+      <table $var:cntrBorder cellspacing=0>
+       <tr valign=middle>
+        <td>&nbsp;</td>
+        <td align=left>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td align=left nowrap>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+	   </tr>
+      </table>
+     </td>
+	</tr>
+	`
+	`<tr valign=middle>
+     <td class="uiErrorCell"><img src="$var:imgErrorBlank" $var:dimImgErrorMark ></td>
+     <td align=right>Options:</td>
+     <td align=left>
+      <table $var:cntrBorder cellspacing=0>
+       <tr valign=middle>
+        <td><input $var:widDefCheckBoxOff id="uiViewNatControl" onclick="jslDoToggleCheckBox(id)" value=off title="Enable or disable Connection Sharing for this connection" align="center"></td>
+        <td align=left>NAT&nbsp;</td>
+        <td><input $var:widDefCheckBoxOff id="uiViewFirewallControl" onclick="jslDoToggleCheckBox(id)" value="off" title="Enable or disable Firewall for this connection" align="center"></td>
+        <td align=left nowrap>Firewall&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+	   </tr>
+      </table>
+     </td>
+	</tr>` ?>
+   </table>
+  </td>
+  <td valign=middle align=center width="50%">
+   <table <? echo $var:cntrBorder ?> cellpadding=2 cellspacing=1>
+    <tr valign=middle>
+     <td>&nbsp;</td>
+     <td id="uiViewWanOptions" align=right>Type:</td>
+     <td align=left>
+      <select onchange="wstDoSetWanType(value)" id="uiViewWanType">
+      <? if neq `new` `<? echo $var:mode ?>`
+        ` <? multiquery manager:status/$var:contype/compatible
+            ` <option value="$11">$12</option>
+            ` ?>
+        `  
+        ` <? multiquery manager:status/new/compatible
+            ` <option value="$11">$12</option>
+            ` ?>
+        ` ?>
+      </select>
+     </td>
+   <? if eq `1` `$var:HasVlan` 
+    `<td align=right>Sharing:</td>
+     <td>
+        <select onchange="uiDoVlan(value)" id="uiViewVlanEnable">
+            <option value="disable">Disable</option>
+            <option value="enable">Enable</option>
+            <option value="vlan">VLAN</option>
+        </select>
+     </td>
+     ` `<td colspan=2>&nbsp;</td>` ?>
+    </tr>
+<? if eq `1` `$var:HasVlan` 
+  `<tr>
+     <td class="uiErrorCell"><img src="$var:imgErrorBlank" id="uiViewVlanIdMark" $var:dimImgErrorMark ></td>
+     <td align=right nowrap>VLAN ID:</td>
+     <td align=left><input type="text" size="4" maxlength="5" name="uiViewVlanIdMark" value="" id="uiViewVlanId" title="This field is to specify vlanid between 1 to 1024."></td>
+     <td align=right nowrap>Priority Bits:</td>
+     <td align=left><select  id="uiViewPbits">
+                                 <option value="0">0</option>
+                                 <option value="1">1</option>
+                                 <option value="2">2</option>
+                                 <option value="3">3</option>
+                                 <option value="4">4</option>
+                                 <option value="5">5</option>
+                                 <option value="6">6</option>
+                                 <option value="7">7</option>
+                            </select>
+     </td>
+    </tr>
+   ` `<tr><td colspan=5>&nbsp;</td></tr> ` ?>
+   </table>
+  </td>
+ </tr>
+</table>
+<? include /usr/www_safe/html/setup/error.html ?>
+<!-- END Common Setup Header -->

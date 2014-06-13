@@ -1,0 +1,178 @@
+<!-- Wireless WEP Security -->
+<form onSubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Security</font></td>
+</tr>
+  <tr>
+   <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center height=55>
+   
+   <div style="height: 5px"></div>
+
+	    <table cellspacing=0 border=0 cellpadding=1 align=center>
+		<tr>
+                <td align=center height=30 colspan=6><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+              </tr>
+		<tr>
+                  <td colspan=4 align=right height=25>Select an SSID and its security level:</td>
+                  <td colspan=4> 
+                    
+                      <select onchange="uiChangeCurrentSSID(value);uiDoGetSecPage(value)" id="uiViewCurrentSSID">
+                         <? multiquery ap:status/mssid_list 
+                           '
+                             <option value=$01
+                             <? if eq `<? echo $var:currentSSID ?>` $01 
+                                `selected` `` ?>
+                             >$02</option>
+		           '
+                         ?>
+                      </select>
+                  </td>  
+		</tr>
+	       <tr>
+                 <td height=12><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=19 height=1></td>
+		</tr>
+	    <tr>
+		  <td width=20><input <? echo $var:widDefRadioBtnOff ?> id="uiViewSecurity0" onclick="jslDoToggleRadio('uiViewSecurity',0,4);uiDoNone(id)" alt="" ></td>
+		  <td width=60>None</td>
+		  <td width=20><input <? echo $var:widDefRadioBtnOn ?>  id="uiViewSecurity1" onclick="jslDoToggleRadio('uiViewSecurity',1,4);uiDoWepPage(id)" alt="" ></td>
+		  <td width=60>WEP</td>
+		  <td width=20><input <? echo $var:widDefRadioBtnOff ?> id="uiViewSecurity2" onclick="jslDoToggleRadio('uiViewSecurity',2,4);uiDo8021xPage(id)" alt="" ></td>
+		  <td width=60>802.1x</td>
+		  <td width=20><input <? echo $var:widDefRadioBtnOff ?> id="uiViewSecurity3" onclick="jslDoToggleRadio('uiViewSecurity',3,4);uiDoWPAPage(id)" alt="" ></td>
+		  <td width=60>WPA</td>
+	     </tr>
+	     </table>
+	  </td>
+	 </tr>
+	 <tr>
+        <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+        
+         <div style="height: 5px"></div>
+	  
+	    <table cellspacing=0 border=0 cellpadding=1>
+	    <tr>
+	      <td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewWepEnabled" value="off" onclick="jslDoToggleCheckBox(id); uiDoEnableWEP()"  alt=""></td>
+		  <td align=left>Enable WEP Wireless Security</td>
+	    </tr>
+		<tr>
+			<td colspan=2 height=10 nowrap></td>   
+		</tr>
+	    <tr>
+		  <td width=19></td>
+		  <td align=left>
+		  
+		  <table cellspacing=0 border=0 cellpadding=1>
+		  <tr>
+		  <td align=right>Authentication Type:&nbsp;</td>
+		  <td align=left>
+    	  	<select onchange="uiChangeAuthType(value)" id="uiViewAuthType">
+		   	  <option value="0">Open</option>
+		      <option value="1">Shared</option>
+		   	  <option value="2">Both</option>
+    		</select>
+		  </td>
+		  </tr>
+		  </table>
+		  
+		  </td>
+	    </tr>
+		<tr>
+			<td colspan=2 height=10 nowrap></td>   
+		</tr>
+	    <tr>
+		  <td width=19></td>
+		  <td align=left>
+		  
+		   <table cellspacing=0 border=0 cellpadding=1 width=500>
+		   <tr>
+			 <td align=center>Select</td>
+			 <td align=center>Encryption Key</td>
+			 <td align=center>Cipher</td>
+		   </tr>
+		   <tr>
+			 <td align=center>
+			  <input <? echo $var:widDefRadioBtnOff ?> id='uiViewKeyId0' value='off' onclick="jslDoToggleRadio('uiViewKeyId',0,4);uiDoSelectWepKeyId(0)">
+			 </td>
+			 <td align=left><input type="text" maxLength=86 id="uiViewKeyValue1" size=58></td>
+			 <td height=19 align=center>
+			 <select onchange='uiChangeKeyLen("uiPostKeyLen1", value)' id="uiViewKeyLen1"> 
+				<option value="5">64 bits</option>
+				<option value="13">128 bits</option>
+				<option value="29">256 bits</option>
+			 </select>
+			 </td>
+		   </tr>
+		   <tr>
+			 <td align=center>
+			  <input <? echo $var:widDefRadioBtnOff ?> id='uiViewKeyId1' value='off' onclick="jslDoToggleRadio('uiViewKeyId',1,4);uiDoSelectWepKeyId(1)">
+			 </td>
+			 <td align=left><input type="text" maxLength=86 id="uiViewKeyValue2" size=58></td>
+			 <td height=19 align=center>
+			 <select onchange='uiChangeKeyLen("uiPostKeyLen2", value)' id="uiViewKeyLen2"> 
+				<option value="5">64 bits</option>
+				<option value="13">128 bits</option>
+				<option value="29">256 bits</option>
+			 </select>
+			 </td>
+		   </tr>
+		   <tr>
+			 <td align=center>
+			  <input <? echo $var:widDefRadioBtnOff ?> id='uiViewKeyId2' value='off' onclick="jslDoToggleRadio('uiViewKeyId',2,4);uiDoSelectWepKeyId(2)">
+			 </td>
+			 <td align=left><input type="text" maxLength=86 id="uiViewKeyValue3" size=58></td>
+			 <td height=19 align=center>
+			 <select onchange='uiChangeKeyLen("uiPostKeyLen3", value)' id="uiViewKeyLen3"> 
+				<option value="5">64 bits</option>
+				<option value="13">128 bits</option>
+				<option value="29">256 bits</option>
+			 </select>
+			 </td>
+		   </tr>
+		   <tr>
+			<td align=center>
+			 <input <? echo $var:widDefRadioBtnOff ?> id='uiViewKeyId3' value='off' onclick="jslDoToggleRadio('uiViewKeyId',3,4);uiDoSelectWepKeyId(3)">
+			</td>
+			<td align=left><input type="text" maxLength=86 id="uiViewKeyValue4" size=58></td>
+			<td height=19 align=center>
+			<select onchange='uiChangeKeyLen("uiPostKeyLen4", value)' id="uiViewKeyLen4"> 
+				<option value="5">64 bits</option>
+				<option value="13">128 bits</option>
+				<option value="29">256 bits</option>
+			</select>
+			</td>
+		  </tr>
+		   <tr>
+		   	<td></td>
+			<td align=left>
+			<font size=1>Enter 10, 26, or 58 hexadecimal digits for 64, 128 or 256 bit Encryption Keys respectively. e.g., AA AA AA AA AA for a key length of 64 bits.</font>
+			</td>
+		   	<td></td>
+		  </tr>
+		  </table>
+	  
+	  	   </td>
+	     </tr>
+		<tr>
+			<td colspan=2 height=5 nowrap></td>   
+		</tr>
+	     </table>
+	     
+	   
+     </td>
+    </tr>
+<tr>
+   <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+	
+	<table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+	<tr>
+		<td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+		<td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+	</tr>
+   </table>
+   
+   </td>
+</tr>
+	</table>
+</form>
+<!-- END Wireless WEP Security -->

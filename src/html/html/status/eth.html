@@ -1,0 +1,45 @@
+
+<!-- Ethernet Stats -->
+<table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=0>
+ <? multiquery eth0:status/statistics
+ `<tr>
+  <? if eq $00 0 '<td colspan=2 valign=middle class="statusSubHeader" height=20>Transmit</td>' '<td colspan=2 valign=middle class="statusSubHeader" height=16>Receive</td>' ?>			
+  </tr>
+  <tr><td width=25 nowrap></td>
+  <td>
+   <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=0>
+    <tr>
+     <? if eq $00 0 '<td>Good Tx Frames</td>' '<td>Good Rx Frames</td>' ?>
+     <td width=17 nowrap rowspan=7></td>
+     <td>$01</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Good Tx Broadcast Frames</td>' '<td>Good Rx Broadcast Frames</td>' ?>
+     <td>$02</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Good Tx Multicast Frames</td>' '<td>Good Rx Multicast Frames</td>' ?>
+     <td>$03</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Tx Total Bytes</td>' '<td>Rx Total Bytes</td>' ?>
+     <td>$04</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Collisions</td>' '<td>CRC Errors</td>' ?>
+     <td>$05</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Error Frames</td>' '<td>Undersized Frames</td>' ?>
+     <td>$06</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Carrier Sense Errors</td>' '<td>Overruns</td>' ?>
+     <td>$07</td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ ` ?>
+</table>
+<!-- END Ethernet Stats -->

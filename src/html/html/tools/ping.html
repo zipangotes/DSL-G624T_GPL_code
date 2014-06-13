@@ -1,0 +1,60 @@
+
+<!-- Ping Test Page -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=20 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Ping Test</font></td>
+</tr>
+ <tr> 
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+   <div style="height: 5px"></div>
+   <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=3 align=center width=447>
+    <tr>
+     <td align=right width="50%">Enter IP Address to ping:</td>
+     <td align=left width="50%">
+      <input type="text" maxlength=15 size=15 name="uiViewPingIPAddress" id="uiViewPingIPAddress">
+     </td>
+    </tr>
+    <tr> 
+     <td align=right width="50%">Packet size:</td>
+     <td align=left width="50%">
+      <input type="text" maxlength=5 size=5 name="uiViewPingSize" id="uiViewPingSize">bytes
+     </td>
+    </tr>
+    <tr> 
+     <td align=right width="50%">Number of echo requests:</td>
+     <td align=left width="50%">
+      <input type="text" maxlength=2 size=2 name="uiViewPingNumber" id="uiViewPingNumber">
+     </td>
+    </tr>
+    <tr>
+     <td align=center colspan=2>
+      <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=0 align=center width=375>
+       <tr>
+        <td align=right><input <? echo $var:widDefBtnTest ?> onclick="uiSave()" alt="Test"></td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+    <tr> 
+     <td height=12 nowrap valign=middle colspan=2 align=center><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=385 height=1></td>
+    </tr>
+   </table>
+					
+   <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=4 align=center>
+    <tr>
+     <td align=center>	  
+      <textarea name="" rows=9 cols=50 readonly><? multiquery ping:command/result "$01" ?></textarea>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+</table>
+</form>
+
+<form method="POST" action="webcm" target="_self" id="uiPostPingResultForm" > 
+<? include /usr/www_safe/html/refresh.frm ?>
+<input type="hidden" name="ping:settings/func1/moreResult" value="0" id="uiPostPingMore">
+</form>
+<!-- END Ping Test Page -->

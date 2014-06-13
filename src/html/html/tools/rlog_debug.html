@@ -1,0 +1,148 @@
+
+<html>
+<head>
+<title>&gt;Tools&gt;Remote Log Debug Page</title>
+<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1">
+<link rel="stylesheet" href="/usr/www_safe/html/css/nsp.css" type="text/css">
+<script language="JavaScript" src="/usr/www_safe/html/js/jsl.js"></script>
+<script language="JavaScript" src="/usr/www_safe/html/js/error.js"></script>
+<script language="JavaScript" src="/usr/www_safe/html/js/ip.js"></script>
+</head>
+
+<body onload="uiDoOnLoad()" bgcolor="<? echo $var:bgColorBody ?>" leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 background="<? echo $var:imgMainBackground ?>">
+
+<table width=761 <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=0 align=center>
+	<tr>
+		<td width=761 height=4 colspan=2 nowrap></td>
+	</tr>
+
+	<tr>
+		<td width=631>
+		<img src="<? echo $var:imgPageSpacer ?>" alt="" width=1 height=1 align=left>
+		
+			<table <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=1 width=590 bgcolor="#838383">
+			<tr>
+				<td>
+				
+				<table <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=0 width=589 height=390 bgcolor="<? echo $var:bgColorBody ?>">
+				<tr>
+					<td valign=top>
+						  
+		  	<br>
+		  	
+  			<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 align=center id="uiViewBodyTable" bgcolor="<? echo $var:bgColorTable ?>" width=455>
+			<tr>
+			  <td align=center class="header" bgcolor="<? echo $var:bgColorBody ?>">Remote Log Settings</td>
+			</tr>
+			<tr>
+			  <td height=5 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td>
+			</tr>
+			<tr>
+				<td bgcolor="<? echo $var:bgColorBody ?>" align=center>
+				
+			  <br>
+			  
+			   <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=1 align=center width=355>
+				<tr>
+				  <td nowrap align=center>Default Log Level:</td>
+				  <td nowrap align=left>
+					 <select id="uiViewDefaultLevel" Name="uiViewDefaultLevel">
+					   <option value="alert">Alert</option>
+					   <option value="crit">Critical</option>
+					   <option value="debug">Debug</option>
+					   <option value="err">Error</option>
+					   <option value="info">Info</option>
+					   <option value="notice">Notice</option>
+					   <option value="emerg">Panic</option>
+					   <option value="warn">Warning</option>
+					</select>
+				  </td>
+				 </tr>
+				<tr> 
+					<td colspan=3 height=16 nowrap valign=middle><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=355 height=1></td>
+				</tr>
+				</table>
+				<table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=1 align=center width=355>
+				<tr>
+				  <td align=center class="header" bgcolor="<? echo $var:bgColorBody ?>">Log Level</td>
+				</tr>
+				<tr>
+				  <td nowrap align=center>Logic</td>
+				  <td nowrap align=left>
+					 <select id="uiViewLogicLevel" Name="uiViewLogicLevel">
+					   <option value="alert">Alert</option>
+					   <option value="crit">Critical</option>
+					   <option value="debug">Debug</option>
+					   <option value="err">Error</option>
+					   <option value="info">Info</option>
+					   <option value="notice">Notice</option>
+					   <option value="panic">Panic</option>
+					   <option value="warning">Warning</option>
+					</select>
+				  </td>
+				 </tr>
+				<tr>
+				  <td nowrap align=center>Entity</td>
+				  <td nowrap align=left>
+					 <select id="uiViewEntityLevel" Name="uiViewEntityLevel">
+					   <option value="alert">Alert</option>
+					   <option value="crit">Critical</option>
+					   <option value="debug">Debug</option>
+					   <option value="err">Error</option>
+					   <option value="info">Info</option>
+					   <option value="notice">Notice</option>
+					   <option value="panic">Panic</option>
+					   <option value="warning">Warning</option>
+					</select>
+				  </td>
+				 </tr>
+				<tr>
+				  <td nowrap align=center>Module</td>
+				  <td nowrap align=left>
+					 <select id="uiViewModuleLevel" Name="uiViewModuleLevel">
+					   <option value="alert">Alert</option>
+					   <option value="crit">Critical</option>
+					   <option value="debug">Debug</option>
+					   <option value="err">Error</option>
+					   <option value="info">Info</option>
+					   <option value="notice">Notice</option>
+					   <option value="panic">Panic</option>
+					   <option value="warning">Warning</option>
+					</select>
+				  </td>
+				 </tr>
+				<tr>
+				  <td nowrap align=center>User</td>
+				  <td nowrap align=left>
+					 <select id="uiViewUserLevel" Name="uiViewUserLevel">
+					   <option value="alert">Alert</option>
+					   <option value="crit">Critical</option>
+					   <option value="debug">Debug</option>
+					   <option value="err">Error</option>
+					   <option value="info">Info</option>
+					   <option value="notice">Notice</option>
+					   <option value="panic">Panic</option>
+					   <option value="warning">Warning</option>
+					</select>
+				  </td>
+				 </tr>
+				 </table>
+				</td>	
+			   </tr>
+			   <tr>
+			    <td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+			   </tr>
+		    </table>
+
+					</td>
+				</tr>
+				</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>

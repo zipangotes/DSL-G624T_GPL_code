@@ -1,0 +1,84 @@
+
+<!-- Setup Home -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Setup</font></td>
+</tr>
+ <tr><td bgcolor="<? echo $var:bgColorBody ?>" height=20><font size=1>The Setup section allows you to create new connections, edit existing connections, and configure other basic settings.</font></td></tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 5px"></div>
+
+  	<!-- Setup Home Menu -->
+	<table cellspacing=5 border=0 cellpadding=0 width=425>
+	<tr>
+		<td align=center colspan=2 style="padding: 3px" class="header"><font size=1><b>LAN Setup</b></font></td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>LAN Configuration</b></font>
+		</td>
+		<td>
+			<font size=1>Select to assign physical interfaces to LAN and configure LAN IP address, LAN DHCP Server.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+       <? if eq `1` `$var:HasMarvell`
+	`<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Ethernet Switch</b></font>
+		</td>
+		<td>
+			<font size=1>Select to configure ethernet switch settings.</font>
+		</td>
+	 </tr>
+	 <tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	 </tr> 
+       ` ` ` ?>
+	<tr>
+ 		<td align=center colspan=2 style="padding: 3px" class="header"><font size=1><b>WAN Setup</b></font></td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+ 	<? if neq `<? if eq `1` `$var:HasDsl` `8` `1` ?>` `<? multiquerycount manager:command/connection/list ?>`
+	 `<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>New Connection</b></font>
+		</td>
+		<td>
+			<font size=1>Select to configure a new connection.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>` `` ?>
+<? if eq `1` `$var:HasDsl`
+     `<tr>
+		<td valign=middle>
+			<font size=1>				
+			<b>Modem</b></font>
+		</td>
+		<td>
+			<font size=1>Select to setup your modem.</font>
+		</td>
+	</tr>
+      ` ` ` ?>
+	</table>
+	
+	<div style="height: 12px"></div>
+
+	</td>
+   </tr>
+</table>
+<!-- End Setup Home -->

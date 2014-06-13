@@ -1,0 +1,257 @@
+<? multiquery manager:command/connection/list <? setvariableonce var:conid $01 ?> ?>
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Custom Port Forwarding</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+  
+   <div style="height: 12px"></div>
+
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+    <tr>
+     <td>
+      <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=2>
+       <tr>
+        <td colspan=10>
+         <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=2>
+          <tr><td align=center colspan=10><? include /usr/www_safe/html/setup/error.html ?></td></tr>
+          <tr>
+ 	     <td>&nbsp;</td>
+            <td align=left nowrap>Connection:</td>
+            <td align=left>
+              <select onchange="uiDoSelectConnection(value)" id="uiViewConnectionSelector">
+                <? multiquery manager:command/connection/list "<option value='$01'>$02</option>" ?>
+              </select>	
+            </td>
+ 	     <td>&nbsp;</td>
+            <td align=right>Enable</td>
+            <td align=right width=19 height=30>
+                 <input <? echo $var:widDefCheckBoxOff ?> id="uiViewState" onclick="jslDoToggleCheckBox(id);" alt="Enable Filters" >
+            </td>
+          </tr>
+
+          <tr>
+            <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewNameMark" <? echo $var:dimImgErrorMark ?> ></td>
+            <td align=left nowrap>Application:</td>
+            <td align=left>
+              <input type="text" size=15 name="fwan:settings/name" value="" id="uiViewName" maxlength=15>	
+            </td>
+ 	     <td>&nbsp;</td>
+            <td align=right>Protocol:</td>
+            <td>
+	        <select id="uiViewProtocol">
+	          <option value="TCP">TCP</option>
+	          <option value="UDP">UDP</option>
+	          <option value="TCP,UDP">TCP and UDP</option>
+	       </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSrcIPStartMark" <? echo $var:dimImgErrorMark ?> ></td>
+            <td align=left nowrap>Source IP Address:</td>
+            <td align=left>
+               <input type=text size=15 name="fwan:settings/srcip_start" id="uiViewSrcIPStart" maxlength=15>
+            </td>
+            <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSrcMaskMark" <? echo $var:dimImgErrorMark ?> ></td>
+            <td align=right nowrap>Source Netmask:</td>
+            <td>
+               <input type=text size=15 name="fwan:settings/src_mask" id="uiViewSrcMask" maxlength=15>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDstIPStartMark" <? echo $var:dimImgErrorMark ?> ></td>
+            <td align=left nowrap>Destination IP Address:</td>
+            <td align=left>
+               <input type=text size=15 name="fwan:settings/dstip_start" id="uiViewDstIPStart" maxlength=15>
+            </td>
+            <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDstMaskMark" <? echo $var:dimImgErrorMark ?> ></td>
+            <td align=right nowrap>Destination Netmask:</td>
+            <td>
+               <input type=text size=15 name="" id="uiViewDstMask" value="255.255.255.255" maxlength=15 readonly>                            
+            </td>
+          </tr>
+
+          <tr>
+            <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPortStartMark" <? echo $var:dimImgErrorMark ?> ></td>
+            <td align=left nowrap>Destination Port Start:</td>
+            <td align=left>
+               <input type="text" size=5 name="fwan:settings/portstart" id="uiViewPortStart" maxlength=5>
+            </td>
+            <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPortEndMark" <? echo $var:dimImgErrorMark ?> ></td>
+            <td align=right nowrap>Destination Port End:</td>
+            <td>
+               <input type="text" size=5 name="fwan:settings/portend" id="uiViewPortEnd" maxlength=5>                            
+            </td>
+          </tr>
+
+          <tr>
+            <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPortMapMark" <? echo $var:dimImgErrorMark ?> ></td>
+            <td align=left nowrap>Destination Port Map:</td>
+            <td align=left>
+               <input type="text" size=5 name="fwan:settings/portmap" id="uiViewPortMap" maxlength=5>
+            </td>
+ 	     <td>&nbsp;</td>
+            <td align=right nowrap>&nbsp;</td>
+            <td>&nbsp;
+            </td>
+          </tr>
+
+          <tr>
+ 	     <td colspan=10>
+		<table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=1>
+                <tr><td height=1 colspan=20 nowrap bgcolor="<? echo $var:bgColorTable ?>"></td></tr>
+                <tr>
+			<td align=center nowrap>Enabled</td>
+                     <td width=3 nowrap></td>
+			<td align=center nowrap>Name</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>Source IP</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>Destination IP</td>
+			<td width=3 nowrap></td>
+			<td align=left nowrap>Port Start</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>Protocol</td>
+			<td width=3 nowrap></td>
+			<td align=center>Edit</td>
+                     <td width=3 nowrap></td>
+			<td align=center>Delete</td>
+                </tr>
+                <tr>
+			<td align=center nowrap>&nbsp;</td>
+                     <td width=3 nowrap></td>
+			<td align=center nowrap>&nbsp;</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>Mask</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>Mask</td>
+			<td width=3 nowrap></td>
+			<td align=left nowrap>Port End</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>&nbsp;</td>
+			<td width=3 nowrap></td>
+			<td align=center>&nbsp;</td>
+                     <td width=3 nowrap></td>
+			<td align=center>&nbsp;</td>
+                </tr>
+                <tr>
+			<td align=center nowrap>&nbsp;</td>
+                     <td width=3 nowrap></td>
+			<td align=center nowrap>&nbsp;</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>&nbsp;</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>&nbsp;</td>
+			<td width=3 nowrap></td>
+			<td align=left nowrap>Port Map</td>
+			<td width=3 nowrap></td>
+			<td align=center nowrap>&nbsp;</td>
+			<td width=3 nowrap></td>
+			<td align=center>&nbsp;</td>
+                     <td width=3 nowrap></td>
+			<td align=center>&nbsp;</td>
+                </tr>
+               <tr><td height=1 colspan=20 nowrap bgcolor="<? echo $var:bgColorTable ?>"></td></tr>
+
+		  <? multiquery <? echo $var:conid ?>:fwan:status/pf `
+		  <tr>
+			   <input type="hidden" name="<? echo $var:conid ?>:fwan:command/delete" value="$01" id="uiViewDeletePP$00" disabled>
+                        <td align=center>
+				<input type="text" class="uiNoBorder" size="3" value="<? if eq $04 0 'off' 'on' ?>" id="uiEditEnable$00" readonly>
+                        </td>
+                        <td width=3 nowrap></td>
+                        <td align=center>
+				<input type="text" class="uiNoBorder" size="15" value="$02" id="uiEditName$00" readonly>
+                        </td>
+                        <td width=3 nowrap></td>
+ 			   <td align=center>
+				<input type="text" class="uiNoBorder" size="15" value="$05" id="uiEditSrcIPStart$00" readonly>
+			   </td>
+			   <td width=3 nowrap></td>
+			   <td align=center>
+				<input type="text" class="uiNoBorder" size="15" value="$07" id="uiEditDstIPStart$00" readonly>
+			   </td>
+			   <td width=3 nowrap></td>
+			   <td align=center>
+				<input type="text" class="uiNoBorder" size="4" value="$09" id="uiEditPortStart$00" readonly>
+			   </td>
+			   <td width=3 nowrap></td>
+			   <td align=center>
+				<input type="text" class="uiNoBorder" size="11" value="$0c" id="uiEditProtocol$00" readonly>
+			    </td>
+			    <td width=3 nowrap></td>
+			    <td align=center>
+	 		       <input <? echo $var:widDefRadioBtnOff ?> value="off" name="$00" id="uiViewFilterStatus$00" onclick="uiDoEdit('$00');" alt="Select this entry" $var:dimBtnRadioBtn ></td>
+			    </td>
+                         <td width=3 nowrap></td>
+			    <td align=center>
+			       <input <? echo $var:widDefCheckBoxOff ?>  id="uiViewDeletePPCheckBox$00" onclick="uiDoToggleDelete(id,'uiPostDelete$00')" value="off" alt="Select to delete" $var:dimBtnCheckBox>
+			    </td>
+		  </tr>
+		  <tr>
+                        <td align=center>&nbsp;</td>
+                        <td width=3 nowrap></td>
+                        <td align=center>&nbsp;</td>
+                        <td width=3 nowrap></td>
+ 			   <td align=center>
+				<input type="text" class="uiNoBorder" size="15" value="$06" id="uiEditSrcMask$00" readonly>
+			   </td>
+			   <td width=3 nowrap></td>
+			   <td align=center>
+				<input type="text" class="uiNoBorder" size="15" value="$08" id="uiEditDstMask$00" readonly>
+			   </td>
+			   <td width=3 nowrap></td>
+			   <td align=center>
+				<input type="text" class="uiNoBorder" size="4" value="$0a" id="uiEditPortEnd$00" readonly>
+			   </td>
+			   <td width=3 nowrap></td>
+			   <td align=center>&nbsp;</td>
+			   <td width=3 nowrap></td>
+			   <td align=center>&nbsp;</td>
+                        <td width=3 nowrap></td>
+			   <td align=center>&nbsp;</td>
+		  </tr>
+		  <tr>
+                        <td align=center>&nbsp;</td>
+                        <td width=3 nowrap></td>
+                        <td align=center>&nbsp;</td>
+                        <td width=3 nowrap></td>
+ 			   <td align=center>&nbsp;</td>
+			   <td width=3 nowrap></td>
+ 			   <td align=center>&nbsp;</td>
+			   <td width=3 nowrap></td>
+			   <td align=center>
+				<input type="text" class="uiNoBorder" size="4" value="$0b" id="uiEditPortMap$00" readonly>
+			   </td>
+			   <td width=3 nowrap></td>
+			   <td align=center>&nbsp;</td>
+			   <td width=3 nowrap></td>
+			   <td align=center>&nbsp;</td>
+                        <td width=3 nowrap></td>
+			   <td align=center>&nbsp;</td>
+		  </tr>
+               <tr><td height=2 colspan=20 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+		  ` ?>
+              </table>
+            </td>
+          </tr>
+         </table>
+        </td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td>
+ </tr>
+</table>
+
+<!-- END Custom Port Forwarding -->
+

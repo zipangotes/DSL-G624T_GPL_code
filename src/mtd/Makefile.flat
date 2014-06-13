@@ -1,0 +1,28 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+TEMPPATH = /bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin/:/usr/local/bin
+
+all: build install
+
+
+build:
+#	ln -sf ./linux/zlib.h ./include/zlib.h
+#	ln -sf ./linux/zconf.h ./include/zconf.h
+	cd util; export PATH=$(TEMPPATH); $(MAKE)  KERNEL_DIR=$(TI_kernel_path)/$(TI_kernel_version)
+
+install: 
+	install -m 0755 util/mkfs.jffs2 $(TI_tools_path)/bin
+	install -m 0755 util/erase $(TI_tools_path)/bin
+	install -m 0755 util/eraseall $(TI_tools_path)/bin
+	install -m 0755 util/unlock $(TI_tools_path)/bin
+	install -m 0755 util/lock $(TI_tools_path)/bin
+
+clean:
+	rm -f ../tools/bin/erase
+	rm -f ../tools/bin/mkfs.jffs2
+	rm -f ../tools/bin/eraseall
+	rm -f ../tools/bin/unlock
+	rm -f ../tools/bin/lock
+	$(MAKE) clean

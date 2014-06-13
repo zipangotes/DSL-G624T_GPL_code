@@ -1,0 +1,107 @@
+<? setvariable var:pagepath `../cgi-bin/webcm?getpage=%2Fusr%2Fwww_safe%2Fhtml%2Fdefs%2F$var:style%2Fmenus%2F$var:main.html&var:style=$var:style&var:main=$var:main&var:menu=status&var:menutitle=Status&var:pagename` ?>
+<!-- Status Menu -->
+<table <? echo $var:cntrBorder ?> bgcolor="<? echo $var:menuLeftBgColor ?>" cellspacing=0 cellpadding=0 width=155 height="<? echo $var:dimLeftMenuHeight ?>">
+<tr  <? if eq `netstats` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Make sure these rowspans cover all tr's in table -->
+	<td <? if eq `1` `$var:HasWireless` `rowspan=14` `rowspan=12` ?>  bgcolor="#000000" width=2 nowrap></td>
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td width=152 height=22>
+	<a href="<? echo $var:pagepath ?>=netstats&var:pagetitle=Network%20Statistics&var:interface=eth&var:langrp=lan0" class="leftMenu">Network Statistics</a>
+	</td>   
+	<td <? if eq `1` `$var:HasWireless` `rowspan=14` `rowspan=12` ?> bgcolor="#000000" width=1 nowrap></td>
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr  <? if eq `connection` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Connection Status -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=connection&var:pagetitle=Connection%20Status&var:langrp=lan0" class="leftMenu">Connection Status</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr  <? if eq `dhcpc` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- DHCP Clients -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=dhcpc&var:pagetitle=DHCP%20Clients&var:langrp=lan0" class="leftMenu">DHCP Clients</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<? if eq `1` `$var:HasDsl`
+` <tr  <? if eq `mdm` `$var:pagename` `style=background-color:$var:menuLeftRollOverBGColor; ` `style=background-color:$var:menuLeftRollOutBGColor; ` ?>>
+	<!-- Modem Status -->
+	<td align=right width=16 nowrap><!-- <img src="$var:imgLeftMenuPointerBlank" alt="" $var:dimImgLeftMenuPointer> --></td>
+	<td height=22>
+	<a href="$var:pagepath=mdm&var:pagetitle=Modem%20Status" class="leftMenu">Modem Status</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+` ` ` ?>
+
+<tr  <? if eq `prodinfo` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Product Information -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=prodinfo&var:pagetitle=Product%20Information" class="leftMenu">Product Information</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr  <? if eq `syslog` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- System Log -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=syslog&var:pagetitle=System%20Log" class="leftMenu">System Log</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<? if eq `1` `$var:HasWireless`
+     `<tr  <? if eq `wdsreport` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- WDS Report -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22>
+	<a href="<? echo $var:pagepath ?>=wdsreport&var:pagetitle=WDS%20Report" class="leftMenu">WDS Report</a>
+	</td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+      ` ` ` ?> 	
+<? include /usr/www_safe/html/defs/$var:style/menus/$var:main_logout.html ?>
+
+<tr>
+	<!-- Empty -->
+	<td bgcolor="#000000" width=2 nowrap height=228></td>
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td nowrap></td>   
+	<td bgcolor="#000000" width=1 nowrap></td>
+</tr>
+
+<tr>
+	<td colspan=4 bgcolor="#000000" width=155 height=1 nowrap></td>
+</tr>
+</table>
+<!-- END Status Menu -->

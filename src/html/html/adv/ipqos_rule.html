@@ -1,0 +1,159 @@
+
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">IP QoS Traffic Rule</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+  
+   <div style="height: 12px"></div>
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+    <tr><td align=center colspan=10><? include /usr/www_safe/html/setup/error.html ?></td></tr>
+       <tr id="rulename">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewRuleNameMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=left nowrap>Rule Name:</td>
+         <td align=left><input type="text" name="uiViewRuleNameMark" value="" maxlength="32" size="15" id="uiViewRuleName"></td>
+ 	  <td>&nbsp;</td>
+       </tr>
+       <tr id="srcipAddress">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSrcIPAddrMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=left nowrap>Source IP:</td>
+         <td align=left><input type="text" name="uiViewSrcIPAddrMark" value="" maxlength="15" size="15" id="uiViewSrcIPAddr"></td>
+ 	  <td>&nbsp;</td>
+       <!-- </tr>
+       <tr id="srcnetmask"> -->
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSrcNetmaskMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=left nowrap>Source Netmask:</td>
+         <td align=left><input type="text" name="uiViewSrcNetmaskMark" value="" maxlength="15" size="15" id="uiViewSrcNetmask"></td>
+ 	  <td>&nbsp;</td>
+       </tr>
+       <tr id="srcstartport">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSrcStartPortMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=left nowrap>Source Start Port:</td>
+         <td align=left><input type="text" name="uiViewSrcStartPortMark" value="" maxlength="5"  size="5" id="uiViewSrcStartPort"></td>
+ 	  <td>&nbsp;</td>
+       <!-- </tr>
+       <tr id="srcendport"> -->
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSrcEndPortMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=left nowrap>Source End Port:</td>
+         <td align=left><input type="text" name="uiViewSrcEndPortMark" value="" maxlength="5"  size="5" id="uiViewSrcEndPort"></td>
+ 	  <td>&nbsp;</td>
+       </tr>
+       <tr id="destipAddress">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDestIPAddrMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=left nowrap>Destination IP:</td>
+         <td align=left><input type="text" name="uiViewDestIPAddrMark" value="" maxlength="15" size="15" id="uiViewDestIPAddr"></td>
+ 	  <td>&nbsp;</td>
+       <!-- </tr>
+       <tr id="destnetmask"> -->
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDestNetmaskMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=left nowrap>Destination Netmask:</td>
+         <td align=left><input type="text" name="uiViewDestNetmaskMark" value="" maxlength="15" size="15" id="uiViewDestNetmask"></td>
+ 	  <td>&nbsp;</td>
+       </tr>
+       <tr id="deststartport">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDestStartPortMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=left nowrap>Destination Start Port:</td>
+         <td align=left><input type="text" name="uiViewDestStartPortMark" value="" maxlength="5" size="5" id="uiViewDestStartPort"></td>
+ 	  <td>&nbsp;</td>
+       <!-- </tr>
+       <tr id="destendport"> -->
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDestEndPortMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=left nowrap>Destination End Port:</td>
+         <td align=left><input type="text" name="uiViewDestEndPortMark" value="" maxlength="5" size="5" id="uiViewDestEndPort"></td>
+ 	  <td>&nbsp;</td>
+       </tr>
+       <tr>
+          <td colspan=10>&nbsp;</td>
+       </tr>
+       <tr>
+	  <td>&nbsp;</td>
+         <td align=left>Protocol:</td>
+         <td align=left>
+          <select name="qos:settings/protocol" id="uiViewProtocol" onchange="uiDoSelectProtocol(value);" >
+	     <? multiquery qos:settings/protocoltype "<option value='$01'>$02</option>" ?>
+		<option value='tcp'>TCP</option>
+		<option value='udp'>UDP</option>
+		<option value='icmp'>ICMP</option>
+		<option value='*'>ANY</option>
+  	   </select>
+         </td>
+ 	  <td>&nbsp;</td>
+       <!-- </tr>	
+	<tr> -->
+  	  <td>&nbsp;</td>
+ 	  <td>Physical Port:</td>
+	  <td>
+	    <select id="uiViewPHYPort">
+          	<option value='-1'>None</option>
+          	<? if eq `1` `$var:HasMarvell` 
+          	 `<option value='5'>Port 1</option>
+          	   <option value='6'>Port 2</option>
+          	   <option value='7'>Port 3</option>
+          	   <option value='8'>Port 4</option>
+          	 ` 
+          	 `<option value='0'>Eth 0</option>         	   
+          	 ` ?>
+          	<? if eq `1` `$var:HasUsb` 
+          	 `<option value='2'>USB</option>
+          	 ` ` ` ?>
+          	<? if eq `1` `$var:HasWireless` 
+          	 `<option value='3'>WLAN</option>
+          	 ` ` ` ?>          	 
+	    </select>	
+	  </td>
+ 	  <td>&nbsp;</td>
+	</tr>
+	<tr>
+  	  <td>&nbsp;</td>
+ 	  <td>Traffic Priority:</td>
+	  <td>
+	    <select id="uiViewPriority">
+          	<option value='low'>Low</option>
+          	<option value='medium'>Medium</option>
+          	<option value='high'>High</option>
+	    </select>	
+	  </td>
+ 	  <td>&nbsp;</td>
+	</tr>
+       <tr>
+          <td colspan=10>&nbsp;</td>
+       </tr>
+       <tr><td height=2 colspan=10 nowrap bgcolor="<? echo $var:bgColorHorStripe ?>"></td></tr>
+       <tr>
+          <td colspan=10>&nbsp;</td>
+       </tr>
+	<tr>
+  	  <td>&nbsp;</td>
+ 	  <td>TOS Marking</td>
+	  <td>
+            <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+                  <tr>
+	              <td align=left ><input <? echo $var:widDefCheckBoxOff ?> id="uiViewNormalService" value="off" onclick="jslDoToggleCheckBox(id);uiNormalService(value)" alt="Enable Normal Service"></td>
+	              <td align=left nowrap >Normal Service </td>
+                 </tr>
+                 <tr>
+                    <td colspan=2>
+			    <select id="uiViewTOS" multiple size=3>
+		  <? multiquery $var:qosconid:valid_settings/tos  
+		   '<option value=$01>$02</option>' ?>
+	    </select>	
+	  </td>
+	    	   </tr>
+	     </table>	   
+	  </td>
+ 	  <td>&nbsp;</td>
+	</tr>
+	<tr>
+	   <td align=center colspan=10 bgcolor="<? echo $var:bgColorBody ?>" style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint"><? echo $var:txtErrorHint ?></td>
+	</tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=19><? include /usr/www_safe/html/applycancel.html ?></td>
+ </tr>
+</table>
+</form>
+<div style="height: 10px"></div>

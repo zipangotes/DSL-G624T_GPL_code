@@ -1,0 +1,15 @@
+
+API to firmware upgrade application:
+------------------------------------
+
+1. The NSP firmware file must be placed into /var directory under any name
+less than 64 characters long. For example, nsp.firmware.img.
+2. The upgrade application must be called with execve() system call.
+The command line syntax is:
+	/usr/bin/upgrade -f nsp.firmware.img
+3. The procedure will kill every user process in the system, unmount
+flash partition, program the specified image, set MTD variables, and
+reboot the system.
+
+
+

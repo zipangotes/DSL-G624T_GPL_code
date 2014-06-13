@@ -1,0 +1,254 @@
+# #
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/config-language.txt.
+#
+
+export TI_TARGET_KERNEL_PATH=@@TARGET_HOME@@/src/kernel/@@LINUXVERSION@@/
+
+mainmenu_name "TI NSP/PSP Configuration"
+
+mainmenu_option next_comment
+comment 'Distribution'
+choice 'TI Distribution (Support Package Selection)' \
+    "Linux_NSP CONFIG_TI_NSP \
+     Linux_PSP CONFIG_TI_PSP" Linux_NSP
+string 'TI NSP version' CONFIG_TI_NSP_VERSION "3.6.0"
+string 'TI PSP version' CONFIG_TI_PSP_VERSION "4.2"
+endmenu
+
+
+
+mainmenu_option next_comment
+comment 'TI Board type'
+choice 'TI Reference board' \
+    "AR7RD  CONFIG_MIPS_AR7RD \
+     AR7VWI  CONFIG_MIPS_AR7VWI \
+     AR7WI  CONFIG_MIPS_AR7WI \
+     AR7V  CONFIG_MIPS_AR7V \
+     AR7VW  CONFIG_MIPS_AR7VW \
+     AR7WRD  CONFIG_MIPS_AR7WRD" AR7RD
+if [ "$CONFIG_MIPS_AR7RD" = "y" ]; then
+   choice 'Ethernet Phy' \
+     "Marvell CONFIG_MIPS_AVALANCHE_MARVELL \
+      Auto    CONFIG_AVALANCHE_CPMAC_AUTO" Auto
+fi
+if [ "$CONFIG_MIPS_AR7WRD" = "y" ]; then
+   choice 'Ethernet switch' \
+     "Marvell CONFIG_MIPS_AVALANCHE_MARVELL \
+      Auto    CONFIG_AVALANCHE_CPMAC_AUTO" Auto
+fi
+choice 'DSL firmware' \
+    "Annex_A CONFIG_TI_DSL_ANNEXA \
+     Annex_B CONFIG_TI_DSL_ANNEXB" Annex_A
+endmenu
+if [ "$CONFIG_MIPS_AR7RD_7300c" = "y" ]; then
+   define_bool CONFIG_MIPS_AR7RD_7300c y    
+fi
+
+#
+# Applications
+#
+
+mainmenu_option next_comment
+comment 'Target Applications'
+define_bool CONFIG_TI_UCLIBC y
+if [ "$CONFIG_MIPS_AR7RD" = "y" ]; then
+   define_bool CONFIG_TI_LIBATM y    
+   define_bool CONFIG_MIPS_AVALANCHE_VLYNQ n
+   define_bool CONFIG_AVALANCHE_VLYNQ_CLK_LOCAL n
+fi
+if [ "$CONFIG_MIPS_AR7VWI" = "y" -o "$CONFIG_MIPS_AR7WI" = "y" -o "$CONFIG_MIPS_AR7VW" = "y" ]; then
+   define_bool CONFIG_TI_LIBATM y    
+   define_bool CONFIG_TI_FOXY y    
+   define_bool CONFIG_TI_WLAN y    
+   define_bool CONFIG_MIPS_AVALANCHE_VLYNQ y
+   define_bool CONFIG_AVALANCHE_VLYNQ_CLK_LOCAL n
+   define_bool CONFIG_AVALANCHE_VLYNQ_POLARITY_LOW n
+   bool 'Wireless 1230' CONFIG_MIPS_AR7W_1230
+fi
+if [ "$CONFIG_MIPS_AR7WRD" = "y" ]; then
+   define_bool CONFIG_TI_LIBATM y    
+   define_bool CONFIG_TI_FOXY y    
+   define_bool CONFIG_TI_WLAN y
+   define_bool CONFIG_MIPS_AVALANCHE_VLYNQ y
+   define_bool CONFIG_AVALANCHE_VLYNQ_CLK_LOCAL n
+   define_bool CONFIG_AVALANCHE_VLYNQ_POLARITY_LOW n
+   bool 'Wireless 1230' CONFIG_MIPS_AR7W_1230
+fi
+if [ "$CONFIG_MIPS_AR7V" = "y" ]; then
+   define_bool CONFIG_TI_LIBATM y    
+   define_bool CONFIG_TI_FOXY y    
+   define_bool CONFIG_MIPS_AVALANCHE_VLYNQ n
+   define_bool CONFIG_AVALANCHE_VLYNQ_CLK_LOCAL n
+fi
+
+bool 'Bridge tools (brctl)' CONFIG_TI_BRCTL 
+bool 'Upgrader application and tools' CONFIG_TI_UPGRADER 
+bool 'Busybox application' CONFIG_TI_BUSYBOX
+if [ "$CONFIG_TI_NSP" = "y" ]; then
+   bool 'DHCP forwarder' CONFIG_TI_DHCP_FORWARDER       
+   bool 'DNS Proxy Utility' CONFIG_TI_DPROXY
+   bool 'NAT/Firewall Utility' CONFIG_TI_IPTABLES
+   bool 'Memory Technology Device tools' CONFIG_TI_MTD
+   bool 'RIP v2 tools' CONFIG_TI_NETKIT_ROUTEDV2
+   if [ "$CONFIG_TI_NETKIT_ROUTEDV2" = "n" ]; then 
+      bool 'legacy RIP v1 tools' CONFIG_TI_NETKIT_ROUTED
+   fi
+   bool 'Linux QOS tools (tc)' CONFIG_TI_IPROUTE2
+   bool 'Network Utilities (ARP)' CONFIG_TI_NETTOOLS
+   bool 'Point to Point Protocol (PPP,PPPoE)' CONFIG_TI_PPP_PPPOE
+   bool 'Tiny Web Server (THTTPD)' CONFIG_TI_THTTPD
+   bool 'DHCP server/client' CONFIG_TI_UDHCP
+   bool 'Simple Network Time protocol' CONFIG_TI_SNTP
+   bool 'Zlib Compression Library' CONFIG_TI_ZLIB
+   bool 'ATM Bridging tools (br2684ctl)' CONFIG_TI_BR2684CTL
+   bool 'Telnet Daemon' CONFIG_TI_UTELNETD
+   bool 'Compressed RAM filesystem' CONFIG_TI_CRAMFS
+   bool 'Dropbear SSH server' CONFIG_TI_DROPBEAR
+   bool 'Squash Filesystem (Squashfs)' CONFIG_TI_SQUASHFS
+   bool 'TI checksum utility' CONFIG_TI_CHECKSUM
+   bool 'TI DSL firmware' CONFIG_TI_DSL_FW
+   bool 'IGMP Proxy Utility' CONFIG_TI_IGMP_PROXY
+   bool 'Universal Plug and Play daemon' CONFIG_TI_UPNP
+   bool 'TI LED appliction' CONFIG_TI_LEDAPP
+   bool 'TI LED configuration' CONFIG_TI_LEDCFG
+   bool 'TI HTML web pages' CONFIG_TI_HTML
+   bool 'TI Configuration Manager' CONFIG_TI_CFGMGR
+   dep_bool 'Voice Application' CONFIG_TI_VOICEAPP $CONFIG_TI_CFGMGR
+   if [ "$CONFIG_TI_CFGMGR" = "y" ]; then
+      mainmenu_option next_comment
+      comment '   Config Manager Options'
+      bool '   Reference Module' CONFIG_TI_CFGMGR_REFERENCE
+      bool '   Ethernet Module'  CONFIG_TI_CFGMGR_ETH
+      bool '   Static Module'    CONFIG_TI_CFGMGR_STATIC
+      bool '   Resolver Module'  CONFIG_TI_CFGMGR_RESOLVER
+      bool '   Route Module'     CONFIG_TI_CFGMGR_ROUTE
+      bool '   Filter Module'    CONFIG_TI_CFGMGR_FILTER
+      bool '   Hostname Module'  CONFIG_TI_CFGMGR_HOSTNAME
+      dep_bool '   UPnP Module'  CONFIG_TI_CFGMGR_UPNP $CONFIG_TI_UPNP
+      bool '   RFC2684 Module'   CONFIG_TI_CFGMGR_RFC2684
+      bool '   CLIP Module'      CONFIG_TI_CFGMGR_CLIP
+      bool '   PVC Module'       CONFIG_TI_CFGMGR_PVC
+      bool '   SAR Module'       CONFIG_TI_CFGMGR_SAR
+      bool '   Bridge Module'    CONFIG_TI_CFGMGR_BRIDGE
+      bool '   WAN Bridge Module' CONFIG_TI_CFGMGR_WBRIDGE
+      dep_bool '   PPPoA Module' CONFIG_TI_CFGMGR_PPPOA $CONFIG_TI_PPP_PPPOE
+      dep_bool '   PPPoE Module' CONFIG_TI_CFGMGR_PPPOE $CONFIG_TI_PPP_PPPOE
+      bool '   USB Module'       CONFIG_TI_CFGMGR_USB
+      dep_bool '   DHCPC Module' CONFIG_TI_CFGMGR_DHCPC $CONFIG_TI_UDHCP
+      dep_bool '   DHCPD Module' CONFIG_TI_CFGMGR_DHCPD $CONFIG_TI_UDHCP
+      bool '   Service Module'   CONFIG_TI_CFGMGR_SERVICE
+      bool '   Routed Module'    CONFIG_TI_CFGMGR_ROUTED
+      bool '   DHCP-forward Module' CONFIG_TI_CFGMGR_DHCPFWD
+      dep_bool '   Firewall Module' CONFIG_TI_CFGMGR_FLIB $CONFIG_TI_IPTABLES
+      dep_bool '   Firewall Lan Module' CONFIG_TI_CFGMGR_FLAN $CONFIG_TI_IPTABLES
+      dep_bool '   Firewall Wan Module' CONFIG_TI_CFGMGR_FWAN $CONFIG_TI_IPTABLES
+      dep_bool '   Firewall DB Module'  CONFIG_TI_CFGMGR_FDB $CONFIG_TI_IPTABLES
+      dep_bool '   IGMP Proxy Module'   CONFIG_TI_CFGMGR_IGMPPROXY $CONFIG_TI_IGMP_PROXY
+      dep_bool '   Bridge Filter Module' CONFIG_TI_CFGMGR_BFILTER $CONFIG_TI_BRCTL
+      dep_bool '   Web GUI Module'      CONFIG_TI_CFGMGR_WEBUI $CONFIG_TI_THTTPD
+      bool '   SNMP Module'      CONFIG_TI_CFGMGR_SNMP
+      bool '   TEXTUI Interface' CONFIG_TI_CFGMGR_TEXTUI
+      bool '   CLI Interface' CONFIG_TI_CFGMGR_CMCLI
+      bool '   TFTPU Interface' CONFIG_TI_CFGMGR_TFTPU
+      bool '   QOS Module'       CONFIG_TI_CFGMGR_QOS
+      dep_bool '   SNTP Module'       CONFIG_TI_CFGMGR_SNTP $CONFIG_TI_SNTP
+	  if [ "$CONFIG_MIPS_AR7WRD" = "y" -o "$CONFIG_MIPS_AR7VWI" = "y" -o "$CONFIG_MIPS_AR7WI" = "y" -o "$CONFIG_MIPS_AR7VW" = "y" ]; then
+         bool '   AP Module'        CONFIG_TI_CFGMGR_AP
+         bool '   AP filter Module' CONFIG_TI_CFGMGR_WLAN_FILTER
+      fi
+      dep_bool '  Voice Module'      CONFIG_TI_CFGMGR_VOICE $CONFIG_TI_VOICEAPP
+      bool '   Digitally signed firmware' CONFIG_TI_CFGMGR_DSS
+      endmenu
+   fi
+   if [ "$CONFIG_TI_VOICEAPP" = "y" ]; then
+      mainmenu_option next_comment
+      comment '   VOIP Build Options'
+      choice 'TI VOIP Build Selection' \
+         "MGCP          CONFIG_TI_VOICE_MGCP \
+          SIP           CONFIG_TI_VOICE_SIP \
+          dimtest       CONFIG_TI_VOICE_DIMTEST \
+          ggbasica      CONFIG_TI_VOICE_GGBASICA \
+          ggsvca        CONFIG_TI_VOICE_GGSVCA" MGCP
+      choice 'TI VOIP DSP Selection' \
+         "SI_LAB        CONFIG_TI_VOICE_DSP_CHOICE_SI_LAB\
+          LEGERITY      CONFIG_TI_VOICE_DSP_CHOICE_LEGERITY" SI_LAB
+      if [ "$CONFIG_TI_VOICE_DSP_CHOICE_SI_LAB" = "y" ]; then
+      choice 'TI VOIP DSP Image Selection' \
+         "d21_d20 CONFIG_TI_VOICE_DSP_SI_LAB_IMAGE_d21_d20\
+          d22  CONFIG_TI_VOICE_DSP_SI_LAB_IMAGE_d22" d22
+      fi
+      endmenu
+   fi
+fi
+if [ "$CONFIG_TI_BUSYBOX" = "y" ]; then
+mainmenu_option next_comment
+comment '   BusyBox Options'
+source @@TARGET_HOME@@/src/busybox/sysdeps/linux/nsp_config.in
+endmenu
+fi
+endmenu
+
+mainmenu_option next_comment
+comment 'Kernel Configuration'
+source $TI_TARGET_KERNEL_PATH./arch/mips/config.in
+endmenu
+
+if [ "$CONFIG_TI_UCLIBC" = "y" ]; then
+mainmenu_option next_comment
+comment '   uClibc Configuration'
+source @@TARGET_HOME@@/src/uClibc/extra/Configs/Config.nsp.mipsel
+endmenu
+fi
+
+mainmenu_option next_comment
+comment 'BIOS Configuration'
+choice 'TI Bootloader' \
+    "ADAM2 CONFIG_MIPS_AVALANCHE_ADAM2 \
+     PSPBOOT CONFIG_MIPS_AVALANCHE_PSPBOOT" ADAM2
+if [ "$CONFIG_MIPS_AVALANCHE_ADAM2" = "y" ]; then
+	bool 'FTP client' CONFIG_ADAM2_FTP
+	choice 'BIOS Build size SDRAM(8/16)' \
+   		"8M CONFIG_ADAM2_8M \
+    	16M CONFIG_ADAM2_16M" 16M
+	if [ "$CONFIG_MIPS_AR7V" = "y" -o "$CONFIG_MIPS_AR7WI" = "y" ]; then
+		choice 'EMAC Phy' \
+   			"External CONFIG_ADAM2_EXTERNAL \
+			Internal CONFIG_ADAM2_INTERNAL" Internal
+	else
+		choice 'EMAC Phy' \
+   			"External CONFIG_ADAM2_EXTERNAL \
+			Internal CONFIG_ADAM2_INTERNAL" External
+	fi
+	choice 'Output format' \
+   		"Binary CONFIG_ADAM2_FORMAT_BIN \
+    	SRecord CONFIG_ADAM2_FORMAT_SREC" Binary
+fi
+if [ "$CONFIG_MIPS_AVALANCHE_PSPBOOT" = "y" ]; then   
+	choice 'Network Vehicle' \
+		"PCAPP CONFIG_PSPBOOT_PCAPP \
+   		FTP CONFIG_PSPBOOT_FTP \
+    	TFTP CONFIG_PSPBOOT_TFTP" PCAPP
+	choice 'Output format' \
+   		"Binary CONFIG_PSPBOOT_FORMAT_BIN \
+    	SRecord CONFIG_PSPBOOT_FORMAT_SREC" Binary
+fi
+endmenu
+
+mainmenu_option next_comment
+comment 'NFS Client Support'
+bool 'NFS Client Enabled' CONFIG_NFS_CLIENT
+if [ "$CONFIG_NFS_CLIENT" = "y" ]; then
+   define_bool CONFIG_NFSMOUNT y
+   define_bool CONFIG_CUT y
+   define_bool UCLIBC_HAS_RPC y
+   define_bool UCLIBC_HAS_FULL_RPC y
+   define_bool CONFIG_NFS_FS y
+   define_bool CONFIG_NFS_V3 y
+   define_bool CONFIG_SUNRPC y
+   define_bool CONFIG_LOCKD y
+   define_bool CONFIG_LOCKD_V4 y
+   define_bool CONFIG_ADAM2_16M y
+fi
+endmenu
+

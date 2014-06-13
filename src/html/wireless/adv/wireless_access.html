@@ -1,0 +1,95 @@
+<!-- Wireless Access List -->
+<form onSubmit="return false">
+  <table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="#757575" width=455>
+    <tr>
+      <td align=center class="header" bgcolor="#FFFFFF">Wireless Management</td>
+    </tr>
+    <tr>
+      <td height=5 nowrap bgcolor="#D3D9DF"></td>
+    </tr>
+    <tr>
+      <td bgcolor="#FFFFFF" align=center>
+		<table width=387 border=0 cellpadding=0 cellspacing=0>
+		<tr>
+			<td height=6 nowrap></td>
+		</tr>
+		<tr>
+			<td><input type="image" src="/usr/www_safe/html/images/ti_menu_wireless_access.gif" width=117 height=20 border=0 alt="" id="uiViewManagement0" onclick="uiDoAccessPage(id)"></td>
+			<td><input type="image" src="/usr/www_safe/html/images/ti_menu_wireless_associated.gif" width=150 height=20 border=0 alt="" id="uiViewManagement1" onclick="uiDoStaPage(id)"></td>
+			<td><input type="image" src="/usr/www_safe/html/images/ti_menu_wireless_multiple.gif" width=120 height=20 border=0 alt="" id="uiViewManagement2" onclick="uiDoSSIDPage(id)"></td>
+		</tr>
+		<tr>
+			<td height=6 nowrap></td>
+		</tr>
+		</table>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#FFFFFF" valign=top align=center>
+        <table cellspacing=0 border=0 cellpadding=1 align=center>
+	   <tr>		   
+	     <td colspan=4 align=center class="header">Access List</td>
+	   </tr>
+	   <tr>		   
+	     <td width=19><input type="image" src="/usr/www_safe/html/images/ti_check_off.gif" id="uiViewAccessEnable" value="off" onclick="uiDoEnableAccess(value)" alt="" width=19 height=20 border=0></td>
+	     <td align=left colspan=3>Enable Access List</td>
+	   <tr>
+	     <td>&nbsp;</td>
+	     <td colspan=3 align=center height=30>
+		<table cellspacing=0 border=0 cellpadding=1 align=center>
+ 	    	  <tr>
+		    <td><input type="image" src="/usr/www_safe/html/images/ti_radio_off.gif" id="uiViewAccessType0" value="off" onclick="jslDoToggleRadio('uiViewAccessType',0,2);uiDoAccessTypeChange(1)" alt="" width=20 height=20 border=0></td>
+		    <td width=60 align=left>Allow</td>
+		    <td><input type="image" src="/usr/www_safe/html/images/ti_radio_off.gif" id="uiViewAccessType1" value="off" onclick="jslDoToggleRadio('uiViewAccessType',1,2);uiDoAccessTypeChange(2)" alt="" width=20 height=20 border=0></td>
+		    <td width=60 align=left>Ban</td>
+	    	  </tr>
+		</table>
+	      </td>
+	    </tr>
+	    <tr>		   
+	      <td></td>
+	      <td align=right>Mac Address:&nbsp;</td>
+	      <td><input type="text" id="uiViewAddMac" name="ap:settings/mac_add" size="17" maxlength="17"></td>
+	      <td width=62 height=19><input type="image" id="uiViewAddMacButton" src="/usr/www_safe/html/images/ti_button_add.gif" onclick="uiDoAddMacAddress()" alt="Add" width="62" height="19" border=0></td>
+	    </tr>
+	    <tr>		   
+	      <td align=center colspan=4 height=15><img src="/usr/www_safe/html/images/ti_px757575.gif" alt="" width=300 height=1></td>
+	    </tr>
+	  </table>
+         <table cellspacing=0 border=0 cellpadding=1 align=center>
+	    <tr>		   
+	      <td align=center><u>Delete</u></td>
+	      <td width=10 nowrap></td>
+	      <td align=center><u>Mac Address</u></td>
+	    </tr>
+           <? multiquery ap:status/access_list
+		`<tr>
+		    <td align=center>
+			<input type="image" src="/usr/www_safe/html/images/ti_radio_off.gif" id="uiViewMacAddress$0" onclick="uiDeleteMacAddress('$1')" alt="" width=20 height=20 border=0>
+		    </td>
+		    <td width=10 nowrap></td>
+		    <td align=center>$1</td>
+		 </tr>
+		` ?>
+	   </table>
+          <table cellspacing=0 border=0 cellpadding=1 align=center>
+	     <tr>
+		 <td height=20><font size=1>Note: you must <a href="../cgi-bin/webcm?getpage=%2Fusr%2Fwww_safe%2Fhtml%2Fmenus%2Fmenu1.html&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+	     </tr>
+	   </table>
+        </td>
+    </tr>
+    <tr>
+     <td align=right bgcolor="#FFFFFF">
+	 <table border=0 cellspacing=0 width=124>
+	  <tr valign=middle>
+		<td width=62 height=19><input type="image" src="/usr/www_safe/html/images/ti_button_apply.gif" onclick="uiDoSave()" alt="Apply" width="62" height="19" border=0></td>
+		<td width=62 height=19><input type="image" src="/usr/www_safe/html/images/ti_button_cancel.gif" onClick="uiDoCancel()" alt="Cancel" width="62" height="19" border=0></td>
+	  </tr>
+	 </table>	 
+     </td>
+    </tr>
+  </table>
+<div style="height: 10px;"></div>
+</form>
+<!-- END Wireless Access List -->

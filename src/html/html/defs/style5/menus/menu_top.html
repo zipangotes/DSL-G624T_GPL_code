@@ -1,0 +1,56 @@
+<? setvariable var:pagepath `../cgi-bin/webcm?getpage=%2Fusr%2Fwww_safe%2Fhtml%2Fdefs%2F$var:style/menus%2F$var:main.html&var:style=$var:style&var:main=$var:main&var:pagename=home&var:pagetitle=Home&var:menu` ?>
+<? setvariable var:concount <? multiquerycount manager:command/connection/list ?> ?>
+<!-- Top Menu -->
+<table width=760 cellpadding=0 cellspacing=0 <? echo $var:cntrBorder ?>>
+ <tr><td width=760 height=5 <? if eq `1` `$var:HasWireless` `colspan=19` `colspan=17` ?> nowrap></td></tr>
+ <tr><td width=760 height=2 <? if eq `1` `$var:HasWireless` `colspan=19` `colspan=17` ?> nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td></tr>
+ <tr>
+  <td width=2 height=39 rowspan=3 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td> <!--    SPAN    -->
+  <td width=152>
+  	<img src="<? echo $var:imgMenuLogo ?>" <? echo $var:dimMenuLogo ?> alt="<? echo $var:altMenuLogo ?>"></td>
+  <td width=1 height=33 rowspan=2 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td> <!--    SPAN    -->
+  <td width=57><a href="<? echo $var:pagepath?>=home&var:menutitle=Home" <? if eq $var:menu tools `onclick="uiToolsTopDoOnClick(href)"` ?>>
+   	<img id="uiViewMenuTopHomeBtn" src="<? if eq $var:menu home `$var:btnMenuHomeHilite` `$var:btnMenuHome` ?>" <? echo $var:dimBtnMenuHome ?> alt="<? echo $var:altBtnMenuHome ?>"></a></td>
+  <td width=1 height=25 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td>
+
+  <td width=59><a href="<? echo $var:pagepath?>=setup&var:menutitle=Setup" <? if eq $var:menu tools `onclick="uiToolsTopDoOnClick(href)"` ?>>
+   	<img id="uiViewMenuTopSetupBtn" src="<? if eq $var:menu setup `$var:btnMenuSetupHilite` `$var:btnMenuSetup` ?>" <? echo $var:dimBtnMenuSetup ?> alt="<? echo $var:altBtnMenuSetup ?>"></a></td>
+  <td width=1 height=25 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td>
+
+  <td width=81><a href="<? echo $var:pagepath?>=adv&var:menutitle=Advanced" <? if eq $var:menu tools `onclick="uiToolsTopDoOnClick(href)"` ?>>
+   	<img id="uiViewMenuTopAdvBtn" src="<? if eq $var:menu adv `$var:btnMenuAdvHilite` `$var:btnMenuAdv` ?>" <? echo $var:dimBtnMenuAdv ?> alt="<? echo $var:altBtnMenuAdv ?>"></a></td>
+  <td width=1 height=25 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td>
+
+  <? if eq `1` `$var:HasWireless`
+  `
+  <td width=76><a href="$var:pagepath=wireless&var:menutitle=Wireless" <? if eq $var:menu tools `onclick="uiToolsTopDoOnClick(href)"` ?>>
+   <img id="uiViewMenuTopWirelessBtn" src="<? if eq $var:menu wireless `$var:btnMenuWirelessHilite` `$var:btnMenuWireless` ?>" $var:dimBtnMenuWireless alt="$var:altBtnMenuWireless"></a></td>
+  <td width=1 height=25 nowrap bgcolor="$var:menuColorBlack"></td>
+  ` ?> 
+
+  <td width=58><a href="<? echo $var:pagepath?>=tools&var:menutitle=Tools" <? if eq $var:menu tools `onclick="uiToolsTopDoOnClick(href)"` ?>>
+   <img id="uiViewMenuTopToolsBtn"  src="<? if eq $var:menu tools `$var:btnMenuToolsHilite` `$var:btnMenuTools` ?>" <? echo $var:dimBtnMenuTools ?> alt="<? echo $var:altBtnMenuTools ?>"></a></td>
+  <td width=1 height=25 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td>
+
+  <td width=66><a href="<? echo $var:pagepath?>=status&var:menutitle=Status" <? if eq $var:menu tools `onclick="uiToolsTopDoOnClick(href)"` ?>>
+   <img id="uiViewMenuTopStatusBtn"  src="<? if eq $var:menu status `$var:btnMenuStatusHilite` `$var:btnMenuStatus` ?>" <? echo $var:dimBtnMenuStatus ?> alt="<? echo $var:altBtnMenuStatus ?>"></a></td>
+  <td width=1 height=25 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td>
+
+  <td width=51><a href="<? echo $var:pagepath?>=help&var:menutitle=Help" <? if eq $var:menu tools `onclick="uiToolsTopDoOnClick(href)"` ?>>
+   <img id="uiViewMenuTopHelpBtn" src="<? if eq $var:menu help `$var:btnMenuHelpHilite` `$var:btnMenuHelp` ?>" <? echo $var:dimBtnMenuHelp ?> alt="<? echo $var:altBtnMenuHelp ?>"></a></td>
+  <td width=1 height=25 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td>
+  <td <? if eq `1` `$var:HasWireless` `width=148` `width=225` ?> height=25 nowrap bgcolor="#9595C7"></td>
+  <td width=2 height=39 rowspan=3 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td>    <!--   SPAN    -->
+ </tr>
+ <tr>
+  <td width=152 height=8 nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td>
+  <td width=603 height=8 <? if eq `1` `$var:HasWireless` `colspan=15` `colspan=13` ?> nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td>
+ </tr>
+ <tr>
+  <td width=152 height=6 nowrap bgcolor="#FFFFFF"></td>
+  <td width=1 height=6 nowrap bgcolor="<? if eq $var:menu home `#FFFFFF` `$var:menuColorBlack` ?>"</td>
+  <td width=603 height=6 <? if eq `1` `$var:HasWireless` `colspan=15` `colspan=13` ?> nowrap bgcolor="#FFFFFF"></td>
+ </tr>
+ <tr><td width=760 height=1 <? if eq `1` `$var:HasWireless` `colspan=19` `colspan=17` ?> nowrap bgcolor="<? echo $var:menuColorBlack ?>"></td></tr>
+</table>
+<!-- END Top Menu -->

@@ -1,0 +1,82 @@
+
+
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=20 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">IP QoS Help</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top>
+  
+<font size=1>
+IP QoS services in the NSP is applicable to the output device (Egress side).
+Meaning the IP QoS traffic shaping is associated with any transmitted traffic 
+from the perspective of the NSP. Each output device has 3 priority queues 
+associated with transmit data. The High priority queue has strict priority over
+medium and low priority queues. The Medium and Low priority queues are serviced
+on a Round Robin priority basis according to the configured weights (WRR), after
+the High priority queue has been completely serviced.<br>
+The "IP QoS" section under "Advanced section" allows you to setup IP QoS for a
+connection.<br>
+The "IP QoS" section has two sub-sections - <u>QoS Setup Page</u> and <u>Rule Setup Page.</u></font>
+        </td>
+</tr>
+
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>">
+        <font size=1><b>QoS Setup Page</b><br>
+The QoS setup page allows you to configure IP QoS for a connection, to view the 
+configured QoS rules and to add/delete a QoS rule.<br>
+
+<u>Choose a connection:</u> This field allows you choose a connection from the
+list of available connections. For e.g. Choose a WAN connection to enable IP QoS
+for the Upstream traffic of the Modem. On the other hand choose the LAN connection
+(Ethernet and USB Bridged) for the downstream traffic.<br>
+
+<u>Low/Medium priority weights:</u> These 2 fields will allow you to select the
+weights of the Medium and Low priority queues in increments of 10 percent, so 
+that that the sum of the weights of these 2 queues is equal to 100 percent.<br>
+
+<u>Enable IP QoS:</u> This field allows you to enable/disable IP QoS for the
+chosen connection.<br>
+
+<u>Trusted Mode:</u> The NSP has two primary modes of operation with regard
+to queue traffic prioritization - Trusted and Un-trusted. This field allows you
+to choose the mode - Trusted (checked) and Un-trusted (Unchecked).<br>
+In "Trusted mode" all the rules will be applied first, regardless of the setting
+of the TOS bits. After the rules have been exhausted the existing TOS bit settings 
+will be honored. The "Un-trusted" mode will match first against all rules as in 
+"Trusted" mode. The difference is that if there is no match then a default rule
+will be used. The default rule will have an associated queuing priority - Low.<br>
+
+<u>Rules section:</u> This section displays a list of configured rules, allows
+you to add a new rule and allows you to delete an existing rule.<br>
+Each rule is a Matching criteria that identifies an Application traffic to be
+transmitted by the NSP using one of the 3 Priority Queues - High, Medium and Low.<br><br>
+
+<u>Note:</u> If IP QoS is enabled and no rules are defined, a Default Rule is added 
+which is hidden. The Default Rule puts all the Traffic to be transmitted in the
+<u>Low Priority Queue</u>.
+       </font>
+	</td>
+</tr>
+
+<tr>
+	<td bgcolor="<? echo $var:bgColorBody ?>">
+        <font size=1><b>Rule Setup Page</b><br>
+This page is invoked when you click on the "Add" button of "QoS Setup Page". 
+This page allows you add a Rule or Matching criteria that identifies an Application
+traffic. The Application traffic can be identified by Rule Name, Source/Destination 
+IP Address and Netmask, Source/Destination Port range, Protocol and Traffic Priority.<br>
+
+The Traffic Priority field corresponds to the Priority Queue (High/Medium/Low) for
+for this traffic. The possible options for Protocol are - ANY, ICMP, TCP and UDP. 
+Wildcard(*) entries are allowed for IP Address/Netmask and Port range fields.<br>
+
+The additional TOS marking field allows you to assign a TOS value to this traffic.
+The values for the TOS marking can be - No Change, Normal Service, Minimize
+monetary cost, Maximize reliability, Maximize throughput and Minimize delay. 
+       </font>
+	</td>
+</tr>
+	
+</table>

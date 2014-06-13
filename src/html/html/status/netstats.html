@@ -1,0 +1,47 @@
+
+<!-- Network Statistics -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 align=center bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Network Statistics</font></td>
+ </tr>
+ <tr>
+  <td nowrap bgcolor="<? echo $var:bgColorBody ?>" height=45>Choose an interface to view your network statistics:<br>
+   <!-- START radio button table -->
+   <table <? echo $var:cntrBorder ?> align=center cellspacing=1 cellpadding=1>		
+    <tr>
+     <td width=20><input <? if eq eth `$var:interface` `$var:widDefRadioBtnOn` `$var:widDefRadioBtnOff` ?> id="uiViewStats0" onclick="jslDoToggleRadio('uiViewStats',0,<? if eq `1` `$var:HasWireless` `4` `3` ?>);uiDoEthPage()" alt=""></td>
+     <td width=80>Ethernet</td>
+   <? if eq `1` `$var:HasUsb`
+   ` <td width=20><input <? if eq usb `$var:interface` `$var:widDefRadioBtnOn` `$var:widDefRadioBtnOff` ?> id="uiViewStats1" onclick="jslDoToggleRadio('uiViewStats',1,<? if eq `1` `$var:HasWireless` `4` `3` ?>);uiDoUSBPage()" alt=""></td>
+     <td width=60>USB</td>
+   ` ` `?>
+   <? if eq `1` `$var:HasDsl`
+   `<td width=20><input <? if eq dsl `$var:interface` `$var:widDefRadioBtnOn` `$var:widDefRadioBtnOff` ?> id="uiViewStats2" onclick="jslDoToggleRadio('uiViewStats',2,<? if eq `1` `$var:HasWireless` `4` `3` ?>);uiDoDSLPage()" alt=""></td>
+     <td width=50>DSL</td>
+   ` 
+   `<td width=20><input <? if eq wan `$var:interface` `$var:widDefRadioBtnOn` `$var:widDefRadioBtnOff` ?> id="uiViewStats2" onclick="jslDoToggleRadio('uiViewStats',2,<? if eq `1` `$var:HasWireless` `4` `3` ?>);uiDoWANPage()" alt=""></td>
+     <td width=50>WAN</td>
+   `?>
+       <? if eq `1` `$var:HasWireless`
+   ` <td width=20><input <? if eq wireless `$var:interface` `$var:widDefRadioBtnOn` `$var:widDefRadioBtnOff` ?> id="uiViewStats3" onclick="jslDoToggleRadio('uiViewStats',3,4);uiDoWirelessPage()" alt=""></td>
+     <td>Wireless</td>
+   ` ` `?>
+    </tr>
+   </table>
+   <!-- END radio button table -->
+  </td>
+ </tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top height=291>
+   <? include /usr/www_safe/html/status/$var:interface.html ?>
+  </td>
+ </tr>
+ <tr> 
+  <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28 valign=middle>
+   <input <? echo $var:widDefBtnRefresh ?> onclick="uiDoRefresh()" alt="Refresh">
+  </td>
+ </tr>
+</table>
+</form>
+<!-- END Network Statistics -->

@@ -1,0 +1,6 @@
+
+<? setvariable var:advMsgBlockConn `You must create a connection to enter this setup` ?>
+<? setvariable var:advMsgBlockLanc `You must enter an IP address on LAN Clients page for the selected lan group to enter this setup.` ?>
+<? setvariable var:advMsgBlockFwNAT `You must enable firewall and NAT services to enter this setup` ?>
+
+

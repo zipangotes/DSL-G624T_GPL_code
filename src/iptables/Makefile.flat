@@ -1,0 +1,15 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+all: build install
+
+build:
+	$(MAKE) TI_FILESYSTEM=$(TI_filesystem_path) TI_KERNEL_VERSION=$(TI_kernel_version)
+	mips_fp_le-strip -s iptables
+
+install: 
+	$(MAKE) install TI_FILESYSTEM=$(TI_filesystem_path) TI_KERNEL_VERSION=$(TI_kernel_version)
+
+clean:
+	$(MAKE) -i  clean

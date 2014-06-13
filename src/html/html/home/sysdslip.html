@@ -1,0 +1,27 @@
+<!-- System Uptime, DSL, LAN IP -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 align=center width=225 bgcolor="<? echo $var:bgColorTable ?>">
+ <tr>
+  <td nowrap align=left bgcolor="#E3E3FF"><font size=1>System Uptime: </font></td>
+  <td align=left  bgcolor="#E3E3FF" nowrap><font size=1><? query logic:status/uptime_hours ?> hours <? query logic:status/uptime_minutes ?> minutes</font></td>
+ </tr>
+ <tr>
+  <td nowrap align=left  bgcolor="#E3E3FF"><font size=1>DSL Status:</font></td>
+  <? setvariable var:DSLTrainingState "Connecting..." ?>
+  <? if eq `<? query sar:status/dsl_carrier_state ?>` `0` `<? setvariable var:DSLTrainingState "Disconnected" ?>` ?>
+  <? if eq `<? query sar:status/dsl_carrier_state ?>` `2` `<? setvariable var:DSLTrainingState "Connected" ?>`    ?>
+  <td align=left  bgcolor="#E3E3FF"><font size=1><? echo $var:DSLTrainingState ?></font></td>	
+ </tr>
+ <tr>
+  <td nowrap align=left  bgcolor="#E3E3FF"><font size=1>DSL Speed:</font></td>
+  <td align=left  bgcolor="#E3E3FF"><font size=1><? query sar:status/dsl_us_rate ?>/<? query sar:status/dsl_ds_rate ?>kbps</font></td>
+ </tr>
+ <tr>
+  <td nowrap align=left  bgcolor="#E3E3FF"><font size=1>LAN IP Address:</font></td>
+  <td align=left  bgcolor="#E3E3FF"><font size=1><? query bridgeip:settings/type '<? query bridgeip:$01:settings/ip ?>' ?></font></td>
+ </tr>
+ <tr>
+  <td nowrap align=left  bgcolor="#E3E3FF"><font size=1>Wireless RF:</font></td>
+  <td align=left  bgcolor="#E3E3FF"><font size=1><? if eq '0' '<? query ap:settings/ap_enabled ?>' `Disabled` `Enabled` ?></font></td>
+ </tr>
+</table>
+<!-- END System Uptime, DSL, LAN IP -->

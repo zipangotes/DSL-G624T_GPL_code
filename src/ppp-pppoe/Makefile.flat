@@ -1,0 +1,29 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+export CROSS_COMPILE_PREFIX=$(TI_uclibc_base)
+
+all: build install
+
+build:
+	CFLAGS="-Os -Wall -W -Wpointer-arith -Wbad-function-cast -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -Winline" ./configure 
+	$(MAKE)
+
+install: 
+	mips_fp_le-strip -s pppd/pppd
+	install -s -m 0755 pppd/pppd $(TI_base)$(TI_sbindir)/.
+	install -s -m 0755 pppd/plugins/libpppoatm.so $(TI_base)$(TI_rlibdir)/.
+	install -s -m 0755 pppd/plugins/pppoe/libpppoe.so $(TI_base)$(TI_rlibdir)/.
+	mkdir -p  $(TI_base)$(TI_etcdir)/ppp
+	cd $(TI_base)$(TI_etcdir)/ppp
+	ln -sf ../resolv.conf resolv.conf
+
+clean: 
+	$(MAKE) clean
+
+distclean:
+	@if [ -e $(TARGET_HOME)/src/ppp-pppoe/Makefile ]; then \
+	$(MAKE) dist-clean; \
+	fi
+	-rm -f resolv.conf

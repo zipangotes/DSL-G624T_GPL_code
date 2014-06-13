@@ -1,0 +1,89 @@
+
+<!-- SNTP Management -->
+<form onsubmit="return false"> 
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">SNTP</font></td>
+</tr>
+ <tr><td bgcolor="<? echo $var:bgColorBody ?>" height=21 align=center><font size=1>To enable SNTP, check the Enable SNTP box and enter a time server.</font></td></tr>
+  <tr>
+   <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+   
+   <div style="height: 1px"></div>
+
+   <table border=0 cellspacing=0 cellpadding=2>
+    <tr><td align=center colspan=2><? include /usr/www_safe/html/setup/error.html ?></td></tr>
+    <tr>
+	 <td colspan=2 nowrap>
+      <table border=0 cellspacing=1 cellpadding=1>
+       <tr>
+        <td><input <? echo $var:widDefCheckBoxOff ?> id="uiViewSNTPState"  value="off" onclick="jslDoToggleCheckBox(id);uiDoChangeSNTPState(value)" alt=""></td>
+        <td align=left><b class="header">Enable SNTP</b></td>
+       </tr>
+      </table> 
+     </td>
+    </tr>
+   <tr id="primarysrv">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPrimaryMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Primary SNTP Server:</td>
+         <td align=left><input type="text" name="uiViewPrimaryMark" value="" maxlength="64" size="15" id="uiViewPrimary"></td>
+   </tr>
+
+   <tr id="secondarysrv">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewSecondaryMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Secondary SNTP Server:</td>
+         <td align=left><input type="text" name="uiViewSecondaryMark" value="" maxlength="64" size="15" id="uiViewSecondary"></td>
+   </tr>
+
+   <tr id="tertiarysrv">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewTertiaryMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Tertiary SNTP Server:</td>
+         <td align=left><input type="text" name="uiViewTertiaryMark" value="" maxlength="64" size="15" id="uiViewTertiary"></td>
+   </tr>
+
+   <tr id="timeout">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewTimeoutMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Timeout:</td>
+         <td align=left><input type="text" name="uiViewTimeoutMark" value="" maxlength="8" size="8" id="uiViewTimeout"> Secs</td>
+   </tr>
+
+   <tr id="pollinterval">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPollIntervalMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Polling Interval:</td>
+         <td align=left><input type="text" name="uiViewPollIntervalMark" value="" maxlength="8" size="8" id="uiViewPollInterval"> Mins</td>
+   </tr>
+
+   <tr id="retrycount">
+         <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewRetryCountMark" <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right nowrap>Retry Count:</td>
+         <td align=left><input type="text" name="uiViewRetryCountMark" value="" maxlength="8" size="8" id="uiViewRetryCount"></td>
+   </tr>
+
+   <tr id="timezone">
+ 	  <td>&nbsp;</td>
+         <td align=right nowrap>Time Zone:</td>
+         <td align=left>
+            <select id="uiViewTimezone" onclick="uiTimeZone()">
+	       <? multiquery sntp:settings/timezonelist
+		         '<option value=$01>$02</option>' ?>
+	     </select>
+         </td>
+   </tr>
+   <tr id="daylight">
+ 	  <td>&nbsp;</td>
+         <td align=right nowrap>Day Light:</td>
+         <td align=left><input <? echo $var:widDefCheckBoxOff ?> id="uiViewDayLight"  value="off" onclick="jslDoToggleCheckBox(id);" alt="">
+         </td>
+   </tr>
+    <tr><td colspan=2 height=4 nowrap></td></tr>
+    <tr>
+	   <td align=center colspan=10 bgcolor="<? echo $var:bgColorBody ?>" style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint"><? echo $var:txtErrorHint ?></td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</table>
+</form>
+<!-- END SNTP Management -->
+

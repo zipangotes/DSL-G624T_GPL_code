@@ -1,0 +1,76 @@
+		
+<!-- Modem Test Page -->		
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=20 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Modem Test</font></td>
+</tr>
+<tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" height=30>
+   <font size=1>This test can be used to check whether your Modem is properly connected to the 
+    Network. This test may take a few seconds to complete. To perform the test, 
+    select your connection from the list and press the Test button.</font>
+  </td>
+ </tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  
+  	<div style="height: 5px"></div>
+
+   <? if eq 0 <? multiquerycount manager:command/connection/list_group ?>
+   `<table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1 align=center>
+     <tr><td width=250 height=50 bgcolor="<? echo $var:bgColorBody ?>" align=center><font size=1><b>No Connections Available</b></font></td></tr>
+    </table>						   
+     <input type="hidden" name="uiViewTestResult" id="uiViewTestResult">`
+  
+   `<table $var:cntrBorder cellspacing=2 cellpadding=1 align=center>
+     <tr>
+      <td></td>
+      <td align=center><u>Connection</u></td>
+      <td align=center ><u>Type</u></td>
+      <td align=center ><u>VPI:VCI</u></td>
+     </tr>
+     <? multiquery manager:command/connection/list_group 
+    `<tr>
+      <td width=20 align=right><input $var:widDefRadioBtnOff id="uiViewTestStatus$10" value="off" onclick="uiChangeTestStatus($10);uiCurrentConnid('$11')" alt=""></td>
+      <td align=left>$14</td>
+      <td align=center>$16</td>
+      <td align=center>$15</td>
+     </tr>` ?>
+     <tr>
+      <td colspan=4 align=center height=32 valign=bottom>Test Type: 
+       <select size="1" name="uiViewModemTest" id="uiViewModemTest">
+       <? multiquery sar:valid_settings/oamType
+       `<option value="$11">$12</option>
+       ` ?>
+       </select>
+      </td>
+     </tr>
+    </table>
+    <table cellspacing=0 $var:cntrBorder cellpadding=3 align=center width=447>
+     <tr>
+      <td align=center colspan=2>
+       <table $var:cntrBorder cellspacing=0 cellpadding=0 align=center width=375>
+        <tr>
+         <td align=right height=26><input $var:widDefBtnTest onclick="uiDoSave()" alt="Test"></td>
+        </tr>
+       </table>
+      </td>
+     </tr>
+     <tr> 
+      <td height=12 nowrap valign=middle colspan=2 align=center><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=385 height=1></td>
+     </tr>
+     <tr>
+      <td align=center>
+       Modem Test Result: <input type="text" style="border-bottom: 0px;border-top: 0px;border-right: 0px;border-left: 0px;background-color: <? echo $var:bgColorBody ?>;" name="uiViewTestResult" id="uiViewTestResult">
+      </td>
+     </tr>
+    </table>`?>
+  </td>
+ </tr>
+</table>
+<div style="height: 10px"></div>
+<form method="POST" action="webcm" target="_self" id="uiPostMTestResultForm" >
+<? include /usr/www_safe/html/refresh.frm ?>
+<input type="hidden" name="uiPostTestCheckResult" value="<? query sar:status/oam_result ?>" id="uiPostTestCheckResult">
+</form>
+<!-- END Modem Test Page -->

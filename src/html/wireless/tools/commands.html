@@ -1,0 +1,58 @@
+		<!--Page content goes here -->
+<form onsubmit="return false">
+		  	
+<table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="<? echo $var:bgColorTable ?>" width=455>
+<tr>
+  <td colspan=2 align=center class="header" bgcolor="<? echo $var:bgColorBody ?>">System Commands</td>
+</tr>
+<tr>
+  <td height=5 colspan=2 nowrap bgcolor="#D3D9DF"></td>
+</tr>
+<tr>
+  <td colspan=2 bgcolor="<? echo $var:bgColorBody ?>">
+  <font size=1>System Commands allow you to carry out basic system actions. Press the button to execute a command.</font>
+  </td>
+</tr>
+<tr>
+  <td nowrap align=center bgcolor="<? echo $var:bgColorBody ?>" width=125>
+	<input type="image" src="/usr/www_safe/html/images/ti_button_save_all.gif" onclick="uiSaveAll()" alt="Save All" width="119" height="19" border=0>
+  </td>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>" width=300 height=72>
+	<font size=1>Press this button in order to permanently save the current configuration of the Gateway.
+	If you do re-start the system without saving your configuration, the Gateway will revert back to the 
+	previously saved configuration.
+	</font>
+  </td>	
+ </tr>
+ <tr>
+   <td nowrap align=center bgcolor="<? echo $var:bgColorBody ?>" width=125>
+	 <input type="image" src="/usr/www_safe/html/images/ti_button_restart.gif" onclick="uiRestart()" alt="Restart" width="119" height="19" border=0>
+   </td>
+   <td align=left bgcolor="<? echo $var:bgColorBody ?>" width=300 height=72>
+   <font size=1>Use this button to re-start the system.
+	If you have not saved your configurations, the Gateway will revert back to the previously saved configuration upon re-starting.
+	NOTE: Connectivity to the unit will be lost. You can reconnect after the unit reboots.</font>
+	</td>	
+  </tr>
+ <tr>
+  <td nowrap align=center bgcolor="<? echo $var:bgColorBody ?>" width=125>
+	 <input type="image" src="/usr/www_safe/html/images/ti_button_restart_ap.gif" onclick="uiRestartAP()" alt="Restart Access Point" width="119" height="19" border=0>
+   </td>
+   <td align=left bgcolor="<? echo $var:bgColorBody ?>" width=300 height=72>
+   <font size=1>Use this button to restart the Wireless Access Point.  It is important to Restart Access Point any time you change your Wireless settings.
+	</font>
+	</td>	
+  </tr>
+  <tr>
+
+		<td nowrap align=center bgcolor="<? echo $var:bgColorBody ?>" width=100>
+	  <input type="image" src="/usr/www_safe/html/images/ti_button_restore_defaults.gif"  onclick="uiRestoreFactoryDefaults()" alt="Restore Defaults" width="119" height="19" border=0>
+	</td>
+	<td align=left bgcolor="<? echo $var:bgColorBody ?>" width=300 height=72>
+	  <font size=1>Use this button to restore factory default configuraion.
+	  NOTE: Connectivity to the unit will be lost. You can reconnect after the unit reboots.</font>
+	</td>	
+   </tr>
+</table>
+		    
+</form>

@@ -1,0 +1,49 @@
+<!-- CLIP Setup -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">CLIP Connection Setup</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  
+   <div style="height: 12px"></div>
+   
+  <? include /usr/www_safe/html/setup/header.html ?>
+  
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=0 width=497>
+	<tr>
+     <td valign=top align=right width="50%">
+	  <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0 id="uiViewEncapsulationTable">
+       <tr>			
+        <td colspan=2 align=center class="header" height=21>CLIP Settings</td>
+       </tr>
+       <tr>
+        <td align=right nowrap><img src="<? echo $var:imgErrorBlank ?>" id="uiViewIpAddressMark" <? echo $var:dimImgErrorMark ?> >&nbsp;IP Address:&nbsp;</td>
+        <td align=left><input type="text" value="" size="15" maxlength="15" name="uiViewIpAddressMark" id="uiViewIpAddress"></td>
+       </tr>
+       <tr>
+        <td align=right nowrap><img src="<? echo $var:imgErrorBlank ?>" id="uiViewNetMaskMark" <? echo $var:dimImgErrorMark ?> >&nbsp;Mask:&nbsp;</td>
+        <td align=left><input type="text" value="" size="15" maxlength="15" name="uiViewNetMaskMark" id="uiViewNetMask"></td>
+       </tr>
+       <tr>
+        <td align=right nowrap><img src="<? echo $var:imgErrorBlank ?>" id="uiViewATMARPGatewayMark" <? echo $var:dimImgErrorMark ?> >&nbsp;ARP Server:&nbsp;</td>
+		<td align=left><input type="text" value="" size="15" maxlength="15" name="uiViewATMARPGatewayMark" id="uiViewATMARPGateway"></td>
+       </tr>
+       <tr>
+        <td align=right nowrap><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDefaultGatewayMark" <? echo $var:dimImgErrorMark ?>>&nbsp;Default Gateway:&nbsp;</td>
+        <td align=left><input type="text" size="15" maxlength="15" name="uiViewDefaultGatewayMark" id="uiViewDefaultGateway"></td>
+       </tr>
+      </table>
+     </td>
+     <td valign=top align=left width="50%"><? include /usr/www_safe/html/setup/pvc.html ?></td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/setup/footer.html ?></td>
+ </tr>
+</table>
+</form>
+<!-- END CLIP Setup -->

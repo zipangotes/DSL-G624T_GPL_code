@@ -1,0 +1,99 @@
+
+<!-- Static Setup -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Static Connection Setup</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  
+   <div style="height: 12px"></div>
+   
+   <? include /usr/www_safe/html/setup/header.html ?>
+   
+   <table align=center cellpadding=0 cellspacing=0 width=497>
+    <tr>
+     <td valign=top align=right width="50%">
+      <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0 id="uiViewEncapsulationTable">
+	   <tr><td colspan=3 class="header" align=center>Static Settings</td></tr>
+      <? if eq `1` `$var:HasDsl`
+      ` <tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" <? echo $var:dimImgErrorMark ?> ></td>	
+		<td align=right>Encapsulation:</td>
+        <td align=left nowrap>
+          <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=1>
+		   <tr>
+		    <td><input <? echo $var:widDefRadioBtnOn ?> onclick="jslDoToggleRadio('uiViewEncaps',0,2)" value="on" id="uiViewEncaps0" align="middle"></td>
+			<td>&nbsp;LLC&nbsp;</td>
+            <td><input <? echo $var:widDefRadioBtnOff ?> onclick="jslDoToggleRadio('uiViewEncaps',1,2)" value="off"  id="uiViewEncaps1" align="middle"></td>
+			<td>&nbsp;VC</td>
+		   </tr>
+		  </table>
+        </td>
+       </tr>
+      ` ` ` ?>
+       <tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewIpAddressMark" <? echo $var:dimImgErrorMark ?> ></td>
+		<td align=right>IP Address:</td>
+        <td align=left><input type="text" size="15" maxlength="15" name="uiViewIpAddressMark" id="uiViewIpAddress"></td>
+       </tr>
+       <tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewNetMaskMark" <? echo $var:dimImgErrorMark ?> ></td>
+		<td align=right>Mask:</td>
+        <td align=left><input type="text" size="15" maxlength="15" name="uiViewNetMaskMark" id="uiViewNetMask"></td>
+       </tr>
+       <? if eq `1` `$var:HasVoice` 
+       `<tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewConnGatewayMark" <? echo $var:dimImgErrorMark ?> ></td>
+		<td align=right>Gateway:</td>
+        <td align=left><input type="text" size="15" maxlength="15" name="uiViewConnGatewayMark" id="uiViewConnGateway"></td>
+       </tr>
+        ` ` ` ?>
+       <tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewGatewayMark" <? echo $var:dimImgErrorMark ?> ></td>
+		<td align=right nowrap>Default Gateway:</td>
+        <td align=left><input type="text" size="15" maxlength="15" name="uiViewGatewayMark" id="uiViewGateway"></td>
+       </tr>
+       <tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDns1Mark" <? echo $var:dimImgErrorMark ?> ></td>
+		<td align=right>DNS 1:</td>
+        <td align=left><input type="text" size="15" maxlength="15" name="uiViewDns1Mark" id="uiViewDns1"></td>
+       </tr>
+       <tr>
+	    <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDns2Mark" <? echo $var:dimImgErrorMark ?> ></td>
+		<td align=right>DNS 2:</td>
+        <td align=left><input type="text" size="15" maxlength="15" name="uiViewDns2Mark" id="uiViewDns2"></td>
+       </tr>
+	   <tr>
+        <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDns3Mark" <? echo $var:dimImgErrorMark ?> ></td>
+		<td align=right>DNS 3:</td>
+   		<td align=left><input type="text" size="15" maxlength="15" name="uiViewDns3Mark" id="uiViewDns3"></td>
+       </tr>
+      <? if eq `1` `$var:HasDsl`
+      `<tr>
+	    <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" <? echo $var:dimImgErrorMark ?> ></td>
+		<td align=right>Mode:</td>
+		<td align=left nowrap>
+		 <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=1>
+		  <tr>
+		   <td><input <? echo $var:widDefRadioBtnOn ?> value="on" id="uiViewBridgeRoute0" onclick="uiDoBridged()" align="middle"></td>
+           <td>&nbsp;Bridged&nbsp;</td>
+		   <td><input <? echo $var:widDefRadioBtnOff ?> value="off" id="uiViewBridgeRoute1" onclick="uiDoRouted()" align="middle"></td>
+		   <td>&nbsp;Routed</td>
+		  </tr>
+		 </table>
+		</td>
+       </tr>
+      ` ` ` ?>
+      </table>
+     </td>
+     <td valign=top align=left width="50%"> <? if eq `1` `$var:HasDsl` `<? include /usr/www_safe/html/setup/pvc.html ?>` `&nbsp;` ?></td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/setup/footer.html ?></td></tr>
+</table>
+</form>
+<!-- END Static Setup -->

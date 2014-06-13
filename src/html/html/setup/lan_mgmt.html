@@ -1,0 +1,83 @@
+<!-- LAN Management  -->
+<form id="uiViewLANMgmtForm" onSubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">LAN Configuration</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 12px"></div>
+
+   <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=center>
+     <tr>
+        <td width=179 align=center height=26 class="header">Interfaces
+            <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=center>
+              <tr>                  
+                <td>
+                 	<select size=14 id="uiViewInterface" style="width: 120px;">
+		         <? multiquery manager:command/lan/ifaces
+		          '<option value=$01>$02</option>' ?>		 
+                    </select>
+                 </td>
+              </tr>
+            </table>
+
+        </td>
+        <td>
+            <table border=1 cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=center>
+            <? multiquery manager:command/lan/list
+              `<tr>                  
+                  <td colspan=3 align=center class="header">$02
+                  </td>                  
+              </tr>
+              <tr>
+                 <td >
+                  <table width=75  $var:cntrBorder  cellpadding=0 cellspacing=0>
+                    <tr>
+                      <td align=center><input  $var:widDefBtnSmallAddArrow  alt="Add selected rule" onclick="uiDoAddRule('$01');">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td height=15 nowrap></td>
+                    </tr>
+	             <tr>
+	               <td align=center><input  $var:widDefBtnSmallDeleteArrow  alt="Remove selected rule" onclick="uiDoDeleteRule('$01');">
+	               </td>
+	             </tr>
+	           </table>
+                 </td>
+                 <td>
+                 	<select size=4 id="uiViewLAN$01" style="width: 100px;">
+		         <? multiquery manager:command/lan/ifaces/$01
+		          `<option value=$11>$12</option>` ?>		 
+                    </select>
+                 </td>
+                 <? if neq `0` `<? multiquerycount manager:command/lan/ifaces/$01 ?>`
+                    `<td align=center><a href="$var:pagepath=lan_cfg&var:pagetitle=LAN%20Configuration&var:langrp=$01" title="Select to set IP, Gateway, DHCP">Configure</a>`
+                  </td>                  
+                    `  
+                    ` <td align=center>&nbsp; </td>
+                    ` ?>
+              </tr> ` ?>
+            </table>
+        </td>
+     </tr>
+   </table>
+   <br>
+  </td>
+ </tr>
+ <tr>
+  <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+   <table <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=0 width="100%">
+    <tr valign=middle>
+     <td align=center style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint" ><? echo $var:txtErrorHint ?></td>
+	 <td>&nbsp;</td>
+	 <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+	</tr>
+   </table> 
+  </td>
+ </tr>
+</table>
+</form>
+<!-- END LAN Management  -->

@@ -1,0 +1,83 @@
+#! /bin/sh
+#
+# rcS           Call all S??* scripts in /etc/rcS.d in
+#               numerical/alphabetical order.
+#
+# Version:      @(#)/etc/init.d/rcS  2.76  19-Apr-1999  miquels@cistron.nl
+#
+trap "" SIGHUP
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+runlevel=S
+prevlevel=N
+umask 022
+export PATH runlevel prevlevel
+
+#
+#       Trap CTRL-C &c only in this shell so we can interrupt subprocesses.
+#
+trap ":" INT QUIT TSTP
+
+mount -n /proc
+#mount -n -o remount,rw /
+mount /var
+
+# unreserve for unp systems
+echo "0 0" > /proc/sys/vm/pagetable_cache
+# router
+echo 1 > /proc/sys/net/ipv4/ip_forward
+# pppox
+echo 1 > /proc/sys/net/ipv4/ip_dynaddr
+# ignore_all not yet used: this should be satisfactory
+echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_broadcasts
+# drop spoofed addr: turn this off on non-loop-free networks
+echo 1 > /proc/sys/net/ipv4/conf/default/rp_filter
+echo 1 > /proc/sys/net/ipv4/conf/all/rp_filter
+# do not honor source route flags
+echo 0 > /proc/sys/net/ipv4/conf/default/accept_source_route
+echo 0 > /proc/sys/net/ipv4/conf/all/accept_source_route
+# protect against syn flood attacks
+echo 1 >/proc/sys/net/ipv4/tcp_syncookies
+# this needs proper sampling on av_blog to determine optimal value
+# for now just observe softnet_stats to see # time was throttled
+# historical value was 300
+echo 100 > /proc/sys/net/core/netdev_max_backlog
+
+(cd /; tar xf var.tar)
+
+/sbin/ledcfg
+sleep 1
+
+/sbin/insmod avalanche_usb
+sleep 1
+
+/sbin/insmod tiatm
+sleep 1
+
+# UPnP requires loopback
+ifconfig lo 127.0.0.1
+
+/usr/sbin/thttpd -d /usr/www -u root -p 80 -c '/cgi-bin/*' -l /dev/null
+
+/usr/bin/cm_pc > /dev/tts/0 &
+sleep 30
+
+# Mount /var/www/html
+# Retrieve adam2 environment variables for NFS ip and root
+ip=$(cat /proc/ticfg/env | grep "NFS_SERVER_IP" | cut -f2)
+root=$(cat /proc/ticfg/env | grep "NFS_SERVER_ROOT" | cut -f2)
+
+# Set default values, if they are not defined.
+if [ "$ip" = "" ]
+then
+ip=192.168.1.100
+fi;
+
+if [ "$root" = "" ]
+then
+root=/exports/html
+fi;
+
+# Now mount with those values.
+mount -t nfs -o nolock $ip:$root /usr/www/html
+sleep 2

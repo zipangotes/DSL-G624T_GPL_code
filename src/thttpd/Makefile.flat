@@ -1,0 +1,23 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+export CROSS_COMPILE_PREFIX=$(TI_uclibc_base)
+
+all: build install
+
+build:
+	./configure --prefix=/usr --build=i386-linux --host=mipsel-linux
+	$(MAKE)
+	mips_fp_le-strip -s thttpd
+
+install: 
+	$(MAKE) -i prefix=$(TI_base)$(TI_rusrdir) installthis
+
+clean:
+	@if [ -e $(TARGET_HOME)/src/thttpd/Makefile ]; then \
+	$(MAKE) -i clean; \
+	fi
+
+distclean:
+	-rm -f Makefile config.log config.status

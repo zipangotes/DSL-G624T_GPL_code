@@ -1,0 +1,56 @@
+
+<? setvariable var:numdhcpclients <? multiquerycount <? query manager:status/$var:langrp/dhcps ?>:status/leasetable ?> ?>
+<!-- DHCP Clients -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 align=center bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">DHCP Clients <? if neq `0` `$var:numdhcpclients` `($var:numdhcpclients)` `` ?></font></td>
+ </tr>
+ <tr>
+   <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top height=337>
+     <table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 align=center >
+       <tr>
+           <td align=right nowrap>Select LAN: </td>
+           <td align=left>
+	      <select onchange="uiDoSelectLAN(value)" id="uiViewLanGrp" style="width: 150px;">
+                   <? multiquery manager:command/lan/list_used `<option value='$01'>$02</option>` ?>
+	      </select>	
+           </td>
+       </tr>	
+
+ <? if eq 0 `$var:numdhcpclients`
+         `<tr><td colspan=2 align=center><font size=1><b>No DHCP Clients Available</b></font></td></tr>`
+ `<tr>
+           <td align=center colspan=2>
+    <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=4>
+     <tr>
+      <td align=center><u>MAC Address</u></td>
+      <td width=7 nowrap></td>
+      <td><u>IP Address</u></td>
+      <td width=7 nowrap></td>
+      <td><u>Host Name</u></td>
+      <td width=7 nowrap></td>
+      <td><u>Lease Time</u></td>
+     </tr>
+     <? multiquery <? query manager:status/$var:langrp/dhcps ?>:status/leasetable
+    '<tr>
+      <td align=center>$12</td>
+      <td width=7 nowrap></td>
+      <td align=center>$13</td>
+      <td width=7 nowrap></td>
+      <td align=center>$14</td>
+      <td width=7 nowrap></td>
+      <td align=center>$11</td>
+     </tr>' ?>
+	</table>
+   </td>
+  </tr>` ?>
+      </table>
+    </td>
+  </tr>
+  <tr> 
+   <td align=right bgcolor="<? echo $var:bgColorBody ?>" colspan=2 height=28 valign=middle>
+    <input <? echo $var:widDefBtnRefresh ?> onclick="uiDoRefresh()" alt="Refresh">
+   </td>
+  </tr>
+</table>
+<!-- END DHCP Clients -->

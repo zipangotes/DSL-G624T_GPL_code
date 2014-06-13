@@ -1,0 +1,21 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+all: build install
+
+build:
+
+install: 
+	install -m 0755 -d $(TI_filesystem_path)/lib
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules
+
+	install -m 0644 ./sangam/ar0700mp.bin       	$(TI_base)/.
+# Jyothi	install -m 0644 ./sangam/ar0700db.bin       	$(TI_base)/.
+
+#	install -m 0644 ./avalanche/pdsp_d.bin		$(TI_base)$(TI_rlibdir)/modules/.
+
+clean:
+	rm -f $(TI_base)/ar0700mp.bin
+# Jyothi	rm -f $(TI_base)/ar0700db.bin
+#	rm -f $(TI_base)$(TI_rlibdir)/modules/pdsp_d.bin

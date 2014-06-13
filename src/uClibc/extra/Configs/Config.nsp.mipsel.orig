@@ -1,0 +1,16 @@
+#
+# For a description of the syntax of this configuration file,
+# see extra/config/Kconfig-language.txt
+#
+
+mainmenu_name "uClibc C Library Configuration"
+
+mainmenu_option next_comment
+comment 'Target Architecture Features and Options'
+        bool 'ELF interperter' HAVE_ELF
+#        string 'Architecture CFLAGS' ARCH_CFLAGS 
+#        string 'Architecutre LDFLAGS' ARCH_LDFLAGS
+#        string 'Architecture LIBGCC_CFLAGS' LIBGCC_CFLAGS
+endmenu
+source @@TARGET_HOME@@/src/uClibc/extra/Configs/Config.nsp.in.arch
+source @@TARGET_HOME@@/src/uClibc/extra/Configs/Config.nsp.in

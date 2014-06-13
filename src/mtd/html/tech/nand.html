@@ -1,0 +1,314 @@
+<h1>NAND FLASH</h1>
+
+<h2>NAND vs. NOR</h2>
+
+<p>Beside the different silicon cell design, the most important difference between NAND and NOR Flash is the bus interface. NOR Flash is connected to a address / data bus direct like other
+memory devices as SRAM etc. NAND Flash uses a multiplexed I/O Interface with some additional control pins. NAND flash is a sequential access device appropriate for mass storage applications,
+while NOR flash is a random access device appropriate for code storage application.NOR Flash can be used for code storage and code execution. Code stored on NAND Flash
+can't be executed frome there. It must be loaded into RAM memory and executed from there.</p>
+
+<table>
+  <tr>
+    <td>Type  </td>
+    <td>NOR  </td>
+    <td>NAND  </td>
+  </tr>
+  <tr>
+    <td>Interface  </td>
+    <td>Bus  </td>
+    <td>I/O  </td>
+  </tr>
+  <tr>
+    <td>Cell Size  </td>
+    <td>Large  </td>
+    <td>Small  </td>
+  </tr>
+  <tr>
+    <td>Cell Cost  </td>
+    <td>High  </td>
+    <td>Low  </td>
+  </tr>
+  <tr>
+    <td>Read Time  </td>
+    <td>Fast  </td>
+    <td>Slow  </td>
+  </tr>
+  <tr>
+    <td>Program Time  </td>
+    <td>Fast  </td>
+    <td>Slow  </td>
+  </tr>
+  <tr>
+    <td>Erase Time  </td>
+    <td>Slow  </td>
+    <td>Fast  </td>
+  </tr>
+  <tr>
+    <td>Scaling  </td>
+    <td>Difficult  </td>
+    <td>Easy  </td>
+  </tr>
+  <tr>
+    <td>Power consumption  </td>
+    <td>High  </td>
+    <td>Low  </td>
+  </tr>
+</table>
+
+<p>As NAND Flash is cheaper than NOR Flash and has a very slim interface it was selected as the optimum solution
+ for large nonvolatile storage applications such as solid state file storage, digital audio/voice recorder,
+ digital still camera and portable applications requiring non-volatility.</p>
+
+                       
+<hr>
+<h2>NAND Types</h2>
+
+<p>There are various types of NAND Flash available.
+
+Bare NAND chips, SmartMediaCards, DiskOnChip.</p>
+
+<p>SmartMediaCards are bare NAND chips covered by thin plastic. They are very common in
+digital cameras and MP3 players. The card itself contains nothing smart at all. It gets
+smart by software.</p>
+
+<p>DiskOnChip is NAND Flash with additional glue logic as a drop in replacement for NOR Flash chips.
+The glue logic provides direct memory access to a small address window, which contains a boot
+loader stub, which loads the real boot code from the NAND device.</p>
+
+
+<hr>
+<h2>NAND technical view</h2>
+
+<p>The memory is arranged as a array of pages. A page consists of 256 / 512 Byte data and 8 / 16 Byte spare (out of band) area.
+The spare area is used to store ECC (error correction code), bad block information and filesystem dependend data.
+n pages build one block.
+The read / write access to data is on a per page basis. Erase is done on a per block basis.
+The commands to read / write / erase the chip is given by writing to the chip with the
+Command Latch Enable pin high. Address is given by writing with the Address Latch Enable pin high.
+</p>
+
+<p>There are only a few lines neccecary to access up to 256 MB of Flashmemory.</p>
+
+<table>
+  <tr>
+    <td>I/O 0-7  </td>
+    <td>Data Inputs/Outputs  </td>
+  </tr>
+  <tr>
+    <td>/CE  </td>
+    <td>Chip Enable  </td>
+  </tr>
+  <tr>
+    <td>CLE  </td>
+    <td>Command Latch Enable  </td>
+  </tr>
+  <tr>
+    <td>ALE  </td>
+    <td>Address Latch Enable  </td>
+  </tr>
+  <tr>
+    <td>/RE  </td>
+    <td>Read Enable  </td>
+  </tr>
+  <tr>
+    <td>/WE  </td>
+    <td>Write Enable  </td>
+  </tr>
+  <tr>
+    <td>/WP  </td>
+    <td>Write Protect  </td>
+  </tr>
+  <tr>
+    <td>/SE  </td>
+    <td>Spare area Enable  </td>
+  </tr>
+  <tr>
+    <td>R/B  </td>
+    <td>Ready / Busy Output  </td>
+  </tr>
+</table><br><br>
+
+<p>As it is recommended to use the spare area, the /SE (Spare area Enable) pin should be tied to GND.
+ /CE, CLE and ALE should be GPIO pins or latched signals. It's possible to use address lines for ALE and CLE,
+ but you have to take care about the timing restrictions of the chip ! /RE and /WE can be tied to the corresponding lines of the CPU.
+ I/O 0-7 are connected to the databus D0-D7. The /WP pin can be used for write protection or connected to VCC to enable writes unconditionally.
+ As NAND flash uses a command driven programming and erasing, an accidential write or erase is not likely to happen.
+ The Ready / Busy output is not neccecary for operation, but it can be tied to a GPIO or an interrupt line.
+</p>
+
+
+<hr>
+<h2>Filesystems supporting NAND</h2>
+
+<p>One major problem for using NAND Flash is, that you cannot write as often as you want to a page.
+The consecutive writes to a page, before erasing it again, are restricted to 1-3 writes, depending on the manufacturers specifications.
+This applies similar to the spare area. This makes it neccecary for the filesystem to handle a writebuffer,
+which contains data, that is less than a page</p>
+<p>At the moment there are only a few filesystems, which support NAND</p>
+
+<ul>
+  <li>JFFS2 for bare NAND Flash and SmartMediaCards </li>
+  <li>NTFL for DiskOnChip devices </li>
+  <li>TRUEFFS from M-Systems for DiskOnChip devices</li>
+  <li>SmartMedia DOS-FAT as defined by the SSFDC Forum</li>
+</ul>
+
+<p>JFFS2 and NTFL are Open Source, while TRUEFFS is a proprietary solution. SmartMedia DOS-Fat is a specification from
+SSFDC forum. It is somewhat open under a non disclosure agreement with Toshiba, who owns all rights on this specifications.
+NTFL is designed for the usage of DiskOnChip devices. JFFS2 supports raw NAND chips and SmartMediaCards at the moment. A JFFS2 support for
+DiskOnChip devices, based on the NAND code, is planned.
+There are some other Open Source projects for NAND filesystem support, but there's no other working solution than JFFS2 at the moment of this writing.
+</p>
+<p>There is currently no support for the wide spread SmartMedia DOS-FAT filesystem, mainly because it's not a reliable filesystem
+for industrial usage. It's ok for multimedia applications. The hardware support layer is designed to support a implementation of SmartMedia
+DOS-FAT, but nobody has made an attempt to implement it really. There are a couple of SmartMedia Card adaptors 
+for USB, PCMCIA, FireWire ... with Linux drivers available, which support the SmartMedia DOS-FAT. 
+</p>
+
+<p>JFFS2 includes bad block management, wear leveling, error correction and provides a reliable filesystem on top of NAND Flash</p>
+
+
+<hr>
+<h2>HOWTO implement NAND support</h2>
+
+<h3>Where can you get the code ?</h3>
+<p>The changes to JFFS2 and the underlying NAND code are not in the kernel code at the moment. The latest code is available from
+<a href=http://www.linux-mtd.infradead.org>CVS and daily snapshots</a></p>
+
+<p>There are four layers of software</p>
+<ol>
+  <li>JFFS2: filesystem driver</li>
+  <li>MTD: Memory Technology Devices driver</li>
+  <li>NAND: generic NAND driver  </li>
+  <li>Hardware specific driver  </li>
+</ol>
+<p>
+The MTD driver just provides a mount point for JFFS2. The generic NAND driver provides
+all functions, which are neccecary to identify, read, write and erase NAND Flash. The hardware
+dependend functions are provided by the hardware driver.
+</p>
+
+<h3>Hardware driver</h3>
+
+<p>To implement it on your hardware, you will have to write a new hardware driver. Use one of the existing
+hardware drivers and modify it to fit your hardware. The most important things are:
+</p>
+
+<p>
+<b>void yourboard_hwcontrol(int cmd)</b><br>
+{<br>
+	switch(cmd){<br>
+	case NAND_CTL_SETCLE: <i>Hardware specific code to set CLE line to 1;</i> break;<br>
+	case NAND_CTL_CLRCLE: <i>Hardware specific code to set CLE line to 0;</i> break;<br>
+	case NAND_CTL_SETALE: <i>Hardware specific code to set ALE line to 1;</i> break;<br>
+	case NAND_CTL_CLRALE: <i>Hardware specific code to set ALE line to 0;</i> break;<br>
+	case NAND_CTL_SETNCE: <i>Hardware specific code to set CE line to 0;</i> break;<br>
+	case NAND_CTL_CLRNCE: <i>Hardware specific code to set CE line to 1;</i> break;<br>
+	}<br>
+}<br>
+This functions is used to access the control pins of the chip. The function is called from
+the generic nand driver.
+</p>
+<p>
+<b>int yourboard_device_ready(void)</b><br>
+{<br>
+	return <i>The state of the ready/busy pin of the chip;</i><br>
+}<br>
+If your hardware interface does not have access to the ready busy pin, you can delete this
+function and set the function pointer this->dev_ready to NULL.
+</p>
+
+<p>
+<b>int __init yourboard_init (void)</b><br>
+{<br>
+        SNIP<br>
+	/* Allocate memory for MTD device structure and private data */<br>
+	yourboard_mtd = kmalloc (sizeof(struct mtd_info) + sizeof (struct nand_chip),GFP_KERNEL);<br>
+        SNIP<br>
+	/* map physical adress */<br>
+	yourboard_fio_base=(unsigned long)ioremap(yourboard_fio_pbase,SZ_1K);<br>
+        SNIP<br>
+	/* Set address of NAND IO lines */<br>
+	this->IO_ADDR_R = yourboard_fio_base; <i>The address to read from the chip </i><br>
+	this->IO_ADDR_W = yourboard_fio_base; <i>The address to write to the chip </i><br>
+	this->hwcontrol = yourboard_hwcontrol;<i>Your function for accessing the controllines</i><br>
+	this->dev_ready = yourboard_device_ready; <i>Your function for accessing the ready/busy line or NULL, if you don't have one</i><br>
+	this->chip_delay = 20;<i>The delay time (µs), after writing a command to the chip, according to datasheet</i><br>
+        SNIP<br>
+}<br>
+If you have a different access scheme to the chip for writing commands, due to your hardware, you can supply a own
+command write function by setting this->cmdfunc. The same applies for a own wait function, which could utilize an interrupt
+driven by the ready/busy pin. In this case set this->waitfunc to your own function. This must be done before calling nand_scan.
+<p>
+
+<h3>Supported chips</h3>
+<p>Most NAND chips actually available from 2 to 128MB should be supported by the current code. If you have a chip, which is not supported,
+it can easily be added by extending the chiplist in include/linux/mtd/nand_ids.h
+</p>
+
+<h3>Config settings</h3>
+<p>The following config switches should be set<br>
+CONFIG_MTD=y<br>
+CONFIG_MTD_PARTITIONS=y --- if you want to use partitions<br>
+CONFIG_MTD_CHAR=y<br>
+CONFIG_MTD_BLOCK=y<br>
+CONFIG_MTD_NAND=y<br>
+CONFIG_MTD_NAND_ECC=y<br>
+CONFIG_MTD_NAND_ECC_JFFS2=y<br>
+CONFIG_MTD_NAND_YOURBOARD=y</p>
+
+<p>For JFFS2 usage set<br>
+CONFIG_JFFS2_FS=y<br>
+CONFIG_JFFS2_FS_DEBUG=0<br>
+CONFIG_JFFS2_FS_NAND=y</p>
+
+<hr>
+<h2>FAQ</h2>
+<h4>Can I boot from NAND Flash?</h4>
+<p>Not from a bare NAND chip. You need a glue logic around, which gives you memory access to the
+chip on bootup, like the DiskOnChip devices do. This will be a quite complex CPLD. An alternative
+is to use a small e.g. 1MB NOR Flash, which contains the boot code and maybe a compressed kernel
+image. Then you can use JFFS2 on NAND as your root filesystem</p>
+<h4>Is there support for 16/32bit wide NAND Flash ?</h4>
+<p>No. The generic NAND driver supports 8 bit wide NAND Flash only. 16 or 32 bit NAND Flash can
+be built by using 2 or 4 chips and connect them to D0-7, D8-D15, D16-D23 and D24-D31 on the data bus.
+You can tie all corresponding control signals together. But you have to build a new nand16 or nand32 driver,
+which can be derived from the existing nand.c. Be aware, that the writebuffer size is 2 or 4 times as big as
+on 8 bit NAND. This mean's, if you flush the buffer to ensure, that your data are on disk, you may waste much
+more memory space than on 8 bit NAND. Another point is bad block handling. When a block on 1 chip is bad, the
+corresponding blocks on the other chips are lost too, as you present them as one big block to the filesystem
+driver. The JFFS2 code, which handles the writebuffer and the out of band (spare) area of NAND doesn't support
+16 / 32 bit neither.
+<h4>How is ensured, that data is written to flash ?</h4>
+<p>As we have to handle a writebuffer for writing only full pages to the chips, there could be a loss of
+data, when the writebuffer is not flushed before power down. There are some mechanisms to ensure,
+that the writebuffer is flushed. You can force the flush of the writebuffer by using fsync() or sync()
+in your application. JFFS2 has a timed flush of the write buffer, which forces the flush of the buffer to flash,
+if there are no writes to the filesystem for more than 2 seconds. When you unmount the filesystem the buffer
+is flushed too.</p>
+<h4>Can I copy a JFFS2 Image to NAND</h4>
+<p>Yes, as long as your chip does not contain bad blocks. Make sure, that the erasesize you set to mkfs.jffs2
+is the same as the erasesize of your chip</p>
+
+<hr>
+<h2>References:</h2>
+<h3>Open Source</h3>
+<p>JFFS2 and NTFL are located on this <a href=http://www.linux-mtd.infradead.org> website</a></p>
+
+<h3>Hardware</h3>
+<p><a href=http://www.toshiba.com/taec/>Toshiba</a></p>
+<p><a href=http://samsungelectronics.com/>Samsung</a></p>
+<p><a href=http://www.ssfdc.or.jp>SSFDC Forum</a></p>
+<p><a href=http://www.m-sys.com>M-Systems</a></p>
+
+<hr>
+<h2>Maintainers</h2>
+<p>JFFS2 is maintained by David Woodhouse</p>
+<p>The generic NAND driver is maintained by Thomas Gleixner</p>
+<p>Please don't contact them direct. Ask your questions on the <a href=http://www.linux-mtd.infradead.org>mtd-mailing-list</a>.</p>
+<p>Any suggestions, improvements, bug-reports and bug-fixes are welcome</p>
+
+
+<hr>
+<address><a href="mailto:tglx@autronix.de">Thomas Gleixner</a></address>
+$Id: nand.html,v 1.1.1.1 2003/11/25 22:15:12 jharrell Exp $

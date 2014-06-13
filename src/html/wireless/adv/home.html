@@ -1,0 +1,169 @@
+<? multiquery udhcps1:status/hostlist <? setvariableonce var:lanip $2 ?> ?>
+<? setvariable var:blockmsg `javascript:alert("$var:advMsgBlockConn")` ?>
+<? setvariable var:concount <? multiquerycount manager:command/connection/list ?> ?>
+<!-- Advanced home -->
+		
+	<table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="#757575" width=520>
+	<tr>
+		<td colspan=4 align=center class="header" bgcolor="#FFFFFF">Advanced</td>
+	</tr>
+	<tr>
+		<td colspan=4 class="" bgcolor="#FFFFFF">
+		<font size=1>The Advanced section lets you configure advanced features like RIP, 
+		Firewall, NAT, UPnP, IGMP, Bridge Filters, and LAN clients.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+
+		<? setvariable var:privacyLevel <? query ap:settings/privacy_type ?> ?>
+		<? if eq `<? echo $var:privacyLevel ?>` `0` ` <td nowrap align=left class="" bgcolor="#FFFFFF" width=125><a href='<? echo $var:pagepath ?>=security_none&var:pagetitle=Wireless%20Security'><font size=1>Wireless Security</font></a></td>` ?>
+		<? if eq `<? echo $var:privacyLevel ?>` `1` ` <td nowrap align=left class="" bgcolor="#FFFFFF" width=125><a href='<? echo $var:pagepath ?>=security_wep&var:pagetitle=Wireless%20Security'><font size=1>Wireless Security</font></a></td>` ?>
+		<? if eq `<? echo $var:privacyLevel ?>` `2` ` <td nowrap align=left class="" bgcolor="#FFFFFF" width=125><a href='<? echo $var:pagepath ?>=security_8021x&var:pagetitle=Wireless%20Security'><font size=1>Wireless Security</font></a></td>` ?>
+		<? if eq `<? echo $var:privacyLevel ?>` `3` ` <td nowrap align=left class="" bgcolor="#FFFFFF" width=125><a href='<? echo $var:pagepath ?>=security_wpa&var:pagetitle=Wireless%20Security'><font size=1>Wireless Security</font></a></td>` ?>
+
+		<td align=left class="" bgcolor="#FFFFFF" width=300><font size=1>Select to configure Wireless Security.</font></td>	
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left class="" bgcolor="#FFFFFF" width=125>
+			<a href='<? echo $var:pagepath ?>=wireless_access&var:pagetitle=Wireless%20Management'>
+			<font size=1>Wireless Management</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF" width=300><font size=1>Select to configure Wireless Management.</font></td>	
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left class="" bgcolor="#FFFFFF" width=100>
+			<a href='<? if eq 0 $var:concount $var:blockmsg `$var:pagepath=upnp&var:pagetitle=UPnP` ?> '><font size=1>UPnP</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF" width=300><font size=1>Select to configure UPnP for different connections.</font></td>	
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left class="" bgcolor="#FFFFFF" width=125>
+			<a href='<? if eq 0 $var:concount $var:blockmsg <? if eq 0 <? multiquerycount udhcps1:status/hostlist ?>
+     `javascript:alert("You must enter an IP address on LAN Clients page to enter this setup.")`
+	 `$var:pagepath=fwan&var:pagetitle=Port%20Forwarding&var:lanip=$var:lanip` ?> ?>'>
+		<font size=1>Port Forwarding</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF" width=300><font size=1>Select to configure Firewall and NAT pass-through to your hosted applications.</font></td>	
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+		<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left class="" bgcolor="#FFFFFF" width=125>
+			<a href='<? if eq 0 <? multiquerycount udhcps1:status/hostlist ?>
+          `javascript:alert("You must enter an IP address on LAN Clients page to enter this setup.")`
+           `$var:pagepath=flan&var:pagetitle=Access%20Control&var:lanip=$var:lanip` ?>'>
+			<font size=1>Access Control</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF" width=300><font size=1>Select to configure Firewall to block your LAN PCs from accessing the Internet.</font></td>	
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap class="" align=left bgcolor="#FFFFFF">
+			<a href='<? if eq 0 $var:concount $var:blockmsg <? if eq 0 <? multiquerycount udhcps1:status/hostlist ?>
+          `javascript:alert("You must enter an IP address on LAN Clients page to enter this setup.")`
+            `$var:pagepath=security&var:pagetitle=Advanced%20Security%20Settings` ?> ?> '>
+			<font size=1>Advanced Security</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF"><font size=1>Select to configure Advanced Firewall & NAT features such as DMZ and Remote Management.</font></td>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap class="" align=left bgcolor="#FFFFFF">
+			<a href='<? echo $var:pagepath ?>=lan_clients&var:pagetitle=LAN%20Clients'>
+			<font size=1>LAN Clients</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF"><font size=1>Select to configure LAN Clients.</font></td>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap class="" align=left bgcolor="#FFFFFF">
+		<a href='<? echo $var:pagepath ?>=bfilter&var:pagetitle=Bridge%20Filters'><font size=1>Bridge Filters</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF"><font size=1>Select to setup Bridge Filters.</font></td>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap class="" align=left bgcolor="#FFFFFF">
+		<a href='<? echo $var:pagepath ?>=webfilters&var:pagetitle=Web%20Filters'><font size=1>Web Filters</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF"><font size=1>Select to setup web filters.</font></td>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap class="" align=left bgcolor="#FFFFFF">
+			<a href='<? if eq 0 $var:concount $var:blockmsg `$var:pagepath=igmp&var:pagetitle=Multicast%20Setup` ?> '><font size=1>Multicast</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF"><font size=1>Select to configure Multicast pass-through for different connections.</font></td>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left class="" bgcolor="#FFFFFF" width=125>
+			<a href='<? echo $var:pagepath ?>=routing&var:pagetitle=Static%20Routing'>
+			<font size=1>Static Routing</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF" width=300><font size=1>Select to configure Static routes.</font></td>	
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	<tr>
+		<td height=5 nowrap colspan=4 bgcolor="#FFFFFF"></td>
+	</tr>
+	<tr>
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+		<td nowrap align=left class="" bgcolor="#FFFFFF" width=125>
+			<a href='<? echo $var:pagepath ?>=rip&var:pagetitle=Dynamic%20Routing'><font size=1>Dynamic Routing</font></a>
+		</td>
+		<td align=left class="" bgcolor="#FFFFFF" width=300><font size=1>Select to configure RIP.</font></td>	
+		<td width=15 nowrap bgcolor="#D3D9DF"></td>
+	</tr>
+	</table>
+	
+	<div style="height: 10px"></div>
+	
+<!-- END Advanced home -->
+

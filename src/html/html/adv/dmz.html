@@ -1,0 +1,64 @@
+
+<!-- Advanced Security -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">DMZ Settings</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+   <div style="height: 15px"></div>
+<!--  DMZ Settings -->
+       <table <? echo $var:cntrBorder ?> cellpadding=1 cellspacing=4>
+        <tr>
+         <td width=19 align=right><input <? echo $var:widDefCheckBoxOff ?> id="uiViewFwanDmzState" onclick="jslDoToggleCheckBox(id)"></td>
+         <td colspan=3>Enable DMZ</td>
+        </tr>
+		<tr>
+               <td>&nbsp;</td>
+		 <td align=right>Select your WAN Connection:</td>
+		 <td align=left>
+		   <select onchange="uiDoSelectConnection(value)" id="uiViewConnectionSelector" style="width: 150px;">
+			<? multiquery manager:command/connection/list "<option value='$01'>$02</option>" ?>
+		   </select>	
+		 </td>
+		 <td>&nbsp;</td>
+       </tr>
+	<tr>
+               <td>&nbsp;</td>
+		 <td align=right>Select LAN Group:</td>
+		 <td align=left>
+		 <select onchange="uiDoSelectLANGrp(value)" id="uiViewLanGrp" style="width: 150px;">
+                   <? multiquery manager:command/lan/list_used "<option value='$01'>$02</option>" ?>
+		   </select>	
+		 </td>
+		 <td>&nbsp;</td>
+		</tr>
+        <tr>
+         <td align=right><img src="<? echo $var:imgErrorBlank ?>" id="uiViewDMZstatusMarkBlank" align=left <? echo $var:dimImgErrorMark ?> ></td>
+         <td align=right>Select a LAN IP Address: </td>
+         <td align=left>
+          <select id="uiViewDmzInternalClient">
+           <? multiquery <? query manager:status/$var:langrp/dhcps ?>:status/hostlist `<option value="$02">$02</option>` ?>
+          </select>
+         </td>
+         <td nowrap>&nbsp;<a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:style=<? echo $var:style ?>&var:main=<? echo $var:main ?>&var:menu=adv&var:menutitle=Advanced&var:pagename=lan_clients&var:pagetitle=LAN%20Clients&var:langrp=<? echo $var:langrp ?>" class="pageLink">LAN Clients</a></td>
+        </tr>
+       </table>
+<!--  END DMZ Settings -->
+   </td>
+  </tr>
+  <tr>
+   <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28>
+    <table <? echo $var:cntrBorder ?> cellspacing=0 width="100%">
+     <tr valign=middle>
+      <td align=center style="color:<? echo $var:bgColorBody ?>" id="uiViewErrorHint"><? echo $var:txtErrorHint ?></td>
+	  <td>&nbsp;</td>
+	  <td align=right><? include /usr/www_safe/html/applycancel.html ?></td>
+	 </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</form>
+<!-- END Advanced Security -->

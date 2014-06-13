@@ -1,0 +1,12 @@
+#
+::sysinit:/etc/init.d/rcS
+
+# Start an "askfirst" shell on the console (whatever that may be)
+#::askfirst:-/bin/sh
+::askfirst:-/usr/bin/textui
+
+# Stuff to do before rebooting
+#::ctrlaltdel:/sbin/reboot
+::shutdown:/bin/umount -a -r
+::shutdown:/sbin/swapoff -a
+

@@ -1,0 +1,35 @@
+#
+# For a description of the syntax of this configuration file,
+# see scripts/kbuild/config-language.txt.
+#
+
+mainmenu_option next_comment
+comment 'Text Utilities'
+
+
+bool 'cat'	    CONFIG_CAT
+bool 'cmp'	    CONFIG_CMP
+bool 'cut'	    CONFIG_CUT
+bool 'dos2unix'	    CONFIG_DOS2UNIX
+bool 'head'	    CONFIG_HEAD
+bool 'length'	    CONFIG_LENGTH
+bool 'md5sum'	    CONFIG_MD5SUM
+bool 'od'	    CONFIG_OD
+bool 'sort'	    CONFIG_SORT
+if [ "$CONFIG_SORT" = "y" ]; then
+    bool '  Enable reverse sort'	CONFIG_FEATURE_SORT_REVERSE
+    bool '  Enable unique sort'		CONFIG_FEATURE_SORT_UNIQUE
+fi
+bool 'tail'	    CONFIG_TAIL
+if [ "$CONFIG_TAIL" = "y" ]; then
+    bool '  Enable extra tail options (-c, -q, -s, and -v)'	CONFIG_FEATURE_FANCY_TAIL
+fi
+bool 'tr'	    CONFIG_TR
+bool 'uniq'	    CONFIG_UNIQ
+bool 'unix2dos'	    CONFIG_DOS2UNIX
+bool 'uudecode'	    CONFIG_UUDECODE
+bool 'uuencode'	    CONFIG_UUENCODE
+bool 'wc'	    CONFIG_WC
+
+endmenu
+

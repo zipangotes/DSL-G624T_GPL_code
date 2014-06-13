@@ -1,0 +1,18 @@
+
+<!-- System Log -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 align=center bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>">
+<tr>
+<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">System Log</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center height=337>				
+   <textarea name="" rows=20 cols=78 readonly><? multiquery logger:status/log '$01\n' ?></textarea>
+  </td>
+ </tr>
+ <tr> 
+  <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28 valign=middle>
+   <input <? echo $var:widDefBtnRefresh ?> onclick="uiDoRefresh()" alt="Refresh">
+  </td>
+ </tr>
+</table>
+<!-- END System Log -->

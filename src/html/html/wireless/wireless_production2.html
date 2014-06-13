@@ -1,0 +1,47 @@
+<!-- Wireless Setup -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+		<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Wireless Production 2</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 12px"></div>
+
+  	  <table cellspacing=1 border=0 cellpadding=2 align=center width=350>
+	     <tr>
+                 <td align=center height=30 colspan=2><b><input style="color:#CC3366; background-color: <? echo $var:bgColorBody ?>; width: 500;" type="text" size=80 class="uiNoBorder" id="AccessError" value="<? error message ?>"></b></td>
+            </tr>
+ 	   <tr>
+		<td align="right" nowrap width="50%">Spectrum Management:&nbsp;</td>
+ 	       <td align="left" width="50%"><input <? echo $var:widDefCheckBoxOff ?> id="uiViewSpectrumMgmt"  value="off" onclick="jslDoToggleCheckBox(id);" alt="" width=19 height=20 border=0></td>
+	    </tr>
+       <? if eq `1` `<? query ap:status/dot11a_supported ?>`
+	   `<tr>
+		<td align="right" nowrap width="50%">Radar Detect:&nbsp;</td>
+ 	       <td align="left" width="50%"><input <? echo $var:widDefCheckBoxOff ?> id="uiViewRadarDetect"  value="off" onclick="jslDoToggleCheckBox(id);" alt="" width=19 height=20 border=0></td>
+	    </tr>
+	     ` ` ` ?>
+	     <tr>
+		<td colspan=2 align=center height=10><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width="350" height=1></td>
+            </tr>
+	   </table>
+
+       </td>
+     </tr>
+	<tr>
+	   <td align=left bgcolor="<? echo $var:bgColorBody ?>" height=28>
+		
+		<table cellspacing=0 border=0 cellpadding=0 align=center width="100%">
+		<tr>
+			<td align=left><font size=1>&nbsp;&nbsp;Note: you must <a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/<? echo $var:style ?>/menus/<? echo $var:main ?>.html&var:main=<? echo $var:main ?>&var:style=<? echo $var:style ?>&var:menu=tools&var:menutitle=Tools&var:pagename=commands&var:pagetitle=System%20Commands" class="pageLink">Restart Access Point</a> for Wireless changes to take effect.</font></td>
+			<td align=right bgcolor="<? echo $var:bgColorBody ?>"><? include /usr/www_safe/html/applycancel.html ?></td>
+		</tr>
+	   </table>
+	   
+	   </td>
+	</tr>
+  </form>
+</table>
+<!-- END Wireless Setup -->
+

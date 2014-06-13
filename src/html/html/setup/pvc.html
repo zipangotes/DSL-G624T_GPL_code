@@ -1,0 +1,62 @@
+
+<!-- PVC Setup -->
+<table align=center cellpadding=1 cellspacing=1 <? echo $var:cntrBorder ?>>
+ <tr><td></td><td colspan=2 class="header" height=21 align=center>PVC Settings</td></tr>
+ <tr>
+  <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" <? echo $var:dimImgErrorMark ?> ></td>
+  <td align=left>PVC:&nbsp;</td>
+  <td align=left title="Select PVC.">
+   <select onchange="pvcDoSetPVC(value)" id="uiViewPvc">
+    <option value="<? query manager:command/encaps/new ?>">New</option>
+    <? multiquery manager:command/encaps/list_shared
+     '<option value=$01>$02</option>' ?>   
+   </select>
+  </td>
+ </tr><tr>
+  <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPvcVpiMark" <? echo $var:dimImgErrorMark ?> ></td>
+  <td align=right>VPI:</td>
+  <td align=left><input class="" type="text" size="4" maxlength="3" value="" name="uiViewPvcVpiMark" id="uiViewPvcVpi" title="VPI parameter 0..255"></td>
+ </tr>
+ <tr>
+  <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPvcVciMark" <? echo $var:dimImgErrorMark ?> ></td>
+  <td align=right>VCI:</td>
+  <td align=left><input class="" type="text" size="4" maxlength="5" value="" name="uiViewPvcVciMark" id="uiViewPvcVci" title="VCI parameter 0..65535"></td>
+ </tr>
+ <tr>
+  <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" <? echo $var:dimImgErrorMark ?> ></td>
+  <td align=right>QoS:&nbsp;</td>
+  <td align=left title="Quality of service parameter.">
+   <select onchange="pvcDoSetQoS(value)" id="uiViewQoS">
+    <option value="UBR">UBR</option>
+    <option value="CBR">CBR</option>
+    <option value="VBR">VBR</option>
+   </select>
+  </td>
+ </tr>
+ <tr>
+  <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPvcPcrMark" <? echo $var:dimImgErrorMark ?> ></td>
+  <td align=right>PCR:</td>
+  <td align=left><input class="uiTextInput" type="text" size="5" maxlength="7" value="" name="uiViewPvcPcrMark" id="uiViewPvcPcr">&nbsp;cps</td>
+ </tr>
+ <tr>
+  <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPvcScrMark" <? echo $var:dimImgErrorMark ?> ></td>
+  <td align=right>SCR:</td>
+  <td align=left><input class="uiTextInput" type="text" size="5" maxlength="7" value="" name="uiViewPvcScrMark" id="uiViewPvcScr">&nbsp;cps</td>
+ </tr>
+ <tr>
+  <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPvcMbsMark" <? echo $var:dimImgErrorMark ?> ></td>
+  <td align=right>MBS:</td>
+  <td align=left><input class="uiTextInput" type="text" size="5" maxlength="7" value="" name="uiViewPvcMbsMark" id="uiViewPvcMbs">&nbsp;cells</td>
+ </tr>
+ <tr>
+  <td class="uiErrorCell"><img src="<? echo $var:imgErrorBlank ?>" id="uiViewPvcCdvtMark" <? echo $var:dimImgErrorMark ?> ></td>
+  <td align=right>CDVT:</td>
+  <td align=left><input class="uiTextInput" type="text" size="5" maxlength="7" value="" name="uiViewPvcCdvtMark" id="uiViewPvcCdvt">&nbsp;usecs</td>
+ </tr>
+ <tr>
+  <td></td>
+  <td align=right>Auto PVC:</td>
+  <td align=left><input <? echo $var:widDefCheckBoxOff ?> id="uiViewAutoPvcEnable" onclick="jslDoToggleCheckBox(id);uiDoAutoPvc(value)" value="off" ></td>  
+</tr>
+</table>
+<!-- END PVC Setup -->

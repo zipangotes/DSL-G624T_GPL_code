@@ -1,0 +1,96 @@
+include ../../TI_Build.make
+-include $(TARGET_HOME)/.config
+
+VOICE=
+ETHER=_AUTO
+ifeq ($(CONFIG_TI_VOICE_MGCP),y)
+VOICE=_MGCP
+endif
+ifeq ($(CONFIG_TI_VOICE_SIP),y)
+VOICE=_SIP
+endif
+
+ifeq ($(CONFIG_MIPS_AVALANCHE_MARVELL),y)
+ETHER=_MARVELL
+endif
+ifeq ($(CONFIG_TI_VOICEAPP),y)
+VOPGLUE_LIB = $(TI_base)/src/voice/pform/linux/MIPS32sfgnu/lib
+VOPGLUE_DIR = $(TI_base)/src/voice/pform/sample/vniu
+endif
+
+all: build install
+
+build: 
+
+install:
+	install -d $(TI_base)$(TI_bindir)
+	install -d $(TI_base)$(TI_sbindir)
+	install -d $(TI_base)$(TI_etcdir)
+	install -d $(TI_base)$(TI_cgidir)
+	install -d $(TI_base)$(TI_htmldir)
+	install -d $(TI_base)$(TI_vartmpdir)
+	install -d $(TI_base)$(TI_rlibdir)
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/cm_pc $(TI_base)$(TI_bindir)
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/cm_logic $(TI_base)$(TI_bindir)
+ifeq ($(CONFIG_MIPS_AR7RD),y) 
+	# Do not install the klogd process into the filesystem for AR7RD boards because
+	# of memory constraints. 
+else
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/cm_klogd $(TI_base)$(TI_bindir)
+endif
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/webcm $(TI_base)$(TI_cgidir)
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/firmwarecfg $(TI_base)$(TI_cgidir)
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/ftpu $(TI_base)$(TI_sbindir)
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/cm_convert $(TI_base)$(TI_bindir)
+
+ifeq ($(CONFIG_TI_CFGMGR_TFTPU),y)
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/tftpu $(TI_base)$(TI_sbindir)
+endif
+
+ifeq ($(CONFIG_TI_CFGMGR_TEXTUI),y)
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/textui $(TI_base)$(TI_bindir)
+endif
+
+ifeq ($(CONFIG_TI_CFGMGR_SNMP),y)
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/snmpd $(TI_base)$(TI_sbindir)
+endif
+
+ifeq ($(CONFIG_TI_CFGMGR_CMCLI),y)
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/cmcli $(TI_base)$(TI_bindir)
+endif
+
+ifeq ($(CONFIG_TI_VOICEAPP),y)
+	install -m 0755  ./$(BOARD)$(ETHER)$(VOICE)/libcm.a $(VOPGLUE_LIB)
+	install -m 0755  ./$(BOARD)$(ETHER)$(VOICE)/libcmexpat.a $(VOPGLUE_LIB)
+	install -m 0644  voice_api.c $(VOPGLUE_DIR)
+	install -m 0644  voice_api.h $(VOPGLUE_DIR)
+	install -m 0644  input.c $(VOPGLUE_DIR)
+	install -m 0644  input.h $(VOPGLUE_DIR)
+	install -m 0644  ./$(BOARD)$(ETHER)$(VOICE)/cm_* $(VOPGLUE_DIR)
+	install -m 0644  ./cm_* $(VOPGLUE_DIR)
+endif
+
+ifeq ($(CONFIG_TI_CFGMGR_VOICE),y)
+	install -m 755 ./$(BOARD)$(ETHER)$(VOICE)/voice_dly $(TI_base)$(TI_etcdir)
+endif
+
+	install -m 0755 -s ./$(BOARD)$(ETHER)$(VOICE)/libcm.so $(TI_base)$(TI_rlibdir)
+	install -m 0644 -s ./$(BOARD)$(ETHER)$(VOICE)/libcmexpat.so $(TI_base)$(TI_rlibdir)
+	cd  $(TI_base)$(TI_rlibdir); ln -sf libcmexpat.so libcmexpat.so.0
+	install -m 0644 ./$(BOARD)$(ETHER)$(VOICE)/config.xml $(TI_base)$(TI_etcdir)
+	install -m 0644 ./$(BOARD)$(ETHER)$(VOICE)/progdefs.xml $(TI_base)$(TI_etcdir)
+	install -m 0644 ./$(BOARD)$(ETHER)$(VOICE)/sysdef.xml $(TI_base)$(TI_etcdir)
+	install -m 0644 ./$(BOARD)$(ETHER)$(VOICE)/strings.xml $(TI_base)$(TI_etcdir)
+	install -m 0755 src/mkconfig/mkconfig $(TI_base)/tools/bin
+
+clean:
+	rm -f ./expat/gennmtab/gennmtab
+ifeq ($(CONFIG_TI_VOICEAPP),y)
+	rm -f $(VOPGLUE_LIB)/libcm.a
+	rm -f $(VOPGLUE_LIB)/libcmexpat.a
+	rm -f $(VOPGLUE_DIR)/voice_api.c
+	rm -f $(VOPGLUE_DIR)/voice_api.h
+	rm -f $(VOPGLUE_DIR)/input.c
+	rm -f $(VOPGLUE_DIR)/input.h
+	rm -f $(VOPGLUE_DIR)/cm_*
+endif

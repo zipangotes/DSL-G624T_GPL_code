@@ -1,0 +1,104 @@
+<form onsubmit="return false">
+  <table cellspacing=1 border=0 cellpadding=4 align=center id="uiViewBodyTable" bgcolor="#757575" width=390>
+   <tr>
+    <td align=center class="header" bgcolor="#FFFFFF">Wireless Network Statistics</td>
+   </tr>
+   <tr>
+    <td height=5 nowrap bgcolor="#D3D9DF"></td>
+  </tr>
+  <tr>
+   <td nowrap bgcolor="#FFFFFF">Choose an interface to view your network statistics:<br>
+     <!-- START radio button table -->
+     <table border=0 align=center cellspacing=1 cellpadding=1>		
+	<tr>
+	 <td width=20><input type="image" src="/usr/www_safe/html/images/ti_radio_off.gif"  id="uiViewStats0" onclick="jslDoToggleRadio('uiViewStats',0,4);uiDoEthPage()" alt="" width=20 height=20 border=0></td>
+	 <td width=70>Ethernet</td>
+	 <td width=20><input type="image" src="/usr/www_safe/html/images/ti_radio_off.gif" id="uiViewStats1" onclick="jslDoToggleRadio('uiViewStats',1,4);uiDoUSBPage()" alt="" width=20 height=20 border=0></td>
+	 <td width=45>USB</td>
+	 <td width=20><input type="image" src="/usr/www_safe/html/images/ti_radio_off.gif" id="uiViewStats2" onclick="jslDoToggleRadio('uiViewStats',2,4);uiDoDSLPage()" alt="" width=20 height=20 border=0></td>
+	 <td width=40>DSL</td>
+	 <td width=20><input type="image" src="/usr/www_safe/html/images/ti_radio_on.gif" id="uiViewStats3" onclick="jslDoToggleRadio('uiViewStats',3,4);uiDoWirelessPage()" alt="" width=20 height=20 border=0></td>
+	 <td>Wireless</td>
+	</tr>
+     </table>
+     <!-- END radio button table -->
+    </td>
+   </tr>
+   <tr>
+    <td bgcolor="#FFFFFF" align=center valign=top>
+     <!-- Actual data starts here... -->
+      <table border=0 cellspacing=1 cellpadding=0 width=355>
+	<tr>
+	  <td colspan=2 height=20 valign=middle class="statusSubHeader">Transmit</td>
+	</tr>
+	<tr>
+	 <td width=25 nowrap></td>
+ 	 <td>
+         <table border=0 cellspacing=1 cellpadding=0 class="">
+          <input type="hidden" name="ap:status/wireless_statistics" value="<? query ap:status/wireless_statistics ?>">
+           <? multiquery ap:status/wireless_tx_stats
+            '<tr>
+              <td>MPDUs</td>
+              <td width=17 nowrap rowspan=5></td>
+              <td>$1</td>
+            </tr>
+            <tr>
+              <td>MSDUs</td>
+              <td>$2</td>
+            </tr>
+            <tr>
+              <td>Multicast MSDUs</td>
+              <td>$3</td>
+            </tr>
+            <tr>
+              <td>Failed MSDUs</td>
+              <td>$4</td>
+            </tr>
+            <tr>
+              <td>Retry MSDUs</td>
+              <td>$5</td>
+            </tr>
+           ' ?>
+         </table>
+        </td>
+       </tr>
+	<tr>
+	  <td colspan=2 height=20 valign=middle class="statusSubHeader">Receive</td>
+	</tr>
+	<tr>
+         <td width=25 nowrap></td>
+	  <td>
+           <table border=0 cellspacing=1 cellpadding=0>
+             <? multiquery ap:status/wireless_rx_stats
+                '<tr>
+                   <td>MPDUs</td>
+                   <td width=17 nowrap rowspan=4></td>
+                   <td>$1</td>
+                 </tr>
+                 <tr>
+                   <td>MSDUs</td>
+                   <td>$2</td>
+                 </tr>
+                <tr>
+                  <td>Multicast MSDUs</td>
+                  <td>$3</td>
+                </tr>
+                <tr>
+                  <td>FCS Error MPDUs</td>
+                  <td>$4</td>
+                </tr>
+               ' ?>
+           </table>
+	 </td>
+      </tr>
+    </table>
+   </td>
+  </tr>
+  <tr> 
+    <td align=right bgcolor="#FFFFFF" height=19 valign=middle>
+	<input type="image" src="/usr/www_safe/html/images/ti_button_refresh.gif" onclick="uiDoRefresh()" alt="Refresh" width="62" height="19" border="0">
+    </td>
+ </tr>
+</table>
+</form>
+

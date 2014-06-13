@@ -1,0 +1,89 @@
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 align=center bgcolor="<? echo $var:bgColorTable ?>" width=475>
+<tr>
+	<td colspan=2>
+	<table border=0 width="100%" cellspacing=0 cellpadding=0>
+	<tr><td height=1 bgcolor="<? echo $var:bgColorTable ?>"></td></tr>
+	<tr><td height=8 bgcolor="#333366"></td></tr>
+	<tr><td height=3 bgcolor="#999999"></td></tr>
+	</table>
+	</td>
+</tr>
+<tr>
+	<td valign=middle bgcolor="#E6E6FF" align=center height=95 width="50%">
+
+	<!-- System Uptime, DSL, LAN IP -->
+	<table cellspacing=2 <? echo $var:cntrBorder ?> cellpadding=1 bgcolor="#E6E6FF">
+	 <tr>
+	  <td nowrap align=left><font size=1>System Uptime: </font></td>
+	  <td align=left  nowrap><font size=1><? query logic:status/uptime_hours ?> hours <? query logic:status/uptime_minutes ?> minutes</font></td>
+	 </tr>
+	<? if eq `1` `$var:HasDsl`	 
+       ` <? setvariable var:DSLTrainingState "Connecting..." ?>
+	  <? if eq `<? query sar:status/dsl_carrier_state ?>` `0` `<? setvariable var:DSLTrainingState "Disconnected" ?>` ?>
+	  <? if eq `<? query sar:status/dsl_carrier_state ?>` `2` `<? setvariable var:DSLTrainingState "Connected" ?>`    ?>
+       ` ` ` ?>
+	<? if eq `1` `$var:HasDsl`	 
+	`<tr>
+	  <td nowrap align=left ><font size=1>DSL Status:</font></td>
+	  <td align=left ><font size=1>$var:DSLTrainingState</font></td>	
+	 </tr>
+	 <tr>
+	  <td nowrap align=left ><font size=1>DSL Speed:</font></td>
+	  <td align=left ><font size=1><? query sar:status/dsl_us_rate ?>/<? query sar:status/dsl_ds_rate ?>kbps</font></td>
+	 </tr>
+	` ` ` ?>
+    <? if eq `1` `$var:HasWireless`
+     ` <tr>
+	  <td nowrap align=left ><font size=1>Wireless RF:</font></td>
+	  <td align=left ><font size=1><? if eq '0' '<? query ap:settings/ap_enabled ?>' `Disabled` `Enabled` ?></font></td>
+	 </tr>
+     ` ` ` ?>
+	</table>
+	<!-- END System Uptime, DSL, LAN IP -->
+
+	</td>
+	
+
+	<td valign=middle bgcolor="#E6E6FF" align=center width="50%">
+
+	<!-- Ethernet, USB, DHCP Server, SW Version -->
+	<table cellspacing=2 <? echo $var:cntrBorder ?> cellpadding=1 bgcolor="#E6E6FF">
+	 <tr>
+	  <td nowrap align=left><font size=1>Ethernet:</font></td>
+         <? if eq `1` `$var:HasMarvell`
+	  ` <td align=left><font size=1><? if eq <? query eth0:status/marvell_carrier ?> 0 'Disconnected' 'Connected' ?></font></td>
+	  `
+	  ` <td align=left><font size=1><? if eq <? query eth0:status/carrier ?> 0 'Disconnected' 'Connected' ?></font></td>
+         ` ?>
+	 </tr>
+      <? if eq `1` `$var:HasUsb`
+       `<tr>
+	  <td nowrap align=left><font size=1>USB:</font></td>
+	  <td align=left><font size=1><? if eq <? query usb:status/carrier ?> 0 'Disconnected' 'Connected' ?> </font></td>
+	 </tr>
+	` ` ` ?>
+	 <tr>
+	  <td nowrap align=left><font size=1>Software Version:</font></td>
+	  <td align=left><font size=1><? query logic:status/nspver ?></font></td>
+	 </tr>
+    <? if eq `1` `$var:HasWireless`
+     ` <tr>
+	  <td nowrap align=left><font size=1>SSID:</font></td>
+	  <td align=left><input type="text" size="32" class="uiSSID"  style="text-align:left;background-color:#E6E6FF;font-size:8pt;" value="" id="uiViewSSID"></td>
+	 </tr>
+     ` ` ` ?>
+	</table>
+	<!-- END Ethernet, USB, DHCP Server, SW Version -->
+
+	</td>
+</tr>
+<tr>
+	<td colspan=2>
+	<table border=0 width="100%" cellspacing=0 cellpadding=0>
+	<tr><td height=3 bgcolor="#999999"></td></tr>
+	<tr><td height=8 bgcolor="#333366"></td></tr>
+	<tr><td height=1 bgcolor="<? echo $var:bgColorTable ?>"></td></tr>
+	</table>
+	</td>
+</tr>
+</table>

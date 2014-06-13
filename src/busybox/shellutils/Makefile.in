@@ -1,0 +1,57 @@
+# Makefile for busybox
+#
+# Copyright (C) 1999,2000,2001 by Erik Andersen <andersee@debian.org>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+#
+
+
+SHELLUTILS_AR:=shellutils.a
+ifndef SHELLUTILS_DIR
+SHELLUTILS_DIR=$(TOPDIR)shellutils/
+endif
+
+SHELLUTILS-y:=
+SHELLUTILS-$(CONFIG_BASENAME)		+= basename.o
+SHELLUTILS-$(CONFIG_CAL)		+= cal.o
+SHELLUTILS-$(CONFIG_CHROOT)		+= chroot.o
+SHELLUTILS-$(CONFIG_DATE)		+= date.o
+SHELLUTILS-$(CONFIG_DIRNAME)		+= dirname.o
+SHELLUTILS-$(CONFIG_ECHO)		+= echo.o
+SHELLUTILS-$(CONFIG_ENV)		+= env.o
+SHELLUTILS-$(CONFIG_EXPR)		+= expr.o
+SHELLUTILS-$(CONFIG_FALSE)		+= false.o
+SHELLUTILS-$(CONFIG_HOSTID)		+= hostid.o
+SHELLUTILS-$(CONFIG_ID)			+= id.o
+SHELLUTILS-$(CONFIG_LOGNAME)		+= logname.o
+SHELLUTILS-$(CONFIG_PRINTF)		+= printf.o
+SHELLUTILS-$(CONFIG_PWD)		+= pwd.o
+SHELLUTILS-$(CONFIG_SLEEP)		+= sleep.o
+SHELLUTILS-$(CONFIG_STTY)		+= stty.o
+SHELLUTILS-$(CONFIG_TEE)		+= tee.o
+SHELLUTILS-$(CONFIG_TEST)		+= test.o
+SHELLUTILS-$(CONFIG_TRUE)		+= true.o
+SHELLUTILS-$(CONFIG_TTY)		+= tty.o
+SHELLUTILS-$(CONFIG_UNAME)		+= uname.o
+SHELLUTILS-$(CONFIG_USLEEP)		+= usleep.o
+SHELLUTILS-$(CONFIG_WHO)		+= who.o
+SHELLUTILS-$(CONFIG_WHOAMI)		+= whoami.o
+SHELLUTILS-$(CONFIG_YES)		+= yes.o
+
+libraries-y+=$(SHELLUTILS_DIR)$(SHELLUTILS_AR)
+
+$(SHELLUTILS_DIR)$(SHELLUTILS_AR): $(patsubst %,$(SHELLUTILS_DIR)%, $(SHELLUTILS-y))
+	$(AR) -ro $@ $(patsubst %,$(SHELLUTILS_DIR)%, $(SHELLUTILS-y))
+

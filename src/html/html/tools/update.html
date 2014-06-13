@@ -1,0 +1,82 @@
+
+<!-- Update Gateway -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Update Gateway</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>">
+   <font size=1>To update your gateway firmware, choose an updated firmware image or configuration file in "Select a File", and then click the 
+   Update Gateway button.  Additionally, you may download your configuration file from the system by clicking Get Configuration.
+   </font>
+  </td>
+ </tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  
+   <div style="height: 5px"></div>
+  	
+   <table cellspacing=0 <? echo $var:cntrBorder ?> cellpadding=2 align=center id="uiViewBodyTable" width=425>
+    <form name="Firmware" method="POST" action="../cgi-bin/firmwarecfg" enctype="multipart/form-data" id="uiPostUpdateForm" onsubmit="return false">
+	<tr>
+	 <td align=left>
+	  <table <? echo $var:cntrBorder ?> cellspacing=0 width=124>
+           <tr> 
+             <td align=right nowrap>Select a File: </td>
+             <td align=left nowrap><input type="file" name="UploadFile" size="30" value="" id="uiViewFileSelector"></td>
+           </tr>
+           <tr>
+             <td align=right >&nbsp;</td>
+             <td align=left >(Max file size 3.5 MB)</td>
+           </tr>
+           <tr>
+             <td align=right >&nbsp;</td>
+             <td align=left >Firmware Image can be the combined single image with or without digital signature.</td>
+           </tr>
+         </table>
+	 </td>
+       </tr>
+	<tr>
+	 <td align=center bgcolor="<? echo $var:bgColorBody ?>">
+	  <table <? echo $var:cntrBorder ?> cellspacing=0 width=124>
+          <tr valign=middle>
+           <td width=62 height=50>
+            <input <? echo $var:widDefBtnUpdateGateway ?> name="upgrade" alt="Update Gateway" onclick="uiDoUpdate(document.getElementById('uiViewFileSelector').value)" id="uiUpgrade">
+           </td>
+         </tr>
+      </table>
+     </td>
+    </tr>
+    </form>
+	<tr>
+     <td align=left>
+      <font size=1>The system will be restarted automatically, after the Filesystem image is successfully updated.  
+       You will need to reconnect again to configure your setup.
+      </font>
+     </td>	
+    </tr>
+	<tr><td align=center height=10></td></tr>
+    <form name="Configuration" method="POST" action="../cgi-bin/firmwarecfg" enctype="multipart/form-data" id="uiPostConfigForm">
+	<tr>
+     <td height=5 nowrap align=center><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=425 height=1></td>
+	</tr>
+	<tr>
+     <td align=center height=35>
+      <input <? echo $var:widDefBtnGetConfig ?> name="config" alt="Get Configuration" id="uiConfig"><br>
+     </td>
+    </tr>
+   <tr>
+     <td align=left>
+      <font size=1>The system will give the configuration file only if it was earlier saved by pressing "SaveAll" in System Command Menu.
+      </font>
+     </td>	
+    </tr>
+    </form>
+	</table>
+   </td>
+  </tr>
+  <tr><td align=left height=28 bgcolor="<? echo $var:bgColorBody ?>">
+  <font size=1>Status:<input type="text" name="Status" id="uiStatus" class="uiNoBorder" size="65" value="" style="background-color: <? echo $var:bgColorBody ?>;"></font></td></tr>
+</table>
+<!-- END Update Gateway -->
+

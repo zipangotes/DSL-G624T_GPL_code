@@ -1,0 +1,296 @@
+#
+#  
+#   Texas Instruments NSP/PSP distribution
+#  (c) Texas Instruments 2003
+#
+#
+#   AR7RD NSP  development board Makefile
+#--------------------------------------------------------
+
+TARGET_HOME = $(shell pwd)
+KERNEL_DIR  = $(TARGET_HOME)/src/kernel/linux-2.4.17_mvl21
+DO_DEP	    = $(shell cat $(TARGET_HOME)/.did_dep)
+REL_NSP32 = 1
+TEMPPATH = /bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin/:/usr/local/bin
+#include ./TI_Build.make
+
+
+build_kernel: kernel_AR7RD_NSP modules_AR7RD_NSP TI_checksum_AR7RD_NSP USB_AR7RD_NSP  
+
+build_dsl: DSL_AR7RD_NSP
+build_dsl_annex: DSL_ANNEX
+
+build_filesystem: filesystem_AR7RD_NSP
+
+build_config: config_AR7RD_NSP
+
+.PHONY:  build_kernel build_filesystem build_dsl build_config
+
+#------------------
+# AR7RD kernel type
+#------------------
+ifeq    ($(FS),JFFS)
+KERNEL_TYPE=ram_zimage.ar7rd.nsp.jffs.bin
+KERNEL_UPGRADE_TYPE=ram_zimage.ar7rd.nsp.jffs.upgrade.bin
+FS_TYPE=nsp.ar7rd.jffs.img
+SIMAGE_TYPE=nsp.ar7rd.firmware.img
+SIMAGE_UPG_TYPE=nsp.ar7rd.firmware.upgrade.img
+endif
+ifeq    ($(FS),CRAMFS)
+KERNEL_TYPE=ram_zimage.ar7rd.nsp.cramfs.bin
+KERNEL_UPGRADE_TYPE=ram_zimage.ar7rd.nsp.cramfs.upgrade.bin
+FS_TYPE=nsp.ar7rd.cramfs.img
+SIMAGE_TYPE=nsp.ar7rd.firmware.img
+SIMAGE_UPG_TYPE=nsp.ar7rd.firmware.upgrade.img
+endif
+ifeq    ($(FS),SQUASHFS)
+KERNEL_TYPE=ram_zimage.ar7rd.$(BOARD_EXT).nsp.squashfs.bin
+KERNEL_UPGRADE_TYPE=ram_zimage.ar7rd$(BOARD_EXT).nsp.squashfs.upgrade.bin
+FS_TYPE=nsp.ar7rd$(BOARD_EXT).squashfs.img
+FS_UPG_TYPE=nsp.ar7rd$(BOARD_EXT).squashfs.upgrade.img
+SIMAGE_TYPE=nsp.ar7rd$(BOARD_EXT).firmware.img
+SIMAGE_UPG_TYPE=nsp.ar7rd$(BOARD_EXT).firmware.upgrade.img
+endif
+ifeq  "$(FS)" ""
+KERNEL_TYPE=ram_zimage.ar7rd$(BOARD_EXT).nsp.squashfs.bin
+KERNEL_UPGRADE_TYPE=ram_zimage.ar7rd$(BOARD_EXT).nsp.squashfs.upgrade.bin
+FS_TYPE=nsp.ar7rd$(BOARD_EXT).squashfs.img
+FS_UPG_TYPE=nsp.ar7rd$(BOARD_EXT).squashfs.upgrade.img
+SIMAGE_TYPE=nsp.ar7rd$(BOARD_EXT).firmware.img
+SIMAGE_UPG_TYPE=nsp.ar7rd$(BOARD_EXT).firmware.upgrade.img
+endif
+
+
+kernel_AR7RD_NSP:
+#-------------------------
+# AR7RD development board
+#-------------------------
+	cd $(KERNEL_DIR)
+
+#--------
+# NSP build
+#--------
+ifeq    ($(FS),JFFS)
+#	cp $(KERNEL_DIR)/arch/mips/configs/avalanche/sangam/defconfig-sangam-ar7rd-nsp-jffs $(KERNEL_DIR)/.config
+endif  
+
+# -----Squash FS--------
+
+ifeq    ($(FS),SQUASHFS)
+#ifeq	($(EMAC),EXTERNAL)
+#	cp $(KERNEL_DIR)/arch/mips/configs/avalanche/sangam/defconfig-sangam-ar7rd-nsp-squashfs $(KERNEL_DIR)/.config
+#endif
+#ifeq	($(EMAC),INTERNAL)
+#	cp $(KERNEL_DIR)/arch/mips/configs/avalanche/sangam/defconfig-sangam-ar7rd_i-nsp-squashfs $(KERNEL_DIR)/.config
+#endif
+#ifeq	"$(EMAC)" ""
+#	cp $(KERNEL_DIR)/arch/mips/configs/avalanche/sangam/defconfig-sangam-ar7rd-nsp-squashfs $(KERNEL_DIR)/.config
+#endif
+endif
+
+# -----Default FS--------
+
+ifeq    "$(FS)" ""
+	@echo "*----------------------------------------------------------------*"
+	@echo "*  No FS specified, defaulting to SQUASHFS                         *"
+	@echo "*----------------------------------------------------------------*"
+	@echo "BOARD_EXT",$(BOARD_EXT)
+#ifeq	($(EMAC),EXTERNAL)
+#	cp $(KERNEL_DIR)/arch/mips/configs/avalanche/sangam/defconfig-sangam-ar7rd-nsp-squashfs $(KERNEL_DIR)/.config
+#endif
+#ifeq	($(EMAC),INTERNAL)
+#	cp $(KERNEL_DIR)/arch/mips/configs/avalanche/sangam/defconfig-sangam-ar7rd_i-nsp-squashfs $(KERNEL_DIR)/.config
+#endif
+#ifeq	"$(EMAC)" ""
+#	cp $(KERNEL_DIR)/arch/mips/configs/avalanche/sangam/defconfig-sangam-ar7rd-nsp-squashfs $(KERNEL_DIR)/.config
+#endif
+endif
+
+#--------------
+# Build Kernel
+#--------------
+ifeq	($(DO_DEP), depend_done)
+	make -C $(KERNEL_DIR) ram_zimage
+else
+	make -C $(KERNEL_DIR) oldconfig
+	make -C $(KERNEL_DIR) dep
+	echo "depend_done" > .did_dep
+	make -C $(KERNEL_DIR) clean
+	make -C $(KERNEL_DIR) ram_zimage
+endif
+
+#----------------------------------------
+# AVALANCHE USB & DSL & NETFILTER modules
+#----------------------------------------
+modules_AR7RD_NSP:
+	make -C $(KERNEL_DIR) modules
+	make -C $(KERNEL_DIR) modules_install INSTALL_MOD_PATH=$(TARGET_HOME)/filesystem
+
+#-------------------------------------------------
+# remove built, pcmcia and strip-debug all modules
+#-------------------------------------------------
+
+	rm -rf $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/build
+	rm -rf $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/pcmcia
+
+#-----------------------
+# tiatm.o for AR7RD
+#----------------------
+
+#	mips_fp_le-strip --strip-unneeded $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/drivers/atm/tiatm.o
+#	mips_fp_le-strip --strip-unneeded $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/drivers/net/avalanche_usb.o
+	@if [ -d $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/net/ipv4/netfilter/ ]; then \
+		mips_fp_le-strip --strip-debug $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/net/ipv4/netfilter/*.o ; \
+	fi
+	mv $(KERNEL_DIR)/ram_zimage.bin $(TARGET_HOME)/$(KERNEL_TYPE)
+
+#----------------------------------------------
+# add cksum to upgrade/distribution kernel image
+#-----------------------------------------------
+TI_checksum_AR7RD_NSP:
+	cp $(TARGET_HOME)/$(KERNEL_TYPE) $(TARGET_HOME)/$(KERNEL_UPGRADE_TYPE)
+	$(TARGET_HOME)/tools/bin/tichksum $(TARGET_HOME)/$(KERNEL_UPGRADE_TYPE)
+
+#---------------------------------------
+# Install avalanche_usb module for AR7RD
+#---------------------------------------
+USB_AR7RD_NSP:
+ifneq    ($(BOARD_EXT),_7300c)
+	$(MAKE) -C $(TARGET_HOME)/src/usb_rel -f Makefile.flat
+endif
+	$(MAKE) -C $(TARGET_HOME)/src/dsl_rel -f Makefile.flat
+
+#---------------------------------------
+# Install avalanche_dsl module for AR7RD
+#---------------------------------------
+DSL_AR7RD_NSP:
+	$(MAKE) -C $(TARGET_HOME)/src/dsl_rel -f Makefile.flat
+
+#-------------------------------
+# DSL Firmware (Annex selection)
+#-------------------------------
+DSL_ANNEX:
+ifeq ($(ANNEX),A)
+	cp $(TARGET_HOME)/ar0700mp.bin $(TARGET_HOME)/filesystem/lib/modules/ar0700xx.bin
+	@echo "**Selecting Annex A for DSL firmware..**"
+endif
+ifeq ($(ANNEX),B)
+	cp $(TARGET_HOME)/ar0700db.bin $(TARGET_HOME)/filesystem/lib/modules/ar0700xx.bin
+	@echo "**Selecting Annex B for DSL firmware..**"
+endif
+ifeq ($(ANNEX),)
+	@echo "** DSL firmware defaults to Annex A since not configured **"
+	cp $(TARGET_HOME)/ar0700mp.bin $(TARGET_HOME)/filesystem/lib/modules/ar0700xx.bin
+endif
+
+
+
+filesystem_AR7RD_NSP:
+#-------------------------------------------
+#  LED configuration
+#-------------------------------------------
+
+#	@if [ ! -f $(TARGET_HOME)/filesystem/etc/led.conf ]; then \
+#	mv $(TARGET_HOME)/filesystem/etc/led_ar7rd.conf $(TARGET_HOME)/filesystem/etc/led.conf; \
+#	rm $(TARGET_HOME)/filesystem/etc/led_ar5d01.conf; \
+#	rm $(TARGET_HOME)/filesystem/etc/led_ar5w01.conf; \
+#	fi
+
+#--------------------------------------------
+# HTML configuration 
+#--------------------------------------------
+
+	@if [ -f $(TARGET_HOME)/filesystem/usr/www/contents_wireless.html ]; then \
+	rm $(TARGET_HOME)/filesystem/usr/www/contents_wireless.html; \
+	fi
+	@if [ -f $(TARGET_HOME)/filesystem/usr/www/gateway/commands/index_wireless.html ]; then \
+	rm $(TARGET_HOME)/filesystem/usr/www/gateway/commands/index_wireless.html; \
+	fi
+
+
+ifeq (0,1) # that is to disable 2/8 footprint for now
+#-------------------------------------------------------
+# Remove files to hit 2/8 footprint
+#-------------------------------------------------------
+#
+	@if [ -f $(TARGET_HOME)/filesystem/usr/bin/cm_klogd ]; then \
+	rm $(TARGET_HOME)/filesystem/usr/bin/cm_klogd; \
+	fi
+	@if [ -f $(TARGET_HOME)/filesystem/usr/bin/dumpleases ]; then \
+	rm $(TARGET_HOME)/filesystem/usr/bin/dumpleases; \
+	fi
+
+#	@if [ -f $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/net/ipv4/netfilter/ipt_LOG.o ]; then \
+#	rm $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/net/ipv4/netfilter/ipt_LOG.o; \
+#	fi
+#	@if [ -f $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/net/ipv4/netfilter/ipt_mac.o ]; then \
+#	rm $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/net/ipv4/netfilter/ipt_mac.o; \
+#	fi
+#	@if [ -f $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/net/ipv4/netfilter/ipt_psd.o ]; then \
+#	rm $(TARGET_HOME)/filesystem/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/net/ipv4/netfilter/ipt_psd.o; \
+#	fi
+
+	@if [ -f $(TARGET_HOME)/filesystem/lib/libpthread.so.0 ]; then \
+	rm $(TARGET_HOME)/filesystem/lib/libpthread.so.0; \
+	fi
+	@if [ -f $(TARGET_HOME)/filesystem/lib/libpthread-0.9.19.so ]; then \
+	rm $(TARGET_HOME)/filesystem/lib/libpthread-0.9.19.so; \
+	fi
+endif
+
+
+#-----------------------------
+# Filesystem Generation
+#-----------------------------
+	cp -a filesystem filesystem_temp
+	cd filesystem_temp; tar cvf var.tar var
+	rm -rf filesystem_temp/var/*
+ifeq    ($(FS),SQUASHFS)
+	$(TARGET_HOME)/tools/bin/mksquashfs filesystem_temp $(FS_TYPE) -noappend
+	rm -rf filesystem_temp
+	chmod a-x+r $(FS_TYPE)
+	cp $(TARGET_HOME)/$(FS_TYPE) $(TARGET_HOME)/$(FS_UPG_TYPE)
+	$(TARGET_HOME)/tools/bin/tichksum $(FS_UPG_TYPE)
+else
+ifeq    "$(FS)" ""
+	$(TARGET_HOME)/tools/bin/mksquashfs filesystem_temp $(FS_TYPE) -noappend
+	rm -rf filesystem_temp
+	chmod a-x+r $(FS_TYPE)
+	cp $(TARGET_HOME)/$(FS_TYPE) $(TARGET_HOME)/$(FS_UPG_TYPE)
+	$(TARGET_HOME)/tools/bin/tichksum $(FS_UPG_TYPE)
+endif
+endif
+	@echo "******** Generating a single upgrade image ********"
+	$(TARGET_HOME)/tools/bin/mknspimg -o $(SIMAGE_TYPE) -i $(KERNEL_TYPE) $(FS_TYPE) -a 0 4096 -v
+	@echo "******** $(SIMAGE_TYPE) is ready *********"
+	cp $(TARGET_HOME)/$(SIMAGE_TYPE) $(TARGET_HOME)/$(SIMAGE_UPG_TYPE)
+	@echo "Calculating single image CRC (for Config Man)..."
+	$(TARGET_HOME)/tools/bin/tichksum $(TARGET_HOME)/$(SIMAGE_UPG_TYPE)
+	@echo "*--------------------------------------------------------------------------*"
+	@echo "* SQUASHFS NSP build complete (with single image)!                         *"
+	@echo "*--------------------------------------------------------------------------*"
+
+#-----------------
+# Generate Upgrade
+#-----------------
+upgrade_AR7RD_NSP:
+	cp $(TARGET_HOME)/$(FS_TYPE) $(TARGET_HOME)/$(FS_UPG_TYPE)
+	$(TARGET_HOME)/tools/bin/tichksum $(FS_UPG_TYPE)
+
+#-----------------
+# config.xml build
+#-----------------
+config_AR7RD_NSP:
+	$(TARGET_HOME)/tools/bin/mkconfig -i $(TARGET_HOME)/config.xml -o $(TARGET_HOME)/config.ar7rd$(BOARD_EXT).img
+
+AR7RD_NSP_kernel_clean:
+	rm -f $(FS_TYPE)
+	rm -f $(FS_UPG_TYPE)
+	rm -f $(KERNEL_TYPE)
+	rm -f $(KERNEL_UPGRADE_TYPE)
+	rm -f $(SIMAGE_TYPE)
+	rm -f $(SIMAGE_UPG_TYPE)
+	rm -f config.ar7rd$(BOARD_EXT).img
+
+.PHONY: kernel_AR7RD_NSP filesystem_AR7RD_NSP upgrade_AR7RD_NSP modules_AR7RD_NSP TI_checksum_AR7RD_NSP
+.PHONY: USB_AR7RD_NSP DSL_AR7RD_NSP AR7RD_NSP_kernel_clean 

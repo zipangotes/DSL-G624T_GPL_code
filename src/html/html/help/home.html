@@ -1,0 +1,132 @@
+<!-- Help Home -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=4 bgcolor="<? echo $var:menuColorBlack ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+<tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Help</font></td>
+</tr>
+ <tr><td bgcolor="<? echo $var:bgColorBody ?>" height=20><font size=1>This section takes you to different Help Sections for Firewall, Bridge Filters, LAN Clients and PPP Connection.</font></td></tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top>
+  	
+	<div style="height: 5px"></div>
+
+  	<!-- Help Home Menu -->
+	<table cellspacing=5 border=0 cellpadding=0 width=375>
+	<tr>
+		<td valign=middle nowrap>
+			<a href="<? echo $var:pagepath ?>=help_firewall&var:pagetitle=Firewall%20Help" class="pageLink"><font size=1>				
+			<b>Firewall</b></font></a>
+		</td>
+		<td>
+			<font size=1>Help for Port Forwarding, Access Control, and Advanced Security.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle nowrap>
+			<a href="<? echo $var:pagepath ?>=help_bfilters&var:pagetitle=Bridge%20Filters%20Help" class="pageLink"><font size=1>				
+			<b>Bridge Filters</b></font></a>
+		</td>
+		<td>
+			<font size=1>Help section for Bridge Filters.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+
+	<tr>
+		<td valign=middle nowrap>
+			<a href="<? echo $var:pagepath ?>=help_lclients&var:pagetitle=LAN%20Clients%20Help" class="pageLink"><font size=1>				
+			<b>LAN Clients</b></font></a>
+		</td>
+		<td>
+			<font size=1>Help section for LAN Clients.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+
+	<tr>
+		<td valign=middle nowrap>
+			<a href="<? echo $var:pagepath ?>=help_slconfig&var:pagetitle=LAN%20Configuration%20Help" class="pageLink"><font size=1>				
+			<b>LAN Group Configuration</b></font></a>
+		</td>
+		<td>
+			<font size=1>Help section for Configuring LAN Groups with static IP Address.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	<tr>
+		<td valign=middle nowrap>
+			<a href="<? echo $var:pagepath ?>=help_ppp&var:pagetitle=PPP%20Help" class="pageLink"><font size=1>				
+			<b>PPP Connection</b></font></a>
+		</td>
+		<td>
+			<font size=1>Help for establishing a PPP Connection.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+       <? if eq `1` `$var:HasVoice`
+	`<tr>
+		<td valign=middle nowrap>
+			<a href="<? echo $var:pagepath ?>=help_voice&var:pagetitle=Voice%20Help" class="pageLink"><font size=1>				
+			<b>Voice</b></font></a>
+		</td>
+		<td>
+			<font size=1>Help pages for Voice.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr> 
+	` ` ` ?>
+	 <tr>
+		<td valign=middle nowrap>
+			<a href="<? echo $var:pagepath ?>=help_upnp&var:pagetitle=UPnP%20Help" class="pageLink"><font size=1>				
+			<b>UPnP</b></font></a>
+		</td>
+		<td>
+			<font size=1>Help pages for UPnP.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle nowrap>
+			<a href="<? echo $var:pagepath ?>=help_ipqos&var:pagetitle=IPQoS%20Help" class="pageLink"><font size=1>				
+			<b>IP QoS</b></font></a>
+		</td>
+		<td>
+			<font size=1>Help section for IP QoS.</font>
+		</td>
+	</tr>
+	<tr>
+		<td height=1 colspan=2 bgcolor="<? echo $var:bgColorTable ?>"></td>
+	</tr>
+	<tr>
+		<td valign=middle nowrap>
+			<a href="<? echo $var:pagepath ?>=help_rip&var:pagetitle=RIP%20Help" class="pageLink"><font size=1>				
+			<b>RIP Help</b></font></a>
+		</td>
+		<td>
+			<font size=1>Help section for RIP ( Routing Information Protocol).</font>
+		</td>
+	</tr>
+	</table>
+	
+	<div style="height: 12px"></div>
+
+	</td>
+   </tr>
+</table>
+<!-- END Help Home -->
+
+

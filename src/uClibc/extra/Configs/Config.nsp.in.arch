@@ -1,0 +1,42 @@
+# 
+# Architecture specific defines
+#
+#mainmenu_option next_comment
+comment 'Architecture specific defines'
+
+#if [ "$ARCH_HAS_NO_MMU" = "n" ]; then
+   bool 'Target CPU has a memory management unit (MMU)' UCLIBC_HAS_MMU
+#fi
+
+bool 'Enable floating point number support' UCLIBC_HAS_FLOATS
+
+if [ "$UCLIBC_HAS_FLOATS" = "y" -a "$ARCH_HAS_NO_FPU" != "n" ]; then
+   bool 'Target CPU has a floating point unit (FPU)' HAS_FPU
+fi
+
+if [ "$UCLIBC_HAS_FLOATS" = "y" -a "$HAS_FPU" = "n" ]; then
+   bool 'uClibc has a soft float' UCLIBC_HAS_SOFT_FLOAT
+fi
+
+if [ "$UCLIBC_HAS_FLOATS" = "y" ]; then
+   bool 'Enable full C99 math library support' DO_C99_MATH
+fi
+
+string 'Compiler Warnings' WARNINGS "-Wall"
+
+if [ "$UCLIBC_HAS_MMU" = "n" ]; then
+   bool 'uClinux Broken MUNMAP' UCLIBC_UCLINUX_BROKEN_MUNMAP
+fi
+
+if [ "$UCLIBC_HAS_MMU" = "n" ]; then
+   bool 'Exclude BRK' EXCLUDE_BRK
+fi
+
+if [ "$ARCH_HAS_C_SYMBOL_PREFIX" = "y" ]; then
+   string 'C symbol Prefix' C_SYMBOL_PREFIX ""
+fi
+
+if [ "$ARCH_HAS_C_SYMBOL_PREFIX" = "n" ]; then
+   string 'C symbol Prefix' C_SYMBOL_PREFIX "_"
+fi
+#endmenu

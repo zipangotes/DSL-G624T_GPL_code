@@ -1,0 +1,144 @@
+#!/bin/sh
+
+PWD=$1
+BOARD=
+OPTIONS=
+ETHPHY=
+NBOARD=
+NVOICEPROTOCOL=
+
+if [ "$#" -eq 4 -o "$#" -eq 3 ]
+then
+	NBOARD="$2"
+	ETHPHY="$3"
+	NVOICEPROTOCOL="$4"
+	INTERACTIVE=0
+else
+	INTERACTIVE=1
+fi
+
+fatal() {
+	echo $1
+	touch ${PWD}/.bad_setconfig
+	exit
+}
+
+menu_board() {
+	echo "*-------------------------------------------*"
+	echo "*     -*  Texas Instruments Linux *-        *"
+	echo "*-------------------------------------------*"
+	echo "*  Please select from the following boards: *"
+	echo "*                                           *"
+	echo "*   [1]  AR7RD                              *"
+	echo "*   [2]  AR7WRD                             *"
+	echo "*   [3]  AR7VWi                             *"
+	echo "*   [4]  AR7Wi                              *"
+	echo "*   [6]  AR7VW                              *"
+ 	echo "*                                           *"
+	echo "*-------------------------------------------*"
+	echo -n "Selection (1-6): >"
+	read NBOARD
+}
+
+menu_ethphy() {
+	echo "*------------------------------------------------*"
+	echo "*        -*  Texas Instruments Linux *-          *"
+	echo "*------------------------------------------------*"
+	echo "*  Please select from the following options:     *"
+	echo "*                                                *"
+	echo "*   [1]  Autoselect of Internal or External Phy  *"
+	echo "*   [2]  Marvell Switch                          *"
+	echo "*                                                *"
+	echo "*------------------------------------------------*"
+	echo -n "Selection (1-2): >"
+	read ETHPHY
+}
+
+menu_voice_protocol() {
+	echo "*------------------------------------------------*"
+	echo "*        -*  Texas Instruments Linux *-          *"
+	echo "*------------------------------------------------*"
+	echo "*      Please select from the following Voice    *"
+	echo "*                 Protocol options:              *"
+	echo "*                                                *"
+	echo "*   [1]  SIP                                     *"
+	echo "*   [2]  MGCP                                    *"
+	echo "*                                                *"
+	echo "*------------------------------------------------*"
+	echo -n "Selection (1-2): >"
+	read NVOICEPROTOCOL
+}
+
+handle_board() {
+	case "${NBOARD}" in
+	1)	BOARD="AR7RD"
+		break;;
+	2)	BOARD="AR7WRD"
+		break;;
+	3)	BOARD="AR7VWi"
+		break;;
+	4)	BOARD="AR7Wi"
+		break;;
+	6)	BOARD="AR7VW"
+		break;;
+	*)	fatal "ERROR: Unknown Configuration!"
+	esac
+}
+
+handle_ethphy() {
+	case "${ETHPHY}" in
+	1)	OPTIONS="${OPTIONS}"
+		break;;
+	2)	OPTIONS="${OPTIONS}_marvell"
+		break;;
+	*)	fatal "ERROR: Unknown Configuration!"
+	esac
+}
+
+handle_voice_protocol() {
+	case "${NVOICEPROTOCOL}" in
+	1)	VOICE_PROTO_OPTION="${VOICE_PROTO_OPTION}_sip"
+		break;;
+	2)	VOICE_PROTO_OPTION="${VOICE_PROTO_OPTION}_mgcp"
+		break;;
+	*)	fatal "ERROR: Unknown Configuration!"
+	esac
+}
+
+set_config() {
+	echo "Board: '${BOARD}'"
+	echo "Options: '${OPTIONS}'"
+	echo "voice_protocol: '${VOICE_PROTO_OPTION}'"
+	echo "config file selected "NSP_${BOARD}${OPTIONS}${VOICE_PROTO_OPTION}.config
+
+	if [ -f ${PWD}/tools/configs/NSP_${BOARD}${OPTIONS}${VOICE_PROTO_OPTION}.config ]
+	then
+		cp -f ${PWD}/tools/configs/NSP_${BOARD}${OPTIONS}${VOICE_PROTO_OPTION}.config ${PWD}/.config
+		chmod 644 ${PWD}/.config
+	else
+		fatal "ERROR: Wrong combination of options selected!"
+	fi
+}
+
+if [ $INTERACTIVE -eq 1 ]
+then
+	menu_board
+	handle_board
+	menu_ethphy
+	handle_ethphy
+
+if [ $BOARD = AR7VWi -o  $BOARD = "AR7VW" ]
+then
+	menu_voice_protocol
+	handle_voice_protocol
+fi
+	set_config
+else
+	handle_board
+	handle_ethphy
+if [ $BOARD = AR7VWi -o  $BOARD = "AR7VW" ]
+then
+	handle_voice_protocol
+fi
+	set_config
+fi

@@ -1,0 +1,70 @@
+<!-- Remote web -->
+<? if eq 0 <? multiquerycount manager:command/connection/list ?> 
+`
+  <table $var:cntrBorder align=center cellpadding=1 cellspacing=0>
+   <tr><td>&nbsp;</td></tr>
+   <tr>
+    <td bgcolor="$var:bgColorBody" height=21 class="header" align=center>
+         You must create a connection to enter this advanced setup.
+    </td>
+   </tr> 
+  </table>
+` 
+`<table cellspacing=1 $var:cntrBorder cellpadding=0 bgcolor="$var:bgColorPageOutline" width="$var:dimMenuHomeInsideWidth" height="$var:dimMenuHomeHeight">
+ <tr>
+	<td bgcolor="$var:bgColorHeader" height=21 class="header" align=center><font size=1 color="$var:bgColorHeaderText">Remote Web Access</font></td>
+</tr>
+ <tr>
+  <td bgcolor="$var:bgColorBody" valign=top align=center>	
+  <div style="height: 15px"></div>
+  <table $var:cntrBorder align=center cellpadding=1 cellspacing=0>
+    <tr>
+     <td>
+      <table $var:cntrBorder align=center cellpadding=0 cellspacing=2>
+       <tr><td align=center colspan=10><? include /usr/www_safe/html/setup/error.html ?></td></tr>
+       <tr>
+ 	  <td>&nbsp;</td>
+	  <td align=right>Enable:</td>
+	  <td width=19 nowrap height=20 align=right><input <? echo $var:widDefCheckBoxOff ?> id="uiViewRhostState" value=off onclick="jslDoToggleCheckBox(id)" alt="" align="center"></td>
+	</tr>
+       <tr>
+ 	  <td>&nbsp;</td>
+         <td align=right nowrap>Choose a connection: 
+         </td>
+         <td>
+         <select onchange="uiDoSelectConnection(value)" id="uiViewConnectionSelector" style="width: 150px;">
+          <? multiquery manager:command/connection/list "<option value='$11'>$12</option>" ?>
+         </select>	
+        </td>
+       </tr>
+       <tr><td height=8 nowrap></td></tr>
+       <tr>
+         <td class="uiErrorCell"><img src="$var:imgErrorBlank" id="uiViewRhostIPMark" $var:dimImgErrorMark ></td>
+        <td align=right>Remote Host IP: </td>
+        <td><input type=text size=15 name="uiViewRhostIPMark" id="uiViewRhostIP" maxlength=15></td>
+       </tr>
+       <tr>
+         <td class="uiErrorCell"><img src="$var:imgErrorBlank" id="uiViewRhostMaskMark" $var:dimImgErrorMark ></td>
+        <td align=right>Remote Netmask: </td>
+        <td><input type="text" size=15 name="uiViewRhostMaskMark" value="255.255.255.0" id="uiViewRhostMask" maxlength=15></td>
+       </tr>
+       <tr>
+         <td class="uiErrorCell"><img src="$var:imgErrorBlank" id="uiViewRedirectPortMark" $var:dimImgErrorMark ></td>
+        <td align=right>Redirect Port: </td>
+        <td><input type="text" size=15 name="uiViewRedirectPortMark" value="" id="uiViewRedirectPort" maxlength=15></td>
+       </tr>
+       <tr>
+	   <td align=center colspan=10 bgcolor="$var:bgColorBody" style="color:$var:bgColorBody" id="uiViewErrorHint">$var:txtErrorHint</td>
+       </tr>
+      </table>
+     </td>
+    </tr>		
+    <tr><td height=12 align=center><img src="$var:imgHorizontalDivider" alt="" width=480 height=1></td></tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="$var:bgColorBody" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</table>
+` ?>
+<!-- END Remote Web -->
+

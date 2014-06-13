@@ -1,0 +1,39 @@
+<? setvariable var:imgMenuLogo `$var:dirImages/ti_menu_logo.gif` ?>
+<? setvariable var:dimMenuLogo `width=152 height=25 border=0` ?>
+<? setvariable var:altMenuLogo `Texas Instruments` ?>
+
+<? setvariable var:altBtnMenuHome `Home` ?>
+<? setvariable var:altBtnMenuSetup `Setup` ?>
+<? setvariable var:altBtnMenuAdv `Advanced` ?>
+<? setvariable var:altBtnMenuWireless `Wireless` ?>
+<? setvariable var:altBtnMenuTools `Tools` ?>
+<? setvariable var:altBtnMenuStatus `Status` ?>
+<? setvariable var:altBtnMenuHelp `Help` ?>
+
+<? setvariable var:btnMenuHome `$var:dirImages/ti_menu_home.gif` ?>
+<? setvariable var:btnMenuHomeHilite `$var:dirImages/ti_menu_home_hilite.gif` ?>
+<? setvariable var:dimBtnMenuHome `width=57 height=25 border=0` ?>
+
+<? setvariable var:btnMenuSetup `$var:dirImages/ti_menu_setup.gif` ?>
+<? setvariable var:btnMenuSetupHilite `$var:dirImages/ti_menu_setup_hilite.gif` ?>
+<? setvariable var:dimBtnMenuSetup `width=59 height=25 border=0` ?>
+
+<? setvariable var:btnMenuAdv `$var:dirImages/ti_menu_advanced.gif` ?>
+<? setvariable var:btnMenuAdvHilite `$var:dirImages/ti_menu_advanced_hilite.gif` ?>
+<? setvariable var:dimBtnMenuAdv `width=81 height=25 border=0` ?>
+
+<? setvariable var:btnMenuWireless `$var:dirImages/ti_menu_wireless.gif` ?>
+<? setvariable var:btnMenuWirelessHilite `$var:dirImages/ti_menu_wireless_hilite.gif` ?>
+<? setvariable var:dimBtnMenuWireless `width=76 height=25 border=0` ?>
+
+<? setvariable var:btnMenuTools `$var:dirImages/ti_menu_tools.gif` ?>
+<? setvariable var:btnMenuToolsHilite `$var:dirImages/ti_menu_tools_hilite.gif` ?>
+<? setvariable var:dimBtnMenuTools `width=58 height=25 border=0` ?>
+
+<? setvariable var:btnMenuStatus `$var:dirImages/ti_menu_status.gif` ?>
+<? setvariable var:btnMenuStatusHilite `$var:dirImages/ti_menu_status_hilite.gif` ?>
+<? setvariable var:dimBtnMenuStatus `width=66 height=25 border=0` ?>
+
+<? setvariable var:btnMenuHelp `$var:dirImages/ti_menu_help.gif` ?>
+<? setvariable var:btnMenuHelpHilite `$var:dirImages/ti_menu_help_hilite.gif` ?>
+<? setvariable var:dimBtnMenuHelp `width=51 height=25 border=0` ?>

@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>&gt; Tools&gt; Update Firmware</title>
+<meta http-equiv=content-type content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="/usr/www_safe/html/css/nsp.css" type="text/css">
+<script language="JavaScript">
+function uiDoOnLoad()
+{
+
+  document.getElementById("uiStatus").disabled=true;		
+  return true;
+
+}
+function uiDoUpdate(value)
+{
+  if(value=="") alert("You must select a file to update.");
+
+  else
+
+  {
+    
+    document.getElementById("uiStatus").value = "Upgrade in progress, Please wait...";
+    document.getElementById("uiStatus").disabled=true;
+    document.getElementById("uiUpgrade").disabled=true;	
+    document.getElementById("uiConfig").disabled=true;	
+	document.getElementById("uiRestart").disabled=true;	
+    document.getElementById("uiPostUpdateForm").submit();
+
+  }
+}
+function uiDoCancel()
+{
+  jslGoTo(null,"home");
+}
+</script>
+</head>
+<body onload="uiDoOnLoad()" bgcolor="#ECECEC" leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
+
+<table align=center cellspacing=1 border=0 cellpadding=4 bgcolor="#000000" width="604" height="390">
+<tr>
+	<td bgcolor="#000000" height=20 class="header" align=center><font size=1 color="#FFFFFF">Update Gateway</font></td>
+</tr>
+ <tr>
+  <td bgcolor="#ECECEC">
+  <font size=1>To update your gateway firmware, choose an update image or configuration file in Select a File, and then click the 
+  Update Gateway button.  Additionally, you may download your configuration file from the system by clicking Get Configuration.
+  </font>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap align=center bgcolor="#ECECEC">
+   <br>
+   <table cellspacing=0 cellpadding=2 align=center id="uiViewBodyTable" width=425>
+    <form name="Firmware" method="POST" action="../cgi-bin/firmwarecfg" enctype="multipart/form-data" id="uiPostUpdateForm" onsubmit="return false">
+    <tr><td align=left>Select a File: <input type="file" name="UploadFile" size="30" value="" id="uiViewFileSelector"></td></tr>
+	<tr>
+             <td align=center >(Max file size 3.5 MB)</td>
+    </tr>
+
+	<tr>
+     <td align=center bgcolor="#ECECEC">
+      <table cellspacing=0 width=124>
+      <tr valign=middle>
+       <td width=62 height=50>
+        <input type="submit" name="upgrade" value="Update Gateway" alt="Update Gateway" onclick="uiDoUpdate(document.getElementById('uiViewFileSelector').value)" id="uiUpgrade">
+       </td>
+    </form>
+
+    <form name="Restart" method="POST" action="../cgi-bin/firmwarecfg" enctype="multipart/form-data" id="uiPostRestartForm">
+     <td width=62 height=50>
+      <input type="submit" name="reboot" value="Restart Gateway" alt="Restart Gateway" id="uiRestart">
+     </td>
+	</form>
+	</tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+  <td align=left><font size=1>
+   The system will be restarted automatically, after the Filesystem image is successfully updated.  
+   You will need to reconnect again to configure your setup.</font>
+  </td>
+ </tr>
+ <tr><td align=center height=10></td></tr>
+    <form name="Configuration" method="POST" action="../cgi-bin/firmwarecfg" enctype="multipart/form-data" id="uiPostConfigForm">
+    <tr> 
+     <!-- <td height=5 nowrap align=center><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=425 height=1></td> -->
+    </tr>
+	<tr>
+     <td align=center height=35>
+      <input type="submit" name="config" value="Get Configuration" alt="Get Configuration" id="uiConfig"><br>
+     </td>
+	</tr>
+    </form>
+   </table>
+  </td>
+ </tr>
+  <tr>
+  <td bgcolor="#ECECEC" align=center nowrap>
+  <font size=1>Try the right upgradable file and in case of failure or on success RESTART the gateway.
+  </font>
+  </td>
+ </tr>
+ <tr>
+   <td align=left height=28 bgcolor="#ECECEC">			
+   <font size=1>Status:<input type="text" name="Status" id="uiStatus" class="uiNoBorder" style="background-color: #ECECEC;" size="65" value=""></font>
+  </td>
+ </tr>	  			
+</table>
+</body>
+</html>
+

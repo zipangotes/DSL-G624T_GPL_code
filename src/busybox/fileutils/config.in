@@ -1,0 +1,49 @@
+#
+# For a description of the syntax of this configuration file,
+# see scripts/kbuild/config-language.txt.
+#
+
+mainmenu_option next_comment
+comment 'File Utilities'
+
+bool 'chmod'	    CONFIG_CHMOD
+bool 'chown'	    CONFIG_CHOWN
+bool 'chgrp'	    CONFIG_CHGRP
+bool 'cp'	    CONFIG_CP
+bool 'dd'	    CONFIG_DD
+bool 'df'	    CONFIG_DF
+bool 'du'	    CONFIG_DU
+bool 'ln'	    CONFIG_LN
+bool 'ls'	    CONFIG_LS
+if [ "$CONFIG_LS" = "y" ]; then
+    bool '  Enable filetyping options (-p and -F)'	CONFIG_FEATURE_LS_FILETYPES
+    bool '  Enable symlinks dereferencing (-L)'		CONFIG_FEATURE_LS_FOLLOWLINKS
+    bool '  Enable recursion (-R)'			CONFIG_FEATURE_LS_RECURSIVE
+    bool '  Sort the file names'			CONFIG_FEATURE_LS_SORTFILES
+    bool '  Show file timestamps'			CONFIG_FEATURE_LS_TIMESTAMPS
+    bool '  Show username/groupnames'			CONFIG_FEATURE_LS_USERNAME
+    bool '  Use color to identify file types'		CONFIG_FEATURE_LS_COLOR
+fi
+bool 'mkdir'	    CONFIG_MKDIR
+bool 'mkfifo'	    CONFIG_MKFIFO
+bool 'mknod'	    CONFIG_MKNOD
+bool 'mv'           CONFIG_MV
+bool 'rm'	    CONFIG_RM
+bool 'rmdir'	    CONFIG_RMDIR
+bool 'sync'	    CONFIG_SYNC
+bool 'touch'	    CONFIG_TOUCH
+
+if [ "$CONFIG_CP" = "y" -o "$CONFIG_MV" = "y" ]; then
+    comment 'Common options for cp and mv'
+    bool    '  Preserve hard links.'	CONFIG_FEATURE_PRESERVE_HARDLINKS
+fi
+if [ "$CONFIG_LS" = "y" -o "$CONFIG_MORE" = "y" ]; then
+    comment 'Common options for ls and more'
+    bool    '    Calculate terminal & column widths'	CONFIG_FEATURE_AUTOWIDTH
+fi
+if [ "$CONFIG_DF" = "y" -o "$CONFIG_DU" = "y" -o "$CONFIG_LS" = "y" ]; then
+    comment 'Common options for df, du, ls'
+    bool    '  Support for human readable output (example 13k, 23M, 235G)'	CONFIG_FEATURE_HUMAN_READABLE
+fi
+endmenu
+

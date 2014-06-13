@@ -1,0 +1,128 @@
+
+<!-- Modem Stats -->
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 align=center bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>">
+<tr>
+<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Modem Status</font></td>
+</tr>
+  <tr>
+   <td bgcolor="<? echo $var:bgColorBody ?>" align=center valign=top height=337>
+   <div style="height: 5px"></div>
+    <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1>
+     <tr><td colspan=2 height=20 valign=top>Modem Status</td></tr>
+     <tr>
+      <td width=25 nowrap></td>
+      <td>
+       <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=0 class="smallerTable">
+        <tr>
+         <td>Connection Status</td>
+          <? setvariable var:DSLTrainingState "Connecting..." ?>
+          <? if eq `<? query sar:status/dsl_carrier_state ?>` `0` `<? setvariable var:DSLTrainingState "Disconnected" ?>` ?>
+          <? if eq `<? query sar:status/dsl_carrier_state ?>` `2` `<? setvariable var:DSLTrainingState "Connected" ?>`    ?>
+         <td width=100 nowrap>&nbsp;</td>
+         <td><? echo $var:DSLTrainingState ?></td>
+        </tr>
+        <tr>
+         <td>Us Rate (Kbps)</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/dsl_us_rate ?></td>
+        </tr>
+        <tr>
+         <td>Ds Rate (Kbps)</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/dsl_ds_rate ?></td>
+        </tr>
+        <tr>
+         <td>US Margin</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/us_margin ?></td>
+        </tr>
+        <tr>
+         <td>DS Margin</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/ds_margin ?></td>
+        </tr>
+        <tr>
+         <td>Trained Modulation</td>
+         <td>&nbsp;</td>
+		 <td><? query sar:status/trained_mode ?></td>		 
+        </tr>
+        <tr>
+         <td>LOS Errors</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/los_errors ?></td>
+        </tr>
+        <tr>
+         <td>DS Line Attenuation</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/dsl_ds_attenuation ?></td>
+        </tr>
+        <tr>
+         <td>US Line Attenuation</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/dsl_us_attenuation ?></td>
+        </tr>
+        <tr>
+         <td>Peak Cell Rate</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/peak_cell_rate ?> cells per sec</td>
+        </tr>
+        <tr>
+         <td>CRC Rx Fast</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/crc_rx_fast ?></td>
+        </tr>
+        <tr>
+         <td>CRC Tx Fast</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/crc_tx_fast ?></td>
+        </tr>
+        <tr>
+         <td>CRC Rx Interleaved</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/crc_rx_interleaved ?></td>
+        </tr>
+        <tr>
+         <td>CRC Tx Interleaved</td>
+         <td>&nbsp;</td>
+         <td><? query sar:status/crc_tx_interleaved ?></td>
+        </tr>
+        <tr>
+         <td>Path Mode</td>
+         <td>&nbsp;</td>
+         <td><? if eq `<? query sar:status/dsl_pathmode ?>` `0` `Fast Path` `Interleaved`?></td>
+        </tr>
+       </table>					  
+      </td>
+     </tr>				
+     <tr><td valign=middle colspan=2 height=6><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=353 height=1></td></tr>				
+     <tr><td colspan=2 height=20 valign=middle class="statusSubHeader">DSL Statistics</td></tr>
+     <tr>
+      <td width=25 nowrap></td>					
+      <td>					
+       <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=0 class="smallerTable">
+        <? multiquery sar:status/sar_oam_stats
+       '<tr>
+         <td>Near End F4 Loop Back Count</td>
+         <td width=38 nowrap>&nbsp;</td>
+         <td>$01</td>
+        </tr>
+        <tr>
+         <td>Near End F5 Loop Back Count</td>
+         <td>&nbsp;</td>
+         <td>$02</td>
+        </tr>' ?>
+       </table>
+      </td>					
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <tr>
+   <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28 valign=middle>
+    <input <? echo $var:widDefBtnRefresh ?> onclick="uiDoRefresh()" alt="Refresh">
+   </td>
+  </tr>
+ </table>
+</form>
+<!-- END Modem Stats -->

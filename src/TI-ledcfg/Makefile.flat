@@ -1,0 +1,44 @@
+include ../../TI_Build.make
+-include $(TARGET_HOME)/.config
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+export CROSS_COMPILE_PREFIX=$(TI_uclibc_base)
+
+all: build install
+
+build:
+	$(MAKE)
+	mips_fp_le-strip -s ledcfg
+
+install:
+	install -m 0755 ledcfg $(TARGET_HOME)$(TI_rsbindir)/ledcfg
+ifeq ($(CONFIG_MIPS_AR7RD),y)
+	install -m 644 src/ar7rd_led.conf $(TI_base)$(TI_etcdir)/led.conf
+endif
+ifeq ($(CONFIG_MIPS_AR7WRD),y)
+	install -m 644 src/ar7wrd_led.conf $(TI_base)$(TI_etcdir)/led.conf
+endif
+ifeq ($(CONFIG_MIPS_AR7VWI),y)
+	install -m 644 src/ar7vwi_led.conf $(TI_base)$(TI_etcdir)/led.conf
+endif
+ifeq ($(CONFIG_MIPS_AR7WI),y)
+	install -m 644 src/ar7wi_led.conf $(TI_base)$(TI_etcdir)/led.conf
+endif
+ifeq ($(CONFIG_MIPS_AR7V),y)
+	install -m 644 src/ar7v_led.conf $(TI_base)$(TI_etcdir)/led.conf
+endif
+ifeq ($(CONFIG_MIPS_AR7VW),y)
+	install -m 644 src/ar7vw_led.conf $(TI_base)$(TI_etcdir)/led.conf
+endif
+
+	@if [ ! -f $(TI_base)$(TI_etcdir)/led.conf ]; then \
+	echo "*---------------------------------------------------------------------*"; \
+	echo "*  Error: no led.conf file exists for target board                    *"; \
+	echo "*---------------------------------------------------------------------*"; \
+	cat $(TARGET_HOME)/force_error 2> /dev/null; \
+	fi
+
+
+clean:
+	$(MAKE) clean
+

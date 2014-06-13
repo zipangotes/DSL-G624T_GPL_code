@@ -1,0 +1,16 @@
+include ../../TI_Build.make
+
+all: build install
+
+build: 
+
+install:
+	install -m 0755 -d $(TI_filesystem_path)/lib
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/drivers
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/drivers/atm
+	install -m 0644 ./tiatm.o $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/drivers/atm/.
+
+clean:

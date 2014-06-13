@@ -1,0 +1,58 @@
+
+<!-- WAN Stats -->
+<table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=0>
+<tr>
+   <td colspan=2 nowrap valign=middle class="statusSubHeader" height=20>Link</td>
+</tr>
+
+<tr><td width=25 nowrap></td>
+  <td>
+   <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=0>
+    <tr>
+     <td>Status</td>
+     <td width=80>&nbsp;</td>
+     <td><? if eq `1` `<? query ewan0:status/carrier ?>` `Up` `Down` ?></td>
+    </tr>
+   </table>
+  </td>
+</tr>
+
+</tr>
+ <? multiquery ewan0:status/statistics
+ `<tr>
+  <? if eq $00 0 '<td colspan=2 valign=middle class="statusSubHeader" height=20>Transmit</td>' '<td colspan=2 valign=middle class="statusSubHeader" height=16>Receive</td>' ?>			
+  </tr>
+  <tr><td width=25 nowrap></td>
+  <td>
+   <table <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=0>
+    <tr>
+     <? if eq $00 0 '<td>Good Tx Bytes</td>' '<td>Good Rx Bytes</td>' ?>
+     <td width=17 nowrap rowspan=7></td>
+     <td>$01</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Good Tx Unicast Packets</td>' '<td>Good Rx Unicast Packets</td>' ?>
+     <td>$02</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Good Tx Multicast Packets</td>' '<td>Good Rx Multicast Packets</td>' ?>
+     <td>$03</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Good Tx Broadcast Packets</td>' '<td>Good Rx Broadcast Packets</td>' ?>
+     <td>$04</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Tx Discards Packets</td>' '<td>Rx Discards Packets</td>' ?>
+     <td>$05</td>
+    </tr>
+    <tr>
+     <? if eq $00 0 '<td>Tx Error Packets</td>' '<td>Rx Error Packets</td>' ?>
+     <td>$06</td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ ` ?>
+</table>
+<!-- END WAN Stats -->

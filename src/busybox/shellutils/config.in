@@ -1,0 +1,44 @@
+#
+# For a description of the syntax of this configuration file,
+# see scripts/kbuild/config-language.txt.
+#
+
+mainmenu_option next_comment
+comment 'Shell Utilities'
+
+
+bool 'basename'		CONFIG_BASENAME
+bool 'cal'		CONFIG_CAL
+bool 'chroot'		CONFIG_CHROOT
+bool 'date'		CONFIG_DATE
+bool 'dirname'		CONFIG_DIRNAME
+bool 'echo'		CONFIG_ECHO
+bool 'env'		CONFIG_ENV
+bool 'expr'		CONFIG_EXPR
+bool 'false'		CONFIG_FALSE
+bool 'hostid'		CONFIG_HOSTID
+bool 'id'		CONFIG_ID
+bool 'logname'		CONFIG_LOGNAME
+bool 'printf'		CONFIG_PRINTF
+bool 'pwd'		CONFIG_PWD
+bool 'sleep'		CONFIG_SLEEP
+bool 'stty'		CONFIG_STTY
+bool 'tee'		CONFIG_TEE
+if [ "$CONFIG_ASH" = "y" -o "$CONFIG_HUSH" = "y" -o "$CONFIG_LASH" = "y" -o "$CONFIG_MSH" = "y" ] ; then
+	define_bool CONFIG_TEST		y
+	define_bool CONFIG_TRUE		y
+	define_bool CONFIG_FALSE        y
+else
+	bool 'test'	    CONFIG_TEST
+fi
+bool 'true'		CONFIG_TRUE
+bool 'tty'		CONFIG_TTY
+bool 'uname'		CONFIG_UNAME
+bool 'usleep'		CONFIG_USLEEP
+bool 'who'		CONFIG_WHO
+bool 'whoami'		CONFIG_WHOAMI
+bool 'yes'		CONFIG_YES
+
+
+endmenu
+

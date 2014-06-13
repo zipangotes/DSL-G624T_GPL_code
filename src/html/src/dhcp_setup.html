@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0.1 Transitional//EN">
+<html>
+<head>
+<title>Connection Setup</title>
+<link rel="stylesheet" href="../css/nsp.css" type="text/css">
+<script language="JavaScript" src="../js/jsl.js"></script>
+<script>
+function doOnLoad()
+{
+}
+function doLoadPage(id,page)
+{
+  document.getElementById(id).src=page;
+}
+function doLoadConnectionPage(contype)
+{
+  var page;
+  switch(contype)
+  {
+    case "pppoe":
+	  page="ppp.html";
+	  break;
+	case "pppoa":
+	  page="ppp.html";
+	  break;
+	case "static":
+	  page="static.html";
+	  break;
+	case "dhcp":
+	  page="dhcp.html";
+	  break;
+	case "bridged":
+	  page="bridge.html";
+	  break;
+    default:
+	  page="ppp.html";
+	  break;
+  }
+  doLoadPage("uiConSetupId",page);
+}
+function doLoadSecurityPage()
+{
+  doLoadPage("uiConSetupId","../firewall/list.html");
+}
+function doLoadSecurityViewPage()
+{
+  doLoadPage("uiConPvcId","../firewall/rule.html");
+}
+function doLoadRuleDetails()
+{
+  doLoadPage("uiConPvcId","../firewall/fwan/policy.html");
+}
+</script>
+
+</head>
+
+<body>
+
+<table border="0" cols="6" width="90%" align="center" cellpadding="0" cellspacing="2"> 
+  <tr> 
+    <td colspan="6" align="center"><b>LAN DHCP</b>&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="6" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="left"><b>Setting:</b></td>
+	<td width="16%" align="center">
+	  <select>
+	    <option>&nbsp;Server&nbsp;</option>
+		<option>&nbsp;Relay&nbsp;</option>
+	  </select>
+	</td>
+    <td width="16%" align="left"><input type="image" src="../img/check.gif">&nbsp;<b>Enabled</b></td>
+    <td width="16%" align="left">&nbsp;</td>
+    <td width="16%" align="left">&nbsp;</td>
+    <td width="16%" align="left">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="left"><b>Relay IP</b>&nbsp;</td>
+    <td width="16%" align="left"><b><input type="text" class="" size="10" maxlength="17"></b></td>
+    <td width="16%" align="left">&nbsp;</td>
+    <td width="16%" align="left">&nbsp;</td>
+    <td width="16%" align="left">&nbsp;</td>
+    <td width="16%" align="left">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td width="20%" align="left"><b>Start IP</b>&nbsp;</td>
+    <td width="16%" align="left"><b><input type="text" class="" size="10" maxlength="17"></b></td>
+    <td width="16%" align="right"><b>End IP</b>&nbsp;</td>
+    <td width="16%" align="left"><b><input type="text" class="" size="10" maxlength="17"></b></td>
+    <td width="16%" align="right"><b>Lease Time</b>&nbsp;</td>
+    <td width="16%" align="left"><input type="text" class="" size="5" maxlength="17"></td>
+  </tr>
+
+  <tr>
+    <td width="20%" align="left"><b>Show Clients</b>&nbsp;<input type="image" src="../img/arrow_right_red.gif" id="uiNatControl" onclick="jslDoToggleViews('uiDhcpClientsTable')"></td>
+    <td colspan="5" align="right">&nbsp;</td>
+  </tr>
+
+  <tr>
+   <td colspan="6" align="right"><input type="image" src="../img/apply.gif"><b>Apply</b>&nbsp;<input type="image" src="../img/cross_red.gif"><b>Cancel</b></td>
+  </tr>
+</table>
+
+
+<table cols="1" width="90%" align="center" cellpadding="0" cellspacing="0" id="uiDhcpClientsTable" style="display:none">
+   <tr> 
+     <td width="100%" align="center">&nbsp;</td>
+   </tr>
+   <tr> 
+     <td width="100%" align="center"><b>DHCP Clients Table</b></td>
+   </tr>
+   <tr>
+	 <td width="100%" align="center" bgcolor="lightblue"><b>&nbsp;</b></td>
+   </tr>
+   <tr> 
+     <td width="100%" align="center" class="uiThinBorder"><iframe width="100%" height="250" src="../setup/dhcp_clients.html" frameborder="0" id="uiConSetupId"></iframe></td>
+   </tr>
+</table>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,46 @@
+a.leftMenu
+{
+	font-size: 11px;
+	color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica;
+	text-decoration: none;
+	font-weight: Bold;
+}
+
+.leftMenu
+{
+	font-size: 11px;
+	color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica;
+	text-decoration: none;
+	font-weight: Bold;
+}
+
+.inputButton
+{
+	border-color: #6A9AA8;
+	border-width: 1px;
+	background-color: #6A9AA8;
+	font-family: Verdana, Arial, Helvetica;
+	font-weight: Bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	width: 61px;
+	height: 18px;
+	vertical-align: middle;
+}
+
+.inputButtonCommands
+{
+	border-color: #6A9AA8;
+	border-width: 1px;
+	background-color: #6A9AA8;
+	font-family: Verdana, Arial, Helvetica;
+	font-weight: Bold;
+	font-size: 11px;
+	color: #FFFFFF;
+	width: 119px;
+	height: 19px;
+	vertical-align: middle;
+	text-align: center;
+}

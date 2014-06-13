@@ -1,0 +1,24 @@
+<input type="hidden" name="ap:settings/preamble" value="<? query ap:settings/preamble ?>" id="uiPostPreambleAlgo">
+<input type="hidden" name="ap:settings/slot_time" value="<? query ap:settings/slot_time ?>" id="uiPostTimeSlotAlgo">
+<input type="hidden" name="ap:settings/pbcc" value="<? query ap:settings/pbcc ?>" id="uiPostPBCCAlgo">
+<input type="hidden" name="ap:settings/erp_mode" value="<? query ap:settings/erp_mode ?>" id="uiPostERPMode">
+<input type="hidden" name="ap:settings/erp_type" value="<? query ap:settings/erp_type ?>" id="uiPostERPType">
+<input type="hidden" name="ap:settings/max_basic_rate" value="<? query ap:settings/max_basic_rate ?>" id="uiPostBasicRate">
+<input type="hidden" name="ap:settings/max_supp_rate" value="<? query ap:settings/max_supp_rate ?>" id="uiPostSuppRate">
+<input type="hidden" name="ap:settings/rate_g_6M" value="<? query ap:settings/rate_g_6M ?>" id="uiPostRateG1">
+<input type="hidden" name="ap:settings/rate_g_9M" value="<? query ap:settings/rate_g_9M ?>" id="uiPostRateG2">
+<input type="hidden" name="ap:settings/rate_g_12M" value="<? query ap:settings/rate_g_12M ?>" id="uiPostRateG3">
+<input type="hidden" name="ap:settings/rate_g_18M" value="<? query ap:settings/rate_g_18M ?>" id="uiPostRateG4">
+<input type="hidden" name="ap:settings/rate_g_24M" value="<? query ap:settings/rate_g_24M ?>" id="uiPostRateG5">
+<input type="hidden" name="ap:settings/rate_g_36M" value="<? query ap:settings/rate_g_36M ?>" id="uiPostRateG6">
+<input type="hidden" name="ap:settings/rate_g_48M" value="<? query ap:settings/rate_g_48M ?>" id="uiPostRateG7">
+<input type="hidden" name="ap:settings/rate_g_54M" value="<? query ap:settings/rate_g_54M ?>" id="uiPostRateG8">
+<input type="hidden" name="ap:settings/rate_gp_6M" value="<? query ap:settings/rate_gp_6M ?>" id="uiPostRateGP1">
+<input type="hidden" name="ap:settings/rate_gp_9M" value="<? query ap:settings/rate_gp_9M ?>" id="uiPostRateGP2">
+<input type="hidden" name="ap:settings/rate_gp_12M" value="<? query ap:settings/rate_gp_12M ?>" id="uiPostRateGP3">
+<input type="hidden" name="ap:settings/rate_gp_18M" value="<? query ap:settings/rate_gp_18M ?>" id="uiPostRateGP4">
+<input type="hidden" name="ap:settings/rate_gp_24M" value="<? query ap:settings/rate_gp_24M ?>" id="uiPostRateGP5">
+<input type="hidden" name="ap:settings/rate_gp_36M" value="<? query ap:settings/rate_gp_36M ?>" id="uiPostRateGP6">
+<input type="hidden" name="ap:settings/rate_gp_48M" value="<? query ap:settings/rate_gp_48M ?>" id="uiPostRateGP7">
+<input type="hidden" name="ap:settings/rate_gp_54M" value="<? query ap:settings/rate_gp_54M ?>" id="uiPostRateGP8">
+

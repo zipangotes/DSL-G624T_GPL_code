@@ -1,0 +1,99 @@
+
+<? multiquery manager:command/connection/list
+ `<input type="hidden" value="$01" id="uiViewConValue$00">
+  <input type="hidden" value="$02" id="uiViewConName$00">
+ ` ?>
+
+<!-- Static Routing -->
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">Static Routing</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>	
+  <div style="height: 15px"></div>
+  <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+    <tr>
+     <td>
+      <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=2>
+       <tr>
+        <td align=center colspan=5 nowrap>Choose a connection: 
+         <select onchange="uiDoSelectConnection(value)" id="uiViewConnectionSelector">
+          <? multiquery manager:command/connection/list "<option value='$01'>$02</option>" ?>
+          <? multiquery manager:command/lan/list_used "<option value='$01'>$02</option>" ?>
+         </select>	
+        </td>
+       </tr>
+       <tr><td height=8 nowrap></td></tr>
+       <tr>
+        <td align=right>New Destination IP: </td>
+        <td><input type=text size=15 name="route:settings/destination" id="uiViewDestIP" maxlength=15></td>
+        <td width=10 nowrap></td>
+        <td align=right>Mask: </td>
+        <td><input type="text" size=15 name="route:settings/mask" value="255.255.255.0" id="uiViewMask" maxlength=15></td>
+       </tr>
+       <tr>
+        <td align=right>Gateway: </td>
+        <td><input type="text" size=15 name="route:settings/gateway" value="" id="uiViewGateway" maxlength=15></td>
+        <td width=10 nowrap></td>
+        <td align=right>Metric: </td>
+        <td><input type="text" size=3 name="route:settings/metric" value="0" id="uiViewMetric" maxlength=3></td>
+       </tr>
+      </table>
+     </td>
+    </tr>		
+    <tr><td align=right height=26 valign=middle><!-- Space for the Add button  --></td></tr>
+    <tr><td height=12 align=center><img src="<? echo $var:imgHorizontalDivider ?>" alt="" width=480 height=1></td></tr>
+    <tr>
+     <td align=center>
+	  <? if neq 0 <? multiquerycount route:status/table ?>
+     `<!-- Routing Table -->
+      <table <? echo $var:cntrBorder ?> align=center cellpadding=0 cellspacing=1>
+       <tr>
+        <td align=left nowrap><u>Connection</u></td>
+        <td width=3 nowrap></td>
+        <td align=left nowrap><u>Destination IP</u></td>
+        <td width=3 nowrap></td>
+        <td align=left><u>Mask</u></td>
+        <td width=3 nowrap></td>
+        <td align=left><u>Gateway</u></td>
+        <td width=3 nowrap></td>
+        <td align=center><u>Metric</u></td>
+        <td width=3 nowrap></td>
+        <!-- Delete Control (enabled with the checkbox on the form) -->
+        <td align=center><u>Delete</u></td>
+       </tr>
+       <? multiquery route:status/table
+      `<tr>
+	    <input type="hidden" name="route:command/del" value="$11" id="uiViewDeletePP$10" disabled>
+        <td align=left>
+         <input type="text" style="BORDER-bottom: 0px;BORDER-top: 0px;BORDER-right: 0px;BORDER-left: 0px;text-align: left;"  value="<? query $12:settings/description ?>" id="uiViewDispCon$10" readonly>
+        </td>
+        <td width=3 nowrap></td>
+        <td align=left>$13</td>
+        <td width=3 nowrap></td>
+        <td align=left>$14</td>
+        <td width=3 nowrap></td>
+        <td align=left>$15</td>
+        <td width=3 nowrap></td>
+        <td align=center>$16</td>
+        <td width=3 nowrap></td>
+        <td align=center>
+         <input $var:widDefCheckBoxOff id="uiViewDeletePPCheckBox$10" onclick="uiDoToggleDelete(id,'uiPostDelete$10'); return false;" value="off" alt="">
+        </td>
+       </tr>
+      ` ?>
+      </table>	
+      <!-- END Routing Table -->`
+     `<b class="header">The Routing Table is empty.</b>` ?>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr><td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td></tr>
+</table>
+<input type="hidden" value="<? multiquerycount route:status/table ?>" id="uiViewTableSize">
+</form>
+<!-- END Static Routing -->
+

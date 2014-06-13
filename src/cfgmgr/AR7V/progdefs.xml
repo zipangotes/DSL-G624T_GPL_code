@@ -1,0 +1,268 @@
+<progdefs>
+	<program>
+		<name>cm_logic</name>
+		<path>/usr/bin/cm_logic</path>
+		<single/>
+	</program>
+
+	<program>
+		<name>cm_monitor</name>
+		<path>/usr/bin/cm_monitor</path>
+		<single/>
+	</program>
+
+	<program>
+		<name>cm_klogd</name>
+		<path>/usr/bin/cm_klogd</path>
+		<single/>
+	</program>
+
+	<program>
+		<name>foxy</name>
+		<path>/usr/bin/foxy</path>
+		<single/>
+	</program>
+
+	<program>
+		<name>upnpd</name>
+		<path>/usr/sbin/upnpd</path>
+		<single/>
+	</program>
+
+	<program>
+		<name>pppd</name>
+		<path>/usr/sbin/pppd</path>
+		<serialize timeout="3"/>
+	</program>
+
+	<program>
+		<name>ifconfig</name>
+		<path>/sbin/ifconfig</path>
+		<serialize timeout="1"/>
+	</program>
+
+	<program>
+		<name>tc</name>
+		<path>/sbin/tc</path>
+		<serialize timeout="1"/>
+	</program>
+
+	<program>
+		<name>iptables</name>
+		<path>/sbin/iptables</path>
+		<single/>
+	</program>
+
+	<program>
+		<name>br2684ctl</name>
+		<path>/usr/sbin/br2684ctl</path>
+		<serialize timeout="1"/>
+	</program>
+
+	<program>
+		<name>atmarpd</name>
+		<path>/usr/sbin/atmarpd</path>
+		<single/>
+	</program>
+
+	<program>
+		<name>atmarp</name>
+		<path>/usr/sbin/atmarp</path>
+		<serialize timeout="1"/>
+	</program>
+
+	<program>
+		<name>brctl</name>
+		<path>/usr/sbin/brctl</path>
+		<serialize timeout="2"/>
+	</program>
+
+	<program>
+		<name>insmod</name>
+		<path>/sbin/insmod</path>
+	</program>
+
+	<program>
+		<name>rmmod</name>
+		<path>/sbin/rmmod</path>
+	</program>
+
+	<program>
+		<name>reboot</name>
+		<path>/sbin/reboot</path>
+	</program>
+
+	<program>
+		<name>telnetd</name>
+		<path>/sbin/utelnetd</path>
+	</program>
+
+	<program>
+		<name>dropbear</name>
+		<path>/usr/sbin/dropbear</path>
+	</program>
+
+	<program>
+		<name>ftpu</name>
+		<path>/usr/sbin/ftpu</path>
+	</program>
+
+	<program>
+		<name>tftpu</name>
+		<path>/usr/sbin/tftpu</path>
+	</program>
+                                                                                                                                                             
+        <program>
+                <name>sntp</name>
+                <path>/sbin/msntp</path>
+        </program>
+
+	<program>
+		<name>thttpd</name>
+		<path>/usr/bin/thttpd</path>
+	</program>
+
+	<program>
+		<name>udhcpc</name>
+		<path>/usr/sbin/udhcpc</path>
+	</program>
+
+	<program>
+		<name>udhcpd</name>
+		<path>/usr/sbin/udhcpd</path>
+	</program>
+
+	<program>
+		<name>dproxy</name>
+		<path>/sbin/dproxy</path>
+		<single/>
+	</program>
+
+	<program>
+		<name>echo</name>
+		<path>/bin/echo</path>
+	</program>
+
+	<program>
+		<name>ls</name>
+		<path>/bin/ls</path>
+	</program>
+
+	<program>
+		<name>ps</name>
+		<path>/bin/ps</path>
+	</program>
+
+	<program>
+		<name>cat</name>
+		<path>/bin/cat</path>
+	</program>
+
+	<program>
+		<name>ping</name>
+		<path>/bin/ping</path>
+	</program>
+
+	<program>
+		<name>arp</name>
+		<path>/sbin/arp</path>
+	</program>
+
+	<program>
+		<name>route</name>
+		<path>/sbin/route</path>
+	</program>
+
+	<program>
+		<name>routed</name>
+		<path>/usr/sbin/routed</path>
+	</program>
+
+	<program>
+		<name>IGMPProxy</name>
+		<path>/usr/sbin/IGMPProxy</path>
+	</program>
+
+	<program>
+		<name>hostname</name>
+		<path>/bin/hostname</path>
+	</program>
+
+	<program>
+		<name>dhcp-fwd</name>
+		<path>/usr/sbin/dhcp-fwd</path>
+	</program>
+
+	<program>
+		<name>shell</name>
+		<path>/bin/sh</path>
+	</program>
+
+	<program>
+		<name>grep</name>
+		<path>/bin/grep</path>
+	</program>
+
+	<program>
+		<name>snmpd</name>
+		<path>/usr/sbin/snmpd</path>
+	</program>
+
+	<program>
+		<name>wpa_auth</name>
+		<path>/usr/sbin/wlan/wpa_authenticator</path>
+	</program>
+
+	<program>
+		<name>tftp</name>
+		<path>/usr/bin/tftp</path>
+	</program>
+
+	<service>
+		<name>telnet</name>
+		<enable>yes</enable>
+		<protocol>tcp</protocol>
+		<port>23</port>
+		<listen>0.0.0.0</listen>
+		<max>2</max>
+		<program>telnetd</program>
+	</service>
+
+	<service>
+		<name>ftpu</name>
+		<enable>yes</enable>
+		<protocol>tcp</protocol>
+		<port>21</port>
+		<max>1</max>
+		<program>ftpu</program>
+	</service>
+
+	<service>
+		<name>tftpu</name>
+		<enable>yes</enable>
+		<protocol>udp</protocol>
+		<port>69</port>
+		<max>1</max>
+		<program>tftpu</program>
+	</service>
+
+	<service>
+		<name>http</name>
+		<enable>no</enable>
+		<protocol>tcp</protocol>
+		<port>8080</port>
+		<max>0</max>
+		<program>thttpd</program>
+		<arg>-l</arg>
+	</service>
+
+	<service>
+		<name>ssh</name>
+		<enable>yes</enable>
+		<protocol>tcp</protocol>
+		<port>22</port>
+		<listen>0.0.0.0</listen>
+		<max>2</max>
+		<program>dropbear</program>
+	</service>
+</progdefs>

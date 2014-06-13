@@ -1,0 +1,48 @@
+
+<?-- Buttons --?>
+<? setvariable var:widDefBtnApply `type=submit name="" value="Apply" class="inputButton"` ?>
+<? setvariable var:widDefBtnCancel `type=submit name="" value="Cancel" class="inputButton"` ?>
+
+<? setvariable var:widDefCheckBoxOff `type="image" src="$var:btnCheckBoxOff" $var:dimBtnCheckBox` ?>
+<? setvariable var:widDefCheckBoxOn `type="image" src="$var:btnCheckBoxOn" $var:dimBtnCheckBox` ?>
+
+<? setvariable var:widDefRadioBtnOff `type="image" src="$var:btnRadioBtnOff" $var:dimBtnRadioBtn` ?>
+<? setvariable var:widDefRadioBtnOffGrey `type="image" src="$var:btnRadioBtnOffGrey" $var:dimBtnRadioBtn` ?>
+<? setvariable var:widDefRadioBtnOn `type="image" src="$var:btnRadioBtnOn" $var:dimBtnRadioBtn` ?>
+
+<? setvariable var:widDefBtnNew `type=submit name="" value="New" class="inputButton"` ?>
+<? setvariable var:widDefBtnNewIP `type=submit name="" value="New IP" class="inputButton"` ?>
+<? setvariable var:widDefBtnTest `type=submit name="" value="Test" class="inputButton"` ?>
+<? setvariable var:widDefBtnEdit `type=submit name="" value="Edit" class="inputButton"` ?>
+<? setvariable var:widDefBtnDelete `type=submit name="" value="Delete" class="inputButton"` ?>
+<? setvariable var:widDefBtnView `type=submit name="" value="View" class="inputButton"` ?>
+<? setvariable var:widDefBtnAdd `type=submit name="" value="Add" class="inputButton"` ?>
+<? setvariable var:widDefBtnAddArrow `type=submit name="" value="Add &gt;" class="inputButtonWide"` ?>
+<? setvariable var:widDefBtnDeleteArrow `type=submit name="" value="&lt; Remove" class="inputButtonWide"` ?>
+<? setvariable var:widDefBtnQoSRule `type=submit name="" value="Traffic Rules" class="inputButton" style="width:80px;"` ?>
+<? setvariable var:widDefBtnSmallAddArrow `type=submit name="" value="Add &gt;" class="inputSmallButton"` ?>
+<? setvariable var:widDefBtnSmallDeleteArrow `type=submit name="" value="&lt; Remove" class="inputSmallButton"` ?>
+
+<? setvariable var:widDefBtnRelease `type=submit name="" value="Release" class="inputButton"` ?>
+<? setvariable var:widDefBtnRenew `type=submit name="" value="Renew" class="inputButton"` ?>
+<? setvariable var:widDefBtnRefresh `type=submit name="" value="Refresh" class="inputButton"` ?>
+
+<? setvariable var:widDefBtnSaveAll `type=submit name="" value="Save All" class="inputButtonCommands"` ?>
+<? setvariable var:widDefBtnRestart `type=submit name="" value="Restart" class="inputButtonCommands"` ?>
+<? setvariable var:widDefBtnRestartAP `type=submit name="" value="Restart Access Point" class="inputButtonCommands"` ?>
+<? setvariable var:widDefBtnRestoreDefaults `type=submit name="" value="Restore Defaults" class="inputButtonCommands"` ?>
+<? setvariable var:widDefBtnUpdateGateway `type=submit value="Update Gateway" class="inputButtonCommands"` ?>
+<? setvariable var:widDefBtnGetConfig `type=submit value="Get Configuration" class="inputButtonCommands"` ?>
+
+<? setvariable var:widDefBtnLogout `type=submit name="" value="Log Out" class="inputButton"` ?>
+
+<? setvariable var:widDefBtnWirelessAccess `type=submit name="" value="Access List" class="inputButtonWireless"` ?>
+<? setvariable var:widDefBtnWirelessAccessHilite `type=submit name="" value="Access List" class="inputButtonWirelessHilite"` ?>
+<? setvariable var:widDefBtnWirelessAssoc `type=submit name="" value="Associated Stations" class="inputButtonWireless"` ?>
+<? setvariable var:widDefBtnWirelessAssocHilite `type=submit name="" value="Associated Stations" class="inputButtonWirelessHilite"` ?>
+<? setvariable var:widDefBtnWirelessMulti `type=submit name="" value="Multiple SSID" class="inputButtonWirelessRight"` ?>
+<? setvariable var:widDefBtnWirelessMultiHilite `type=submit name="" value="Multiple SSID" class="inputButtonWirelessRightHilite"` ?>
+
+<? setvariable var:widDefBtnAdvWireless `type=submit name="" value="Advanced" class="inputButtonWide"` ?>
+<? setvariable var:widDefBtnConnect `type=submit name="" value="Connect" class="inputButton"` ?>
+<? setvariable var:widDefBtnDisconnect `type=submit name="" value="Disconnect" class="inputButtonWide"` ?>

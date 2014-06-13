@@ -1,0 +1,196 @@
+
+<form onsubmit="return false">
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>"><? if eq $var:pagename fwan `Port Forwarding` `IP Filters` ?></font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+  
+   <div style="height: 12px"></div>
+
+   <table <? echo $var:cntrBorder ?> align=center cellpadding=1 cellspacing=0>
+    <tr>
+     <td align=left colspan=5 height=74 valign=middle>
+      <table cellspacing=1 cellpadding=0 <? echo $var:cntrBorder ?> >
+	   <? if eq $var:pagename fwan
+	   `<tr>
+        <td align=right nowrap>WAN Connection: </td>
+	    <td align=left>
+		 <select onchange="uiDoSelectConnection(value)" id="uiViewConnectionSelector" style="width: 150px;">
+          <? multiquery manager:command/connection/list "<option value='$11'>$12</option>" ?>
+		 </select>	
+		</td>
+		<td colspan=10>
+		 <table cellpadding=0 cellspacing=0>
+		  <tr>
+		   <td><input $var:widDefCheckBoxOff id="uiViewPingState" onclick="jslDoToggleCheckBox(id);" value="off" alt=""></td>
+		   <td>&nbsp;Allow Incoming Ping</td>
+		  </tr>
+		 </table>
+		</td>
+	   </tr>
+	   <tr><td height=6 nowrap colspan=10></td></tr>
+	   ` ?>
+	   <tr>
+		<td align=right>Select LAN Group:&nbsp;</td>
+		<td align=left colspan=2>
+		 <select onchange="uiDoSelectLANGrp(value)" id="uiViewLanGrp" style="width: 150px;">
+                   <? multiquery manager:command/lan/list_used "<option value='$01'>$02</option>" ?>
+		 </select>	
+		</td>
+              <td>&nbsp;</td>
+		<td align=left>&nbsp;</td>
+		<? if eq `$var:pagename` fwan `
+		<td align=right>&nbsp;&nbsp;&nbsp;</td>
+		` ?>
+	   </tr>
+	   <tr>
+		<td align=right>LAN IP:&nbsp;</td>
+		<td align=left colspan=2>
+	     <select onchange="uiDoSelectLanIp(value)" id="uiViewLanIpSelector">
+		  <? multiquery <? query manager:status/$var:langrp/dhcps ?>:status/hostlist `<option value="$02">$02</option>` ?>
+	  	 <? if eq `$var:pagename` flan `<option value="0.0.0.0">Any</option>` ?>
+		 </select>
+		</td>
+              <td><input <? echo $var:widDefBtnNewIP ?> onclick="uiDoLanClientPage()" alt="Add a new IP address">
+		</td>
+		<td align=left>
+	     <? if eq `$var:pagename` fwan `&nbsp;&nbsp;<a href="../cgi-bin/webcm?getpage=/usr/www_safe/html/defs/$var:style/menus/$var:main.html&var:style=$var:style&var:main=$var:main&var:menu=adv&var:menutitle=Advanced&var:pagename=dmz&var:pagetitle=DMZ%20Settings&var:conid=$var:conid&var:langrp=$var:langrp" class="pageLink">DMZ</a>` ?>
+		</td>
+		<? if eq `$var:pagename` fwan `
+		<td align=right>&nbsp;&nbsp;&nbsp;<a href="<? if eq 0 `$var:concount` `$var:blockmsg` `$var:pagepath=pf&var:pagetitle=Custom%20Port%20Forwarding&var:langrp=$var:langrp` ?>" class="pageLink">Custom Port Forwarding</a></td>
+		` ?>
+	   </tr>
+	   <? if eq $var:pagename flan
+       `<tr>
+        <td align=right>Block All Traffic:&nbsp;</td>
+		<td align=left width=19>
+		 <table cellspacing=1 cellpadding=0>
+		  <tr>
+		   <td><input $var:widDefCheckBoxOff id="uiViewTrafficTypeAny" onclick="jslDoToggleCheckBox(id);uiDoChangeTraffic(id);" value="off" alt="Cancel"></td>
+		   <td>&nbsp;</td>
+		  </tr>
+		 </table>
+		</td>
+		<td>&nbsp;</td>
+		<td>
+		 <table cellpadding=0 cellspacing=0>
+		  <tr>
+		   <td><input $var:widDefCheckBoxOff id="uiViewPingState" onclick="jslDoToggleCheckBox(id);" value="off" alt=""></td>
+		   <td>&nbsp;Block Outgoing Ping</td>
+		   <td align=right>&nbsp;&nbsp;&nbsp;<a href="<? if eq 0 0 `$var:pagepath=filter&var:pagetitle=Custom%20IP%20Filters&var:langrp=$var:langrp` ?>" class="pageLink">Custom IP Filters</a></td>
+		  </tr>
+		 </table>		
+		</td>
+	   </tr>` ?>
+	  </table>	
+	 </td>
+	 <td></td>
+	</tr>	
+	<tr><td colspan=3 align=center><? include /usr/www_safe/html/setup/error.html ?></td></tr>
+	<tr>
+     <td width=271 valign=top align=right>
+      <table <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=1 width=270 bgcolor="<? echo $var:bgColorTable ?>">
+	   <tr>
+		<td valign="top">
+		 <table <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=0 width=269 bgcolor="<? echo $var:bgColorBody ?>">
+		  <tr>
+		   <td width=90 align=center class="header" height=26>Category</td>
+		   <td align=center width=179 class="header">Available Rules</td>
+		  </tr>
+		  <tr>
+		   <td width=90 align=center valign=middle>	
+			<table cols=2 <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=2>
+			 <? multiquery fdb:settings/categorylist
+			 `<tr valign="middle">
+			   <td width=20>
+			    <input $var:widDefRadioBtnOff id="uiViewFdbCategory$00" value="off" name="$01" alt="Select this category" onclick="jslDoToggleRadio('uiViewFdbCategory',$00,<? multiquerycount fdb:settings/$01/rulelist ?>);uiDoSelectFdbCategory('$01')">
+			   </td>
+			   <td nowrap><? query fdb:settings/$01/description ?></td>
+			  </tr>` ?>
+			</table>
+		   </td>
+		   <td align=center valign=middle width=179>
+			<select size=10 id="uiViewFdbRules" style="width: 179px;">
+             <? multiquery fdb:settings/$var:category/rulelist '<option value="$01"><? query fdb:settings/$var:category/$01/description ?></option>' ?>
+             <option value="invalid"><? repeat [ 1 35 ] `&nbsp;` ?>
+			 </option>
+		    </select>
+		   </td>
+		  </tr>
+		  <tr>
+		   <td width=90 align=center height=10></td>
+		   <td align=center width=179 height=10></td>
+		  </tr>
+		  <? if eq 1 <? query fdb:settings/$var:category/edit ?>
+		  `<tr bgcolor="$var:bgColorBody">
+            <td width=90 nowrap>&nbsp;</td>
+            <td align=right width=179 height=23>
+	         <table cols=3 <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=2>
+	          <tr>
+	           <td><input $var:widDefBtnNew alt="Add a new rule" onclick="uiDoNewFdbRule()" name="addnewrule" value=""></td>
+	           <td><input $var:widDefBtnEdit alt="Edit selected rule" onclick="uiDoEditFdbRule()" name="editrule" value=""></td>
+	           <td><input $var:widDefBtnDelete alt="Delete selected rule" onclick="uiDoDeleteFdbRule()" name="deleterule" value=""></td>
+	          </tr>
+	         </table>
+            </td>
+           </tr>`
+		   `<tr bgcolor="$var:bgColorBody">
+		    <td width=90 nowrap>&nbsp;</td>
+			<td align=right width=179 height=23>
+			 <table cols=1 <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=2>
+			  <tr><td><input $var:widDefBtnView alt="Edit selected rule" onclick="uiDoEditFdbRule()"></td></tr>
+			 </table>
+		    </td>
+		   </tr>` ?>
+		  </table>
+		 </td>
+		</tr>
+	   </table>
+	 </td>
+     <td valign=middle align=center width=62>
+      <table width=75 <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=0>
+       <tr><td align=right><input <? echo $var:widDefBtnAddArrow ?> alt="Add selected rule" onclick="uiDoAddRule()"></td></tr>
+       <tr><td height=15 nowrap></td></tr>
+	   <tr><td align=left><input <? echo $var:widDefBtnDeleteArrow ?> alt="Remove selected rule" onclick="uiDoDeleteRule()"></td></tr>
+	  </table>
+	 </td>
+	 <td width=182 align=left valign=top>
+      <table <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=1 width=181 bgcolor="<? echo $var:bgColorTable ?>">
+       <tr>
+        <td valign="top">
+		 <table <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=0 width=180 bgcolor="<? echo $var:bgColorBody ?>">
+		  <tr><td width=179 align=center height=26 class="header">Applied Rules</td></tr>
+          <tr>
+		   <td align=center width=179 valign=middle>
+			<select size="10" id="uiViewLanIpRules" style="width: 179px;">
+			 <? multiquery <? if eq $var:pagename fwan `$var:conid:` `$var:langrp:` ?>$var:pagename:settings/$var:lanip/rulelist '<option value="$01">$02</option>' ?>
+             <option value="invalid">&nbsp;</option>
+			</select>
+		   </td>
+		  </tr>
+		  <tr><td width=179 align=center height=19 nowrap></td></tr>
+          <tr>
+           <td align=right colspan=2 height=23 nowrap>
+            <table cols=1 <? echo $var:cntrBorder ?> cellspacing=0 cellpadding=2>
+	         <tr>
+	          <td><img src="<? echo $var:imgPageSpacer ?>" alt="" width=1 height=19></td>
+	         </tr>
+            </table>
+           </td>
+          </tr>
+         </table>
+        </td>
+       </tr>
+      </table>
+	 </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+ <tr>
+	<td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td>
+ </tr>
+</table>
+</form>

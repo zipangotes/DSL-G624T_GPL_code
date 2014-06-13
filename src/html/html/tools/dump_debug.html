@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0.1 Transitional//EN">
+
+
+<html>
+<head>
+  <title>System Dump Debug Page</title>
+  <link rel="stylesheet" href="/usr/www_safe/html/defs/style5/nsp.css" type="text/css">
+  <script language="JavaScript" src="/usr/www_safe/html/js/jsl.js"></script>
+</head>
+<body bgcolor="#FFFFFF" leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 background="<? echo $var:imgMainBackground ?>">
+
+<table width=761 <? echo $var:cntrBorder ?> cellpadding=0 cellspacing=0 align=center>
+	<tr>
+		<td width=761 height=6 colspan=2 nowrap></td>
+	</tr>
+	<tr>
+<td colspan=2>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="600" >
+    <tr>
+      <td align="center" class="bodyPanel">
+        <b>Gateway System Information</b>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <b>&nbsp;</b>
+      </td>
+    </tr>
+    <tr>
+      <td align="left"><font size=1><? multiquery systemdump:command/result "$01<br>" ?></font>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <input <? echo $var:widDefBtnRefresh ?> onclick="uiDoRefresh()" alt="Refresh">
+      </td>
+    </tr>
+  </table>
+</td>
+ </tr>
+</table>
+</body>
+</html>

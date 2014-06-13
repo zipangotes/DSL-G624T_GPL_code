@@ -1,0 +1,37 @@
+include ../../TI_Build.make
+
+export PATH := $(TI_uclibc_path):$(shell echo -n $(PATH))
+
+all: build install
+
+cross_tools = mips_fp_le-
+TEMPPATH = /bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin/:/usr/local/bin
+
+build: native_build 
+	PATH=$(shell echo -n $(PATH)) $(MAKE) BUILD_HOME=$(TI_build_home) TI_LINUX_HOME=$(TI_linux_home) TI_KERNEL_VERSION=$(TI_kernel_version) CROSS_COMPILE=$(cross_tools) 
+
+
+native_build:
+	PATH=$(TEMPPATH) $(MAKE) -C ./extra/config  
+
+
+install: 
+	$(MAKE) install BUILD_HOME=$(TI_build_home) TI_LINUX_HOME=$(TI_linux_home) TI_KERNEL_VERSION=$(TI_kernel_version) CROSS_COMPILE=$(cross_tools)
+	$(MAKE) install_target BUILD_HOME=$(TI_build_home) TI_LINUX_HOME=$(TI_linux_home) TI_KERNEL_VERSION=$(TI_kernel_version) CROSS_COMPILE=$(cross_tools)
+
+ifeq    ($(BOARD),AR7RD)
+	rm -rf $(TI_base)/tools/mipsel-linux-uclibc/lib/libpthread.so
+	rm -rf $(TI_base)/tools/mipsel-linux-uclibc/lib/libpthread.so.0
+	rm -rf $(TI_base)/tools/mipsel-linux-uclibc/lib/libpthread-0.9.19.so
+endif
+
+clean:
+	$(MAKE) clean
+	rm -rf $(TI_base)/tools/mipsel-linux-uclibc
+
+distclean: 
+	$(MAKE) distclean
+
+#	@if [ -e ./.config ]; then \
+#	rm -f ./.config; \
+#	fi

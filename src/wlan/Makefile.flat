@@ -1,0 +1,23 @@
+include ../../TI_Build.make
+
+all: build install
+
+build: 
+	install -m 0644 $(TI_kernel_path)/$(TI_kernel_version)/include/linux/version.h $(TI_uclibc_include)/linux
+
+install:
+	install -m 0755 -d $(TI_filesystem_path)/lib
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/drivers
+	install -m 0755 -d $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/drivers/net
+	install -m 0664 ./$(BOARD)/tiap.o $(TI_filesystem_path)/lib/modules/2.4.17_mvl21-malta-mips_fp_le/kernel/drivers/net/tiap.o
+	install -m 0755 -d $(TI_filesystem_path)/usr
+	install -m 0755 -d $(TI_filesystem_path)/usr/sbin
+	install -m 0755 -d $(TI_filesystem_path)/usr/sbin/wlan
+	install -m 0755 ./$(BOARD)/wpa_authenticator $(TI_filesystem_path)/usr/sbin/wlan/.
+	install -m 0664 ./$(BOARD)/libhidden_prof.so $(TI_filesystem_path)/lib/libhidden_prof.so
+	install -m 0664 ./$(BOARD)/libWdsMngr.so $(TI_filesystem_path)/lib/libWdsMngr.so
+
+clean:

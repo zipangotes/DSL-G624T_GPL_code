@@ -1,0 +1,92 @@
+
+<!-- Multicast -->
+<form onsubmit="return false"> 
+<table cellspacing=1 <? echo $var:cntrBorder ?> cellpadding=0 bgcolor="<? echo $var:bgColorPageOutline ?>" width="<? echo $var:dimMenuHomeInsideWidth ?>" height="<? echo $var:dimMenuHomeHeight ?>">
+ <tr>
+	<td bgcolor="<? echo $var:bgColorHeader ?>" height=21 class="header" align=center><font size=1 color="<? echo $var:bgColorHeaderText ?>">IGMP Proxy</font></td>
+</tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" align=center height=28><font size=1>IGMP Proxy could be enabled on WAN and LAN connections.</font></td>
+ </tr>
+ <tr>
+  <td bgcolor="<? echo $var:bgColorBody ?>" valign=top align=center>
+   <div style="height: 12px"></div>
+
+   <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1>
+	 <tr>
+	 <td colspan=2 nowrap>
+    <table>
+       <tr>
+        <td width=19><input <? echo $var:widDefCheckBoxOff ?> id="uiViewIGMP" value="off" onclick="jslDoToggleCheckBox(id);uiChangeIGMPStatus(value)"></td>
+        <td align=left><b class="header">Enable IGMP Proxy</b></td>
+       </tr>
+     </table>
+     </td>
+    </tr>
+       
+   <tr>
+	 <td colspan=2 nowrap>
+   		&nbsp;
+     </td>
+    </tr>
+    
+   	<tr>
+	 <td colspan=2 height=4 nowrap></td>
+	</tr>
+	<tr>
+	 <td colspan=2>
+	  <table <? echo $var:cntrBorder ?> cellspacing=1 cellpadding=1 align=center>
+       <tr>
+        	<td class="header">Interface</td>
+					<td width=20>&nbsp;</td>
+					<td class="header">Upstream/Downstream/Ignore</td>	
+       </tr>
+       <tr>
+        	<td class="header">&nbsp;</td>
+					<td width=20>&nbsp;</td>
+					<td class="header">&nbsp;</td>	
+       </tr>
+       
+			
+			<? multiquery manager:command/connection/list_group 
+			` <? if neq `bridge` `<? query $01:settings/type ?>` 
+			`   <tr>
+			      <td>$04</td>
+		   	   	<td>&nbsp;</td>
+			      <td>
+			   	<select name="" onchange="uiDoChangeInterfaceDirection(value,'uiPostWanDirection$00')" id="uiViewWanDirection$00">
+					<option value="0">Upstream</option>
+					<option value="1">Downstream</option>
+					<option value="2">Ignore</option>					
+				</select>
+			     </td>
+			   </tr> ` ` ` ?>
+			 ` ?>
+			 
+			 <? multiquery manager:command/lan/list_used 
+			`   <tr>
+			      <td>$02</td>
+		   	   	<td>&nbsp;</td>
+			      <td>
+			   	<select name="" onchange="uiDoChangeInterfaceDirection(value,'uiPostLanDirection$00')" id="uiViewLanDirection$00">
+					<option value="0">Upstream</option>
+					<option value="1">Downstream</option>
+					<option value="2">Ignore</option>					
+				</select>
+			     </td>
+			   </tr>
+			 ` ?>
+       
+	  </table>
+	 </td>
+	</tr>
+   </table>
+  </td>
+ </tr>
+ 
+  <tr>
+  <td align=right bgcolor="<? echo $var:bgColorBody ?>" height=28><? include /usr/www_safe/html/applycancel.html ?></td>
+ </tr>
+</table>
+</form>
+<!-- END Multicast -->

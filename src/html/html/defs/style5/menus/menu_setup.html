@@ -1,0 +1,134 @@
+<? setvariable var:pagepath `../cgi-bin/webcm?getpage=%2Fusr%2Fwww_safe%2Fhtml%2Fdefs%2F$var:style%2Fmenus%2F$var:main.html&var:style=$var:style&var:main=$var:main&var:menu=setup&var:menutitle=Setup&var:pagename` ?>
+<!-- Setup Menu -->
+<table <? echo $var:cntrBorder ?> bgcolor="<? echo $var:menuLeftBgColor ?>" cellspacing=0 cellpadding=0 width=155 height="<? echo $var:dimLeftMenuHeight ?>">
+<tr>
+	<!-- Make sure these rowspans cover all tr's in table -->
+	
+	<td <? if eq `1` `$var:HasMarvell` `<? if eq `1` `$var:HasDsl` `rowspan=10` `rowspan=9` ?>` `<? if eq `1` `$var:HasDsl` `rowspan=8` `rowspan=5` ?>` ?> bgcolor="#000000" width=2 nowrap></td>
+			
+	<td class="leftMenuHeader" width=152 height=22 nowrap align=center colspan=2>LAN Setup</td>  
+	 						
+	<td <? if eq `1` `$var:HasMarvell` `<? if eq `1` `$var:HasDsl` `rowspan=10` `rowspan=9` ?>` `<? if eq `1` `$var:HasDsl` `rowspan=8` `rowspan=5` ?>` ?> bgcolor="#000000" width=1 nowrap></td>
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr  <? if eq `lan_cfg` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- LAN Configuration -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=22 nowrap><a href="<? echo $var:pagepath ?>=lan_cfg&var:pagetitle=LAN%20Configuration&var:langrp=lan" class="leftMenu" title="Select to set interface to a LAN Group">LAN Configuration</a></td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<? if eq `1` `$var:HasMarvell`
+`
+<tr  <? if eq `eth_switch_cfg` `$var:pagename` `style=background-color:$var:menuLeftRollOverBGColor; ` `style=background-color:$var:menuLeftRollOutBGColor; ` ?>>
+	<!-- Ethernet Switch Configuration -->
+	<td align=right width=16 nowrap><!-- <img src="$var:imgLeftMenuPointerBlank" alt=""  $var:dimImgLeftMenuPointer> --></td>
+	<td height=22 nowrap><a href="$var:pagepath=eth_switch_cfg&var:pagetitle=Ethernet%20Switch%20Configuration" class="leftMenu" title="Configure Ethernet Switch">Ethernet Switch</a></td>   
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+` ` ` ?>
+
+<tr  <? if eq `fw_nat` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>>
+	<!-- Firewall/NAT Services -->
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td height=32>		 
+		<table width="100%" cellpadding=0 cellspacing=0 border=0>
+		<tr>
+		   <td align=left><a></a></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=2></td>
+</tr>
+
+<tr>
+	<td class="leftMenuHeader" height=22 nowrap align=center colspan=2>WAN Setup</td>  
+</tr>
+
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=4></td>
+</tr>
+
+
+<? if neq `<? if eq `1` `$var:HasDsl` `8` `1` ?>` `<? multiquerycount manager:command/connection/list ?>`
+`<tr  <? if eq `new` `$var:mode` `style=background-color:$var:menuLeftRollOverBGColor; ` `style=background-color:$var:menuLeftRollOutBGColor; ` ?>>
+	<!-- New Connection -->
+	<td bgcolor="#000000" height=22 width=2 nowrap></td>
+	<td align=right width=16 nowrap><!-- <img src="$var:imgLeftMenuPointerBlank" alt="" $var:dimImgLeftMenuPointer> --></td>
+    <td height=22><a href='$var:pagepath=pppoe&var:pagetitle=New%20Connection&var:conid=<? query manager:command/connection/new ?>&var:muxid=<? query manager:command/mux/new ?>&var:encapsid=<? query manager:command/encaps/new ?>&var:mode=new' class="leftMenu">New Connection</a></td>   
+	<td bgcolor="#000000" width=1 nowrap></td>
+</tr>
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=4></td>
+</tr>
+` `` ?>
+
+<? if eq `1` `$var:HasDsl` 
+`<tr  <? if eq `modem` `$var:pagename` `style=background-color:$var:menuLeftRollOverBGColor; ` `style=background-color:$var:menuLeftRollOutBGColor; ` ?>>
+	<!-- Modem -->
+	<td bgcolor="#000000" width=2 nowrap></td>
+	<td align=right width=16 nowrap><!-- <img src="$var:imgLeftMenuPointerBlank" alt=""  $var:dimImgLeftMenuPointer> --></td>
+    <td height=22>
+		<table width="100%" cellpadding=0 cellspacing=0 border=0>
+		<tr>
+		   <td align=left><a href='$var:pagepath=modem&var:pagetitle=Modem%20Setup' class="leftMenu" title="<? if eq 0 `<? query sar:status/dsl_carrier_state ?>` `Off-Line` `On-Line` ?>">Modem</a></td>
+		   <td align=right valign=bottom $var:dimImgLed><img src="<? if eq `0` `<? query sar:status/dsl_carrier_state ?>` `$var:imgLedRed` `$var:imgLedGreen` ?>" $var:dimImgLed></td>
+		</tr>
+		</table>
+    </td>   
+	<td bgcolor="#000000" width=1 nowrap></td>
+</tr>
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=4></td>
+</tr>
+` `` ?>
+<? multiquery manager:command/connection/list_group '
+
+<tr  <? if neq `new` `<? echo $var:mode ?>`  ` <? if eq `<? query $01:settings/type ?>` `<? echo $var:pagename ?>` `style=background-color:<? echo $var:menuLeftRollOverBGColor ?>; ` `style=background-color:<? echo $var:menuLeftRollOutBGColor ?>; ` ?>`  ` ` ?>>
+	<!-- Connections -->
+	<td bgcolor="#000000" width=2 nowrap></td>
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+    <td height=22>
+		<table width="100%" cellpadding=0 cellspacing=0 border=0>
+		<tr>
+		   <td align=left><a href="$var:pagepath=$06&var:pagetitle=$04%20Setup&var:conid=$01&var:muxid=$02&var:encapsid=$03&var:langrp=lan0" target="_self" class="leftMenu" title="$04, $06, $05, <? if eq `1` `$var:HasDsl` `<? if eq `0` `<? query sar:status/dsl_carrier_state ?>` `dsl carrier disconnected` `dsl carrier connected` ?>` ` ` ?>">$04</a></td>
+		   <td align=right valign=bottom $var:dimImgLed>&nbsp;</td>
+		</tr>
+		</table>
+    </td>   
+	<td bgcolor="#000000" width=1 nowrap></td>
+</tr>
+<tr>
+	<td height=1 nowrap bgcolor="#000000" colspan=4></td>
+</tr>
+       	
+' ?>
+       	
+<? include /usr/www_safe/html/defs/$var:style/menus/$var:main_logout.html ?>
+	
+<tr>
+	<!-- Empty -->
+	<td bgcolor="#000000" width=2 nowrap></td>
+	<td align=right width=16 nowrap><!-- <img src="<? echo $var:imgLeftMenuPointerBlank ?>" alt="" <? echo $var:dimImgLeftMenuPointer ?>> --></td>
+	<td nowrap></td>   
+	<td bgcolor="#000000" width=1 nowrap></td>
+</tr>
+
+<tr>
+	<td colspan=4 bgcolor="#000000" width=155 height=1 nowrap></td>
+</tr>
+</table>	
+<!-- END Setup Menu -->

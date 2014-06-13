@@ -1,0 +1,41 @@
+#
+# For a description of the syntax of this configuration file,
+# see scripts/kbuild/config-language.txt.
+#
+mainmenu_name "BusyBox Configuration"
+
+mainmenu_option next_comment
+comment 'BusyBox general settings'
+choice 'Buffer allocation policy' \
+    "use_malloc	CONFIG_FEATURE_BUFFERS_USE_MALLOC \
+	 on_stack	CONFIG_FEATURE_BUFFERS_GO_ON_STACK \
+	 in_bss		CONFIG_FEATURE_BUFFERS_GO_IN_BSS" use_malloc
+bool 'Show verbose applet usage messages'				CONFIG_FEATURE_VERBOSE_USAGE
+bool 'Support --install [-s] to install applet links at runtime' 	CONFIG_FEATURE_INSTALLER
+bool 'Enable locale support (system needs locale for this to work)'	CONFIG_LOCALE_SUPPORT
+bool 'Support for devfs'						CONFIG_FEATURE_DEVFS
+bool 'Support compress format (.Z) in unzip operations'  		CONFIG_FEATURE_UNCOMPRESS 
+bool 'Clean up all memory before exiting (usually not needed)'		CONFIG_FEATURE_CLEAN_UP
+bool 'Support for SUID/SGID handling'  					CONFIG_FEATURE_SUID
+if [ "$CONFIG_FEATURE_SUID" = "y" ]; then
+  bool '  Runtime configuration via /etc/busybox.conf'			CONFIG_FEATURE_SUID_CONFIG
+fi
+endmenu
+
+source archival/config.in
+source console-tools/config.in
+source editors/config.in
+source fileutils/config.in
+source findutils/config.in
+source init/config.in
+source miscutils/config.in
+source modutils/config.in
+source networking/config.in
+source loginutils/config.in
+source procps/config.in
+source shell/config.in
+source shellutils/config.in
+source sysklogd/config.in
+source textutils/config.in
+source util-linux/config.in
+
